@@ -12,3 +12,20 @@ logs
 results
 
 npm-debug.log
+
+*.iml
+.idea/
+.ipr
+.iws
+*~
+~*
+*.diff
+*.patch
+*.bak
+.DS_Store
+Thumbs.db
+.project
+.*proj
+.svn/
+*.swp
+node_modules/
