@@ -305,7 +305,7 @@ Eureka的目标是让分享会的数据收集更加便捷平滑，分享会的�
    
 * 流程描述 （最好包含主干、分支、异常三种，尽量用流程图描述）
 
-   ![分享列表流程描述]（http://img01.taobaocdn.com/tps/i1/T1KNJTXr4bXXXOMBb_-837-615.jpg）
+   ![分享列表流程描述](http://img01.taobaocdn.com/tps/i1/T1KNJTXr4bXXXOMBb_-837-615.jpg)
    
 * 其他说明
 
