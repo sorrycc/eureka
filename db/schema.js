@@ -12,7 +12,7 @@ var Schema = require("mongoose").Schema;
 
 module.exports = {
     // 分享会
-    party: {
+    party: new Schema({
         creator: {
             "type": String,
             "required": true,
@@ -65,10 +65,10 @@ module.exports = {
             "default": false,
             "required": true
         }
-    },
+    }),
 
     // 分享
-    session: {
+    session: new Schema({
         root: {
             "type": String,
             "required": true,
@@ -115,10 +115,10 @@ module.exports = {
             "default": false,
             "required": true
         },
-    },
+    }),
 
     // 反馈
-    feedback: {
+    feedback: new Schema({
         // 创建时间
         created: {
             "type": Date,
@@ -137,10 +137,10 @@ module.exports = {
             "default": false,
             "required": true
         }
-    },
+    }),
 
     // 人员
-    people: {
+    people: new Schema({
         nick: {
             "type": String,
             "required": true
@@ -154,9 +154,9 @@ module.exports = {
             "default": false,
             "required": true
         }
-    },
+    }),
 
-    tag: {
+    tag: new Schema({
         name: {
             "type": String
         },
@@ -165,15 +165,15 @@ module.exports = {
             "default": false,
             "required": true
         }
-    },
+    }),
 
-    entityTag: {
+    entityTag: new Schema({
         tagId:{
             "type": ObjectId
         },
         relativeId: {
             "type": ObjectId
         }
-    }
+    })
 
 };
