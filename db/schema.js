@@ -11,6 +11,7 @@
 var Schema = require("mongoose").Schema;
 
 module.exports = {
+    // 分享会
     party: {
         creator: {
             "type": String,
@@ -55,11 +56,18 @@ module.exports = {
         sessions: {
             "type": Array
         },
-        listener: {
+        // 签到者
+        listeners: {
             "type": Array
+        },
+        deleted: {
+            "type": Boolean,
+            "default": false,
+            "required": true
         }
     },
 
+    // 分享
     session: {
         root: {
             "type": String,
@@ -109,20 +117,25 @@ module.exports = {
         },
     },
 
+    // 反馈
     feedback: {
-        share: {
-            "type": ObjectId
-        },
+        // 创建时间
         created: {
             "type": Date,
         },
+        // 分数
         score: {
             "type": Number
         },
-        content: {
+        advise: {
         }
         creator: {
             "type": ObjectId
+        },
+        deleted: {
+            "type": Boolean,
+            "default": false,
+            "required": true
         }
     },
 
@@ -136,11 +149,21 @@ module.exports = {
             "type": String,
             "required": true
         }
+        deleted: {
+            "type": Boolean,
+            "default": false,
+            "required": true
+        }
     },
 
     tag: {
         name: {
             "type": String
+        },
+        deleted: {
+            "type": Boolean,
+            "default": false,
+            "required": true
         }
     },
 
