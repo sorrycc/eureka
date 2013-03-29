@@ -13,10 +13,13 @@ var Schema = require("mongoose").Schema;
 module.exports = {
     // 分享会
     party: new Schema({
-        creator: {
+        root: {
             "type": String,
             "required": true,
             "validate": /.+/
+        },
+        admins: {
+            "type": Array
         },
         title: {
             "type": String,
@@ -69,14 +72,6 @@ module.exports = {
 
     // 分享
     session: new Schema({
-        root: {
-            "type": String,
-            "required": true,
-            "validate": /.+/
-        },
-        admins: {
-            "type": Array
-        },
         title: {
             "type": String,
             "trim": true,
