@@ -12,9 +12,9 @@ eureka
 
 #### 说明：
 
-    * 开发进行时，执行 grunt watch，开启实时编译 ./client 中的文件
+    1. 开发进行时，执行 grunt watch，开启实时编译 ./client 中的文件
 
-    * ./client 文件夹只包含客户端脚本和样式源码，这些资源会被编译打包到 ./build/eureka/public
+    2. ./client 文件夹只包含客户端脚本和样式源码，这些资源会被编译打包到 ./build/eureka/public
 
-    * 编辑服务端代码和 HTML 代码直接进入 ./build/eureka ，里面是一个完整的 express 环境
+    3. 编辑服务端代码和 HTML 代码直接进入 ./build/eureka ，里面是一个完整的 express 环境
 
