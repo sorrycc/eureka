@@ -19,6 +19,7 @@ app.locals = {
 };
 
 app.configure(function(){
+    // PORT=3000 node app
     app.set('port', process.env.PORT || 3000);
     app.set('views', __dirname + '/views');
     app.set('view engine', 'jade');
@@ -43,6 +44,7 @@ app.configure(function(){
     app.use(express.static(path.join(__dirname, 'public')));
 });
 
+// NODE_ENV=development node app
 app.configure('development', function(){
     app.use(express.errorHandler());
 });
