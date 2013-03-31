@@ -19,7 +19,7 @@ clone 后进入项目目录，执行 npm install 安装依赖模块
 
 db module在mongoose基础上做了一层简单封装，提供增（put），删（del）、查（get），改（post）操作
 
-所有操作只能在 *party*，*session*，*feedback*，*people*，*tag*，*entityTag* 6个collection（相当于表）中进行
+所有操作只能在 *party*， *session*， *feedback*， *people*， *tag*， *entityTag* 6个collection（相当于表）中进行
 
 #### db module API
 
