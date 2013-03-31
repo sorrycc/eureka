@@ -63,11 +63,13 @@ module.exports = {
         listeners: {
             "type": Array
         },
-        deleted: {
+        _deleted: {
             "type": Boolean,
             "default": false,
             "required": true
         }
+    }, {
+        versionKey: false
     }),
 
     // 分享
@@ -105,11 +107,13 @@ module.exports = {
         feedbacks: {
             "type": Array
         },
-        deleted: {
+        _deleted: {
             "type": Boolean,
             "default": false,
             "required": true
         },
+    }, {
+        versionKey: false
     }),
 
     // 反馈
@@ -123,15 +127,18 @@ module.exports = {
             "type": Number
         },
         advise: {
-        }
-        creator: {
-            "type": ObjectId
+            "type": String
         },
-        deleted: {
+        creator: {
+            "type": Schema.ObjectId
+        },
+        _deleted: {
             "type": Boolean,
             "default": false,
             "required": true
         }
+    }, {
+        versionKey: false
     }),
 
     // 人员
@@ -143,32 +150,43 @@ module.exports = {
         name: {
             "type": String,
             "required": true
-        }
-        deleted: {
+        },
+        _deleted: {
             "type": Boolean,
             "default": false,
             "required": true
         }
+    }, {
+        versionKey: false
     }),
 
     tag: new Schema({
         name: {
             "type": String
         },
-        deleted: {
+        _deleted: {
             "type": Boolean,
             "default": false,
             "required": true
         }
+    }, {
+        versionKey: false
     }),
 
     entityTag: new Schema({
         tagId:{
-            "type": ObjectId
+            "type": Schema.ObjectId
         },
         relativeId: {
-            "type": ObjectId
+            "type": Schema.ObjectId
+        },
+        _deleted: {
+            "type": Boolean,
+            "default": false,
+            "required": true
         }
+    }, {
+        versionKey: false
     })
 
 };
