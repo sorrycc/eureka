@@ -62,6 +62,6 @@ db.get({
     query: Object, // 查询条件
     collection: String, // 必需，party || session || feedback || people || tag || entityTag
     options: Object, // http://mongoosejs.com/docs/api.html#model_Model.find
-    complete: Function // callback，默认传入err、numAffected参数
+    complete: Function // callback，默认传入err、docs参数
 })
 ```
