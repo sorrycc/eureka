@@ -27,7 +27,7 @@ db module在mongoose基础上做了一层简单封装，提供增（put），删
 
 ```
 db.put({
-    doc: Object, // 必需
+    doc: Object, // 必需，新增的一条数据记录
     collection: String, // 必需，party || session || feedback || people || tag || entityTag
     complete: Function // callback，默认传入err、doc参数
 })
