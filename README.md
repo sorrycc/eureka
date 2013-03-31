@@ -25,17 +25,17 @@ db module在mongoose基础上做了一层简单封装，提供增（put），删
 
 ##### put
 
-``
+```
 db.put({
     doc: Object, // 必需
     collection: String, // 必需，party || session || feedback || people || tag || entityTag
     complete: Function // callback，默认传入err、doc参数
 })
-``
+```
 
 ##### post
 
-``
+```
 db.post({
     query: Object, // 查询条件
     doc: Object, // 必需，更新数据对象
@@ -43,25 +43,25 @@ db.post({
     options: Object, // [link](http://mongoosejs.com/docs/api.html#model_Model.update)
     complete: Function // callback，默认传入err、numAffected参数
 })
-``
+```
 
 ##### del
 
-``
+```
 db.del({
     query: Object, // 查询条件
     collection: String, // 必需，party || session || feedback || people || tag || entityTag
     complete: Function // callback，默认传入err、numAffected参数
 })
-``
+```
 
 ##### get
 
-``
+```
 db.get({
     query: Object, // 查询条件
     collection: String, // 必需，party || session || feedback || people || tag || entityTag
     options: Object, // [link](http://mongoosejs.com/docs/api.html#model_Model.find)
     complete: Function // callback，默认传入err、numAffected参数
 })
-``
+```
