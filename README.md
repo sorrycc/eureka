@@ -21,7 +21,7 @@ db module在mongoose基础上做了一层简单封装，提供增（put），删
 
 所有操作只能在 *party*， *session*， *feedback*， *people*， *tag*， *entityTag* 6个collection（相当于表）中进行
 
-#### db module API
+#### db module API [examples](https://github.com/wondger/eureka/blob/master/examples/db.api.js)
 
 ##### put
 

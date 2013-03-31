@@ -1,6 +1,6 @@
 /*
- * @name: .js
- * @description: 
+ * @name: db.api.js
+ * @description: db module api examples
  * @author: wondger@gmail.com
  * @date: 2013-03-31
  * @param: 
