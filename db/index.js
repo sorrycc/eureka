@@ -77,8 +77,9 @@ module.exports = {
            complete(new Error("Param error"));
            return;
        }
-
-       query._deleted = false;
+       
+       // set _deleted true
+       query._deleted = true;
 
        this.post({
            query: query,
@@ -110,7 +111,6 @@ module.exports = {
 
        var mod = mongoose.model(collection, schema[collection], collection);
 
-       // set _deleted true
        query._deleted = false;
 
        mod.find(query, null, options, function(err, docs) {
