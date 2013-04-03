@@ -1,0 +1,28 @@
+extends layout
+
+block content
+    div.bar
+        h1 创建分享会
+    div.party-crate
+        form#J_PartyCreateForm(method="post")
+            ul
+                li
+                    label(for="J_PartyName") 名称
+                    input#J_PartyName(name="title", placeholder="输入分享会名称")
+                li
+                    label(for="J_PartyTime") 时间
+                    input#J_PartyName(name="time", type="date")
+                li
+                    label(for="J_PartyLoc") 地点
+                    input#J_PartyLoc(name="location")
+
+            div.form-btn
+                button(type="submit") 创建
+
+    script
+        KISSY.use("party/create", function(S, Create) {
+            Create({
+                form: "#J_PartyCreateForm"
+                , url: "/party/create"
+            });
+        });
