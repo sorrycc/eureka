@@ -5,11 +5,10 @@
 
 var express = require('express')
     , routes = require('./routes')
-    , user = require('./routes/user')
     , http = require('http')
     , path = require('path');
 
-var dbdemo = require('./examples/db.api')
+var party = require('./routes/party');
 
 var stylus = require('stylus')
     , nib = require('nib');
@@ -28,6 +27,7 @@ app.configure(function(){
     app.use(express.favicon());
     app.use(express.logger('dev'));
     app.use(express.bodyParser());
+    app.use(express.cookieParser());
     app.use(express.methodOverride());
     app.use(app.router);
 
@@ -58,12 +58,32 @@ app.get('/login', function(req, res) {
 });
 
 // party
+
 // 棪木
 app.get('/party/create', function(req, res) {
+    party.create.get(req, res);
 });
+
+// 棪木
+app.post('/party/create', function(req, res) {
+    party.create.post(req, res);
+});
+
+app.get('/party/edit/:id', function(req, res) {
+    party.edit(req, res);
+});
+
+// 棪木
 app.get('/party/list', function(req, res) {
+    party.list.render(req, res);
 });
+// 棪木
+app.get('/party', function(req, res) {
+    party.list.get(req, res);
+});
+// 棪木
 app.get('/party/:id', function(req, res) {
+    party.list.get(req, res);
 });
 
 // session

@@ -14,7 +14,7 @@ var mongoose = require("mongoose"),
 
 mongoose.connect("mongodb://localhost/" + DB_NAME);
 
-module.exports = {
+module.exports = db = {
     // create
     put: function(opt) {
        opt = _.isObject(opt) ? opt : null;
@@ -30,13 +30,23 @@ module.exports = {
            return;
        }
 
-       var mod = new (mongoose.model(collection, schema[collection], collection))(doc);
+       var Mod = mongoose.model(collection, schema[collection], collection);
 
        doc._deleted = false;
 
-       mod.save(function(err, doc) {
-           complete(err, doc);
+       Mod.count(function(err, count) {
+           if (err) {
+               complete(err, doc);
+               return;
+           }
+
+           doc.id = count + 1;
+
+           new Mod(doc).save(function(err, doc) {
+               complete(err, doc);
+           });
        });
+
     },
     // update
     post: function(opt) {
