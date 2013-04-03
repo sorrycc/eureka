@@ -76,3 +76,43 @@ var db = require("../db");
  *});
  */
 
+exports.put = function(req, res) {
+
+    console.log(req.query);
+
+    db.put({
+        collection: "tag",
+        doc: {
+            name: req.query.tag || "tag" + new Date().getTime()
+        },
+        complete: function(err, doc) {
+            if (err) {
+                res.send("error");
+            }
+            else {
+                res.json(doc);
+            }
+        }
+    });
+}
+
+
+exports.del = function(req, res) {
+
+    console.log(req.query);
+
+    db.del({
+        collection: "tag",
+        query: {
+            name: req.query.tag
+        },
+        complete: function(err, numAffected) {
+            if (err) {
+                res.send("error");
+            }
+            else {
+                res.json({num: numAffected});
+            }
+        }
+    });
+}

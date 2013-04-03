@@ -9,6 +9,8 @@ var express = require('express')
     , http = require('http')
     , path = require('path');
 
+var dbdemo = require('./examples/db.api')
+
 var stylus = require('stylus')
     , nib = require('nib');
 
@@ -50,7 +52,38 @@ app.configure('development', function(){
 });
 
 app.get('/', routes.index);
-app.get('/users', user.list);
+
+// 棪木
+app.get('/login', function(req, res) {
+});
+
+// party
+// 棪木
+app.get('/party/create', function(req, res) {
+});
+app.get('/party/list', function(req, res) {
+});
+app.get('/party/:id', function(req, res) {
+});
+
+// session
+// 七念
+app.get('/session/create', function(req, res) {
+});
+// 水儿
+app.get('/session/list', function(req, res) {
+});
+app.get('/session/:id', function(req, res) {
+});
+
+// feedback
+// 筱谷
+app.get('/feedback/create', function(req, res) {
+});
+app.get('/feedback/list', function(req, res) {
+});
+app.get('/feedback/:id', function(req, res) {
+});
 
 http.createServer(app).listen(app.get('port'), function(){
     console.log("Express server listening on port " + app.get('port'));
