@@ -7,7 +7,8 @@ var express = require('express')
     , routes = require('./routes')
     , user = require('./routes/user')
     , http = require('http')
-    , path = require('path');
+    , path = require('path')
+    , session = require('./routes/session');
 
 var dbdemo = require('./examples/db.api')
 
@@ -68,8 +69,9 @@ app.get('/party/:id', function(req, res) {
 
 // session
 // 七念
-app.get('/session/create', function(req, res) {
-});
+app.get('/session/create', session.create);
+app.get('/session/get', session.get);
+
 // 水儿
 app.get('/session/list', function(req, res) {
 });
