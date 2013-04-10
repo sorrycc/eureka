@@ -25,3 +25,25 @@ exports.get = function(req, res){
 	  	);	
 	}	
 };
+
+exports.del = function(req, res){
+	model.del(req, res, render);
+
+	function render(numAffected) {
+		res.render('session/del', {
+			title: '更新分享',
+			num: numAffected
+		});
+	}	
+};
+
+exports.update = function(req, res){
+	model.post(req, res, render);
+
+	function render(numAffected) {
+		res.render('session/update', {
+			title: '更新分享',
+			num: numAffected
+		});
+	}	
+};

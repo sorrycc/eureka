@@ -71,6 +71,8 @@ app.get('/party/:id', function(req, res) {
 // 七念
 app.get('/session/create', session.create);
 app.get('/session/get', session.get);
+app.get('/session/update', session.update);
+app.get('/session/del', session.del);
 
 // 水儿
 app.get('/session/list', function(req, res) {
