@@ -88,12 +88,8 @@ module.exports = {
             "trim": true
         },
         speakers: {
-            "type": Array,
+            "type": String,
             "required": true
-        },
-        order: {
-            "type": Number,
-            "trim": true
         },
         from: {
             "type": Date,

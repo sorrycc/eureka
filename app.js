@@ -57,33 +57,49 @@ app.get('/', routes.index);
 app.get('/login', function(req, res) {
 });
 
-// party
-
 // 棪木
 app.get('/party/create', function(req, res) {
-    party.create.get(req, res);
+    party.create.render(req, res);
 });
 
+// party
+/*
+ * api/...为数据接口路由
+ * 其他为页面模版渲染路由
+ */
 // 棪木
-app.post('/party/create', function(req, res) {
+app.post('/api/party/create', function(req, res) {
     party.create.post(req, res);
 });
 
-app.get('/party/edit/:id', function(req, res) {
-    party.edit(req, res);
-});
-
 // 棪木
-app.get('/party/list', function(req, res) {
-    party.list.render(req, res);
+app.get('/party/edit/:id', function(req, res) {
+    party.edit.render(req, res);
 });
 // 棪木
 app.get('/party', function(req, res) {
-    party.list.get(req, res);
+    party.list.render(req, res);
 });
 // 棪木
 app.get('/party/:id', function(req, res) {
+    party.list.render(req, res);
+});
+// 棪木
+app.get('/api/party', function(req, res) {
     party.list.get(req, res);
+});
+
+// 棪木
+app.get('/api/party/:id', function(req, res) {
+    party.list.get(req, res);
+});
+// 棪木
+app.post('/api/party/edit/:id', function(req, res) {
+    party.edit.post(req, res);
+});
+// 棪木
+app.post('/api/party/del/:id', function(req, res) {
+    party.del(req, res);
 });
 
 // session

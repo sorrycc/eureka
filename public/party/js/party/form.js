@@ -1,27 +1,29 @@
 /*
- * @name: create.js
- * @description: 
+ * @name: form.js
+ * @description: create,edit party
  * @author: wondger@gmail.com
  * @date: 2013-04-03
  * @param: 
  * @todo: 
  * @changelog: 
  */
-KISSY.add("party/create", function(S) {
+KISSY.add("party/form", function(S) {
     var Create = function(cfg) {
         if (!(this instanceof Create)) return new Create(cfg);
 
         cfg = S.isObject(cfg) ? cfg : {};
 
         this.form = cfg.form ? S.one(cfg.form) : null;
-        this.url = S.isString(cfg.url) ? cfg.url : "";
 
         this._init();
     };
 
     S.augment(Create, {
         _init: function() {
-            if (!this.form || !this.url) return;
+            if (!this.form) return;
+
+            this.id = id = S.unparam(S.io.serialize(this.form)).id;
+            this.url = id ? "/api/party/edit/" + id : "/api/party/create"
 
             this.form.on("submit", function(e){
                 e.halt();
@@ -30,6 +32,7 @@ KISSY.add("party/create", function(S) {
             }, this);
         },
         _submit: function() {
+            var self = this;
             S.io({
                 url: this.url,
                 type: "post",
@@ -45,7 +48,12 @@ KISSY.add("party/create", function(S) {
                         return;
                     }
 
-                    window.top.location.href = d.url;
+                    if (self.id) {
+                        alert("编辑成功！");
+                    }
+                    else {
+                        window.top.location.href = d.url;
+                    }
                 }
             });
         }

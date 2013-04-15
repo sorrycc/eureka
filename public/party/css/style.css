@@ -1,0 +1,6 @@
+.bar h1 a{text-decoration:none}
+.party-item{margin:20px;}
+.party-item .party-info{color:#666;}
+.party-item .party-info h1{padding:5px 0;color:#333;border-bottom:1px dotted #ccc;}
+.party-item .party-info h1 a{margin-right:10px;font-size:12px}
+.party-item .party-info h1 .session-name{text-decoration:none;font-size:16px}

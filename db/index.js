@@ -67,7 +67,8 @@ module.exports = db = {
 
        var mod = mongoose.model(collection, schema[collection], collection);
 
-       query._deleted = doc._deleted = false;
+       query._deleted = false;
+       doc._deleted = !!opt.del;
 
        mod.update(query, doc, options, function(err, numAffected) {
            complete(err, numAffected);
@@ -100,6 +101,7 @@ module.exports = db = {
            doc: {
                _deleted: true
            },
+           del: true,
            complete: complete
        });
     },
@@ -110,7 +112,7 @@ module.exports = db = {
        if (!opt) return;
 
        var query = _.isObject(opt.query) ? opt.query : {},
-           options = _.isObject(opt.options) ? opt.options : null,
+           options = _.isObject(opt.options) ? opt.options : {},
            collection = _.isString(opt.collection) ? opt.collection : "",
            complete = _.isFunction(opt.complete) ? opt.complete : function(){};
 
@@ -122,6 +124,7 @@ module.exports = db = {
        var mod = mongoose.model(collection, schema[collection], collection);
 
        query._deleted = false;
+       options["sort"] = query["sort"] || {id: -1};
 
        mod.find(query, null, options, function(err, docs) {
            complete(err, docs);

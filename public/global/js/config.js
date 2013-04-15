@@ -9,7 +9,7 @@
  */
 KISSY.config({
     debug: true,
-    tag: KISSY.now(),
+    tag: 1365601845,
     packages: {
         party: {
             base: "/party/js"
