@@ -47,3 +47,10 @@ exports.update = function(req, res){
 		});
 	}	
 };
+/**
+ * 管理者查看反馈结果页面
+ * by 剑平
+ */
+exports.feedback = function(){
+
+}
