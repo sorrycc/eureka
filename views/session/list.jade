@@ -1,0 +1,28 @@
+extends ../layout
+
+
+block content
+  #wrap
+    #session-list-page
+      header
+        include ../head
+      #content
+        - var party = {title: '天生一队第三季', from: '2013－04-10', to: '2013-04-13', location: '创业大厦8楼'}
+        div#party
+          h2.title #{party.title}
+          div.from
+            label 开始时间：
+            span #{party.from} 
+          div.from
+            label 结束时间：
+            span #{party.to} 
+          div.from
+            label 地点：
+            span #{party.location} 
+
+        - var sessions = [{from: '13:00', to: '13: 20', title: '分享一'}, {from: '14:00', to: '14: 20', title: '分享二'}]
+        ul#session-list
+          - each session in sessions
+            li 
+              p #{session.from} - #{session.to}
+              p #{session.title}

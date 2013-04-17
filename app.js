@@ -111,9 +111,9 @@ app.get('/session/update', session.update);
 app.get('/session/del', session.del);
 
 // 水儿
-app.get('/session/list', function(req, res) {
-});
+app.get('/session/list', routes.sessionList);
 app.get('/session/:id', function(req, res) {
+
 });
 
 // feedback
