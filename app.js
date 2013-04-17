@@ -69,11 +69,12 @@ app.get('/party/:id', function(req, res) {
 // session
 // 七念
 app.get('/session/create', function(req, res) {
+
 });
 // 水儿
-app.get('/session/list', function(req, res) {
-});
+app.get('/session/list', routes.sessionList);
 app.get('/session/:id', function(req, res) {
+
 });
 
 // feedback
