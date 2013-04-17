@@ -5,11 +5,11 @@
 
 var express = require('express')
     , routes = require('./routes')
-    , user = require('./routes/user')
     , http = require('http')
-    , path = require('path');
+    , path = require('path')
+    , session = require('./routes/session');
 
-var dbdemo = require('./examples/db.api')
+var party = require('./routes/party');
 
 var stylus = require('stylus')
     , nib = require('nib');
@@ -28,6 +28,7 @@ app.configure(function(){
     app.use(express.favicon());
     app.use(express.logger('dev'));
     app.use(express.bodyParser());
+    app.use(express.cookieParser());
     app.use(express.methodOverride());
     app.use(app.router);
 
@@ -57,20 +58,58 @@ app.get('/', routes.index);
 app.get('/login', function(req, res) {
 });
 
-// party
 // 棪木
 app.get('/party/create', function(req, res) {
+    party.create.render(req, res);
 });
-app.get('/party/list', function(req, res) {
+
+// party
+/*
+ * api/...为数据接口路由
+ * 其他为页面模版渲染路由
+ */
+// 棪木
+app.post('/api/party/create', function(req, res) {
+    party.create.post(req, res);
 });
+
+// 棪木
+app.get('/party/edit/:id', function(req, res) {
+    party.edit.render(req, res);
+});
+// 棪木
+app.get('/party', function(req, res) {
+    party.list.render(req, res);
+});
+// 棪木
 app.get('/party/:id', function(req, res) {
+    party.list.render(req, res);
+});
+// 棪木
+app.get('/api/party', function(req, res) {
+    party.list.get(req, res);
+});
+
+// 棪木
+app.get('/api/party/:id', function(req, res) {
+    party.list.get(req, res);
+});
+// 棪木
+app.post('/api/party/edit/:id', function(req, res) {
+    party.edit.post(req, res);
+});
+// 棪木
+app.post('/api/party/del/:id', function(req, res) {
+    party.del(req, res);
 });
 
 // session
 // 七念
-app.get('/session/create', function(req, res) {
+app.get('/session/create', session.create);
+app.get('/session/get', session.get);
+app.get('/session/update', session.update);
+app.get('/session/del', session.del);
 
-});
 // 水儿
 app.get('/session/list', routes.sessionList);
 app.get('/session/:id', function(req, res) {

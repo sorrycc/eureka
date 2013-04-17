@@ -13,6 +13,12 @@ var Schema = require("mongoose").Schema;
 module.exports = {
     // 分享会
     party: new Schema({
+        id: {
+            "type": Number,
+            "default": -1,
+            "required": true,
+            "validate": /\d+/
+        },
         root: {
             "type": String,
             "required": true,
@@ -27,29 +33,20 @@ module.exports = {
             "required": true,
             "validate": /.+/
         },
-        description: {
-            "type": String,
-            "trim": true
-        },
         location: {
             "type": String,
-            "trim": true
-        },
-        from: {
-            "type": Date,
+            "trim": true,
             "required": true
         },
-        to: {
+        time: {
             "type": Date,
             "required": true
         },
         url: {
-            "type": String,
-            "required": true
+            "type": String
         },
         qrurl: {
-            "type": String,
-            "required": true
+            "type": String
         },
         state: {
             "type": Number,
@@ -74,6 +71,12 @@ module.exports = {
 
     // 分享
     session: new Schema({
+        id: {
+            "type": Number,
+            "default": -1,
+            "required": true,
+            "validate": /\d+/
+        },
         title: {
             "type": String,
             "trim": true,
@@ -85,12 +88,8 @@ module.exports = {
             "trim": true
         },
         speakers: {
-            "type": Array,
+            "type": String,
             "required": true
-        },
-        order: {
-            "type": Number,
-            "trim": true
         },
         from: {
             "type": Date,
@@ -118,6 +117,12 @@ module.exports = {
 
     // 反馈
     feedback: new Schema({
+        id: {
+            "type": Number,
+            "default": -1,
+            "required": true,
+            "validate": /\d+/
+        },
         // 创建时间
         created: {
             "type": Date,
@@ -143,6 +148,12 @@ module.exports = {
 
     // 人员
     people: new Schema({
+        id: {
+            "type": Number,
+            "default": -1,
+            "required": true,
+            "validate": /\d+/
+        },
         nick: {
             "type": String,
             "required": true
@@ -161,6 +172,12 @@ module.exports = {
     }),
 
     tag: new Schema({
+        id: {
+            "type": Number,
+            "default": -1,
+            "required": true,
+            "validate": /\d+/
+        },
         name: {
             "type": String
         },
@@ -174,6 +191,12 @@ module.exports = {
     }),
 
     entityTag: new Schema({
+        id: {
+            "type": Number,
+            "default": -1,
+            "required": true,
+            "validate": /\d+/
+        },
         tagId:{
             "type": Schema.ObjectId
         },

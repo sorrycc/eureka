@@ -1,0 +1,8 @@
+extends ../layout
+
+block content
+  h1= title
+  each doc in docs
+    h3= doc.title
+    h6= doc.description
+    p Start from #{doc.from}
