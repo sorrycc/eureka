@@ -4,18 +4,18 @@ exports.put = function(req, res, render) {
 	db.put({
         collection: "session",
         doc: {
-	        title: "小分享",
-	        description: "懒懒交流会的一个分享",
-	        speakers: ["7nian"],
-	        order: 1,
-	        from: new Date(),
-	        to: new Date(),
+	        title: req.body.title,
+	        description: req.body.desc,
+	        speakers: req.body.speakers,
+	        from: req.body.from,
+	        to: req.body.to,
 	        state: 0, 
 	        feedbacks: [],
 	        _deleted: false
         },
         complete: function(err, doc) {
             if (err) {
+                console.log(err);
                 res.send("error");
             }
             else {

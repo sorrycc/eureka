@@ -85,20 +85,20 @@ module.exports = {
             "trim": true
         },
         speakers: {
-            "type": Array,
+            "type": String,
             "required": true
         },
-        order: {
-            "type": Number,
-            "trim": true
-        },
         from: {
-            "type": Date,
+            "type": String,
             "required": true
         },
         to: {
-            "type": Date,
+            "type": String,
             "required": true
+        },
+        type: {
+            "type": Number,
+            "enum": [0, 1, 2, 3, 4]
         },
         state: {
             "type": Number,

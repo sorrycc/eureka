@@ -5,7 +5,7 @@
 
 var express = require('express')
     , routes = require('./routes')
-    , user = require('./routes/user')
+    //, user = require('./routes/user')
     , http = require('http')
     , path = require('path')
     , session = require('./routes/session');
@@ -70,6 +70,7 @@ app.get('/party/:id', function(req, res) {
 // session
 // 七念
 app.get('/session/create', session.create);
+app.post('/session/_create', session._create);
 app.get('/session/get', session.get);
 app.get('/session/update', session.update);
 app.get('/session/del', session.del);
@@ -77,8 +78,8 @@ app.get('/session/del', session.del);
 // 水儿
 app.get('/session/list', function(req, res) {
 });
-app.get('/session/:id', function(req, res) {
-});
+// app.get(/session/(/d+), function(req, res) {
+// });
 
 // feedback
 // 筱谷
