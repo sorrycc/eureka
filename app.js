@@ -63,6 +63,10 @@ app.get('/party/create', function(req, res) {
     party.create.render(req, res);
 });
 
+app.get('/sprite', function(req, res) {
+    party.sprite.render(req, res);
+});
+
 // party
 /*
  * api/...为数据接口路由

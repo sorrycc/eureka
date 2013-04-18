@@ -176,6 +176,17 @@ module.exports = {
             });
         }
     },
+    sprite: {
+        render: function(req, res) {
+            console.log(req);
+            res.render("sprite", {
+                title: "sprite"
+            });
+        },
+        post:function(req,res){
+
+        }
+    },
     del: function(req, res, next) {
         var id = req.params.id;
         
