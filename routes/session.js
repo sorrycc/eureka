@@ -70,6 +70,7 @@ exports.list = {
 
             if (id = req.params.id) {
                 query.id = id;
+                console.log("party id:"+id)
             }
 
             db.get({
@@ -86,7 +87,7 @@ exports.list = {
 
                     res.json({
                         success: true,
-                        sessions: docs.sessions
+                        party: docs
                     });
                 }
             });

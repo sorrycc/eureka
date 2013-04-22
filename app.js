@@ -127,7 +127,7 @@ app.get('/session/list/:id', function(req, res) {
     session.list.render(req, res);
 });
 // get the session list belonging to the party with the id
-app.get('api/session/list/:id', function(req, res) {
+app.get('/api/session/list/:id', function(req, res) {
     session.list.get(req, res);
 });
 

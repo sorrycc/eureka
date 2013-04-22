@@ -7,7 +7,7 @@
  * @todo: 
  * @changelog: 
  */
-KISSY.add("js/session/list", function(S, Ajax, XTemplate) {
+KISSY.add("session/list", function(S, Ajax, XTemplate) {
     var List = function(opt) {
         if (!(this instanceof List)) return new List(opt);
 
@@ -27,7 +27,7 @@ KISSY.add("js/session/list", function(S, Ajax, XTemplate) {
             var self = this;
 
             S.io({
-                url: "/api/session" + (self.id ? "/" + self.id : ""),
+                url: "/api/session/list" + (self.id ? "/" + self.id : ""),
                 type: "get",
                 dataType: "json",
                 complete: function(d) {
@@ -36,7 +36,7 @@ KISSY.add("js/session/list", function(S, Ajax, XTemplate) {
                         return;
                     }
 
-                    self.el.html(new XTemplate(self.tpl).render(d));
+                    self.el.html(new XTemplate(self.tpl).render((d.party)[0]));
 
                     self.bind();
                 }
