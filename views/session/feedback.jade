@@ -1,0 +1,27 @@
+extends ../layout
+
+block content
+
+    link(type="text/css", rel="stylesheet", href="/css/feedback-count.css")
+
+    header#header
+        a.header-logo(href="")
+            span.logo
+    div.content
+        div.count-img.J_CountImg
+            ★
+        div.count.J_StarCount 0
+    script(src="/js/socket.io/socket.io.min.js")
+    script(type='text/javascript')
+        KISSY.config({
+            packages:[
+            {
+            name:"feedback",
+            path:"/js/",
+            charset:"utf-8"
+            }]
+        });
+        KISSY.use('feedback/init',function(S,fnInit){
+            fnInit();
+        })
+

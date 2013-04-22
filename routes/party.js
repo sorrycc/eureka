@@ -182,9 +182,6 @@ module.exports = {
             res.render("sprite", {
                 title: "sprite"
             });
-        },
-        post:function(req,res){
-
         }
     },
     del: function(req, res, next) {

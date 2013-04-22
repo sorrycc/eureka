@@ -8,7 +8,6 @@ var express = require('express')
     , http = require('http')
     , path = require('path')
     , session = require('./routes/session');
-
 var party = require('./routes/party');
 
 var stylus = require('stylus')
@@ -63,6 +62,10 @@ app.get('/party/create', function(req, res) {
     party.create.render(req, res);
 });
 
+app.get('/party/feedback', function(req, res) {
+    party.feedback.render(req, res);
+});
+
 app.get('/sprite', function(req, res) {
     party.sprite.render(req, res);
 });
@@ -113,6 +116,10 @@ app.get('/session/create', session.create);
 app.get('/session/get', session.get);
 app.get('/session/update', session.update);
 app.get('/session/del', session.del);
+//剑平
+app.get('/session/feedback',function(req, res) {
+    session.feedback(req, res,http);
+});
 
 // 水儿
 app.get('/session/list', routes.sessionList);
@@ -129,6 +136,20 @@ app.get('/feedback/list', function(req, res) {
 app.get('/feedback/:id', function(req, res) {
 });
 
-http.createServer(app).listen(app.get('port'), function(){
+var server = http.createServer(app);
+
+io = require('socket.io').listen(server);
+
+server.listen(app.get('port'), function(){
     console.log("Express server listening on port " + app.get('port'));
+});
+
+io.sockets.on('connection', function (socket) {
+    //监听听众的打分数据
+    socket.on('feedback', function (data) {
+        //demo data
+        var data = {sessionId:1,userId:33,starNum:3,feedbackContent:"PPT不够华丽"};
+        //将数据推送给管理者界面显示统计结果
+        socket.emit('feedbackCount', data);
+    });
 });
