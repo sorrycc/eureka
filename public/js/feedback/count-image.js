@@ -24,16 +24,23 @@ KISSY.add(function(S, Node, Base) {
             var $target = self.get('target');
             if(!$target.length) return false;
             self.set('fontSize',parseInt($target.css('fontSize')));
+            self.set('margin',{left:parseInt($target.css('marginLeft')),top:parseInt($target.css('marginTop'))});
         },
         change:function(num){
             if(!num) return false;
             var self = this;
             var $target = self.get('target');
             if(!$target.length) return false;
+            num = num * self.get('scale');
             var fontSize = self.get('fontSize');
             fontSize += num;
-            $target.stop().animate({"fontSize":fontSize},0.1,'easeNone');
+            var margin = self.get('margin');
+            var marginLeft = margin.left - Math.round(num/2);
+            var marginTop = margin.top - Math.round(num/2);
+            //$target.stop().animate({"fontSize":fontSize,"marginLeft":marginLeft},1,'easeNone');
+            $target.css({"fontSize":fontSize,"marginLeft":marginLeft});
             self.set('fontSize',fontSize);
+            self.set('margin',{left:marginLeft,top:marginTop});
 
         }
     }, {ATTRS : /** @lends CountImage*/{
@@ -43,7 +50,9 @@ KISSY.add(function(S, Node, Base) {
                 return $(v);
             }
         },
-        fontSize:{value:0}
+        fontSize:{value:0},
+        margin:{value:{left:0,top:0}},
+        scale:{value:0.4}
     }});
     return CountImage;
 }, {requires : ['node','base']});
