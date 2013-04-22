@@ -10,7 +10,7 @@ block header
       a.icon-back(href="#")
       a(href="/party") #{title}
       a.icon-add(href="#")
-        
+
 block content
     div.main
       div.party-list#J_SessionList(data-id="#{id}")
@@ -25,7 +25,7 @@ block content
             span {{location}} 
 
         ul#session-list
-        {{#each docs.sessions}}
+        {{#each sessions}}
         li 
           p {{from}} - {{to}}
           p {{title}}

@@ -84,6 +84,19 @@ exports.list = {
                         });
                         return;
                     }
+                    // 模拟数据
+                    // if(docs[0].sessions === []){
+                        docs[0].sessions =[{
+                            from: "13:00",
+                            to: "14:00",
+                            title: "分享一"
+                        },
+                        {
+                            from: "14:00",
+                            to: "15:00",
+                            title: "分享二"
+                        }]
+                    // }
 
                     res.json({
                         success: true,
