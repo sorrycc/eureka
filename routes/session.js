@@ -1,8 +1,15 @@
 /*
- * 分享路由
+ * @name: session.js
+ * @description: 分享路由
+ * @author: wondger@gmail.com
+ * @date: 2013-04-03
+ * @param: 
+ * @todo: 
+ * @changelog: 
  */
 
 var model = require("../models/session");
+var db = require("../db");
 
 exports.create = function(req, res){
   model.put(req, res, render);
@@ -47,3 +54,42 @@ exports.update = function(req, res){
 		});
 	}	
 };
+
+
+exports.list = {
+	render: function(req, res){
+		res.render('session/list', { 
+	  		title: '分享列表',
+	  		headAdd: true,
+            id: req.params.id || ""
+	    });	
+	},
+	get: function(req, res) {
+            var id,
+                query = {};
+
+            if (id = req.params.id) {
+                query.id = id;
+            }
+
+            db.get({
+                query: query,
+                collection: "party",
+                complete: function(err, docs) {
+                    if (err) {
+                        res.json({
+                            success: false,
+                            message: err.message
+                        });
+                        return;
+                    }
+
+                    res.json({
+                        success: true,
+                        sessions: docs.sessions
+                    });
+                }
+            });
+        }
+};
+

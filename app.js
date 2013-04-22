@@ -111,9 +111,13 @@ app.get('/session/update', session.update);
 app.get('/session/del', session.del);
 
 // 水儿
-app.get('/session/list', routes.sessionList);
-app.get('/session/:id', function(req, res) {
-
+// render the session list belonging to the party with the id
+app.get('/session/list/:id', function(req, res) {
+    session.list.render(req, res);
+});
+// get the session list belonging to the party with the id
+app.get('api/session/list/:id', function(req, res) {
+    session.list.get(req, res);
 });
 
 // feedback
