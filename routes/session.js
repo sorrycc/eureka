@@ -93,3 +93,12 @@ exports.list = {
         }
 };
 
+/**
+ * 管理者查看反馈结果页面
+ * by 剑平
+ */
+exports.feedback = function(req, res,http){
+    res.render('session/feedback',{
+        title: '查看反馈结果'
+    })
+}

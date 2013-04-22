@@ -210,6 +210,34 @@ module.exports = {
         }
     }, {
         versionKey: false
+    }),
+    //反馈统计
+    feedbackCount: new Schema({
+        id: {
+            "type": Number,
+            "default": -1,
+            "required": true,
+            "validate": /\d+/
+        },
+        session_id:{
+            "type": Number,
+            "required": true,
+            "validate": /\d+/
+        },
+        // 统计更新时间
+        timer: {
+            "type": Date
+        },
+        // 分数
+        count: {
+            "type": Number
+        },
+        _deleted: {
+            "type": Boolean,
+            "default": false,
+            "required": true
+        }
+    }, {
+        versionKey: false
     })
-
 };
