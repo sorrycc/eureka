@@ -1,3 +1,60 @@
-#session-list-page
+#protoFluid
+  display none!important
+
+mask()
+  visibility hidden
+  position absolute
+  top 0
+  left 0
+  background-color: rgba(0,0,0,0.2)
+  height: 100%
+  width: 100%
+
+#session-list-wrap
   label 
     display inline-block
+  #party
+    background-color #d7f2fb
+    padding 15px
+    position relative
+    h2.title
+      margin-bottom 0
+    .icon-code
+      position absolute
+      right 10px
+      top 22px
+    div.party-opts
+      mask()
+      i 
+        float left
+        margin-top 50px
+        margin-left 70px
+        cursor pointer
+  ul#session-list
+    li 
+      border-bottom 1px solid #dbcccd
+      margin-bottom 0
+      position relative
+      div.session-info
+        padding 15px 0 15px 15px
+        p.time
+          margin-bottom 5px
+          color #58a8c1
+        p.title
+          margin-bottom 0
+      div.session-opts
+        mask()
+        i 
+          float left
+          margin-top 25px
+          margin-left 35px
+          cursor pointer
+            
+
+  div.add-session-bar
+    padding: 15px 0 0 15px
+    span.text 
+      color #6c93a0
+      height  23px
+      line-height 23px
+      margin-left 5px

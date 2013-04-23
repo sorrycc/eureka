@@ -12,33 +12,45 @@ block header
       a.icon-add(href="#")
 
 block content
-    div.main
-      div.party-list#J_SessionList(data-id="#{id}")
+    div.main#session-list-wrap
+      div.session-list#J_SessionList(data-id="#{id}")
       script#J_TemplateSession(type="javascript/template")
-        div#party
+        div#party.J_PartyOpts
           h2.title {{title}}
           div.from
-            label 时间：
+            label.normal 时间：
             span {{time}}
           div.from
-            label 地点：
+            label.normal 地点：
             span {{location}} 
+          i.icon-code
+          div.party-opts
+            i.icon-edit
+            i.icon-del
 
         ul#session-list
-        {{#each sessions}}
-        li 
-          p {{from}} - {{to}}
-          p {{title}}
-        {{/each}}
+          {{#each sessions}}
+          li.J_SessionOpts
+            div.session-info
+              p.time {{from}} - {{to}}
+              p.title {{title}}
+            div.session-opts
+              i.icon-add-session
+              i.icon-edit
+              i.icon-del
+              i.icon-push
+          {{/each}}
+
+        div.add-session-bar
+          i.icon-add-session
+          span.text.large 新增一个分享
         
     script
         KISSY.use("node, session/list", function(S, Node, SessionList){
             S.ready(function(){
-
                 SessionList({
                     el: "#J_SessionList",
                     tpl: S.one("#J_TemplateSession").html()
                 }).render();
-
             });
         });
