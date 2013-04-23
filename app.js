@@ -10,7 +10,8 @@ var express = require('express')
     , path = require('path')
     , session = require('./routes/session');
 
-var dbdemo = require('./examples/db.api')
+var dbdemo = require('./examples/db.api')；
+var party = require('./routes/party');
 
 var stylus = require('stylus')
     , nib = require('nib');
@@ -29,6 +30,7 @@ app.configure(function(){
     app.use(express.favicon());
     app.use(express.logger('dev'));
     app.use(express.bodyParser());
+    app.use(express.cookieParser());
     app.use(express.methodOverride());
     app.use(app.router);
 
@@ -58,13 +60,57 @@ app.get('/', routes.index);
 app.get('/login', function(req, res) {
 });
 
-// party
 // 棪木
 app.get('/party/create', function(req, res) {
+    party.create.render(req, res);
 });
-app.get('/party/list', function(req, res) {
+
+app.get('/party/feedback', function(req, res) {
+    party.feedback.render(req, res);
 });
+
+app.get('/sprite', function(req, res) {
+    party.sprite.render(req, res);
+});
+
+// party
+/*
+ * api/...为数据接口路由
+ * 其他为页面模版渲染路由
+ */
+// 棪木
+app.post('/api/party/create', function(req, res) {
+    party.create.post(req, res);
+});
+
+// 棪木
+app.get('/party/edit/:id', function(req, res) {
+    party.edit.render(req, res);
+});
+// 棪木
+app.get('/party', function(req, res) {
+    party.list.render(req, res);
+});
+// 棪木
 app.get('/party/:id', function(req, res) {
+    party.list.render(req, res);
+});
+// 棪木
+app.get('/api/party', function(req, res) {
+    party.list.get(req, res);
+});
+
+// 棪木
+app.get('/api/party/:id', function(req, res) {
+    party.list.get(req, res);
+});
+// 棪木
+app.post('/api/party/edit/:id', function(req, res) {
+    party.edit.post(req, res);
+});
+// 棪木
+app.post('/api/party/del/:id', function(req, res) {
+    party.del(req, res);
 });
 
 // session
@@ -74,8 +120,17 @@ app.post('/session/_create', session._create);
 app.get('/session/get', session.get);
 app.get('/session/update', session.update);
 app.get('/session/del', session.del);
+//剑平
+app.get('/session/feedback',function(req, res) {
+    session.feedback(req, res,http);
+});
 
 // 水儿
+// render the session list belonging to the party with the id
+app.get('/session/list/:id', function(req, res) {
+    session.list.render(req, res);
+});
+// get the session list belonging to the party with the id
 app.get('/session/list', function(req, res) {
 });
 // app.get(/session/(/d+), function(req, res) {
@@ -90,6 +145,20 @@ app.get('/feedback/list', function(req, res) {
 app.get('/feedback/:id', function(req, res) {
 });
 
-http.createServer(app).listen(app.get('port'), function(){
+var server = http.createServer(app);
+
+io = require('socket.io').listen(server);
+
+server.listen(app.get('port'), function(){
     console.log("Express server listening on port " + app.get('port'));
+});
+
+io.sockets.on('connection', function (socket) {
+    //监听听众的打分数据
+    socket.on('feedback', function (data) {
+        //demo data
+        var data = {sessionId:1,userId:33,starNum:3,feedbackContent:"PPT不够华丽"};
+        //将数据推送给管理者界面显示统计结果
+        socket.emit('feedbackCount', data);
+    });
 });

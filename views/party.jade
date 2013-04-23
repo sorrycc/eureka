@@ -1,0 +1,35 @@
+extends layout
+
+block head
+    link(type="text/css", rel="stylesheet", href="/party/css/style.css")
+
+block content
+    div.bar
+        h1
+            a(href="/party") #{title}
+    div.party-list#J_PartyList(data-id="#{id}")
+    script#J_TemplateParty(type="javascript/template")
+        {{#each docs}}
+        {{#with this}}
+        section.party-item
+            article.party-info
+                h1
+                    a.session-name(href="/party/{{id}}") {{title}}
+                    a(href="/party/edit/{{id}}") edit
+                    a.session-del(href="/api/party/del/{{id}}") delete
+                div.party-time 时间:{{time}}
+                div.party-loc 地点:{{location}}
+        {{/with}}
+        {{/each}}
+        
+    script
+        KISSY.use("node, party/list", function(S, Node, List){
+            S.ready(function(){
+
+                List({
+                    el: "#J_PartyList",
+                    tpl: S.one("#J_TemplateParty").html()
+                }).render();
+
+            });
+        });

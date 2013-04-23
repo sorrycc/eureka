@@ -39,6 +39,7 @@ exports.get = function(req, res, render) {
                 res.send("error");
             }
             else {
+            	
                 render(docs);
             }
         }

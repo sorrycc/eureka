@@ -5,5 +5,9 @@
 
 
 exports.index = function(req, res){
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'Express'});
+};
+
+exports.sessionList = function(req, res){
+  res.render('./session/list', { title: '我的分享会', headAdd: true});
 };
