@@ -1,8 +1,20 @@
-extends ../layout
+extends layout
 
 block content
-  h1= title
-  each doc in docs
-    h3= doc.title
-    h6= doc.description
-    p Start from #{doc.from}
+  h1= session
+  table
+    tbody
+      tr
+        td 分享者
+        td= speakers
+      tr
+        td 简介
+        td= description
+      tr
+        td 开始时间
+        td= from
+      tr
+        td 结束时间
+        td= to
+
+  a(href='/session/create', title='继续创建') 继续创建
