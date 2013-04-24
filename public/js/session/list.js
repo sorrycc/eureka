@@ -72,9 +72,7 @@ KISSY.add("session/list", function(S, Ajax, XTemplate) {
          */
         partyTapHoldEvt: function(){
             
-             E.on('.J_PartyOpts','click tapHold', function(e){
-
-                if(D.hasClass(e.target,'icon-code')) return;
+             E.on('.J_PartyOpts','dblclick tapHold', function(e){
 
                 var t = e.currentTarget,
                     partyOpts = D.get('.party-opts', t);
@@ -89,7 +87,7 @@ KISSY.add("session/list", function(S, Ajax, XTemplate) {
          */
         sessionTapHoldEvt: function(){
             
-           E.delegate('#session-list','click tapHold', '.J_SessionOpts', function(e){
+           E.delegate('#session-list','dblclick tapHold', '.J_SessionOpts', function(e){
                 var t = e.currentTarget,
                     sessionOpts = D.get('.session-opts', t);
 
@@ -109,7 +107,7 @@ KISSY.add("session/list", function(S, Ajax, XTemplate) {
         viewOriginalCodeEvt: function(){
             var self = this,
                 rotateEl = D.get('#session-list-page');
-            E.on('#J_ViewOriginal', 'click', function(e){
+            E.on('#J_ViewOriginal', 'click tap', function(e){
                 // hide session-list-wrap, and display code
                 rotateYDIV(0, rotateEl);
             });
