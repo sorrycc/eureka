@@ -122,6 +122,17 @@ exports.update = function(req, res){
   } 
 };
 
+exports.detail = {
+  render: function(req, res){
+    res.render('session/detail', { 
+        title: '分享详情',
+        headAdd: true,
+        id: req.params.id || ""
+      }); 
+  }
+};
+
+
 
 exports.list = {
   render: function(req, res){

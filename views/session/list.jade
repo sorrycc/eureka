@@ -31,9 +31,9 @@ block content
         ul#session-list
           {{#each sessions}}
           li.J_SessionOpts
-            div.session-info
-              p.time {{from}} - {{to}}
-              p.title {{title}}
+            a.session-info(href="/session/detail/#{id}")
+              span.time {{from}} - {{to}}
+              span.title {{title}}
             div.session-opts
               a.opt.icon-add-session(href="/session/create")
               a.opt.icon-edit(href="/session/update/#{id}")

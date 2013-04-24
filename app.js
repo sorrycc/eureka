@@ -120,6 +120,9 @@ app.post('/session/create', session.create);
 app.get('/session/edit/:id', session.edit);
 app.get('/session/update/:id', session.update);
 app.post('/session/del/:id', session.del);
+app.post('/session/detail/:id', function(req, res) {
+    session.detail.render(req, res);
+});
 
 //剑平
 app.get('/session/feedback',function(req, res) {
@@ -131,8 +134,8 @@ app.get('/session/feedback',function(req, res) {
 app.get('/session/list/:id', function(req, res) {
     session.list.render(req, res);
 });
-// get the session list belonging to the party with the id
-app.get('/session/list', function(req, res) {
+app.get('/api/session/list/:id', function(req, res) {
+    session.list.get(req, res);
 });
 // app.get(/session/(/d+), function(req, res) {
 // });
