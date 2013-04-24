@@ -14,7 +14,7 @@ var db = require("../db");
 module.exports = {
     create: {
         render: function(req, res) {
-            res.render("party_form", {
+            res.render("form", {
                 title: "创建分享会",
                 id: "",
                 partyTitle: "",
@@ -77,7 +77,7 @@ module.exports = {
     },
     list: {
         render: function(req, res) {
-            res.render("party", {
+            res.render("party/list", {
                 title: "我的分享会",
                 id: req.params.id || ""
             });
@@ -130,7 +130,7 @@ module.exports = {
 
                     var doc = docs[0];
 
-                    res.render("party_form", {
+                    res.render("form", {
                         title: "编辑分享会",
                         id: doc.id,
                         partyTitle: doc.title,
@@ -176,6 +176,7 @@ module.exports = {
             });
         }
     },
+    // 剑平贱人，速删！
     sprite: {
         render: function(req, res) {
             console.log(req);
