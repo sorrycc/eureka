@@ -22,5 +22,5 @@ button{-webkit-border-radius:5px;border-radius:5px}
 .lastrow .column form{display:inline-block}
 .lastrow .column:nth-child(2){width:50%}
 .lastrow .column a,.lastrow .column a:hover{text-decoration:none}
-.lastrow .column .button{color:#fff;font-size:20px;background-color:#303030;padding:7px 20px;border:0;margin-right:20px;}
+.lastrow .column .button{color:#fff;font-size:20px;background-color:#303030;padding:7px 20px;border:0;margin:0 20px 0 0;line-height:20px;}
 .lastrow .column .button:hover{cursor:pointer}
