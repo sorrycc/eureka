@@ -6,23 +6,23 @@ block head
 block content
     div.bar
         h1 #{title}
-    div.party-crate
-        form#J_PartyForm(method="post")
-            ul
-                li
-                    label(for="J_PartyName") 名称
-                    input#J_PartyName(name="title", placeholder="输入分享会名称", value="#{partyTitle}")
-                li
-                    label(for="J_PartyTime") 时间
-                    input#J_PartyName(name="time", type="date", value="#{time}")
-                li
-                    label(for="J_PartyLoc") 地点
-                    input#J_PartyLoc(name="location", value="#{location}")
+    div.panel
+        div.party-crate
+            form#J_PartyForm(method="post")
+                ul
+                    li
+                        label(for="J_PartyName") 名称
+                        input#J_PartyName(name="title", placeholder="输入分享会名称", value="#{partyTitle}")
+                    li
+                        label(for="J_PartyTime") 时间
+                        input#J_PartyName(name="time", type="date", value="#{time}")
+                    li
+                        label(for="J_PartyLoc") 地点
+                        input#J_PartyLoc(name="location", value="#{location}")
 
-            div.form-btn
-                button(type="submit") 创建
-                input(type="hidden", name="id", value="#{id}")
-
+                div.form-btn
+                    button(type="submit") 创建
+                    input(type="hidden", name="id", value="#{id}")
     script
         KISSY.use("party/form", function(S, Form) {
             Form({

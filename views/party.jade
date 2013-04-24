@@ -5,20 +5,23 @@ block head
 
 block content
     div.bar
-        h1
-            a(href="/party") #{title}
-    div.party-list#J_PartyList(data-id="#{id}")
+        h1 #{title}
+        a.back(href="#nogo") 返回
+        a.btn.btn-create(href="/party/create") 创建
+    div.panel
+        div.party-list#J_PartyList(data-id="#{id}")
     script#J_TemplateParty(type="javascript/template")
         {{#each docs}}
         {{#with this}}
         section.party-item
             article.party-info
-                h1
-                    a.session-name(href="/party/{{id}}") {{title}}
-                    a(href="/party/edit/{{id}}") edit
-                    a.session-del(href="/api/party/del/{{id}}") delete
+                h1 {{title}}
                 div.party-time 时间:{{time}}
                 div.party-loc 地点:{{location}}
+            div.party-panel
+                a(href="/party/edit/{{id}}") edit
+                a.session-del(href="/api/party/del/{{id}}") delete
+
         {{/with}}
         {{/each}}
         

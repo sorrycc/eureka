@@ -2,18 +2,35 @@ doctype 5
 html
   head
     title= title
-    meta(name="viewport",content="width=device-width,initial-scale=1,maximum-scale=1")
+<<<<<<< HEAD
+    link(rel='stylesheet', href='/global/css/reset.css')
+    link(rel='stylesheet', href='/global/css/style.css')
+=======
+
+    // 页面初始缩放比例正确，横竖版切换时自动根据当前窗口宽度重置页面缩放，但无法手动缩放页面
+    meta(name="viewport",content="width=device-width,height=device-height,initial-scale=1,maximum-scale=1")
+
     link(rel='stylesheet', href='/css/base.css')
+    link(rel='stylesheet', href='/css/common/sprites.css')
+    link(rel='stylesheet', href='/css/common/header.css')
+    link(rel='stylesheet', href='/css/common/main.css')
     link(rel='stylesheet', href='/css/layout.css')
-    link(rel='stylesheet', href='/css/session/list.css')
+    
+    block head
+
     // use protofluid debug need import follow two js
     script(src="/js/jquery.js")
     script(src="/js/protoFluid3.02.js") 
+
     // our code goes here
+>>>>>>> 842170c3479b90db004ac542d36af2ab1ca3633b
     script(src="http://a.tbcdn.cn/s/kissy/1.3.0/seed.js")
     script(src="/global/js/config.js")
-    block head
+
+    
   body
+
+    block header
     block content
     
 

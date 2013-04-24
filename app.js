@@ -5,9 +5,11 @@
 
 var express = require('express')
     , routes = require('./routes')
+    //, user = require('./routes/user')
     , http = require('http')
     , path = require('path')
     , session = require('./routes/session');
+
 var party = require('./routes/party');
 
 var stylus = require('stylus')
@@ -112,20 +114,31 @@ app.post('/api/party/del/:id', function(req, res) {
 
 // session
 // 七念
-app.get('/session/create', session.create);
-app.get('/session/get', session.get);
-app.get('/session/update', session.update);
-app.get('/session/del', session.del);
+app.get('/session/create', session.new);
+app.post('/session/create', session.create);
+//app.get('/session/get', session.get);
+app.get('/session/edit/:id', session.edit);
+app.get('/session/update/:id', session.update);
+app.post('/session/del/:id', session.del);
+app.get('/session/detail/:id', function(req, res) {
+    session.detail.render(req, res);
+});
+
 //剑平
 app.get('/session/feedback',function(req, res) {
     session.feedback(req, res,http);
 });
 
 // 水儿
-app.get('/session/list', routes.sessionList);
-app.get('/session/:id', function(req, res) {
-
+// render the session list belonging to the party with the id
+app.get('/session/list/:id', function(req, res) {
+    session.list.render(req, res);
 });
+app.get('/api/session/list/:id', function(req, res) {
+    session.list.get(req, res);
+});
+// app.get(/session/(/d+), function(req, res) {
+// });
 
 // feedback
 // 筱谷

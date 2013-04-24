@@ -1,0 +1,35 @@
+extends layout
+
+block content
+  div.bar
+    h1 #{docTitle}
+  div.content
+    div.sessionForm
+      div.row
+        div.column
+          label 标题
+        div.column
+          span #{title}
+      div.row
+        div.column
+          label 分享者
+        div.column
+          span #{speakers}
+      div.row
+        div.column
+          label 分享时间
+        div.column
+          span #{from} ~ #{to}
+      div.row
+        div.column
+          label 简介
+        div.column
+          span #{description}
+      div.lastrow
+        div.column
+          &nbsp;
+        div.column
+          form(method="post",action="/session/del/#{id}")
+            a.button(href="/session/edit/#{id}") 编辑分享
+            input.button(type="submit", value="删除分享")
+            a.button(href="/session/create") 继续创建
