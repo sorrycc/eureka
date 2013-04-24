@@ -119,7 +119,7 @@ app.post('/session/create', session.create);
 app.get('/session/edit/:id', session.edit);
 app.get('/session/update/:id', session.update);
 app.post('/session/del/:id', session.del);
-app.post('/session/detail/:id', function(req, res) {
+app.get('/session/detail/:id', function(req, res) {
     session.detail.render(req, res);
 });
 
