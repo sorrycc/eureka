@@ -21,9 +21,9 @@ KISSY.add(function(S, Node, Base) {
     S.extend(StarCount, Base, /** @lends StarCount.prototype*/{
         _init:function(){
             var self = this;
-/*            setInterval(function(){
-                self.count(3);
-            },200);*/
+            // setInterval(function(){
+            //     self.count(3);
+            // },200);
         },
         count:function(starNum){
             if(!starNum) return false;

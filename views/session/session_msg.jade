@@ -7,7 +7,10 @@ block content
     div.sessionForm
       div.row
         div.msg
-          #{num}条分享已经被删除
+          if type == 'del'
+            #{num}条分享已经被删除
+          else if type == 'update'
+            #{num}条分享已经被更新
       div.lastrow
         div.column
           &nbsp;

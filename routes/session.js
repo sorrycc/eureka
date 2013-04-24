@@ -44,6 +44,7 @@ exports.create = function(req, res){
       id: doc.id,
       docTitle: '分享已创建',
       title: doc.title,
+      type: 'created',
       description: doc.description,
       speakers: doc.speakers,
       from: doc.from,
@@ -91,8 +92,8 @@ exports.get = function(req, res){
   function render(docs) {
     res.render('session/get', { 
         docs: docs,
-        title: '查询分享' }
-      );  
+        title: '查询分享' 
+    });  
   } 
 };
 
@@ -100,9 +101,10 @@ exports.del = function(req, res){
   model.del(req, res, render);
 
   function render(numAffected) {
-    res.render('session/session_del', {
+    res.render('session/session_msg', {
       docTitle: '删除分享',
       num: numAffected,
+      type: 'del',
       success: '1',
       msg: ''
     });
@@ -115,19 +117,42 @@ exports.update = function(req, res){
   model.post(req, res, render);
 
   function render(numAffected) {
-    res.render('session/update', {
-      title: '更新分享',
-      num: numAffected
+    res.render('session/session_msg', {
+      docTitle: '更新分享',
+      num: numAffected,
+      type: 'update',
+      success: '1',
+      msg: ''
     });
   } 
 };
 
+<<<<<<< HEAD
 exports.detail = {
   render: function(req, res){
     res.render('session/detail', { 
         title: '分享详情',
         headAdd: false,
         id: req.params.id || ""
+=======
+exports.detail = function(req, res) {
+  model.get(req, res, render);
+  
+  function render(docs){
+    var doc = docs[0];
+
+    res.render('session/session_display', { 
+        docTitle: '分享详情',
+        success: '1',
+        msg: '',
+        id: doc.id,
+        title: doc.title,
+        type: 'detail',
+        description: doc.description,
+        speakers: doc.speakers,
+        from: doc.from,
+        to: doc.to    
+>>>>>>> 13546a2dfe9ea00a1adc7a82ceaafc27ab716ba5
       }); 
   }
 };
@@ -164,6 +189,8 @@ exports.list = {
                     }
                     // 模拟数据
                     // if(docs[0].sessions === []){
+                      console.log(docs);
+                      console.log("=========");
                         docs[0].sessions =[{
                             id: "1",
                             from: "13:00",
