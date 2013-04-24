@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  div.bar
+    h1 #{docTitle}
+  div.content
+    div.sessionForm
+      div.row
+        div.msg
+          if type == 'del'
+            #{num}条分享已经被删除
+          else if type == 'update'
+            #{num}条分享已经被更新
+      div.lastrow
+        div.column
+          &nbsp;
+        div.column
+          a.button(href="/session/create") 继续创建
