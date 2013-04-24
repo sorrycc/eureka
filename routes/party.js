@@ -78,7 +78,7 @@ module.exports = {
     list: {
         render: function(req, res) {
             res.render("party", {
-                title: "分享会",
+                title: "我的分享会",
                 id: req.params.id || ""
             });
         },
