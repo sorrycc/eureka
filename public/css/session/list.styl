@@ -25,7 +25,7 @@ mask()
       top 22px
     div.party-opts
       mask()
-      i 
+      .opt
         float left
         margin-top 50px
         margin-left 70px
@@ -44,7 +44,7 @@ mask()
           margin-bottom 0
       div.session-opts
         mask()
-        i 
+        .opt 
           float left
           margin-top 25px
           margin-left 35px
@@ -53,11 +53,15 @@ mask()
 
   div.add-session-bar
     padding: 15px 0 0 15px
-    span.text 
+
+    a.text 
+      i.icon-add-session
+        margin-right 5px
       color #6c93a0
       height  23px
       line-height 23px
       margin-left 5px
+      text-decoration none
 #code
   display none
   padding-top 60px

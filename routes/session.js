@@ -87,11 +87,13 @@ exports.list = {
                     // 模拟数据
                     // if(docs[0].sessions === []){
                         docs[0].sessions =[{
+                            id: "1",
                             from: "13:00",
                             to: "14:00",
                             title: "分享一"
                         },
                         {
+                            id: "2",
                             from: "14:00",
                             to: "15:00",
                             title: "分享二"

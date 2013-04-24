@@ -4,13 +4,14 @@
 #session-list-page #party h2.title{margin-bottom:0}
 #session-list-page #party .icon-code{position:absolute;right:10px;top:22px}
 #session-list-page #party div.party-opts{visibility:hidden;position:absolute;top:0;left:0;background-color:rgba(0,0,0,0.2);height:100%;width:100%;}
-#session-list-page #party div.party-opts i{float:left;margin-top:50px;margin-left:70px;cursor:pointer}
+#session-list-page #party div.party-opts .opt{float:left;margin-top:50px;margin-left:70px;cursor:pointer}
 #session-list-page ul#session-list li{border-bottom:1px solid #dbcccd;margin-bottom:0;position:relative;}
 #session-list-page ul#session-list li div.session-info{padding:15px 0 15px 15px;}
 #session-list-page ul#session-list li div.session-info p.time{margin-bottom:5px;color:#58a8c1}
 #session-list-page ul#session-list li div.session-info p.title{margin-bottom:0}
 #session-list-page ul#session-list li div.session-opts{visibility:hidden;position:absolute;top:0;left:0;background-color:rgba(0,0,0,0.2);height:100%;width:100%;}
-#session-list-page ul#session-list li div.session-opts i{float:left;margin-top:25px;margin-left:35px;cursor:pointer}
+#session-list-page ul#session-list li div.session-opts .opt{float:left;margin-top:25px;margin-left:35px;cursor:pointer}
 #session-list-page div.add-session-bar{padding:15px 0 0 15px;}
-#session-list-page div.add-session-bar span.text{color:#6c93a0;height:23px;line-height:23px;margin-left:5px}
+#session-list-page div.add-session-bar a.text{color:#6c93a0;height:23px;line-height:23px;margin-left:5px;text-decoration:none}
+#session-list-page div.add-session-bar a.text i.icon-add-session{margin-right:5px}
 #code{display:none;padding-top:60px}
