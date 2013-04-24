@@ -126,7 +126,7 @@ exports.detail = {
   render: function(req, res){
     res.render('session/detail', { 
         title: '分享详情',
-        headAdd: true,
+        headAdd: false,
         id: req.params.id || ""
       }); 
   }
@@ -139,7 +139,7 @@ exports.list = {
     res.render('session/list', { 
         title: '分享列表',
         headAdd: true,
-            id: req.params.id || ""
+        id: req.params.id || ""
       }); 
   },
   get: function(req, res) {
