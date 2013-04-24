@@ -92,12 +92,16 @@ module.exports = {
             "required": true
         },
         from: {
-            "type": Date,
+            "type": String,
             "required": true
         },
         to: {
-            "type": Date,
+            "type": String,
             "required": true
+        },
+        type: {
+            "type": Number,
+            "enum": [0, 1, 2, 3, 4]
         },
         state: {
             "type": Number,
@@ -210,6 +214,34 @@ module.exports = {
         }
     }, {
         versionKey: false
+    }),
+    //反馈统计
+    feedbackCount: new Schema({
+        id: {
+            "type": Number,
+            "default": -1,
+            "required": true,
+            "validate": /\d+/
+        },
+        session_id:{
+            "type": Number,
+            "required": true,
+            "validate": /\d+/
+        },
+        // 统计更新时间
+        timer: {
+            "type": Date
+        },
+        // 分数
+        count: {
+            "type": Number
+        },
+        _deleted: {
+            "type": Boolean,
+            "default": false,
+            "required": true
+        }
+    }, {
+        versionKey: false
     })
-
 };

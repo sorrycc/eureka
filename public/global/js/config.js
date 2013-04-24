@@ -13,6 +13,9 @@ KISSY.config({
     packages: {
         party: {
             base: "/party/js"
+        },
+        session: {
+        	base: "/js"
         }
     }
 });
