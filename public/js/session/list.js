@@ -50,9 +50,22 @@ KISSY.add("session/list", function(S, Ajax, XTemplate) {
         },
         bind: function() {
             var self = this;
+
+            E.on(document, 'click', function(e){
+                if(!D.parent(e.target, '.J_PartyOpts') && !D.parent(e.target, '.party-opts')){
+                    D.css('.party-opts', 'visibility', 'hidden');
+                }
+                if(!D.parent(e.target, '.J_SessionOpts') && !D.parent(e.target, '.session-opts')){
+                    D.css('.session-opts', 'visibility', 'hidden');
+                }
+            });
+
             self.partyTapHoldEvt();
             self.sessionTapHoldEvt();
             self.viewOriginalCodeEvt();
+
+
+
         },
         /**
          * party taphold效果
@@ -65,12 +78,8 @@ KISSY.add("session/list", function(S, Ajax, XTemplate) {
 
                 var t = e.currentTarget,
                     partyOpts = D.get('.party-opts', t);
-                D.css(partyOpts, 'visibility', 'visible');
 
-                E.on(document, 'click', function(e){
-                    if(!t.contains(e.target) && !partyOpts.contains(e.target) )
-                        D.css(partyOpts, 'visibility', 'hidden');
-                });
+                D.css(partyOpts, 'visibility', 'visible');
             });   
         
         },
@@ -83,12 +92,12 @@ KISSY.add("session/list", function(S, Ajax, XTemplate) {
            E.delegate('#session-list','click tapHold', '.J_SessionOpts', function(e){
                 var t = e.currentTarget,
                     sessionOpts = D.get('.session-opts', t);
-                D.css(sessionOpts, 'visibility', 'visible');
 
-                E.on(document, 'click', function(e){
-                    if(!t.contains(e.target) && !sessionOpts.contains(e.target) )
-                        D.css(sessionOpts, 'visibility', 'hidden');
-                });
+                // first hide all session opts
+                D.css('.session-opts', 'visibility', 'hidden');    
+
+                // then show current session opts
+                D.css(sessionOpts, 'visibility', 'visible');
             }); 
             
         },
@@ -110,11 +119,12 @@ KISSY.add("session/list", function(S, Ajax, XTemplate) {
 
         }
 
-        
-
-
     });
 
+
+    /**
+     * 实现元素的垂直翻转效果
+     */
     function rotateYDIV(ny, el)
     {
         var rotYINT;
@@ -127,16 +137,16 @@ KISSY.add("session/list", function(S, Ajax, XTemplate) {
             ny = ny + 1
             D.css(el, 'transform', 'rotateY(' + ny + 'deg)');
             D.css(el, 'webkitTransform', 'rotateY(' + ny + 'deg)');
-            D.css(el, 'OTransform', 'rotateY(" + ny + "deg)');
-            D.css(el, 'MozTransform', 'rotateY(" + ny + "deg)');
+            D.css(el, 'OTransform', 'rotateY(' + ny + 'deg)');
+            D.css(el, 'MozTransform', 'rotateY(' + ny + 'deg)');
             // el.style.transform = 
             // el.style.webkitTransform = "rotateY(" + ny + "deg)"
             // el.style.OTransform = "rotateY(" + ny + "deg)"
             // el.style.MozTransform = "rotateY(" + ny + "deg)"
             if (ny == 180 || ny >= 360)
             {
-            clearInterval(rotYINT)
-            if (ny >= 360){ny = 0}
+                clearInterval(rotYINT)
+                if (ny >= 360){ny = 0}
             }
             // hide session-list-wrap, and display code
             if(ny == 90){
