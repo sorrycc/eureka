@@ -1,0 +1,45 @@
+extends layout
+
+block content
+  div.bar
+    h1 #{docTitle}
+  div.content
+    div.sessionForm
+      if success == '1'
+        form(method="post")
+          div.row
+            div.column
+              label(for="title") 标题
+            div.column
+              input#J_SessionTitle(type="text", name="title", value="#{title}", placeholder="输入分享名称")
+          div.row
+            div.column
+              label(for="speakers") 分享者  
+            div.column
+              input#J_SessionSpeakers(type="text", name="speakers", value="#{speakers}", placeholder="输入分享者名称，多人则用逗号分隔")
+          div.row
+            div.column
+              label(for="from") 开始时间
+            div.column
+              input#J_SessionFrom(type="time", name="from", value="#{from}")
+          div.row
+            div.column
+              label(for="to") 结束时间
+            div.column
+              input#J_SessionTo(type="time", name="to", value="#{to}")
+          div.row
+            div.column
+              label(for="desc") 简介
+            div.column
+              input#J_SessionDesc(type="text", name="desc", value="#{description}", placeholder="输入分享这个分享的简介")
+          div.lastrow
+            div.column
+              &nbsp;
+            div.column
+              if type == '1'
+                input.button(type="submit", value="创建")
+              else
+                input.button(type="submit", value="更新")
+              input(type="hidden", name="id", value="#{id}")
+      else
+        div.msg #{err}
