@@ -111,17 +111,14 @@ app.post('/api/party/del/:id', function(req, res) {
     party.del(req, res);
 });
 
-// session
+// session/分享
 // 七念
 app.get('/session/create', session.new);
 app.post('/session/create', session.create);
-//app.get('/session/get', session.get);
-app.get('/session/edit/:id', session.edit);
-app.get('/session/update/:id', session.update);
-app.post('/session/del/:id', session.del);
-app.get('/session/detail/:id', function(req, res) {
-    session.detail.render(req, res);
-});
+app.get('/session/:id/', session.detail);
+app.get('/session/:id/edit', session.edit);
+app.post('/session/:id/edit', session.update);
+app.del('/session/:id/', session.del);
 
 //剑平
 app.get('/session/feedback',function(req, res) {
