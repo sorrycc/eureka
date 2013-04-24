@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  div.bar
+    h1 #{docTitle}
+  div.content
+    div.sessionForm
+      div.row
+        div.msg
+          #{num}条分享已经被删除
+      div.lastrow
+        div.column
+          &nbsp;
+        div.column
+          a.button(href="/session/create") 继续创建
