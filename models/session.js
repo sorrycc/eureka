@@ -27,7 +27,7 @@ exports.put = function(req, res, render) {
 
 exports.get = function(req, res, render) {
     var _query = {
-            title: req.query.title
+      id: req.params.id
     };
     console.log(_query);
 
@@ -39,7 +39,6 @@ exports.get = function(req, res, render) {
                 res.send("error");
             }
             else {
-            	
                 render(docs);
             }
         }
@@ -47,7 +46,9 @@ exports.get = function(req, res, render) {
 }
 
 exports.del = function(req, res, render) {
-	var _query = {"title": "小分享"};
+	var _query = {
+    id: req.params.id
+  };
 
 	db.del({
 	    query: _query,

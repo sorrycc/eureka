@@ -10,7 +10,6 @@ var express = require('express')
     , path = require('path')
     , session = require('./routes/session');
 
-var dbdemo = require('./examples/db.api')；
 var party = require('./routes/party');
 
 var stylus = require('stylus')
@@ -115,11 +114,13 @@ app.post('/api/party/del/:id', function(req, res) {
 
 // session
 // 七念
-app.get('/session/create', session.create);
-app.post('/session/_create', session._create);
-app.get('/session/get', session.get);
-app.get('/session/update', session.update);
-app.get('/session/del', session.del);
+app.get('/session/create', session.new);
+app.post('/session/create', session.create);
+//app.get('/session/get', session.get);
+app.get('/session/edit/:id', session.edit);
+app.get('/session/update/:id', session.update);
+app.post('/session/del/:id', session.del);
+
 //剑平
 app.get('/session/feedback',function(req, res) {
     session.feedback(req, res,http);
