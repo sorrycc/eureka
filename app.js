@@ -7,9 +7,9 @@ var express = require('express')
     , routes = require('./routes')
     , http = require('http')
     , path = require('path')
-    , session = require('./routes/session');
-
-var party = require('./routes/party');
+    , session = require('./routes/session')
+    , feedback = require('./routes/feedback')
+    , party = require('./routes/party');
 
 var stylus = require('stylus')
     , nib = require('nib');
@@ -138,8 +138,7 @@ app.get('/api/session/list/:id', function(req, res) {
 
 // feedback
 // 筱谷
-app.get('/feedback/create', function(req, res) {
-});
+app.get('/feedback/make', feedback.make);
 app.get('/feedback/list', function(req, res) {
 });
 app.get('/feedback/:id', function(req, res) {
