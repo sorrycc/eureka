@@ -1,8 +1,17 @@
 var db = require("../db");
-
-exports.put = function(req, res,success) {
+//反馈统计集合
+var COUNT_COLLECTION = "feedback_count";
+//分享集合
+var SESSION_COLLECTION = "session";
+/**
+ * 保存反馈星数统计
+ * @param req
+ * @param res
+ * @return {boolean}
+ */
+exports.saveCount = function(req, res) {
     //分享id
-    var sessionId = req.body.session_id;
+    var sessionId = req.body.sessionId;
     if(!sessionId){
         res.send('{"status":0,"message":"缺少sessionId"}');
         return false;
@@ -14,7 +23,7 @@ exports.put = function(req, res,success) {
         return false;
     }
 	db.put({
-        collection: "feedback_count",
+        collection: COUNT_COLLECTION,
         doc: {
             session_id:sessionId,
             count:count
@@ -24,20 +33,25 @@ exports.put = function(req, res,success) {
                 res.send('{"status":0,"message":"'+err+'"}');
             }
             else {
-                success && success.call(self,doc);
+                res.send('{"status":1}');
             }
         }
     });
 }
-
-exports.get = function(req, res, render) {
+/**
+ * 获取分享
+ * @param req
+ * @param res
+ * @param render
+ */
+exports.getSession = function(req, res, render) {
     var _query = {
       id: req.params.id
     };
     console.log(_query);
 
     db.get({
-        collection: "session",
+        collection: SESSION_COLLECTION,
         query: _query,
         complete: function(err, docs) {
             if (err) {

@@ -25,7 +25,5 @@ exports.result = function(req, res){
  * @param res
  */
 exports.save_count = function(req, res){
-    model.put(req, res,function(result){
-        res.end('{"status":1}');
-    });
+    model.saveCount(req, res);
 }

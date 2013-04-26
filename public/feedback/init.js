@@ -2,7 +2,7 @@
  * @fileoverview 初始化统计反馈逻辑（管理者界面）
  * @author 剑平（明河）<minghe36@126.com>
  **/
-KISSY.add(function(S, Node,Count,CountImage) {
+KISSY.add(function(S, Node,Count,CountImage,saveCount) {
     return function(){
         var count = new Count('.J_StarCount');
         var countImage = new CountImage('.J_CountImg');
@@ -17,5 +17,6 @@ KISSY.add(function(S, Node,Count,CountImage) {
             //触发统计
             count.count(starNum);
         });
+        saveCount(100,"2323424");
     }
-}, {requires : ['node','feedback/star-count','feedback/count-image']});
+}, {requires : ['node','./star-count','./count-image','./save-count']});
