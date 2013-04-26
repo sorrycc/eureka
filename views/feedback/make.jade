@@ -1,0 +1,37 @@
+extends ../layout
+
+block content
+
+    div.content
+        div.mainCard
+            if type = '1'
+                p.submitStatus #{responseString}
+            else
+                form(method="post")
+                    div.row
+                        div.column
+                            label(for="title") 主题
+                        div.column
+                            input#J_Title(type="text", name="title", value="#{title}")
+                    div.row
+                        div.column
+                            label(for="speakers") 分享者
+                        div.column
+                            input#J_Speakers(type="text", name="speakers", value="#{speakers}")
+                    div.row
+                        div.column
+                            label(for="score") 打分
+                        div.column
+                            input#J_Score(type="time", name="score", value="#{from}")
+                    div.row
+                        div.column
+                            label(for="advise") 建议
+                        div.column
+                            textarea#J_Advise(name="advise", value="#{advise}", placeholder="在这里输入你的看法")
+                    div.lastrow
+                        div.column
+                            input(type="hidden", name="id", value="#{id}")
+                        div.column
+                            input.button(type="submit", value="提交")
+
+

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*
  * @name: feedback.js
  * @description: 分享反馈
@@ -23,3 +24,11 @@ exports.save_count = function(req, res){
     res.end('{"test":1}');
     // res.redirect('back',{emailHasExists:'true'}));
 }
+=======
+exports.make = function(req, res){
+  res.render('feedback/make', {
+    docTitle     : "反馈进行时",
+    headAdd   : false
+  })
+}
+>>>>>>> origin/master

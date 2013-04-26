@@ -14,12 +14,13 @@ var db = require("../db");
 module.exports = {
     create: {
         render: function(req, res) {
-            res.render("party_form", {
-                title: "创建分享会",
+            res.render("party/form", {
+                docTitle: "创建分享会",
                 id: "",
                 partyTitle: "",
                 time: "",
-                location: ""
+                location: "",
+                headAdd: false
             });
         },
         post: function(req, res) {
@@ -77,9 +78,9 @@ module.exports = {
     },
     list: {
         render: function(req, res) {
-            res.render("party", {
-                title: "我的分享会",
-                id: req.params.id || ""
+            res.render("party/list", {
+                docTitle    : "我的分享会",
+                id          : req.params.id || ""
             });
         },
         get: function(req, res) {
@@ -130,12 +131,12 @@ module.exports = {
 
                     var doc = docs[0];
 
-                    res.render("party_form", {
-                        title: "编辑分享会",
-                        id: doc.id,
-                        partyTitle: doc.title,
-                        time: moment(doc.time).format("YYYY-MM-DD"),
-                        location: doc.location
+                    res.render("form", {
+                        docTitle    : "编辑分享会",
+                        id          : doc.id,
+                        partyTitle  : doc.title,
+                        time        : moment(doc.time).format("YYYY-MM-DD"),
+                        location    : doc.location
                     });
                 }
             });
@@ -176,6 +177,7 @@ module.exports = {
             });
         }
     },
+    // 剑平贱人，速删！
     sprite: {
         render: function(req, res) {
             console.log(req);
