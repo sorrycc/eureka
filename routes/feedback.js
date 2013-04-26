@@ -14,9 +14,9 @@ exports.make = function(req, res){
 /**
  * 管理者查看反馈结果页面
  */
-exports.result = function(req, res,http){
+exports.result = function(req, res){
     res.render('feedback/result',{
-        title: '查看反馈结果'
+        docTitle: '查看反馈结果'
     })
 }
 /**
@@ -25,7 +25,7 @@ exports.result = function(req, res,http){
  * @param res
  */
 exports.save_count = function(req, res){
-    model.put(req, res);
-    res.end('{"test":1}');
-    // res.redirect('back',{emailHasExists:'true'}));
+    model.put(req, res,function(result){
+        res.end('{"status":1}');
+    });
 }

@@ -216,7 +216,7 @@ module.exports = {
         versionKey: false
     }),
     //反馈统计
-    feedbackCount: new Schema({
+    feedback_count: new Schema({
         id: {
             "type": Number,
             "default": -1,

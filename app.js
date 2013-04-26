@@ -143,10 +143,9 @@ app.get('/feedback/create', function(req, res) {
 });
 app.get('/feedback/list', function(req, res) {
 });
-app.post('/feedback/result', feedback.result);
+//剑平
+app.get('/feedback/result', feedback.result);
 app.post('/feedback/save_count', feedback.save_count);
-app.get('/feedback/:id', function(req, res) {
-});
 
 var server = http.createServer(app);
 

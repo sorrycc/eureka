@@ -1,9 +1,39 @@
-<<<<<<< HEAD
-body{background:#4597b4}
-=======
-body{padding:50px;font:14px "Lucida Grande",Helvetica,Arial,sans-serif}
-a{color:#00b7ff}
-.sprite{background:url("http://img01.taobaocdn.com/tps/i1/T1Lh9hXytXXXcG90nF-154-699.png") 0 0 no-repeat;display:inline-block;width:42px;height:42px}
-.code-icon{background-position:-10px -10px;width:48px;height:50px}
-.add-icon{background-position:-10px -62px;width:64px;height:64px}
->>>>>>> 842170c3479b90db004ac542d36af2ab1ca3633b
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-weight:inherit;font-style:inherit;font-family:inherit;font-size:100%;vertical-align:baseline}
+body{line-height:1;color:#000;background:#fff}
+ol,ul{list-style:none}
+table{border-collapse:separate;border-spacing:0;vertical-align:middle}
+caption,th,td{text-align:left;font-weight:normal;vertical-align:middle}
+a img{border:none}
+[class^="icon-"],[class*=" icon-"]{background:url("http://img04.taobaocdn.com/tps/i4/T1ObamXB0fXXX.tgco-62-332.png") 0 0 no-repeat;display:inline-block;vertical-align:top}
+.icon-code{background-position:0 0;width:24px;height:26px}
+.icon-add{background-position:0 -36px;width:32px;height:32px}
+.icon-add-session{background-position:0 -83px;width:23px;height:23px}
+.icon-edit{background-position:0 -122px;width:23px;height:24px}
+.icon-del{background-position:0 -157px;width:22px;height:21px}
+.icon-push{background-position:0 -190px;width:24px;height:22px}
+.icon-broadcast{background-position:-37px -191px;width:24px;height:22px}
+.icon-back{background-position:0 -228px;width:14px;height:15px}
+.icon-feedback{background-position:0 -228px;width:36px;height:32px}
+.icon-star-solid{background-position:0 -313px;width:24px;height:24px}
+.icon-star-hollow{background-position:-38px -313px;width:24px;height:24px}
+@media only screen and (max-width: 959px){}@media only screen and (min-width: 768px) and (max-width: 959px){}@media only screen and (max-width: 767px){}@media only screen and (min-width: 480px) and (max-width: 767px){}@media only screen and (max-width: 479px){}body{background-color:#58a8c1}
+header h1{background-color:#303030;height:50px;text-align:center;position:relative;}
+header h1 a{color:#fff;text-decoration:none;line-height:50px;}
+header h1 a:visited{color:#fff;text-decoration:none}
+header h1 a.icon-back{position:absolute;top:10px;left:0}
+header h1 a.icon-add{position:absolute;top:10px;right:20px}
+.content{background-color:#58a8c1;padding:20px}
+.mainCard{background-color:#fff;-webkit-box-shadow:-1px 3px 11px #555;-webkit-box-shadow:-1px 3px 11px #555;box-shadow:-1px 3px 11px #555}
+.row{line-height:40px;border-bottom:1px solid #ccc;}
+.row .column{display:inline-block;padding-left:20px;height:100%;width:30%;}
+.row .column:first-child{background-color:#d7f2fb;text-align:right;}
+.row .column:first-child label{margin-right:20px}
+.row .column input{line-height:24px;border:0}
+.msg{text-align:center}
+.lastrow{line-height:40px;height:90px;}
+.lastrow .column{display:inline-block;padding-left:20px;padding-top:20px;height:100%;width:30%;}
+.lastrow .column form{display:inline-block}
+.lastrow .column:nth-child(2){width:50%}
+.lastrow .column a,.lastrow .column a:hover{text-decoration:none}
+.lastrow .column .button{color:#fff;font-size:20px;background-color:#303030;padding:7px 20px;border:0;margin:0 20px 0 0;line-height:20px;}
+.lastrow .column .button:hover{cursor:pointer}
