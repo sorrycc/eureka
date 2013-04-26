@@ -11,6 +11,8 @@ var express = require('express')
     , session = require('./routes/session');
 
 var party = require('./routes/party');
+//反馈
+var feedback = require('./routes/feedback');
 
 var stylus = require('stylus')
     , nib = require('nib');
@@ -124,10 +126,6 @@ app.get('/session/detail/:id', function(req, res) {
     session.detail.render(req, res);
 });
 
-//剑平
-app.get('/session/feedback',function(req, res) {
-    session.feedback(req, res,http);
-});
 
 // 水儿
 // render the session list belonging to the party with the id
@@ -146,7 +144,16 @@ app.get('/feedback/create', function(req, res) {
 });
 app.get('/feedback/list', function(req, res) {
 });
+
+//剑平
+app.get('/feedback/result/',function(req, res) {
+    feedback.result(req, res);
+});
+app.get('/feedback/save_count',function(req, res) {
+    feedback.save_count(req, res);
+});
 app.get('/feedback/:id', function(req, res) {
+
 });
 
 var server = http.createServer(app);

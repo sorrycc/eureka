@@ -230,11 +230,13 @@ module.exports = {
         },
         // 统计更新时间
         timer: {
-            "type": Date
+            "type": Date,
+            "default":Date.now()
         },
         // 分数
         count: {
-            "type": Number
+            "type": Number,
+            "default":0
         },
         _deleted: {
             "type": Boolean,
