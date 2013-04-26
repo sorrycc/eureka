@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /*
  * @name: feedback.js
  * @description: 分享反馈
@@ -6,6 +5,12 @@
 
 var model = require("../models/feedback");
 var db = require("../db");
+exports.make = function(req, res){
+    res.render('feedback/make', {
+        docTitle     : "反馈进行时",
+        headAdd   : false
+    })
+}
 /**
  * 管理者查看反馈结果页面
  */
@@ -24,11 +29,3 @@ exports.save_count = function(req, res){
     res.end('{"test":1}');
     // res.redirect('back',{emailHasExists:'true'}));
 }
-=======
-exports.make = function(req, res){
-  res.render('feedback/make', {
-    docTitle     : "反馈进行时",
-    headAdd   : false
-  })
-}
->>>>>>> origin/master

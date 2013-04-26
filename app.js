@@ -11,6 +11,8 @@ var express = require('express')
     , session = require('./routes/session');
 
 var party = require('./routes/party');
+var feedback = require('./routes/feedback');
+
 
 var stylus = require('stylus')
     , nib = require('nib');
@@ -124,11 +126,6 @@ app.get('/session/detail/:id', function(req, res) {
     session.detail.render(req, res);
 });
 
-//剑平
-app.get('/session/feedback',function(req, res) {
-    session.feedback(req, res,http);
-});
-
 // 水儿
 // render the session list belonging to the party with the id
 app.get('/session/list/:id', function(req, res) {
@@ -146,6 +143,8 @@ app.get('/feedback/create', function(req, res) {
 });
 app.get('/feedback/list', function(req, res) {
 });
+app.post('/feedback/result', feedback.result);
+app.post('/feedback/save_count', feedback.save_count);
 app.get('/feedback/:id', function(req, res) {
 });
 
