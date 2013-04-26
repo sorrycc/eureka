@@ -5,11 +5,14 @@
 
 var express = require('express')
     , routes = require('./routes')
+    //, user = require('./routes/user')
     , http = require('http')
     , path = require('path')
     , session = require('./routes/session');
 
 var party = require('./routes/party');
+var feedback = require('./routes/feedback');
+
 
 var stylus = require('stylus')
     , nib = require('nib');
@@ -111,18 +114,16 @@ app.post('/api/party/del/:id', function(req, res) {
     party.del(req, res);
 });
 
-// session/分享
+// session
 // 七念
 app.get('/session/create', session.new);
 app.post('/session/create', session.create);
-app.get('/session/:id/', session.detail);
-app.get('/session/:id/edit', session.edit);
-app.post('/session/:id/edit', session.update);
-app.del('/session/:id/', session.del);
-
-//剑平
-app.get('/session/feedback',function(req, res) {
-    session.feedback(req, res,http);
+//app.get('/session/get', session.get);
+app.get('/session/edit/:id', session.edit);
+app.get('/session/update/:id', session.update);
+app.post('/session/del/:id', session.del);
+app.get('/session/detail/:id', function(req, res) {
+    session.detail.render(req, res);
 });
 
 // 水儿
@@ -142,6 +143,8 @@ app.get('/feedback/create', function(req, res) {
 });
 app.get('/feedback/list', function(req, res) {
 });
+app.post('/feedback/result', feedback.result);
+app.post('/feedback/save_count', feedback.save_count);
 app.get('/feedback/:id', function(req, res) {
 });
 

@@ -14,12 +14,13 @@ var db = require("../db");
 module.exports = {
     create: {
         render: function(req, res) {
-            res.render("form", {
-                title: "创建分享会",
+            res.render("party/form", {
+                docTitle: "创建分享会",
                 id: "",
                 partyTitle: "",
                 time: "",
-                location: ""
+                location: "",
+                headAdd: false
             });
         },
         post: function(req, res) {
@@ -78,8 +79,8 @@ module.exports = {
     list: {
         render: function(req, res) {
             res.render("party/list", {
-                title: "我的分享会",
-                id: req.params.id || ""
+                docTitle    : "我的分享会",
+                id          : req.params.id || ""
             });
         },
         get: function(req, res) {
@@ -131,11 +132,11 @@ module.exports = {
                     var doc = docs[0];
 
                     res.render("form", {
-                        title: "编辑分享会",
-                        id: doc.id,
-                        partyTitle: doc.title,
-                        time: moment(doc.time).format("YYYY-MM-DD"),
-                        location: doc.location
+                        docTitle    : "编辑分享会",
+                        id          : doc.id,
+                        partyTitle  : doc.title,
+                        time        : moment(doc.time).format("YYYY-MM-DD"),
+                        location    : doc.location
                     });
                 }
             });
