@@ -47,17 +47,25 @@ exports.post = function(req, res) {
         dataObj[key] = req.params[key]
       }
     }
+    // 暂时用分享的id 代替作者 id
+    dataObj.creator = topic.ObjectId
+//    dataObj.score = 5
+//    dataObj.advice = "haha"
+//    dataObj.creator = "11"
     db.put({
-      query     : dataObj,
-      collection: "feedbacks",
+      doc       : dataObj,
+      collection: "feedback",
       complete  : addFeedbackToTopic
     })
 
     function addFeedbackToTopic(err, doc){
-      if(err) {
+      console.log(doc);
+
+      if(!doc) {
         console.log(err);
         return;
       }
+
       topic.feedbacks.push(doc.id);
       db.post({
         query   : {id: req.params.id},
@@ -68,6 +76,7 @@ exports.post = function(req, res) {
   }
 
   function render(err, numAffected) {
+    renderObj.docTitle = "提交成功"
     renderObj.type = "1"
     renderObj.responseString = "你的反馈已经成功提交啦！"
     res.render('feedback/make', renderObj)
