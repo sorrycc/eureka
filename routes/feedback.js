@@ -1,3 +1,4 @@
+
 var db = require("../db");
 
 function getTopic(id, callback) {
@@ -71,5 +72,20 @@ exports.post = function(req, res) {
     renderObj.responseString = "你的反馈已经成功提交啦！"
     res.render('feedback/make', renderObj)
   }
-
+}
+/**
+ * 管理者查看反馈结果页面
+ */
+exports.result = function(req, res){
+    res.render('feedback/result',{
+        docTitle: '查看反馈结果'
+    })
+}
+/**
+ * 保存反馈结果
+ * @param req
+ * @param res
+ */
+exports.save_count = function(req, res){
+    model.saveCount(req, res);
 }

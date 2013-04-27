@@ -216,7 +216,7 @@ module.exports = {
         versionKey: false
     }),
     //反馈统计
-    feedbackCount: new Schema({
+    feedback_count: new Schema({
         id: {
             "type": Number,
             "default": -1,
@@ -230,11 +230,13 @@ module.exports = {
         },
         // 统计更新时间
         timer: {
-            "type": Date
+            "type": Date,
+            "default":Date.now()
         },
         // 分数
         count: {
-            "type": Number
+            "type": Number,
+            "default":0
         },
         _deleted: {
             "type": Boolean,
