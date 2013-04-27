@@ -1,32 +1,57 @@
 var db = require("../db");
-
-exports.put = function(req, res) {
+//反馈统计集合
+var COUNT_COLLECTION = "feedback_count";
+//分享集合
+var SESSION_COLLECTION = "session";
+/**
+ * 保存反馈星数统计
+ * @param req
+ * @param res
+ * @return {boolean}
+ */
+exports.saveCount = function(req, res) {
+    //分享id
+    var sessionId = req.body.sessionId;
+    if(!sessionId){
+        res.send('{"status":0,"message":"缺少sessionId"}');
+        return false;
+    }
+    //星数统计
+    var count = req.body.count;
+    if(!count){
+        res.send('{"status":0,"message":"缺少count"}');
+        return false;
+    }
 	db.put({
-        collection: "feedback_count",
+        collection: COUNT_COLLECTION,
         doc: {
-            session_id:1,
-            count:100
+            session_id:sessionId,
+            count:count
         },
         complete: function(err, doc) {
             if (err) {
-                console.log(err);
-                res.send("error");
+                res.send('{"status":0,"message":"'+err+'"}');
             }
             else {
-
+                res.send('{"status":1}');
             }
         }
     });
 }
-
-exports.get = function(req, res, render) {
+/**
+ * 获取分享
+ * @param req
+ * @param res
+ * @param render
+ */
+exports.getSession = function(req, res, render) {
     var _query = {
       id: req.params.id
     };
     console.log(_query);
 
     db.get({
-        collection: "session",
+        collection: SESSION_COLLECTION,
         query: _query,
         complete: function(err, docs) {
             if (err) {

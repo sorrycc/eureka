@@ -83,7 +83,7 @@ app.get('/party/feedback', function(req, res) {
 });
 
 app.get('/sprite', function(req, res) {
-    party.sprite.render(req, res);
+    routes.sprite.render(req, res);
 });
 
 // party
@@ -151,14 +151,13 @@ app.get('/api/session/list/:id', function(req, res) {
 
 // feedback
 // 筱谷
-app.get('/feedback/create', function(req, res) {
-});
+app.get('/feedback/make/:id', feedback.make);
+app.post('/feedback/make/:id', feedback.post);
 app.get('/feedback/list', function(req, res) {
 });
-app.post('/feedback/result', feedback.result);
+//剑平
+app.get('/feedback/result', feedback.result);
 app.post('/feedback/save_count', feedback.save_count);
-app.get('/feedback/:id', function(req, res) {
-});
 
 var server = http.createServer(app);
 

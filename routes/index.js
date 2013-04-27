@@ -15,3 +15,13 @@ exports.login = function(req, res){
 exports.sessionList = function(req, res){
   res.render('./session/list', { docTitle: '我的分享会', headAdd: true});
 };
+
+
+// 剑平贱人，速删！
+exports.sprite = {
+    render: function(req, res) {
+        res.render("sprite", {
+            docTitle: "sprite"
+        });
+    }
+};
