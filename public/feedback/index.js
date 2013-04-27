@@ -4,7 +4,7 @@ KISSY.use("event, node", function(S, Event, Node){
     var $ = S.all;
 
     $(".score").delegate("click", "span", function(ev){
-      all = $(".score").all('span')
+      var all = $(".score").all('span')
       all.removeClass('icon-star-solid');
       all.addClass("icon-star-hollow");
       var index = $(ev.target).index()
