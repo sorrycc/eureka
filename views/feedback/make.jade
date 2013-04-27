@@ -1,13 +1,18 @@
 extends ../layout
 
-- var score, advise, responseString
+block head
+
 
 block content
-
+    script(src="/feedback/index.js")
     div.content
         div.mainCard
             if type == '1'
                 p.submitStatus #{responseString}
+                    br
+                    br
+                    br
+                    a.button(href="/session/list") 返回列表
             else
                 form(method="post")
                     div.row
