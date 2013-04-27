@@ -153,7 +153,7 @@ exports.detail = function(req, res) {
 exports.list = {
   render: function(req, res){
     res.render('session/list', { 
-        title: '分享列表',
+        docTitle: '分享会',
         headAdd: true,
         id: req.params.id || ""
       }); 
