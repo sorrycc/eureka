@@ -143,7 +143,7 @@ exports.detail = function(req, res) {
         description: doc.description,
         speakers: doc.speakers,
         from: doc.from,
-        to: doc.to
+        to: doc.to    
       }); 
   }
 };
