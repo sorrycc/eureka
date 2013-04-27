@@ -138,7 +138,8 @@ app.get('/api/session/list/:id', function(req, res) {
 
 // feedback
 // 筱谷
-app.get('/feedback/make', feedback.make);
+app.get('/feedback/make/:id', feedback.make);
+app.post('/feedback/make/:id', feedback.post);
 app.get('/feedback/list', function(req, res) {
 });
 app.get('/feedback/:id', function(req, res) {

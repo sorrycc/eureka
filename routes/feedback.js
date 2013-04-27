@@ -1,6 +1,75 @@
-exports.make = function(req, res){
-  res.render('feedback/make', {
-    docTitle     : "反馈进行时",
-    headAdd   : false
+var db = require("../db");
+
+function getTopic(id, callback) {
+  db.get({
+    query: {
+      id: parseInt(id)
+    },
+    collection: "session",
+    complete: callback
   })
+}
+
+exports.make = function(req, res){
+  var renderObj = {}
+  renderObj.docTitle = "反馈进行时";
+  getTopic(req.params.id, render);
+
+  function render(err, docs){
+    if(err || !(topic = docs[0])) {
+      renderObj.type = "1";
+      renderObj.responseString = "无此主题，或暂时还不能反馈哦"
+    }
+    else {
+      renderObj.type            = "0";
+      renderObj.responseString  = ""
+      renderObj.title           = topic.title
+      renderObj.speakers        = topic.speakers
+      renderObj.score           = 3
+      renderObj.advise          = ""
+      renderObj.id              = req.params.id
+    }
+    res.render('feedback/make', renderObj)
+  }
+}
+
+exports.post = function(req, res) {
+  var renderObj = {};
+  var topic = null;
+  getTopic(req.params.id, putData);
+
+  function putData(err, docs) {
+    topic = docs[0];
+    var dataObj = {};
+    for(var key in req.params) {
+      if(req.params.hasOwnProperty(key) && key != 'id') {
+        dataObj[key] = req.params[key]
+      }
+    }
+    db.put({
+      query     : dataObj,
+      collection: "feedbacks",
+      complete  : addFeedbackToTopic
+    })
+
+    function addFeedbackToTopic(err, doc){
+      if(err) {
+        console.log(err);
+        return;
+      }
+      topic.feedbacks.push(doc.id);
+      db.post({
+        query   : {id: req.params.id},
+        doc     : topic,
+        complete: render
+      })
+    }
+  }
+
+  function render(err, numAffected) {
+    renderObj.type = "1"
+    renderObj.responseString = "你的反馈已经成功提交啦！"
+    res.render('feedback/make', renderObj)
+  }
+
 }

@@ -114,7 +114,7 @@ module.exports = {
             "type": Boolean,
             "default": false,
             "required": true
-        },
+        }
     }, {
         versionKey: false
     }),
@@ -129,7 +129,7 @@ module.exports = {
         },
         // 创建时间
         created: {
-            "type": Date,
+            "type": Date
         },
         // 分数
         score: {
