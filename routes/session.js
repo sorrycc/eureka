@@ -127,14 +127,7 @@ exports.update = function(req, res){
   } 
 };
 
-<<<<<<< HEAD
-exports.detail = {
-  render: function(req, res){
-    res.render('session/detail', { 
-        title: '分享详情',
-        headAdd: false,
-        id: req.params.id || ""
-=======
+
 exports.detail = function(req, res) {
   model.get(req, res, render);
   
@@ -152,7 +145,6 @@ exports.detail = function(req, res) {
         speakers: doc.speakers,
         from: doc.from,
         to: doc.to    
->>>>>>> 13546a2dfe9ea00a1adc7a82ceaafc27ab716ba5
       }); 
   }
 };
