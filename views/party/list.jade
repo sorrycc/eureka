@@ -4,10 +4,6 @@ block head
     link(type="text/css", rel="stylesheet", href="/party/css/style.css")
 
 block content
-    div.bar
-        h1 #{title}
-        a.back(href="#nogo") 返回
-        a.btn.btn-create(href="/party/create") 创建
     div.panel
         div.party-list#J_PartyList(data-id="#{id}")
     script#J_TemplateParty(type="javascript/template")

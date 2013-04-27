@@ -8,6 +8,8 @@ var express = require('express')
     //, user = require('./routes/user')
     , http = require('http')
     , path = require('path')
+    , nobuc = require('./auth/nobuc')
+    , user = require('./auth/user')
     , session = require('./routes/session');
 
 var party = require('./routes/party');
@@ -25,14 +27,23 @@ app.locals = {
 
 app.configure(function(){
     // PORT=3000 node app
-    app.set('port', process.env.PORT || 3000);
+    app.set('port', process.env.PORT || 80);
     app.set('views', __dirname + '/views');
     app.set('view engine', 'jade');
     app.use(express.favicon());
     app.use(express.logger('dev'));
     app.use(express.bodyParser());
-    app.use(express.cookieParser());
+    app.use(express.cookieParser("eureka1367047474"));
     app.use(express.methodOverride());
+
+    // auth
+    app.use(nobuc(/.*/, {
+        hostname: "login-test.alibaba-inc.com",
+        appname: "eureka"
+    }));
+
+    app.use(user());
+
     app.use(app.router);
 
     app.use(stylus.middleware({
@@ -56,6 +67,7 @@ app.configure('development', function(){
 });
 
 app.get('/', routes.index);
+app.get('/login', routes.login);
 
 // 棪木
 app.get('/login', function(req, res) {
