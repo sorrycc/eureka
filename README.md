@@ -15,7 +15,7 @@ clone 后进入项目目录，执行 npm install 安装依赖模块
 1. public目录为静态文件目录，HTML文件、CSS文件、JS文件可放于该目录下
 2. 配置了stylus的middleware，会自动compile .styl文件，不需要在本地做任何操作。如请求 /css/style.css，服务端会自动compile public/css/style.styl文件
 
-### 数据库接口
+### 数据库接口：
 
 db module在mongoose基础上做了一层简单封装，提供增（put），删（del）、查（get），改（post）操作
 
@@ -68,7 +68,7 @@ db.get({
 })
 ```
 
-### 用户权限认证
+### 用户权限认证：
 
 #### 环境配置
 
@@ -78,6 +78,6 @@ db.get({
 
 #### 用户信息获取
 
-所有页面强制登录，req.user保存已登录用户数据
+所有页面强制登录，**req.user**保存已登录用户数据
 
-参见 /login
+参见 */login*
