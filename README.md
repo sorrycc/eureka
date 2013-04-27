@@ -67,3 +67,17 @@ db.get({
     complete: Function // callback，默认传入err、docs参数
 })
 ```
+
+### 用户权限认证
+
+#### 环境配置
+
+* 应用使用80端口启动
+* 绑定eureka.taobao.net 到本地
+* 绑定10.20.159.92 login-test.alibaba-inc.com
+
+#### 用户信息获取
+
+所有页面强制登录，req.user保存已登录用户数据
+
+参见 /login
