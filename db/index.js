@@ -34,6 +34,7 @@ module.exports = db = {
        var Mod = mongoose.model(collection, schema[collection], collection);
 
        doc._deleted = false;
+       delete doc._id;
 
        Mod.count(function(err, count) {
            if (err) {
@@ -70,6 +71,8 @@ module.exports = db = {
 
        query._deleted = false;
        doc._deleted = !!opt.del;
+
+       delete doc._id;
 
        mod.update(query, doc, options, function(err, numAffected) {
            complete(err, numAffected);
