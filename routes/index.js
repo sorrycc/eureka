@@ -5,7 +5,10 @@
 
 
 exports.index = function(req, res){
-  res.render('index', { title: 'Express'});
+  res.render('index', {
+      docTitle: 'Express',
+      title: "Express"
+  });
 };
 
 exports.login = function(req, res){
