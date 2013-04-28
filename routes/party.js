@@ -80,7 +80,7 @@ module.exports = {
         render: function(req, res) {
             res.render("party/list", {
                 docTitle    : "我的分享会",
-                id          : req.params.id || ""
+                partyId          : req.params.id || ""
             });
         },
         get: function(req, res) {

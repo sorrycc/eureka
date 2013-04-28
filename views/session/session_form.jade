@@ -7,6 +7,7 @@ block content
     div.mainCard
       if success == '1'
         form(method="post")
+          input(type="hidden",name="partyId", value="#{partyId}")
           div.row
             div.column
               label(for="title") 标题
