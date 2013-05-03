@@ -1,3 +1,9 @@
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-weight:inherit;font-style:inherit;font-family:inherit;font-size:100%;vertical-align:baseline}
+body{line-height:1;color:#000;background:#fff}
+ol,ul{list-style:none}
+table{border-collapse:separate;border-spacing:0;vertical-align:middle}
+caption,th,td{text-align:left;font-weight:normal;vertical-align:middle}
+a img{border:none}
 [class^="icon-"],[class*=" icon-"]{background:url("http://img04.taobaocdn.com/tps/i4/T1ObamXB0fXXX.tgco-62-332.png") 0 0 no-repeat;display:inline-block;vertical-align:top}
 .icon-code{background-position:0 0;width:24px;height:26px}
 .icon-add{background-position:0 -36px;width:32px;height:32px}
@@ -19,7 +25,7 @@ header h1 a:visited{color:#fff;text-decoration:none}
 header h1 a.back-icon-wrapper{border-color:#fff #303030 #303030 #fff;border-width:25px;border-style:solid;height:0;width:0;font-size:0;line-height:0;position:absolute;top:0;left:0;}
 header h1 a.back-icon-wrapper .icon-back{position:absolute;top:-13px;left:-20px}
 header h1 a.icon-add{position:absolute;top:10px;right:20px}
-.content{background-color:#58a8c1;padding:70px 20px 20px 20px;height:100%;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
+.content{background-color:#58a8c1;padding:20px 20px 20px 20px;height:100%;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
 .mainCard{background-color:#fff;-webkit-box-shadow:-1px 3px 11px #555;-webkit-box-shadow:-1px 3px 11px #555;box-shadow:-1px 3px 11px #555;height:100%;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
 .submitStatus{padding:30px;color:#333;text-align:center}
 .button{color:#fff;font-size:20px;background-color:#303030;padding:7px 20px;border:0 none;margin:0 20px 0 0;line-height:20px;cursor:pointer}
