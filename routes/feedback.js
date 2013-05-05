@@ -47,11 +47,10 @@ exports.post = function(req, res) {
         dataObj[key] = req.params[key]
       }
     }
+
     // 暂时用分享的id 代替作者 id
-    dataObj.creator = topic.ObjectId
-//    dataObj.score = 5
-//    dataObj.advice = "haha"
-//    dataObj.creator = "11"
+    dataObj.creator = req.user.ObjectId
+
     db.put({
       doc       : dataObj,
       collection: "feedback",

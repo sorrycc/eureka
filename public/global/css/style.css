@@ -25,7 +25,7 @@ header h1 a:visited{color:#fff;text-decoration:none}
 header h1 a.back-icon-wrapper{border-color:#fff #303030 #303030 #fff;border-width:25px;border-style:solid;height:0;width:0;font-size:0;line-height:0;position:absolute;top:0;left:0;}
 header h1 a.back-icon-wrapper .icon-back{position:absolute;top:-13px;left:-20px}
 header h1 a.icon-add{position:absolute;top:10px;right:20px}
-.content{background-color:#58a8c1;padding:70px 20px 20px 20px;height:100%;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
+.content{background-color:#58a8c1;padding:20px 20px 20px 20px;height:100%;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
 .mainCard{background-color:#fff;-webkit-box-shadow:-1px 3px 11px #555;-webkit-box-shadow:-1px 3px 11px #555;box-shadow:-1px 3px 11px #555;height:100%;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
 .submitStatus{padding:30px;color:#333;text-align:center}
 .button{color:#fff;font-size:20px;background-color:#303030;padding:7px 20px;border:0 none;margin:0 20px 0 0;line-height:20px;cursor:pointer}
