@@ -79,7 +79,8 @@ module.exports = {
         render: function(req, res) {
             res.render("party/list", {
                 docTitle : "我的分享会",
-                id: req.params.id || ""
+                id: req.params.id || "",
+                hasAddIcon: true
             });
         },
         get: function(req, res) {

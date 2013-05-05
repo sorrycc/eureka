@@ -27,7 +27,7 @@ app.locals = {
 
 app.configure(function(){
     // PORT=3000 node app
-    app.set('port', process.env.PORT || 80);
+    app.set('port', process.env.PORT || 3000);
     app.set('views', __dirname + '/views');
     app.set('view engine', 'jade');
     app.use(express.favicon());
