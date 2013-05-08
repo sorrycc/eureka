@@ -51,24 +51,3 @@ header h1{color:#fff;text-align:center;height:1.9230769230769231em;line-height:1
 #J_Advise{margin-top:10px;border:0 none;height:200px;width:80%}
 .score{padding-left:2% !important;width:70.5% !important;}
 .score span{display:inline-block;margin-top:8px;margin-left:8px}
-<<<<<<< HEAD
-.party-info{background-color:#d7f2fb;background:#cdeefa;border-top-left-radius:5px;border-top-right-radius:5px;padding:1em;position:relative;}
-.party-info h3{margin:0 0 .5em}
-.party-info .party-time,.party-info .party-loc{margin:.5em 0 .5em}
-.party-info .icon-code{position:absolute;right:1em;top:1em}
-.party-info div.party-opts{visibility:hidden;position:absolute;top:0;left:0;background-color:rgba(0,0,0,0.2);height:100%;width:100%;}
-.party-info div.party-opts .opt{float:left;margin-top:3.125em;margin-left:4.375em;cursor:pointer}
-ul.session-list li{border-bottom:1px solid #dbcccd;margin-bottom:0;position:relative;}
-ul.session-list li .session-info{display:block;padding:1em;padding-right:0;text-decoration:none;}
-ul.session-list li .session-info span.time{display:block;margin-bottom:5px;color:#58a8c1}
-ul.session-list li .session-info span.title{display:block;margin-bottom:0}
-ul.session-list li div.session-opts{visibility:hidden;position:absolute;top:0;left:0;background-color:rgba(0,0,0,0.2);height:100%;width:100%;}
-ul.session-list li div.session-opts .opt{float:left;margin-top:1.5625em;margin-left:2.1875em;cursor:pointer}
-ul.session-list .entry-list-edit-show .session-opts{visibility:visible !important}
-div.add-session-bar{padding:1em;}
-div.add-session-bar a.text{color:#6c93a0;margin-left:5px;text-decoration:none}
-div.add-session-bar a.text i.icon-add-session{margin-right:5px}
-.code{display:none;padding-top:60px}
-.party-item{height:100%;overflow:hidden;background:#fff;-webkit-user-select:none}
-=======
->>>>>>> 6e83138aab998df447ea17188943f13d4780149d
