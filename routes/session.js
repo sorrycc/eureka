@@ -113,7 +113,6 @@ exports.update = function(req, res){
 };
 
 exports.detail = function(req, res) {
-  console.log("detail~~~~");
   model.get(req, res, render);
   
   function render(docs){
@@ -124,6 +123,7 @@ exports.detail = function(req, res) {
         success: '1',
         msg: '',
         id: doc.id,
+        partyId: req.query.partyId || "",
         title: doc.title,
         type: 'detail',
         description: doc.description,
