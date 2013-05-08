@@ -37,4 +37,16 @@ block content
 
               a.button(href="/session/create") 继续创建
           else if type == "detail"
-            a.button(href="/session/#{id}/edit") 编辑分享
+            input#J_SessionEdit.button(type="button", value="编辑分享")
+            //a.button(href="/session/#{id}/edit") 编辑分享
+  script
+    KISSY.use("session/view", function(S, View){
+        
+        S.ready(function(){
+          View({
+            sid: #{id},
+            pid: #{partyId},
+            btn: "#J_SessionEdit"
+          });
+        });
+    });
