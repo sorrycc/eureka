@@ -10,7 +10,9 @@ ul.session-list li .session-info span.time{display:block;margin-bottom:5px;color
 ul.session-list li .session-info span.title{display:block;margin-bottom:0}
 ul.session-list li div.session-opts{visibility:hidden;position:absolute;top:0;left:0;background-color:rgba(0,0,0,0.2);height:100%;width:100%;}
 ul.session-list li div.session-opts .opt{float:left;margin-top:1.5625em;margin-left:2.1875em;cursor:pointer}
+ul.session-list .entry-list-edit-show .session-opts{visibility:visible !important}
 div.add-session-bar{padding:1em;}
 div.add-session-bar a.text{color:#6c93a0;font-size:1.125em;line-height:1.3333333333333333em;margin-left:5px;text-decoration:none}
 div.add-session-bar a.text i.icon-add-session{margin-right:5px}
 .code{display:none;padding-top:60px}
+.party-item{height:100%;overflow:hidden;background:#fff;-webkit-user-select:none}
