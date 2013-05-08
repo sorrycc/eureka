@@ -21,7 +21,7 @@ block content
                 ul.session-list
                     {{#each sessions}}
                     li.J_SessionOpts.ks-draglist-item
-                        a.session-info(href="/session/{{id}}/partyId=#{id}")
+                        a.session-info(href="/session/{{id}}/?partyId=#{id}")
                             span.time {{from}} - {{to}}
                             span.title {{title}}
                         div.session-opts
