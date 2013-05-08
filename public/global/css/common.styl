@@ -42,25 +42,36 @@ header
     line-height: (50/26)*1em
 
 
-/* 仅iphone4 竖版 320 */
-@media only screen and (max-width: 320px) 
-  .panel
-    height: 90%
 
-/* 仅iPhone 横版 480 */
-@media only screen and (min-width: 321px) and (max-width: 480px) 
+/* panel */
+ 
+/* iPad 及以下，以及所有小于（不等于）960宽度的平板电脑 */
+@media only screen and (max-width: 959px) 
   .panel
-    height: 85%
+    height: 80%
 
-/* 仅iPad 竖版 768 */
-@media only screen and (min-width: 768px) and (max-width: 1023px) 
+ 
+/* 仅iPad 竖版，以及所有小于（不等于）标准960宽度的平板电脑的竖版 */
+@media only screen and (min-width: 768px) and (max-width: 959px) 
   .panel
     height: 96%
 
-/* iPad 横版，以及所有大于（等于）1024宽度的普通pc屏幕 */
-@media only screen and (min-width: 1024px) 
+ 
+/* iPhone 及以下 */
+@media only screen and (max-width: 767px) 
   .panel
-    height: 80%
+    height: 85%
+ 
+/* 仅iPhone 横版，包括某些平板电脑的竖版 */
+@media only screen and (min-width: 480px) and (max-width: 767px) 
+  .panel
+    height: 85%
+
+ 
+/* 仅iphone4 竖版 */
+@media only screen and (max-width: 479px) 
+  .panel
+    height: 90%
 
 .mainCard
   background-color: #FFF

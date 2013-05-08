@@ -20,7 +20,7 @@ module.exports = {
                 partyTitle: "",
                 time: "",
                 location: "",
-                headAdd: false
+                hasAddIcon: false
             });
         },
         post: function(req, res) {
@@ -136,7 +136,8 @@ module.exports = {
                         id: doc.id,
                         partyTitle: doc.title,
                         time: moment(doc.time).format("YYYY-MM-DD"),
-                        location: doc.location
+                        location: doc.location,
+                        hasAddIcon: false
                     });
                 }
             });

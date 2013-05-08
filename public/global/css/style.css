@@ -32,10 +32,11 @@ header a.back-icon-wrapper{border-color:#fff #303030 #303030 #fff;border-width:1
 header a.back-icon-wrapper .icon-back{position:absolute;top:-13px;left:-20px}
 header a.icon-add{position:absolute;top:.625em;right:1.25em}
 header h1{color:#fff;text-align:center;height:1.9230769230769231em;line-height:1.9230769230769231em}
-@media only screen and (max-width: 320px){.panel{height:90%}
-}@media only screen and (min-width: 321px) and (max-width: 480px){.panel{height:85%}
-}@media only screen and (min-width: 768px) and (max-width: 1023px){.panel{height:96%}
-}@media only screen and (min-width: 1024px){.panel{height:80%}
+@media only screen and (max-width: 959px){.panel{height:80%}
+}@media only screen and (min-width: 768px) and (max-width: 959px){.panel{height:96%}
+}@media only screen and (max-width: 767px){.panel{height:85%}
+}@media only screen and (min-width: 480px) and (max-width: 767px){.panel{height:85%}
+}@media only screen and (max-width: 479px){.panel{height:90%}
 }.mainCard{background-color:#fff;-webkit-box-shadow:-1px 3px 11px #555;-webkit-box-shadow:-1px 3px 11px #555;box-shadow:-1px 3px 11px #555;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;height:90%;overflow:auto;-webkit-overflow-scrolling:touch;margin:5%}
 .submitStatus{padding:30px;color:#333;text-align:center}
 .button{color:#fff;font-size:20px;background-color:#303030;padding:7px 20px;border:0 none;margin:0 20px 0 0;line-height:20px;cursor:pointer}
