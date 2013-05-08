@@ -7,7 +7,7 @@
  * @todo: 
  * @changelog: 
  */
-KISSY.add("party/list", function(S, Ajax, XTemplate) {
+KISSY.add("party/list", function(S, Ajax, XTemplate, DragList) {
     var D = S.DOM, E = S.Event;
     var List = function(opt) {
         if (!(this instanceof List)) return new List(opt);
@@ -69,15 +69,15 @@ KISSY.add("party/list", function(S, Ajax, XTemplate) {
                     }
                 });
             });
-
-            E.on(document, 'click tap  tapHold', function(e){
-                if(!D.parent(e.target, '.J_PartyOpts') && !D.parent(e.target, '.party-opts')){
-                    D.css('.party-opts', 'visibility', 'hidden');
-                }
-                if(!D.parent(e.target, '.J_SessionOpts') && !D.parent(e.target, '.session-opts')){
-                    D.css('.session-opts', 'visibility', 'hidden');
-                }
-            });
+//
+//            E.on(document, 'click tap  tapHold', function(e){
+//                if(!D.parent(e.target, '.J_PartyOpts') && !D.parent(e.target, '.party-opts')){
+//                    D.css('.party-opts', 'visibility', 'hidden');
+//                }
+//                if(!D.parent(e.target, '.J_SessionOpts') && !D.parent(e.target, '.session-opts')){
+//                    D.css('.session-opts', 'visibility', 'hidden');
+//                }
+//            });
 
             var self = this;
             self.partyTapHoldEvt();
@@ -89,14 +89,14 @@ KISSY.add("party/list", function(S, Ajax, XTemplate) {
          * party taphold效果
          */
         partyTapHoldEvt: function(){
-            
-             E.on('.J_PartyOpts','dblclick tapHold', function(e){
-
-                var t = e.currentTarget,
-                    partyOpts = D.get('.party-opts', t);
-
-                D.css(partyOpts, 'visibility', 'visible');
-            });   
+//
+//             E.on('.J_PartyOpts','dblclick tapHold', function(e){
+//
+//                var t = e.currentTarget,
+//                    partyOpts = D.get('.party-opts', t);
+//
+//                D.css(partyOpts, 'visibility', 'visible');
+//            });
         
         },
 
@@ -104,18 +104,27 @@ KISSY.add("party/list", function(S, Ajax, XTemplate) {
          * session taphold 效果
          */
         sessionTapHoldEvt: function(){
-            
-           E.delegate('.session-list','dblclick tapHold', '.J_SessionOpts', function(e){
-                var t = e.currentTarget,
-                    sessionOpts = D.get('.session-opts', t);
 
-                // first hide all session opts
-                D.css('.session-opts', 'visibility', 'hidden');    
 
-                // then show current session opts
-                D.css(sessionOpts, 'visibility', 'visible');
-            }); 
-            
+
+          var dragList = new DragList(".party-item", {
+            enableScrollView  : true,
+            enableDragSwitch  : false,
+            enableTapHold     : true,
+          })
+
+
+//           E.delegate('.session-list','dblclick tapHold', '.J_SessionOpts', function(e){
+//                var t = e.currentTarget,
+//                    sessionOpts = D.get('.session-opts', t);
+//
+//                // first hide all session opts
+//                D.css('.session-opts', 'visibility', 'hidden');
+//
+//                // then show current session opts
+//                D.css(sessionOpts, 'visibility', 'visible');
+//            });
+//
         },
 
         /**
@@ -181,5 +190,5 @@ KISSY.add("party/list", function(S, Ajax, XTemplate) {
     return List;
 
 }, {
-    requires: ["ajax", "xtemplate"]
+    requires: ["ajax", "xtemplate", "widget/draglist"]
 });

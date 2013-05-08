@@ -138,6 +138,13 @@ exports.detail = function(req, res) {
 
 
 exports.list = {
+  render: function(req, res){
+    res.render('session/list', { 
+        docTitle: '分享会',
+        hasAddIcon: true,
+        id: req.params.id || ""
+      }); 
+  },
   get: function(req, res) {
             var id,
                 query = {};
@@ -184,3 +191,4 @@ exports.list = {
             });
         }
 };
+
