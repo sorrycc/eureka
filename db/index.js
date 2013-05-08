@@ -24,8 +24,8 @@ module.exports = db = {
        var doc = _.isObject(opt.doc) ? opt.doc : null,
            collection = _.isString(opt.collection) ? opt.collection : "",
            complete = _.isFunction(opt.complete) ? opt.complete : function(){};
-       console.log(collection);
-       console.log(schema[collection]);
+//       console.log(collection);
+//       console.log(schema[collection]);
        if (!doc || !collection || !schema[collection]) {
            complete(new Error("Param error"));
            return;
