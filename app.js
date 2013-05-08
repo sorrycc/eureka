@@ -26,9 +26,7 @@ app.locals = {
 };
 
 app.configure(function(){
-
-    app.set('port', 3000);
-
+    app.set('port', process.env.PORT || 3000);
     app.set('views', __dirname + '/views');
     app.set('view engine', 'jade');
     app.use(express.favicon());
@@ -49,6 +47,7 @@ app.configure(function(){
     }
     else {
         // req.user
+
         app.use(function(req, res, next){
             req.user = {
                 _id: "testid",
@@ -86,8 +85,8 @@ app.get('/', routes.index);
 app.get('/login', routes.login);
 
 // 棪木
-app.get('/login', function(req, res) {
-});
+//app.get('/login', function(req, res) {
+//});
 
 // 棪木
 app.get('/party/create', function(req, res) {

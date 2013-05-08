@@ -20,7 +20,7 @@ block content
 
                 ul.session-list
                     {{#each sessions}}
-                    li.J_SessionOpts
+                    li.J_SessionOpts.ks-draglist-item
                         span.session-info
                         span.time {{from}} - {{to}}
                         span.title {{title}}
@@ -41,7 +41,7 @@ block content
         {{/each}}
         
     script
-        KISSY.use("node, party/list", function(S, Node, List){
+        KISSY.use("node, party/list, widget/draglist", function(S, Node, List, DragList){
             S.ready(function(){
 
                 List({

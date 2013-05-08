@@ -135,3 +135,62 @@ exports.detail = function(req, res) {
   }
 };
 
+<<<<<<< HEAD
+
+
+exports.list = {
+  render: function(req, res){
+    res.render('session/list', { 
+        docTitle: '分享会',
+        hasAddIcon: true,
+        id: req.params.id || ""
+      }); 
+  },
+  get: function(req, res) {
+            var id,
+                query = {};
+
+            if (id = req.params.id) {
+                query.id = id;
+                console.log("party id:"+id)
+            }
+
+            db.get({
+                query: query,
+                collection: "party",
+                complete: function(err, docs) {
+                    if (err) {
+                        res.json({
+                            success: false,
+                            message: err.message
+                        });
+                        return;
+                    }
+                    // 模拟数据
+                    // if(docs[0].sessions === []){
+                      //console.log(docs);
+                      //console.log("=========");
+                        docs[0].sessions =[{
+                            id: "1",
+                            from: "13:00",
+                            to: "14:00",
+                            title: "分享一"
+                        },
+                        {
+                            id: "2",
+                            from: "14:00",
+                            to: "15:00",
+                            title: "分享二"
+                        }]
+                    // }
+
+                    res.json({
+                        success: true,
+                        party: docs
+                    });
+                }
+            });
+        }
+};
+=======
+>>>>>>> 6e83138aab998df447ea17188943f13d4780149d
