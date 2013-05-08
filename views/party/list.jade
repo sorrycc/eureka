@@ -28,7 +28,8 @@ block content
                     span.title {{title}}
                   div.session-opts
                     a.opt.icon-add-session(href="/session/create?partyId={{../id}}")
-                    a.opt.icon-edit(href="/session/update/{{id}}")
+                    a.opt.icon-edit(href="/session/{{id}}/edit?partyId={{../id}}")
+                    //a.opt.icon-edit(href="/session/update/{{id}}")
                     a.opt.icon-del(href="/session/del/{{id}}")
                     a.opt.icon-push(href="/session/feedback/{{id}}")
                 {{/each}}
