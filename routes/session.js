@@ -14,6 +14,7 @@ var db = require("../db");
 exports.new = function(req, res){
   res.render('session/session_form', { 
     docTitle: '创建分享',
+    partyId: req.query.partyId,
     success: '1',
     msg: '',
     type: 1,
@@ -29,26 +30,10 @@ exports.new = function(req, res){
 exports.create = function(req, res){
   model.put(req, res, render);
 
-  function render(doc) {
-    // var _from = new Date(doc.from),
-    //   _to = new Date(doc.to);
-  
-    // var _fromStr = _from.getHours() + ":" + _from.getMinutes(),
-    //   _toStr = _to.getHours()  + ":" + _to.getMinutes();
-
-    console.log(doc);
-
-    res.render('session/session_display', { 
-      success: '1',
-      msg: '',
-      id: doc.id,
-      docTitle: '分享已创建',
-      title: doc.title,
-      type: 'created',
-      description: doc.description,
-      speakers: doc.speakers,
-      from: doc.from,
-      to: doc.to
+  function render() {
+    res.render('party/list',{
+                docTitle    : "我的分享会",
+                partyId          :  ""
     });  
   }  
 };
@@ -152,9 +137,9 @@ exports.detail = function(req, res) {
 exports.list = {
   render: function(req, res){
     res.render('session/list', { 
-        title: '分享列表',
+        docTitle: '分享会',
         headAdd: true,
-            id: req.params.id || ""
+        id: req.params.id || ""
       }); 
   },
   get: function(req, res) {
@@ -203,13 +188,3 @@ exports.list = {
             });
         }
 };
-
-/**
- * 管理者查看反馈结果页面
- * by 剑平
- */
-exports.feedback = function(req, res,http){
-    res.render('session/feedback',{
-        title: '查看反馈结果'
-    })
-}

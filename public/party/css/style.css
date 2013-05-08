@@ -9,3 +9,18 @@ html,body{height:100%;color:#1d1d1d}
 .party-item .party-info h1{padding:5px 0;color:#333;font-size:20px;}
 .party-item .party-info h1 a{color:#141110;margin-right:10px;font-size:14px}
 .party-item .party-info h1 .session-name{text-decoration:none;font-size:16px}
+.party-info{background-color:#d7f2fb;padding:15px;position:relative;}
+.party-info h2.title{margin-bottom:0}
+.party-info .icon-code{position:absolute;right:10px;top:22px}
+.party-info div.party-opts{visibility:hidden;position:absolute;top:0;left:0;background-color:rgba(0,0,0,0.2);height:100%;width:100%;}
+.party-info div.party-opts .opt{float:left;margin-top:50px;margin-left:70px;cursor:pointer}
+ul.session-list li{border-bottom:1px solid #dbcccd;margin-bottom:0;position:relative;}
+ul.session-list li .session-info{display:block;padding:15px 0 15px 15px;text-decoration:none;}
+ul.session-list li .session-info span.time{display:block;margin-bottom:5px;color:#58a8c1}
+ul.session-list li .session-info span.title{display:block;margin-bottom:0}
+ul.session-list li div.session-opts{visibility:hidden;position:absolute;top:0;left:0;background-color:rgba(0,0,0,0.2);height:100%;width:100%;}
+ul.session-list li div.session-opts .opt{float:left;margin-top:25px;margin-left:35px;cursor:pointer}
+ul.session-list div.add-session-bar{padding:15px 0 0 15px;}
+ul.session-list div.add-session-bar a.text{color:#6c93a0;height:23px;line-height:23px;margin-left:5px;text-decoration:none}
+ul.session-list div.add-session-bar a.text i.icon-add-session{margin-right:5px}
+.code{display:none;padding-top:60px}

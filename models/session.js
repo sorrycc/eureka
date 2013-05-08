@@ -16,10 +16,44 @@ exports.put = function(req, res, render) {
         complete: function(err, doc) {
             if (err) {
                 console.log(err);
-                res.send("error");
+                res.send("session insert error");
             }
             else {
-                render(doc);
+                var session = doc;
+                db.get({
+                    query: {
+                       id: req.body.partyId
+                    },
+                    collection: "party",
+                    complete: function(err, docs) {
+                        if (err) {
+                            res.send("query party error, partyId:" + req.body.partyId);
+                        }
+                        else {
+                            docs[0].sessions.push(session);
+                            db.post({
+                                query:{
+                                    id: req.body.partyId
+                                },
+                                collection: "party",
+                                doc: {
+                                    sessions: docs[0].sessions
+                                },
+                                complete: function(err, doc) {
+                                    if (err) {
+                                        console.log("2============"+doc);
+                                        res.send("update party sessions error, message:"+ err.message);
+                                    }
+                                    else {
+                                        render();
+                                    }
+                                }
+                            });
+                        }
+                        
+                    }
+                });
+                
             }
         }
     });

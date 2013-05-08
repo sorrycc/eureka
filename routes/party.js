@@ -14,17 +14,17 @@ var db = require("../db");
 module.exports = {
     create: {
         render: function(req, res) {
-            res.render("form", {
-                title: "创建分享会",
+            res.render("party/form", {
+                docTitle: "创建分享会",
                 id: "",
                 partyTitle: "",
                 time: "",
-                location: ""
+                location: "",
+                headAdd: false
             });
         },
         post: function(req, res) {
-            req.cookies.nick = "棪木";
-            if (!req.cookies.nick) {
+            if (!req.user || !req.user._id) {
                 res.json({
                     success: false,
                     message: "Login Error"
@@ -44,7 +44,7 @@ module.exports = {
                 db.put({
                     collection: "party",
                     doc: {
-                        root: req.cookies.nick,
+                        root: req.user._id,
                         title: req.body.title,
                         time: Date(req.body.time),
                         location: req.body.location,
@@ -78,8 +78,9 @@ module.exports = {
     list: {
         render: function(req, res) {
             res.render("party/list", {
-                title: "我的分享会",
-                id: req.params.id || ""
+                docTitle : "我的分享会",
+                id: req.params.id || "",
+                hasAddIcon: true
             });
         },
         get: function(req, res) {
@@ -130,8 +131,8 @@ module.exports = {
 
                     var doc = docs[0];
 
-                    res.render("form", {
-                        title: "编辑分享会",
+                    res.render("party/form", {
+                        docTitle: "编辑分享会",
                         id: doc.id,
                         partyTitle: doc.title,
                         time: moment(doc.time).format("YYYY-MM-DD"),
@@ -173,15 +174,6 @@ module.exports = {
                         id: id
                     });
                 }
-            });
-        }
-    },
-    // 剑平贱人，速删！
-    sprite: {
-        render: function(req, res) {
-            console.log(req);
-            res.render("sprite", {
-                title: "sprite"
             });
         }
     },
