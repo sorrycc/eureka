@@ -228,6 +228,11 @@ module.exports = {
             "required": true,
             "validate": /\d+/
         },
+        party_id:{
+            "type": Number,
+            "required": true,
+            "validate": /\d+/
+        },
         // 统计更新时间
         timer: {
             "type": Date,

@@ -10,13 +10,14 @@ KISSY.add(function(S, Node,Count,CountImage,saveCount) {
             var n = ev.newVal - ev.prevVal;
             countImage.change(n);
         })
-        var socket = io.connect('http://localhost:3000');
+        var socket = io.connect('http://localhost');
         socket.on('feedbackCount', function (data) {
             S.log(data);
             var starNum = data.num;
             //触发统计
             count.count(starNum);
         });
-        saveCount(100,"2323424");
+
+        saveCount(100);
     }
 }, {requires : ['node','./star-count','./count-image','./save-count']});

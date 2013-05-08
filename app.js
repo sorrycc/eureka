@@ -155,7 +155,7 @@ app.post('/feedback/make/:id', feedback.post);
 app.get('/feedback/list', function(req, res) {
 });
 //剑平
-app.get('/feedback/result', feedback.result);
+app.get('/feedback/result/:partyId/:sessionId', feedback.result);
 app.post('/feedback/save_count', feedback.save_count);
 
 var server = http.createServer(app);

@@ -4,31 +4,20 @@ block head
     link(type="text/css", rel="stylesheet", href="/feedback/result.css")
 
 block content
-    header#header
-        a.header-logo(href="") EUREKA
+    input(type="hidden",value="#{sessionId}")#J_SessionId
+    input(type="hidden",value="#{partyId}")#J_PartyId
     div.content
         div.count-img.J_CountImg ★
         div.session-info
-            h2 七念队-尤里卡的逆袭
             div.count
                 em.J_StarCount 0
 
         ul.session-list
-            li.grid
-                b.g-u.count-num 500
-                span.g-u.text 《鱼相的艳遇》
-            li.grid
-                b.g-u.count-num 400
-                span.g-u.text 《七念的故事》
-            li.grid
-                b.g-u.count-num 300
-                span.g-u.text 《水儿的惆怅》
-            li.grid
-                b.g-u.count-num 200
-                span.g-u.text 《筱谷的冷笑话》
-            li.grid
-                b.g-u.count-num 100
-                span.g-u.text 《棪木搞基去了》
+            each session, i in sessions
+                if session.count
+                    li.grid
+                        b.g-u.count-num #{session.count}
+                        span.g-u.text #{session.title}
 
     script(src="/js/socket.io/socket.io.min.js")
     script(type='text/javascript')
@@ -36,7 +25,7 @@ block content
             packages:[
             {
             name:"feedback",
-            path:"../",
+            path:"../../../",
             charset:"utf-8"
             }]
         });

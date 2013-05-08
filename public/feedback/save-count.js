@@ -5,10 +5,10 @@
 KISSY.add(function(S, Node, io) {
     var EMPTY = '';
     var $ = Node.all;
-    return function saveCount(count,sessionId){
-        if(!count || !sessionId) return false;
-
-        io.post('save_count',{count:count,sessionId:sessionId},function(data){
+    return function saveCount(count){
+        var sessionId = Number($('#J_SessionId').val());
+        var partyId = Number($('#J_PartyId').val());
+        io.post('http://localhost/feedback/save_count',{count:count,sessionId:sessionId,partyId:partyId},function(data){
             if(!data.status){
                 S.log(data.msg);
             }
