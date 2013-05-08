@@ -24,6 +24,7 @@ module.exports = {
             });
         },
         post: function(req, res) {
+
             if (!req.user || !req.user._id) {
                 res.json({
                     success: false,
@@ -102,6 +103,11 @@ module.exports = {
                         });
                         return;
                     }
+
+                    docs.forEach(function(doc, index){
+                        docs[index].formatTime = moment(doc.time).format("YYYY-MM-DD");
+                        //console.log(doc)
+                    });
 
                     res.json({
                         success: true,
