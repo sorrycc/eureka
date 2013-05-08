@@ -26,7 +26,7 @@ app.locals = {
 };
 
 app.configure(function(){
-    app.set('port', 80);
+    app.set('port', process.env.PORT || 3000);
     app.set('views', __dirname + '/views');
     app.set('view engine', 'jade');
     app.use(express.favicon());
@@ -35,13 +35,26 @@ app.configure(function(){
     app.use(express.cookieParser("eureka1367047474"));
     app.use(express.methodOverride());
 
-    // auth
-    // app.use(nobuc(/.*/, {
-    //     hostname: "login-test.alibaba-inc.com",
-    //     appname: "eureka"
-    // }));
+    if (app.get("port") === 80) {
+        // auth
+        app.use(nobuc(/.*/, {
+            hostname: "login-test.alibaba-inc.com",
+            appname: "eureka"
+        }));
 
-    app.use(user());
+        app.use(user());
+    }
+    else {
+        // req.user
+        app.param('party', function(req, res, next, id){
+          req.user = {
+            _id: "testid",
+            name: "testid@taobao.com",
+            nick: "test"
+          };
+        });
+
+    }
 
     app.use(app.router);
 
@@ -69,8 +82,8 @@ app.get('/', routes.index);
 app.get('/login', routes.login);
 
 // 棪木
-app.get('/login', function(req, res) {
-});
+//app.get('/login', function(req, res) {
+//});
 
 // 棪木
 app.get('/party/create', function(req, res) {
