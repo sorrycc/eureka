@@ -111,8 +111,6 @@ exports.del = function(req, res){
   } 
 };
 
-
-
 exports.update = function(req, res){
   model.post(req, res, render);
 
@@ -128,6 +126,7 @@ exports.update = function(req, res){
 };
 
 exports.detail = function(req, res) {
+  console.log("detail~~~~");
   model.get(req, res, render);
   
   function render(docs){
