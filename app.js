@@ -26,7 +26,9 @@ app.locals = {
 };
 
 app.configure(function(){
-    app.set('port', process.env.PORT || 80);
+
+    app.set('port', 3000);
+
     app.set('views', __dirname + '/views');
     app.set('view engine', 'jade');
     app.use(express.favicon());
@@ -34,6 +36,7 @@ app.configure(function(){
     app.use(express.bodyParser());
     app.use(express.cookieParser("eureka1367047474"));
     app.use(express.methodOverride());
+
 
     if (app.get("port") === 80) {
         // auth
@@ -55,6 +58,7 @@ app.configure(function(){
             next();
         });
     }
+
 
     app.use(app.router);
 
@@ -160,15 +164,11 @@ app.post('/session/:id/edit', session.update);
 app.del('/session/:id/', session.del);
 
 // 水儿
-// render the session list belonging to the party with the id
-app.get('/session/list/:id', function(req, res) {
-    session.list.render(req, res);
-});
-app.get('/api/session/list/:id', function(req, res) {
+// get sessions by party id
+app.get('/api/session/list/:partyId', function(req, res) {
     session.list.get(req, res);
 });
-// app.get(/session/(/d+), function(req, res) {
-// });
+
 
 // feedback
 // 筱谷

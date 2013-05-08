@@ -1,5 +1,7 @@
 extends ../layout
 
+block head
+    link(type="text/css", rel="stylesheet", href="/party/css/style.css")
 block content
     div.panel.party-list#J_PartyList(data-id="#{id}")
     script#J_TemplateParty(type="javascript/template")

@@ -30,14 +30,7 @@ exports.put = function(req, res, render) {
                             res.send("query party error, partyId:" + req.body.partyId);
                         }
                         else {
-                            console.log(req.body.partyId);
-                            console.log("#docs:- start");
-                            console.log(docs);
-                            console.log("#docs:- end");
-                            if (docs.length) {
-
-                            }
-                            docs[0].sessions.push(session);
+                            docs[0].sessions.push(session.id);
                             db.post({
                                 query:{
                                     id: req.body.partyId
