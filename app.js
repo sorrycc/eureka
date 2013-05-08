@@ -26,7 +26,7 @@ app.locals = {
 };
 
 app.configure(function(){
-    app.set('port', 80);
+    app.set('port', 3000);
     app.set('views', __dirname + '/views');
     app.set('view engine', 'jade');
     app.use(express.favicon());
@@ -36,10 +36,10 @@ app.configure(function(){
     app.use(express.methodOverride());
 
     // auth
-    app.use(nobuc(/.*/, {
-        hostname: "login-test.alibaba-inc.com",
-        appname: "eureka"
-    }));
+    // app.use(nobuc(/.*/, {
+    //     hostname: "login-test.alibaba-inc.com",
+    //     appname: "eureka"
+    // }));
 
     app.use(user());
 

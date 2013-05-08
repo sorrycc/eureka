@@ -14,6 +14,7 @@ var db = require("../db");
 exports.new = function(req, res){
   res.render('session/session_form', { 
     docTitle: '创建分享',
+    hasAddIcon: false,
     partyId: req.query.partyId,
     success: '1',
     msg: '',
@@ -33,7 +34,8 @@ exports.create = function(req, res){
   function render() {
     res.render('party/list',{
                 docTitle    : "我的分享会",
-                partyId          :  ""
+                partyId          :  "",
+                hasAddIcon: true,
     });  
   }  
 };

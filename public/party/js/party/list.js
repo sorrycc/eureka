@@ -70,7 +70,7 @@ KISSY.add("party/list", function(S, Ajax, XTemplate) {
                 });
             });
 
-            E.on(document, 'click', function(e){
+            E.on(document, 'click tap  tapHold', function(e){
                 if(!D.parent(e.target, '.J_PartyOpts') && !D.parent(e.target, '.party-opts')){
                     D.css('.party-opts', 'visibility', 'hidden');
                 }
@@ -130,7 +130,7 @@ KISSY.add("party/list", function(S, Ajax, XTemplate) {
                 // hide session-list-wrap, and display code
                 rotateYDIV(0, rotateEl);
             });
-            E.on('.code','click', function(e){
+            E.on('.code','click tap', function(e){
                 rotateEl = D.parent(e.currentTarget, '.mainCard');
                 rotateYDIV(180, rotateEl);
             })

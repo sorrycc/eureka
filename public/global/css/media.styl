@@ -1,20 +1,73 @@
 
+//
+// Important numbers
+//
+
+line = 24
+column = 100% / 18
+font-size = 16
+em = font-size * 1
+
+/*
+*
+* Zoomable baseline grid
+* type size presets
+*
+*/
+
+body
+  /* 16px / 24px */
+  font-size (font-size / 16) * 1em
+  line-height (line / 16) * 1em
+
+
+h1 
+  /* 26 / 36px */
+  font-size (26 / em) * 1em
+  line-height: (36 / 26) * 1em
+
+h3, .large
+  /* 18px / 24px */
+  font-size: (18 / em) * 1em
+  line-height: (24 / 18) * 1em
+
+.normal
+  /* 14px / 18px */
+  font-size: (14 / em) * 1em
+  line-height: (18 / 14) * 1em
+  
+ 
+
+
 /* 正常PC液晶屏样式 */
  
 /* iPad 及以下，以及所有小于（不等于）960宽度的平板电脑 */
-@media only screen and (max-width: 959px) {}
+@media only screen and (max-width: 959px) 
+  body
+    font-size: 1.3em
+
  
 /* 仅iPad 竖版，以及所有小于（不等于）标准960宽度的平板电脑的竖版 */
-@media only screen and (min-width: 768px) and (max-width: 959px) {}
+@media only screen and (min-width: 768px) and (max-width: 959px) 
+  body
+    font-size: 1.2em
+
  
 /* iPhone 及以下 */
-@media only screen and (max-width: 767px) {}
+@media only screen and (max-width: 767px) 
+  body
+    font-size: 1.1em
+
  
 /* 仅iPhone 横版，包括某些平板电脑的竖版 */
-@media only screen and (min-width: 480px) and (max-width: 767px) {}
+@media only screen and (min-width: 480px) and (max-width: 767px) 
+  body
+    font-size: 1.1em
+
  
 /* 仅iphone4 竖版 */
-@media only screen and (max-width: 479px) {
-	
-	
-}
+@media only screen and (max-width: 479px) 
+  body
+    font-size: 1em
+
+  
