@@ -1,3 +1,5 @@
+@import "../../global/css/font.styl"
+
 // party info , add by shuier
 mask()
   visibility hidden
@@ -20,7 +22,6 @@ mask()
     margin: 0 0  0.5em
 
   .party-time, .party-loc
-    @extend .normal
     margin: 0.5em 0 0.5em
 
   .icon-code
@@ -41,7 +42,7 @@ ul.session-list
     margin-bottom 0
     position relative
     .session-info
-      @extend .normal
+      normal()
       display block
       padding 1em
       padding-right 0
@@ -76,7 +77,7 @@ div.add-session-bar
       margin-right 5px
 
     color #6c93a0
-    @extend .large
+    large()
     margin-left 5px
     text-decoration none
 .code
