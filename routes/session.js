@@ -141,7 +141,7 @@ exports.list = {
   render: function(req, res){
     res.render('session/list', { 
         docTitle: '分享会',
-        headAdd: true,
+        hasAddIcon: true,
         id: req.params.id || ""
       }); 
   },
