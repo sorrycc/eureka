@@ -11,9 +11,12 @@
 var model = require("../models/session");
 var db = require("../db");
 
+// 渲染创建新分享页面
 exports.new = function(req, res){
   res.render('session/session_form', { 
     docTitle: '创建分享',
+    hasAddIcon: false,
+    partyId: req.query.partyId,
     success: '1',
     msg: '',
     type: 1,
@@ -23,33 +26,16 @@ exports.new = function(req, res){
     speakers: '',
     from: '',
     to: ''
-  });  
+  });
 };
 
+// 提交创建新的分享
 exports.create = function(req, res){
   model.put(req, res, render);
 
-  function render(doc) {
-    // var _from = new Date(doc.from),
-    //   _to = new Date(doc.to);
-  
-    // var _fromStr = _from.getHours() + ":" + _from.getMinutes(),
-    //   _toStr = _to.getHours()  + ":" + _to.getMinutes();
-
-    console.log(doc);
-
-    res.render('session/session_display', { 
-      success: '1',
-      msg: '',
-      id: doc.id,
-      docTitle: '分享已创建',
-      title: doc.title,
-      type: 'created',
-      description: doc.description,
-      speakers: doc.speakers,
-      from: doc.from,
-      to: doc.to
-    });  
+  function render() {
+    // 创建完后重定向到对应的Party详细页面
+    res.redirect("/party/" + req.body.partyId || "");
   }  
 };
 
@@ -75,6 +61,7 @@ exports.edit = function(req, res){
       msg: '',
       type: 'edit',
       id: _result.id,
+      partyId: req.query.partyId,
       title: _result.title,
       description: _result.description,
       speakers: _result.speakers,
@@ -111,23 +98,23 @@ exports.del = function(req, res){
   } 
 };
 
-
-
 exports.update = function(req, res){
   model.post(req, res, render);
 
   function render(numAffected) {
-    res.render('session/session_msg', {
-      docTitle: '更新分享',
-      num: numAffected,
-      type: 'update',
-      success: '1',
-      msg: ''
-    });
+    res.redirect("/party/" + req.body.partyId || "");
+    // res.render('session/session_msg', {
+    //   docTitle: '更新分享',
+    //   num: numAffected,
+    //   type: 'update',
+    //   success: '1',
+    //   msg: ''
+    // });
   } 
 };
 
 exports.detail = function(req, res) {
+  console.log("detail~~~~");
   model.get(req, res, render);
   
   function render(docs){
@@ -180,8 +167,8 @@ exports.list = {
                     }
                     // 模拟数据
                     // if(docs[0].sessions === []){
-                      console.log(docs);
-                      console.log("=========");
+                      //console.log(docs);
+                      //console.log("=========");
                         docs[0].sessions =[{
                             id: "1",
                             from: "13:00",

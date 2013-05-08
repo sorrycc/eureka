@@ -1,27 +1,17 @@
-html,body{height:100%;color:#1d1d1d}
-.bar{height:56px;color:#fff;background:#303030;}
-.bar h1{font-size:24px;font-weight:normal;line-height:56px;color:#fff;text-align:center}
-.bar .back{position:absolute;left:0;top:0;display:block;width:56px;height:56px}
-.bar .btn{position:absolute;right:0;top:0;display:block;width:56px;height:56px}
-.panel{padding:20px}
-.party-item{padding-bottom:50px;margin-bottom:10px;background:#fff;-webkit-border-radius:5px;border-radius:5px;}
-.party-item .party-info{background:#cdeefa;border-top-left-radius:5px;border-top-right-radius:5px;padding:10px;line-height:1.8;}
-.party-item .party-info h1{padding:5px 0;color:#333;font-size:20px;}
-.party-item .party-info h1 a{color:#141110;margin-right:10px;font-size:14px}
-.party-item .party-info h1 .session-name{text-decoration:none;font-size:16px}
-#session-list-page label{display:inline-block}
-#session-list-page #party{background-color:#d7f2fb;padding:15px;position:relative;}
-#session-list-page #party h2.title{margin-bottom:0}
-#session-list-page #party .icon-code{position:absolute;right:10px;top:22px}
-#session-list-page #party div.party-opts{visibility:hidden;position:absolute;top:0;left:0;background-color:rgba(0,0,0,0.2);height:100%;width:100%;}
-#session-list-page #party div.party-opts .opt{float:left;margin-top:50px;margin-left:70px;cursor:pointer}
-#session-list-page ul#session-list li{border-bottom:1px solid #dbcccd;margin-bottom:0;position:relative;}
-#session-list-page ul#session-list li a.session-info{display:block;padding:15px 0 15px 15px;text-decoration:none;}
-#session-list-page ul#session-list li a.session-info span.time{display:block;margin-bottom:5px;color:#58a8c1}
-#session-list-page ul#session-list li a.session-info span.title{display:block;margin-bottom:0}
-#session-list-page ul#session-list li div.session-opts{visibility:hidden;position:absolute;top:0;left:0;background-color:rgba(0,0,0,0.2);height:100%;width:100%;}
-#session-list-page ul#session-list li div.session-opts .opt{float:left;margin-top:25px;margin-left:35px;cursor:pointer}
-#session-list-page div.add-session-bar{padding:15px 0 0 15px;}
-#session-list-page div.add-session-bar a.text{color:#6c93a0;height:23px;line-height:23px;margin-left:5px;text-decoration:none}
-#session-list-page div.add-session-bar a.text i.icon-add-session{margin-right:5px}
-#code{display:none;padding-top:60px}
+.panel{padding:5%}
+.party-item{padding-bottom:50px;margin-bottom:10px;background:#fff;-webkit-border-radius:5px;border-radius:5px}
+.normal,.party-info .party-time,.party-info .party-loc{font-size:.875em;line-height:1.2857142857142858em}
+.party-info{background-color:#d7f2fb;background:#cdeefa;border-top-left-radius:5px;border-top-right-radius:5px;padding:3%;position:relative;}
+.party-info .icon-code{position:absolute;right:10px;top:22px}
+.party-info div.party-opts{visibility:hidden;position:absolute;top:0;left:0;background-color:rgba(0,0,0,0.2);height:100%;width:100%;}
+.party-info div.party-opts .opt{float:left;margin-top:50px;margin-left:70px;cursor:pointer}
+ul.session-list li{border-bottom:1px solid #dbcccd;margin-bottom:0;position:relative;}
+ul.session-list li .session-info{display:block;padding:15px 0 15px 15px;text-decoration:none;}
+ul.session-list li .session-info span.time{display:block;margin-bottom:5px;color:#58a8c1}
+ul.session-list li .session-info span.title{display:block;margin-bottom:0}
+ul.session-list li div.session-opts{visibility:hidden;position:absolute;top:0;left:0;background-color:rgba(0,0,0,0.2);height:100%;width:100%;}
+ul.session-list li div.session-opts .opt{float:left;margin-top:25px;margin-left:35px;cursor:pointer}
+ul.session-list div.add-session-bar{padding:15px 0 0 15px;}
+ul.session-list div.add-session-bar a.text{color:#6c93a0;height:23px;line-height:23px;margin-left:5px;text-decoration:none}
+ul.session-list div.add-session-bar a.text i.icon-add-session{margin-right:5px}
+.code{display:none;padding-top:60px}

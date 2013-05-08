@@ -16,10 +16,51 @@ exports.put = function(req, res, render) {
         complete: function(err, doc) {
             if (err) {
                 console.log(err);
-                res.send("error");
+                res.send("session insert error");
             }
             else {
-                render(doc);
+                var session = doc;
+                db.get({
+                    query: {
+                       id: req.body.partyId
+                    },
+                    collection: "party",
+                    complete: function(err, docs) {
+                        if (err) {
+                            res.send("query party error, partyId:" + req.body.partyId);
+                        }
+                        else {
+                            console.log(req.body.partyId);
+                            console.log("#docs:- start");
+                            console.log(docs);
+                            console.log("#docs:- end");
+                            if (docs.length) {
+
+                            }
+                            docs[0].sessions.push(session);
+                            db.post({
+                                query:{
+                                    id: req.body.partyId
+                                },
+                                collection: "party",
+                                doc: {
+                                    sessions: docs[0].sessions
+                                },
+                                complete: function(err, doc) {
+                                    if (err) {
+                                        //console.log("2============"+doc);
+                                        res.send("update party sessions error, message:"+ err.message);
+                                    }
+                                    else {
+                                        render();
+                                    }
+                                }
+                            });
+                        }
+                        
+                    }
+                });
+                
             }
         }
     });
@@ -29,7 +70,6 @@ exports.get = function(req, res, render) {
     var _query = {
       id: req.params.id
     };
-    console.log(_query);
 
     db.get({
         collection: "session",

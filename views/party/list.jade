@@ -1,23 +1,40 @@
 extends ../layout
 
-block head
-    link(type="text/css", rel="stylesheet", href="/party/css/style.css")
-
 block content
-    div.panel
-        div.party-list#J_PartyList(data-id="#{id}")
+    div.panel.party-list#J_PartyList(data-id="#{id}")
     script#J_TemplateParty(type="javascript/template")
         {{#each docs}}
         {{#with this}}
-        section.party-item
-            article.party-info
-                h1 {{title}}
-                div.party-time 时间:{{formatTime}}
-                div.party-loc 地点:{{location}}
-            div.party-panel
-                a(href="/party/edit/{{id}}") edit
-                a.session-del(href="/api/party/del/{{id}}") delete
+        div.mainCard
+            section.party-item
+                article.party-info.J_PartyOpts
+                    h3.title {{title}}
+                    div.party-time 时间:{{time}}
+                    div.party-loc 地点:{{location}}
+                    i.icon-code.J_ViewOriginal
+                    div.party-opts
+                        a.opt.icon-edit(href="/party/edit/{{id}}")
+                        a.opt.icon-del(href="/api/party/del/{{id}}"")
 
+                ul.session-list
+                    {{#each sessions}}
+                    li.J_SessionOpts
+                        span.session-info
+                        span.time {{from}} - {{to}}
+                        span.title {{title}}
+                        div.session-opts
+                            a.opt.icon-add-session(href="/session/create?partyId={{../id}}")
+                            a.opt.icon-edit(href="/session/{{id}}/edit?partyId={{../id}}")
+                            //a.opt.icon-edit(href="/session/update/{{id}}")
+                            a.opt.icon-del(href="/session/del/{{id}}")
+                            a.opt.icon-push(href="/session/feedback/{{id}}")
+                    {{/each}}
+                div.add-session-bar       
+                    a.text.large(href="/session/create?partyId={{../id}}")
+                        i.icon-add-session
+                        新增一个分享
+                div.code
+                    img(src="http://img02.taobaocdn.com/tps/i2/T1SPeoXE0XXXbgvWvq-249-254.png")
         {{/with}}
         {{/each}}
         
@@ -32,3 +49,5 @@ block content
 
             });
         });
+
+

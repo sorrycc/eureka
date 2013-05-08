@@ -1,9 +1,6 @@
 header
-  h1
-    a.back-icon-wrapper
-      span.icon-back(href="javascript:history.back()")
-    a(href="/party/create") #{docTitle}
-    - if (headAdd)
-        a.icon-add(href="#")
-
-  
+  a.back-icon-wrapper
+   i.icon-back
+  h1 #!{docTitle}  
+  - if (hasAddIcon)
+    a.icon-add(href="/party/create")

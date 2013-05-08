@@ -20,10 +20,11 @@ module.exports = {
                 partyTitle: "",
                 time: "",
                 location: "",
-                headAdd: false
+                hasAddIcon: false
             });
         },
         post: function(req, res) {
+
             if (!req.user || !req.user._id) {
                 res.json({
                     success: false,
@@ -79,7 +80,8 @@ module.exports = {
         render: function(req, res) {
             res.render("party/list", {
                 docTitle : "我的分享会",
-                id: req.params.id || ""
+                id: req.params.id || "",
+                hasAddIcon: true
             });
         },
         get: function(req, res) {
@@ -104,7 +106,7 @@ module.exports = {
 
                     docs.forEach(function(doc, index){
                         docs[index].formatTime = moment(doc.time).format("YYYY-MM-DD");
-                        console.log(doc)
+                        //console.log(doc)
                     });
 
                     res.json({
@@ -140,7 +142,8 @@ module.exports = {
                         id: doc.id,
                         partyTitle: doc.title,
                         time: moment(doc.time).format("YYYY-MM-DD"),
-                        location: doc.location
+                        location: doc.location,
+                        hasAddIcon: false
                     });
                 }
             });

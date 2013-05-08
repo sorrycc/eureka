@@ -6,7 +6,9 @@ block content
   div.content
     div.mainCard
       if success == '1'
-        form(method="post")
+        form#J_SessionForm(method="post")
+          //if type == '1'
+          input(type="hidden",name="partyId", value="#{partyId}")
           div.row
             div.column
               label(for="title") 标题
@@ -43,3 +45,12 @@ block content
               input(type="hidden", name="id", value="#{id}")
       else
         div.msg #{err}
+  script
+    KISSY.use("session/form", function(S, Form){
+        
+        S.ready(function(){
+          Form({
+            form: "#J_SessionForm"
+          });
+        });
+    });        
