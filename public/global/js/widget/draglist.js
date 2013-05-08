@@ -44,19 +44,19 @@
 
       DragList.prototype.initScrollView = function() {
         var _this = this;
-        this.scrollView = new DragSwitch(".entry-list-box", {
+        this.scrollView = new DragSwitch(this.wrapperEl, {
           senDistance: 1,
           inertiaMove: false,
           binds: [
             {
-              moveEls: [],
+              moveEls: [this.wrapperEl],
               maxDistance: DOM.viewportHeight() / 2,
               validDistance: 1,
               passCallback: function() {},
               failCallback: null,
               checkvalid: null
             }, null, {
-              moveEls: [],
+              moveEls: [this.wrapperEl],
               maxDistance: -DOM.viewportHeight() / 2,
               validDistance: -1,
               passCallback: function() {},

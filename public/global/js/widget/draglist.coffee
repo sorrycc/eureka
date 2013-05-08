@@ -29,12 +29,12 @@ KISSY.add "widget/draglist", (S,DOM,Node,Event,DragSwitch)->
       @initTapHold()    if @config.enableTapHold
 
     initScrollView: ->
-      @scrollView = new DragSwitch(".entry-list-box",
+      @scrollView = new DragSwitch(@wrapperEl,
         senDistance: 1
         inertiaMove: false
         binds: [
           {
-            moveEls       : [] # 如果不为空，则只移动这里的元素
+            moveEls       : [@wrapperEl] # 如果不为空，则只移动这里的元素
             maxDistance   : DOM.viewportHeight() / 2
             validDistance : 1
             passCallback  : ->
@@ -43,7 +43,7 @@ KISSY.add "widget/draglist", (S,DOM,Node,Event,DragSwitch)->
           }
         ,null,
           {
-            moveEls       : [] # 如果不为空，则只移动这里的元素
+            moveEls       : [@wrapperEl] # 如果不为空，则只移动这里的元素
             maxDistance   : -DOM.viewportHeight() / 2
             validDistance : -1
             passCallback  : ->

@@ -16,6 +16,9 @@ KISSY.config({
         },
         session: {
         	base: "/session/js"
+        },
+        widget: {
+          base: "/global/js"
         }
     }
 });
