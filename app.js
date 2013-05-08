@@ -46,11 +46,14 @@ app.configure(function(){
     }
     else {
         // req.user
-        req.user = {
-            _id: "testid",
-            name: "testid@taobao.com",
-            nick: "test"
-        };
+        app.use(function(req, res, next){
+            req.user = {
+                _id: "testid",
+                name: "testid@taobao.com",
+                nick: "test"
+            };
+            next();
+        });
     }
 
     app.use(app.router);
