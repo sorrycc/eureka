@@ -22,8 +22,8 @@ block content
                     {{#each sessions}}
                     li.J_SessionOpts.ks-draglist-item
                         span.session-info
-                        span.time {{from}} - {{to}}
-                        span.title {{title}}
+                            span.time {{from}} - {{to}}
+                            span.title {{title}}
                         div.session-opts
                             a.opt.icon-add-session(href="/session/create?partyId=#{id}}")
                             a.opt.icon-edit(href="/session/{{id}}/edit?partyId=#{id}")
