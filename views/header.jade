@@ -1,8 +1,7 @@
 header
-  h1
-    a.back-icon-wrapper
-    a(href="/party/create") #{docTitle}
-    - if (hasAddIcon)
-      a.icon-add(href="#")
-
-  
+    if (typeof(backUrl)!=="undefined")
+      a.back-icon-wrapper(href="#{backUrl}")
+        i.icon-back
+    h1 #{docTitle}  
+        - if (typeof hasAddIcon != 'undefined')
+            a.icon-add(href="/party/create")

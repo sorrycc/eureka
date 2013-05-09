@@ -7,7 +7,8 @@
 exports.index = function(req, res){
   res.render('index', {
       docTitle: 'Express',
-      title: "Express"
+      title: "Express",
+      hasAddIcon: false
   });
 };
 

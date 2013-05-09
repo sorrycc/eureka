@@ -105,6 +105,7 @@ module.exports = {
         },
         state: {
             "type": Number,
+            "default": -1,
             "enmu": [-1, 0, 1]
         },
         feedbacks: {

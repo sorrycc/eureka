@@ -11,9 +11,11 @@
 var model = require("../models/session");
 var db = require("../db");
 
+// 渲染创建新分享页面
 exports.new = function(req, res){
   res.render('session/session_form', { 
     docTitle: '创建分享',
+    hasAddIcon: false,
     partyId: req.query.partyId,
     success: '1',
     msg: '',
@@ -24,17 +26,16 @@ exports.new = function(req, res){
     speakers: '',
     from: '',
     to: ''
-  });  
+  });
 };
 
+// 提交创建新的分享
 exports.create = function(req, res){
   model.put(req, res, render);
 
   function render() {
-    res.render('party/list',{
-                docTitle    : "我的分享会",
-                partyId          :  ""
-    });  
+    // 创建完后重定向到对应的Party详细页面
+    res.redirect("/party/" + req.body.partyId || "");
   }  
 };
 
@@ -60,6 +61,7 @@ exports.edit = function(req, res){
       msg: '',
       type: 'edit',
       id: _result.id,
+      partyId: req.query.partyId,
       title: _result.title,
       description: _result.description,
       speakers: _result.speakers,
@@ -96,19 +98,18 @@ exports.del = function(req, res){
   } 
 };
 
-
-
 exports.update = function(req, res){
   model.post(req, res, render);
 
   function render(numAffected) {
-    res.render('session/session_msg', {
-      docTitle: '更新分享',
-      num: numAffected,
-      type: 'update',
-      success: '1',
-      msg: ''
-    });
+    res.redirect("/party/" + req.body.partyId || "");
+    // res.render('session/session_msg', {
+    //   docTitle: '更新分享',
+    //   num: numAffected,
+    //   type: 'update',
+    //   success: '1',
+    //   msg: ''
+    // });
   } 
 };
 
@@ -123,6 +124,7 @@ exports.detail = function(req, res) {
         success: '1',
         msg: '',
         id: doc.id,
+        partyId: req.query.partyId || "",
         title: doc.title,
         type: 'detail',
         description: doc.description,
@@ -139,7 +141,7 @@ exports.list = {
   render: function(req, res){
     res.render('session/list', { 
         docTitle: '分享会',
-        headAdd: true,
+        hasAddIcon: true,
         id: req.params.id || ""
       }); 
   },
@@ -165,8 +167,8 @@ exports.list = {
                     }
                     // 模拟数据
                     // if(docs[0].sessions === []){
-                      console.log(docs);
-                      console.log("=========");
+                      //console.log(docs);
+                      //console.log("=========");
                         docs[0].sessions =[{
                             id: "1",
                             from: "13:00",
@@ -189,3 +191,4 @@ exports.list = {
             });
         }
 };
+

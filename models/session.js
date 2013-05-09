@@ -30,7 +30,7 @@ exports.put = function(req, res, render) {
                             res.send("query party error, partyId:" + req.body.partyId);
                         }
                         else {
-                            docs[0].sessions.push(session);
+                            docs[0].sessions.push(session.id);
                             db.post({
                                 query:{
                                     id: req.body.partyId
@@ -41,7 +41,7 @@ exports.put = function(req, res, render) {
                                 },
                                 complete: function(err, doc) {
                                     if (err) {
-                                        console.log("2============"+doc);
+                                        //console.log("2============"+doc);
                                         res.send("update party sessions error, message:"+ err.message);
                                     }
                                     else {
@@ -63,7 +63,6 @@ exports.get = function(req, res, render) {
     var _query = {
       id: req.params.id
     };
-    console.log(_query);
 
     db.get({
         collection: "session",

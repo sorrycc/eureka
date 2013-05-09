@@ -15,7 +15,10 @@ KISSY.config({
             base: "/party/js"
         },
         session: {
-        	base: "/js"
+        	base: "/session/js"
+        },
+        widget: {
+          base: "/global/js"
         }
     }
 });
