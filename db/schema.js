@@ -243,6 +243,11 @@ module.exports = {
             "type": Number,
             "default":0
         },
+        //反馈的人数
+        people:{
+            "type": Number,
+            "default":0
+        },
         _deleted: {
             "type": Boolean,
             "default": false,

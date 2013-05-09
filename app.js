@@ -179,7 +179,7 @@ io.sockets.on('connection', function (socket) {
     socket.on('push_feedback',function(data){
         //demo data
         //state:-1未推送，0正在推送，1推送完成
-        var data = {sessionId:1,state:1};
+        var data = {sessionId:1,state:1,people:5,count:10};
         if(data.state === 1){
             socket.emit('push_close',data);
         }else if(data.state === 0){

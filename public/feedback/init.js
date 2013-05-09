@@ -5,7 +5,8 @@
 KISSY.add(function(S, Node,Uri,Count,CountImage,saveCount) {
     return function(){
         var count = new Count('.J_StarCount');
-        var countImage = new CountImage('.J_CountImg');
+        var countImage = new CountImage('.J_Stars');
+        countImage.set('num',3);
         var host = 'http://'+new Uri(window.location.href).getHostname();
         count.on('afterValueChange',function(ev){
             var n = ev.newVal - ev.prevVal;
@@ -20,7 +21,18 @@ KISSY.add(function(S, Node,Uri,Count,CountImage,saveCount) {
         //统计推送结束
         socket.on('push_close',function(data){
             var num = count.get('value');
-            saveCount(num);
+            var people = count.get('time');
+            //星数
+            var starNum = self.get('average');
+            countImage.set('num',starNum);
+            saveCount(num,people);
+        })
+        //统计推送开始
+        socket.on('push_open',function(data){
+            //星数
+            count.set('value',data.count);
+            //统计的次数
+            count.set('time',data.people);
         })
     }
 }, {requires : ['node','uri','./star-count','./count-image','./save-count']});

@@ -7,10 +7,12 @@ block content
     input(type="hidden",value="#{sessionId}")#J_SessionId
     input(type="hidden",value="#{partyId}")#J_PartyId
     div.content
-        div.count-img.J_CountImg ★
         div.session-info
             div.count
                 em.J_StarCount 0
+
+        div.stars-wrapper
+            div.count-img.J_Stars
 
         ul.session-list
             each session, i in sessions

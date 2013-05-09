@@ -5,11 +5,12 @@
 KISSY.add(function(S, Node, io,Uri) {
     var EMPTY = '';
     var $ = Node.all;
-    return function saveCount(count){
+    return function saveCount(count,people){
+        if(!S.isNumber(count) || !S.isNumber(people)) return false;
         var sessionId = Number($('#J_SessionId').val());
         var partyId = Number($('#J_PartyId').val());
         var url = 'http://'+new Uri(window.location.href).getHostname()+'/feedback/save_count';
-        io.post(url,{count:count,sessionId:sessionId,partyId:partyId},function(data){
+        io.post(url,{count:count,people:people,sessionId:sessionId,partyId:partyId},function(data){
             if(!data.status){
                 S.log(data.msg);
             }

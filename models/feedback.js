@@ -21,6 +21,7 @@ exports.saveCount = function(req, res) {
     }
     //星数统计
     var count = req.body.count;
+    var people = req.body.people;
     if(!count){
         res.send('{"status":0,"message":"缺少count"}');
         return false;
@@ -41,7 +42,7 @@ exports.saveCount = function(req, res) {
             db.post({
                 collection: COUNT_COLLECTION,
                 query: {session_id:sessionId},
-                doc:{count:count},
+                doc:{count:count,people:people},
                 complete: function(err, docs) {
                     _complete(err, res);
                 }
@@ -52,7 +53,8 @@ exports.saveCount = function(req, res) {
                 doc: {
                     session_id:sessionId,
                     party_id:partyId,
-                    count:count
+                    count:count,
+                    people:people
                 },
                 complete: function(err, doc) {
                     _complete(err, res);

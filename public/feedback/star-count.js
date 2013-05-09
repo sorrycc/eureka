@@ -30,6 +30,9 @@ KISSY.add(function(S, Node, Base) {
             starNum = Number(starNum);
             var self = this;
             var value = self.get('value');
+            var time = self.get('time');
+            //次数+1
+            self.set('time',time +1);
             self.set('value',value + starNum);
         }
     }, {ATTRS : /** @lends StarCount*/{
@@ -51,6 +54,22 @@ KISSY.add(function(S, Node, Base) {
 
                 target.text(v);
                 return v;
+            }
+        },
+        /**
+         * 评分次数
+         */
+        time:{
+            value:0
+        },
+        /**
+         * 平均得分
+         */
+        average:{
+            value:0,
+            getter:function(){
+                var self = this;
+                return Math.floor(self.get('value')/self.get('time'));
             }
         }
     }});
