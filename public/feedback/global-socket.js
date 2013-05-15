@@ -4,7 +4,7 @@
  * Time: 下午8:34
  * Description:
  */
-window.socket = io.connect('http://localhost:3000')
+window.socket = io.connect('http://localhost')
   socket.on('isValid', function(data){
     console.log("on data", data);
   })
