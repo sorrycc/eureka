@@ -13,10 +13,13 @@ var db = require("../db");
 
 // 渲染创建新分享页面
 exports.new = function(req, res){
+  var partyId = req.query.partyId || "";
+
   res.render('session/session_form', { 
     docTitle: '创建分享',
     hasAddIcon: false,
-    partyId: req.query.partyId,
+    partyId: partyId,
+    backUrl: "/party/" + partyId,
     success: '1',
     msg: '',
     type: 1,
@@ -87,10 +90,13 @@ exports.get = function(req, res){
 exports.del = function(req, res){
   model.del(req, res, render);
 
+  var partyId = req.body.partyId || "";
+
   function render(numAffected) {
     res.render('session/session_msg', {
       docTitle: '删除分享',
       num: numAffected,
+      backUrl: "/party/" + partyId,
       type: 'del',
       success: '1',
       msg: ''
@@ -115,18 +121,24 @@ exports.update = function(req, res){
 
 exports.detail = function(req, res) {
   model.get(req, res, render);
+
+  console.log("----");
+  console.log(req.user);
+  console.log("----");
   
   function render(docs){
-    var doc = docs[0];
+    var doc = docs[0],
+      partyId = req.query.partyId || "";
 
     if (doc !== undefined) {
       res.render('session/session_display', { 
         docTitle: '分享详情',
+        backUrl: "/party/" + partyId,
         isRoot: 'true',
         success: '1',
         msg: '',
         id: doc.id,
-        partyId: req.query.partyId || "",
+        partyId: partyId,
         title: doc.title,
         type: 'detail',
         description: doc.description,

@@ -58,9 +58,6 @@ app.configure(function(){
         });
     }
 
-
-    app.use(app.router);
-
     app.use(stylus.middleware({
         src: __dirname + '/public'
         , compile: function(str, path) {
@@ -74,6 +71,8 @@ app.configure(function(){
 
     //app.use(express.directory(path.join(__dirname, 'public')));
     app.use(express.static(path.join(__dirname, 'public')));
+
+    app.use(app.router);
 });
 
 // NODE_ENV=development node app
@@ -157,10 +156,10 @@ app.post('/api/party/del/:id', function(req, res) {
 // 7n's
 app.get('/session/create', session.new);
 app.post('/session/create', session.create);
-app.get('/session/:id/', session.detail);
+app.get('/session/:id', session.detail);
 app.get('/session/:id/edit', session.edit);
 app.post('/session/:id/edit', session.update);
-app.del('/session/:id/', session.del);
+app.del('/session/:id', session.del);
 
 // 水儿
 // get sessions by party id
@@ -180,8 +179,7 @@ app.get('/feedback/result/:partyId/:sessionId', feedback.result);
 app.post('/feedback/save_count', feedback.save_count);
 
 var server = http.createServer(app);
-
-io = require('socket.io').listen(server);
+var io = require('socket.io').listen(server);
 
 server.listen(app.get('port'), function(){
     console.log("Express server listening on port " + app.get('port'));
@@ -195,6 +193,10 @@ io.sockets.on('connection', function (socket) {
         var data = {sessionId:1,userId:33,starNum:3,feedbackContent:"PPT不够华丽"};
         //将数据推送给管理者界面显示统计结果
         socket.emit('feedbackCount', data);
+    });
+    socket.on('setValid', function(data){
+      // data 是 session id
+      socket.broadcast.emit('isvalid', data);
     });
     //监听推送分享管理员推送
     socket.on('push_feedback',function(data){
