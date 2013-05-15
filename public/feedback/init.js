@@ -6,13 +6,11 @@ KISSY.add(function(S, Node,Uri,Count,CountImage,saveCount) {
     return function(){
         var count = new Count('.J_StarCount');
         var countImage = new CountImage('.J_Stars');
-        countImage.set('num',3);
         var host = 'http://'+new Uri(window.location.href).getHostname();
-        count.on('afterValueChange',function(ev){
-            var n = ev.newVal - ev.prevVal;
-            countImage.change(n);
-        })
         var socket = io.connect(host);
+        countImage.show(function(){
+            countImage.set('num',3);
+        })
         socket.on('feedbackCount', function (data) {
             var starNum = data.num;
             //触发统计
