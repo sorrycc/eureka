@@ -180,8 +180,7 @@ app.get('/feedback/result', feedback.result);
 app.post('/feedback/save_count', feedback.save_count);
 
 var server = http.createServer(app);
-
-io = require('socket.io').listen(server);
+var io = require('socket.io').listen(server);
 
 server.listen(app.get('port'), function(){
     console.log("Express server listening on port " + app.get('port'));
@@ -195,4 +194,10 @@ io.sockets.on('connection', function (socket) {
         //将数据推送给管理者界面显示统计结果
         socket.emit('feedbackCount', data);
     });
+
+    // 接收管理者可以反馈
+    socket.on('setValid', function(data){
+      // data 是 session id
+      socket.broadcast.emit('isValid', data);
+    })
 });

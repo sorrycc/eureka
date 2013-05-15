@@ -11,6 +11,7 @@ function getTopic(id, callback) {
   })
 }
 
+// 观众反馈页面
 exports.make = function(req, res){
   var renderObj = {}
   renderObj.docTitle = "反馈进行时";
@@ -34,6 +35,7 @@ exports.make = function(req, res){
   }
 }
 
+// 观众提交
 exports.post = function(req, res) {
   var renderObj = {};
   var topic = null;
