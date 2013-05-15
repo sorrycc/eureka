@@ -81,7 +81,6 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragList, Cookie) {
                     }
                 });
             });
-<<<<<<< HEAD
 
             E.on(document, 'click tap tapHold', function(e){
                 if(!D.parent(e.target, '.J_PartyOpts') && !D.parent(e.target, '.party-opts')){
@@ -96,7 +95,6 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragList, Cookie) {
               var id = D.attr(ev.target, 'data-id');
               socket.emit('setValid', id)
             })
-=======
 //
 //            E.on(document, 'click tap tapHold', function(e){
 //                if(!D.parent(e.target, '.J_PartyOpts') && !D.parent(e.target, '.party-opts')){
@@ -106,7 +104,6 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragList, Cookie) {
 //                    D.css('.session-opts', 'visibility', 'hidden');
 //                }
 //            });
->>>>>>> 08e4df920b0b0064a0680ae288a94e89e5148ebc
 
             var self = this;
             self.partyTapHoldEvt();
