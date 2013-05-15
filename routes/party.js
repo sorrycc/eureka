@@ -106,8 +106,11 @@ module.exports = {
 
                     docs.forEach(function(doc, index){
                         docs[index].formatTime = moment(doc.time).format("YYYY-MM-DD");
-                        //console.log(doc)
+                        docs[index].set("xx", 123)
+                        //console.log(docs[index])
                     });
+
+
 
                     res.json({
                         success: true,

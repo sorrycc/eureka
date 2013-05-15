@@ -135,8 +135,6 @@ exports.detail = function(req, res) {
   }
 };
 
-<<<<<<< HEAD
-
 
 exports.list = {
   render: function(req, res){
@@ -192,5 +190,3 @@ exports.list = {
             });
         }
 };
-=======
->>>>>>> 6e83138aab998df447ea17188943f13d4780149d
