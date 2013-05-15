@@ -1,5 +1,6 @@
 
 var db = require("../db");
+var model = require("../models/feedback");
 
 function getTopic(id, callback) {
   db.get({
@@ -85,8 +86,17 @@ exports.post = function(req, res) {
  * 管理者查看反馈结果页面
  */
 exports.result = function(req, res){
-    res.render('feedback/result',{
-        docTitle: '查看反馈结果'
+    //获取sessionId
+    model.getSession(req,res,function(result){
+        var data = result[0];
+        req.id = data.id;;
+        model.getcounts(req,res,function(sessions){
+            data.docTitle = '《' + data.title + '》的反馈结果';
+            data.sessions = sessions;
+            data.partyId = req.params.partyId;
+            data.sessionId = req.params.sessionId;
+            res.render('feedback/result',data);
+        })
     })
 }
 /**
