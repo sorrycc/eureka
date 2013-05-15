@@ -13,7 +13,10 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragList, Cookie) {
         if (!(this instanceof List)) return new List(opt);
 
         this.el = opt.el && S.one(opt.el);
-        this.tpl = S.isString(opt.tpl) && opt.tpl;
+        this.partyTpl = S.isString(opt.partyTpl) && opt.partyTpl;
+        this.sessionTpl = S.isString(opt.sessionTpl) && opt.sessionTpl;
+
+        this.parties = [];
 
         this._init();
     };
@@ -23,6 +26,8 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragList, Cookie) {
             if (!this.el || !this.tpl) return;
 
             this.id = this.el.attr("data-id");
+
+            this.el.html("");
         },
         render: function() {
             var self = this;
@@ -38,7 +43,11 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragList, Cookie) {
                         return;
                     }
 
-                    self.el.html(new XTemplate(self.tpl).render(d));
+                    self.parties = d.docs;
+
+                    self.el.append(new XTemplate(self.partyTpl).render(d));
+
+                    self.renderSession(0);
 
                     self.bind();
 
@@ -46,15 +55,52 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragList, Cookie) {
                 }
             });
         },
+        renderSession: function(startPartyIndex) {
+            var parties = [],
+                count = 0;
+
+            while (this.parties[startPartyIndex] && count++ < 5) {
+                parties.push(this.parties[startPartyIndex++]);
+            }
+
+            var self = this;
+
+            S.each(parties, function(doc, index){
+
+                var elParty = S.one("#J_Party" + doc.id + "Session");
+
+                if (!elParty || S.trim(elParty.html())) return;
+
+                S.io({
+                    url: "/api/session/list",
+                    data: {
+                        ids: doc.sessions.join(",")
+                    },
+                    cache: false,
+                    dataType: "json",
+                    complete: function(d) {
+                        if (!d || !d.success) {
+                            //alert(d && d.message || "数据请求失败！");
+                            return;
+                        }
+
+                        doc.sessions = d.docs;
+
+                        elParty.append(new XTemplate(self.sessionTpl).render(doc));
+                    }
+                });
+            });
+        },
 
         setReviewStatus: function(){
-          var str = Cookie.get("remainCount");
-          if(!str) return;
-          var remainList = JSON.parse(Cookie.get("remainList"));
-          remainList.map(function(id){
-            D.get('#J_Feedback' + id).style.display = "block"
-          });
+            var str = Cookie.get("remainCount");
+            if(!str) return;
+            var remainList = JSON.parse(Cookie.get("remainCount"));
+            remainList.map(function(id){
+                D.get('#J_Feedback' + id).style.display = "block"
+            });
         },
+
         bind: function() {
 
             S.one(document).delegate("click", ".session-del", function(evt) {

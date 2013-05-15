@@ -27,7 +27,7 @@ KISSY.add("session/view", function(S, Node, Cookie) {
             }
 
             this.btn.on("click", function(e){
-                location.href = "/session/"+this.sessionId+"/edit?partyId="+this.partyId;
+                location.href = "/session/"+this.sessionId+"/edit";
             }, this);
 
             var remainList = Cookie.get("remainList");
