@@ -26,7 +26,7 @@ app.locals = {
 };
 
 app.configure(function(){
-    app.set('port', process.env.PORT || 3000);
+    app.set('port', process.env.PORT || 80);
     app.set('views', __dirname + '/views');
     app.set('view engine', 'jade');
     app.use(express.favicon());
@@ -164,7 +164,7 @@ app.del('/session/:id/', session.del);
 
 // 水儿
 // get sessions by party id
-app.get('/api/session/list/:partyId', function(req, res) {
+app.get('/api/session/list', function(req, res) {
     session.list.get(req, res);
 });
 

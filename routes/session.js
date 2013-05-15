@@ -119,8 +119,10 @@ exports.detail = function(req, res) {
   function render(docs){
     var doc = docs[0];
 
-    res.render('session/session_display', { 
+    if (doc !== undefined) {
+      res.render('session/session_display', { 
         docTitle: '分享详情',
+        isRoot: 'true',
         success: '1',
         msg: '',
         id: doc.id,
@@ -131,11 +133,17 @@ exports.detail = function(req, res) {
         speakers: doc.speakers,
         from: doc.from,
         to: doc.to    
-      }); 
-  }
+      });   
+    } else {
+      res.render('session/session_msg', { 
+        docTitle: '404',
+        type: '404'
+      });  
+    }
+    
+ }   
+  
 };
-
-
 
 exports.list = {
   render: function(req, res){
@@ -146,49 +154,40 @@ exports.list = {
       }); 
   },
   get: function(req, res) {
-            var id,
-                query = {};
+    var ids,
+        query = {},
+        sessions = [],
+        isError;
 
-            if (id = req.params.id) {
-                query.id = id;
-                console.log("party id:"+id)
-            }
+    if (ids = req.query.ids) {
+      ids = ids.split(',');
+      console.log("session ids:" + ids);
+    }
 
-            db.get({
-                query: query,
-                collection: "party",
-                complete: function(err, docs) {
-                    if (err) {
-                        res.json({
-                            success: false,
-                            message: err.message
-                        });
-                        return;
-                    }
-                    // 模拟数据
-                    // if(docs[0].sessions === []){
-                      //console.log(docs);
-                      //console.log("=========");
-                        docs[0].sessions =[{
-                            id: "1",
-                            from: "13:00",
-                            to: "14:00",
-                            title: "分享一"
-                        },
-                        {
-                            id: "2",
-                            from: "14:00",
-                            to: "15:00",
-                            title: "分享二"
-                        }]
-                    // }
-
-                    res.json({
-                        success: true,
-                        party: docs
-                    });
-                }
+    
+      query.id = {
+        $in: ids
+      };
+      db.get({
+        collection: "session",
+        query: query,
+        complete: function(err, docs) {
+          if (err) {
+            res.json({
+              success: false,
+              message: err.message
             });
+            console.log("查询分享失败")
+            return;
+          }
+          else {
+            res.json({
+              success: true,
+              docs: docs
+            });
+          }
         }
-};
+      });
 
+  }
+};
