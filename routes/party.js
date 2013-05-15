@@ -95,6 +95,8 @@ module.exports = {
 
             query.root = req.user._id;
 
+
+
             db.get({
                 query: query,
                 collection: "party",

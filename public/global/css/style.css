@@ -35,11 +35,11 @@ header h1{color:#fff;text-align:center;height:1.9230769230769231em;line-height:1
 .mainCard{-webkit-box-shadow:-1px 3px 11px #555;-webkit-box-shadow:-1px 3px 11px #555;box-shadow:-1px 3px 11px #555;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;height:100%;overflow:auto;-webkit-overflow-scrolling:touch;padding:4em 3em}
 .submitStatus{padding:30px;color:#333;text-align:center}
 .button{color:#fff;font-size:20px;background-color:#303030;padding:7px 20px;border:0 none;margin:0 20px 0 0;line-height:20px;cursor:pointer}
-.row{line-height:40px;border-bottom:1px solid #ccc;background:#d7f2fb;color:#333;}
-.row .column{display:inline-block;padding-left:2.5%;height:100%;width:70%;background:#fff;}
-.row .column:first-child{text-align:right;display:block;float:left;background:none;width:25%;}
-.row .column:first-child label{margin-right:20px}
-.row .column input{line-height:24px;border:0;width:80%}
+.row,.lastrow{line-height:40px;border-bottom:1px solid #ccc;background:#d7f2fb;color:#333;}
+.row .column,.lastrow .column{display:inline-block;padding-left:2.5%;height:100%;width:70%;background:#fff;}
+.row .column:first-child,.lastrow .column:first-child{text-align:right;display:block;float:left;background:none;width:25%;}
+.row .column:first-child label,.lastrow .column:first-child label{margin-right:20px}
+.row .column input,.lastrow .column input{line-height:24px;border:0;width:80%}
 .msg{text-align:center}
 .lastrow{line-height:40px;height:90px;}
 .lastrow .column{display:inline-block;padding-left:20px;padding-top:20px;width:30%;}
