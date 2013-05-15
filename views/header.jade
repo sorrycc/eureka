@@ -1,5 +1,6 @@
 header
-    a.back-icon-wrapper
+    if (typeof(backUrl)!=="undefined")
+      a.back-icon-wrapper(href="#{backUrl}")
         i.icon-back
     h1 #{docTitle}  
         - if (typeof hasAddIcon != 'undefined')

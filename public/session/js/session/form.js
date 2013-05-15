@@ -8,23 +8,21 @@
  * @changelog: 
  */
 KISSY.add("session/form", function(S) {
-    var Create = function(cfg) {
-        if (!(this instanceof Create)) return new Create(cfg);
+    var Form = function(cfg) {
+        if (!(this instanceof Form)) return new Form(cfg);
 
         cfg = S.isObject(cfg) ? cfg : {};
-
-        this.form = cfg.form ? S.one(cfg.form) : null;
 
         this._init();
     };
 
-    S.augment(Create, {
+    S.augment(Form, {
         _init: function() {
-            if (!this.form) return;
+            
         }
     });
 
-    return Create;
+    return Form;
 }, {
     requires: ["node"]
 });

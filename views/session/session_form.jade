@@ -21,12 +21,12 @@ block content
               input#J_SessionSpeakers(type="text", name="speakers", value="#{speakers}", placeholder="输入分享者名称，多人则用逗号分隔")
           div.row
             div.column
-              label(for="from") 开始时间
+              label(for="from") 开始
             div.column
               input#J_SessionFrom(type="time", name="from", value="#{from}")
           div.row
             div.column
-              label(for="to") 结束时间
+              label(for="to") 结束
             div.column
               input#J_SessionTo(type="time", name="to", value="#{to}")
           div.row
@@ -50,7 +50,7 @@ block content
         
         S.ready(function(){
           Form({
-            form: "#J_SessionForm"
+            
           });
         });
     });        
