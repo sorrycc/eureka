@@ -50,7 +50,7 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragList, Cookie) {
         setReviewStatus: function(){
           var str = Cookie.get("remainCount");
           if(!str) return;
-          var remainList = JSON.parse(Cookie.get("remainCount"));
+          var remainList = JSON.parse(Cookie.get("remainList"));
           remainList.map(function(id){
             D.get('#J_Feedback' + id).style.display = "block"
           });

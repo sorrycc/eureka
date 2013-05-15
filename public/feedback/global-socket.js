@@ -15,9 +15,17 @@ KISSY.use("node, cookie", function(S, Node, Cookie){
 
     socket.on('isValid', function(data){
       console.log("on data", data);
-      var count = parseInt(Cookie.get('remainCount')),
+      var count = Cookie.get('remainCount');
+      var remainList;
+      if(count) {
+          count = parseInt(count);
           remainList = JSON.parse(Cookie.get('remainList'));
-      if(remainList.indexOf(parsetInt(data)) == -1)
+      }
+      else {
+        count = 0;
+        remainList = [];
+      }
+      if(remainList.indexOf(parseInt(data)) == -1)
         remainList.push(parseInt(data));
         Cookie.set('remainList', JSON.stringify(remainList));
         Cookie.set('remainCount', remainList.length)
@@ -27,7 +35,10 @@ KISSY.use("node, cookie", function(S, Node, Cookie){
   function makeNotice(remainList, len) {
     var url = '';
     var partyId = Cookie.get('partyid');
-    if(len == 1) {
+    if (location.href.indexOf('/party') >= 0){
+      location.reload()
+    }
+    else if(len == 1) {
       url = '/party/' + remainList[0];
     }
     else if (partyId){
@@ -37,7 +48,7 @@ KISSY.use("node, cookie", function(S, Node, Cookie){
       url = '/party'
     }
 
-    $('J_ReviewNotice').one('a').attr('href', url);
-    $('J_ReviewNotice').show();
+    $('#J_ReviewNotice').attr('href', url);
+    $('#J_ReviewNotice')[0].style.display = "block";
   }
 })

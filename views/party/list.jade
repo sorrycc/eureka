@@ -19,8 +19,8 @@ block content
                             a.opt.icon-del(href="/api/party/del/{{id}}"")
                     ul.session-list
                         {{#each sessions}}
-                        span.icon-feedback(id="J_Feedback#{id}")
                         li.J_SessionOpts.ks-draglist-item
+                            span.icon-feedback(id="J_Feedback{{id}}")
                             a.session-info(href="/session/{{id}}/?partyId=#{id}")
                                 span.time {{from}} - {{to}}
                                 span.title {{title}}
@@ -28,7 +28,7 @@ block content
                                 a.opt.icon-add-session(href="/session/create?partyId=#{id}}")
                                 a.opt.icon-edit(href="/session/{{id}}/edit?partyId=#{id}")
                                 a.opt.icon-del(href="/session/del/{{id}}")
-                                a.opt.icon-push(href="javascript:void(0)",data-id="#{id}")
+                                a.opt.icon-push(href="javascript:void(0)",data-id="{{id}}")
                         {{/each}}
                     div.add-session-bar       
                         a.text.large(href="/session/create?partyId={{../id}}")

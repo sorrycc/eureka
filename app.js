@@ -196,7 +196,8 @@ io.sockets.on('connection', function (socket) {
     });
     socket.on('setValid', function(data){
       // data 是 session id
-      socket.broadcast.emit('isvalid', data);
+      console.log("fasdf", data);
+      socket.emit('isValid', data);
     });
     //监听推送分享管理员推送
     socket.on('push_feedback',function(data){
