@@ -7,7 +7,7 @@
  * @todo: 
  * @changelog: 
  */
-KISSY.add("party/list", function(S, Ajax, XTemplate, DragList) {
+KISSY.add("party/list", function(S, Ajax, XTemplate, DragList, Cookie) {
     var D = S.DOM, E = S.Event;
     var List = function(opt) {
         if (!(this instanceof List)) return new List(opt);
@@ -41,8 +41,19 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragList) {
                     self.el.html(new XTemplate(self.tpl).render(d));
 
                     self.bind();
+
+                    self.setReviewStatus();
                 }
             });
+        },
+
+        setReviewStatus: function(){
+          var str = Cookie.get("remainCount");
+          if(!str) return;
+          var remainList = JSON.parse(Cookie.get("remainCount"));
+          remainList.map(function(id){
+            D.get('#J_Feedback' + id).style.display = "block"
+          });
         },
         bind: function() {
 
@@ -70,6 +81,20 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragList) {
                     }
                 });
             });
+
+            E.on(document, 'click tap tapHold', function(e){
+                if(!D.parent(e.target, '.J_PartyOpts') && !D.parent(e.target, '.party-opts')){
+                    D.css('.party-opts', 'visibility', 'hidden');
+                }
+                if(!D.parent(e.target, '.J_SessionOpts') && !D.parent(e.target, '.session-opts')){
+                    D.css('.session-opts', 'visibility', 'hidden');
+                }
+            });
+
+            E.delegate('body', 'tap', '.icon-push', function(ev){
+              var id = D.attr(ev.target, 'data-id');
+              socket.emit('setValid', id)
+            })
 //
 //            E.on(document, 'click tap tapHold', function(e){
 //                if(!D.parent(e.target, '.J_PartyOpts') && !D.parent(e.target, '.party-opts')){
@@ -90,14 +115,14 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragList) {
          * party taphold效果
          */
         partyTapHoldEvt: function(){
-//
-//             E.on('.J_PartyOpts','dblclick tapHold', function(e){
-//
-//                var t = e.currentTarget,
-//                    partyOpts = D.get('.party-opts', t);
-//
-//                D.css(partyOpts, 'visibility', 'visible');
-//            });
+
+             E.on('.J_PartyOpts','dblclick tapHold', function(e){
+
+                var t = e.currentTarget,
+                    partyOpts = D.get('.party-opts', t);
+
+                D.css(partyOpts, 'visibility', 'visible');
+            });
         
         },
 
@@ -107,25 +132,25 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragList) {
         sessionTapHoldEvt: function(){
 
 
-
-          var dragList = new DragList(".party-item", {
-            enableScrollView  : true,
-            enableDragSwitch  : false,
-            enableTapHold     : true,
-          })
-
-
-//           E.delegate('.session-list','dblclick tapHold', '.J_SessionOpts', function(e){
-//                var t = e.currentTarget,
-//                    sessionOpts = D.get('.session-opts', t);
 //
-//                // first hide all session opts
-//                D.css('.session-opts', 'visibility', 'hidden');
-//
-//                // then show current session opts
-//                D.css(sessionOpts, 'visibility', 'visible');
-//            });
-//
+//          var dragList = new DragList(".party-item", {
+//            enableScrollView  : true,
+//            enableDragSwitch  : false,
+//            enableTapHold     : true,
+//          })
+
+
+           E.delegate('.session-list','dblclick tapHold', '.J_SessionOpts', function(e){
+                var t = e.currentTarget,
+                    sessionOpts = D.get('.session-opts', t);
+
+                // first hide all session opts
+                D.css('.session-opts', 'visibility', 'hidden');
+
+                // then show current session opts
+                D.css(sessionOpts, 'visibility', 'visible');
+            });
+
         },
 
         /**
@@ -133,63 +158,30 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragList) {
          * 通过动画transform实现Y轴上的旋转
          */
         viewOriginalCodeEvt: function(){
-            var self = this,
-                rotateEl;
-            E.on('.J_ViewOriginal', 'click tap', function(e){
-                rotateEl = D.parent(e.currentTarget, '.mainCard');
-                // hide session-list-wrap, and display code
-                rotateYDIV(0, rotateEl);
+            E.on('.view-qrcode','click', function (e) {
+                var $e = jQuery(this).parent();
+
+                // flip
+                $e.toggleClass("flip3d-flipped");
+
+                // lazy generate qrcode
+                if (!$e.data("generated")) {
+                    $e.data("generated", true);
+
+                    var $qrcode = $e.find(".qrcode");
+                    $qrcode.qrcode({
+                        //render	: "table",
+                        text	: $qrcode.data("url")
+                    });
+                }
             });
-            E.on('.code','click tap', function(e){
-                rotateEl = D.parent(e.currentTarget, '.mainCard');
-                rotateYDIV(180, rotateEl);
-            })
 
         }
 
     });
 
-     /**
-     * 实现元素的垂直翻转效果
-     */
-    function rotateYDIV(ny, el)
-    {
-        var rotYINT;
-
-        if(rotYINT)
-            clearInterval(rotYINT);
-
-        rotYINT = setInterval(function(){
-
-            ny = ny + 1
-            D.css(el, 'transform', 'rotateY(' + ny + 'deg)');
-            D.css(el, 'webkitTransform', 'rotateY(' + ny + 'deg)');
-            D.css(el, 'OTransform', 'rotateY(' + ny + 'deg)');
-            D.css(el, 'MozTransform', 'rotateY(' + ny + 'deg)');
-            // el.style.transform = 
-            // el.style.webkitTransform = "rotateY(" + ny + "deg)"
-            // el.style.OTransform = "rotateY(" + ny + "deg)"
-            // el.style.MozTransform = "rotateY(" + ny + "deg)"
-            if (ny == 180 || ny >= 360)
-            {
-                clearInterval(rotYINT)
-                if (ny >= 360){ny = 0}
-            }
-            // hide session-list-wrap, and display code
-            if(ny == 90){
-                D.hide(D.get('.party-item'), el);
-                D.show(D.get('.code'),el);
-            }
-            if(ny == 270){
-                D.show(D.get('.party-item',el));
-                D.hide(D.get('.code'),el);
-            }
-
-        },10);
-    }
-
     return List;
 
 }, {
-    requires: ["ajax", "xtemplate", "widget/draglist"]
+    requires: ["ajax", "xtemplate", "widget/draglist", "cookie"]
 });

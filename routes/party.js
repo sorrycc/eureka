@@ -95,8 +95,6 @@ module.exports = {
 
             query.root = req.user._id;
 
-
-
             db.get({
                 query: query,
                 collection: "party",
@@ -110,12 +108,19 @@ module.exports = {
                     }
 
                     docs.forEach(function(doc, index){
-                        docs[index].formatTime = moment(doc.time).format("YYYY-MM-DD");
-                        docs[index].set("xx", 123)
-                        //console.log(docs[index])
+                        docs[index] = {
+                            _id: doc._id
+                            , id: doc.id
+                            , root: doc.root
+                            , title: doc.title
+                            , time: doc.time
+                            , location: doc.location
+                            , admins: doc.admins
+                            , sessions: doc.sessions
+                            , listeners: doc.listeners
+                            , formatTime: moment(doc.time).format("YYYY-MM-DD")
+                        };
                     });
-
-
 
                     res.json({
                         success: true,

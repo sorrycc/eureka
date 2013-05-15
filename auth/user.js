@@ -23,6 +23,10 @@ module.exports = exports = function(filter, options) {
         if (pid && pid[1]) {
             res.cookie("partyid", pid[1]);
         }
+        
+        if (/\/party\/*$/.test(req.url)) {
+            res.clearCookie("partyid");
+        };
 
         if (!req._user || !req._user.loginName) {
             next();
