@@ -1,3 +1,10 @@
+script(src='/feedback/global-socket.js')
+a#J_ReviewNotice(href="javascript:void(0)")
+    span.review-notice-icon.icon-broadcast
+    span.review-notice-tip
+        你有分享未反馈哦！
+
+
 header
     if (typeof(backUrl)!=="undefined")
       a.back-icon-wrapper(href="#{backUrl}")
@@ -5,3 +12,5 @@ header
     h1 #{docTitle}  
         - if (typeof hasAddIcon != 'undefined')
             a.icon-add(href="/party/create")
+
+

@@ -26,7 +26,7 @@ app.locals = {
 };
 
 app.configure(function(){
-    app.set('port', process.env.PORT || 80);
+    app.set('port', process.env.PORT || 3000);
     app.set('views', __dirname + '/views');
     app.set('view engine', 'jade');
     app.use(express.favicon());
@@ -179,8 +179,7 @@ app.get('/feedback/result/:partyId/:sessionId', feedback.result);
 app.post('/feedback/save_count', feedback.save_count);
 
 var server = http.createServer(app);
-
-io = require('socket.io').listen(server);
+var io = require('socket.io').listen(server);
 
 server.listen(app.get('port'), function(){
     console.log("Express server listening on port " + app.get('port'));
@@ -194,6 +193,10 @@ io.sockets.on('connection', function (socket) {
         var data = {sessionId:1,userId:33,starNum:3,feedbackContent:"PPT不够华丽"};
         //将数据推送给管理者界面显示统计结果
         socket.emit('feedbackCount', data);
+    });
+    socket.on('setValid', function(data){
+      // data 是 session id
+      socket.broadcast.emit('isvalid', data);
     });
     //监听推送分享管理员推送
     socket.on('push_feedback',function(data){
