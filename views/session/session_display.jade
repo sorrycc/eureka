@@ -29,7 +29,7 @@ block content
         div.column
           &nbsp;
         div.column
-          if isRoot == "true"
+          if isRoot == true
             if type == "created"
               form(method="post",action="/session/#{id}")
                 a.button(href="/session/#{id}/edit") 编辑分享

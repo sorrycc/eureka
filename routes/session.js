@@ -11,6 +11,18 @@
 var model = require("../models/session");
 var db = require("../db");
 
+var isRootFunc = function (plist, current) {
+  var isRoot = false;
+
+  for(var pid in plist) {
+    if (plist[pid] == current) {
+      isRoot = true;
+      break;
+    }
+  }
+  return isRoot;
+};
+
 // 渲染创建新分享页面
 exports.new = function(req, res){
   var partyId = req.query.partyId || "";
@@ -120,21 +132,25 @@ exports.update = function(req, res){
 };
 
 exports.detail = function(req, res) {
-  model.get(req, res, render);
-
-  console.log("----");
-  console.log(req.user);
-  console.log("----");
   
+  var partyId = req.cookies.partyid,
+      isRoot = isRootFunc(req.user.parties, partyId);
+
+  if (partyId === undefined) {
+    res.redirect("/party");
+  } else {
+    model.get(req, res, render);  
+  }
+  
+
   function render(docs){
-    var doc = docs[0],
-      partyId = req.query.partyId || "";
+    var doc = docs[0];
 
     if (doc !== undefined) {
       res.render('session/session_display', { 
         docTitle: '分享详情',
         backUrl: "/party/" + partyId,
-        isRoot: 'true',
+        isRoot: isRoot,
         success: '1',
         msg: '',
         id: doc.id,
@@ -203,3 +219,5 @@ exports.list = {
 
   }
 };
+
+
