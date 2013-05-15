@@ -198,6 +198,6 @@ io.sockets.on('connection', function (socket) {
     // 接收管理者可以反馈
     socket.on('setValid', function(data){
       // data 是 session id
-      socket.broadcast.emit('isValid', data);
+      socket.broadcast.emit('isvalid', data);
     })
 });

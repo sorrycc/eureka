@@ -11,9 +11,9 @@ a img{border:none}
 .icon-edit{background-position:0 -120px;width:23px;height:24px}
 .icon-del{background-position:0 -154px;width:22px;height:21px}
 .icon-push{background-position:0 -187px;width:24px;height:22px}
-.icon-broadcast{background-position:-37px -187px;width:24px;height:22px}
+.icon-broadcast{background-position:-36px -189px;width:24px;height:22px}
 .icon-back{background-position:0 -228px;width:14px;height:15px}
-.icon-feedback{background-position:-28px -185px;width:36px;height:32px}
+.icon-feedback{background-position:0 -256px;width:36px;height:32px}
 .icon-star-solid{background-position:0 -307px;width:24px;height:24px}
 .icon-star-hollow{background-position:-38px -307px;width:24px;height:24px}
 body{font-size:1em;line-height:1.5em}
@@ -51,6 +51,7 @@ header h1{color:#fff;text-align:center;height:1.9230769230769231em;line-height:1
 #J_Advise{margin-top:10px;border:0 none;height:200px;width:80%}
 .score{padding-left:2% !important;width:70.5% !important;}
 .score span{display:inline-block;margin-top:8px;margin-left:8px}
-#J_ReviewNotice{position:fixed;display:block;left:0;bottom:0;width:100%;height:80px;line-height:80px;color:#fff;font-size:18px;background:rgba(0,0,0,0.6);text-align:center;}
-#J_ReviewNotice .icon-feedback{vertical-align:middle}
+#J_ReviewNotice{position:fixed;display:block;text-decoration:none;left:0;bottom:0;width:100%;height:80px;line-height:80px;color:#fff;font-size:18px;background:rgba(0,0,0,0.6);text-align:center;display:none;}
+#J_ReviewNotice .icon-broadcast{vertical-align:middle}
 #J_ReviewNotice .review-notice-tip{padding-left:12px}
+.icon-feedback{position:absolute;right:20px;top:20px;display:none}

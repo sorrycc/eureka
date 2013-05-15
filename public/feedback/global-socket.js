@@ -4,21 +4,29 @@
  * Time: 下午8:34
  * Description:
  */
+window.socket = io.connect('http://localhost:3000')
+socket.on('connection', function () {
+  socket.on('isValid', function(data){
+    console.log("on data", data);
+  })
+})
 
 KISSY.use("node, cookie", function(S, Node, Cookie){
-  var socket = io.connect('http://localhost:3000').
-      S = KISSY,
+  var S = KISSY,
       $ = S.all;
 
-  socket.on('isValid', function(data){
-    var count = parseInt(Cookie.get('remainCount')),
-        remainList = JSON.parse(Cookie.get('remainList'));
-    remainList.push(data);
-    Cookie.set('remainList', JSON.stringify(remainList));
-    Cookie.set('remainCount', remainList.length)
-    makeNotice(remainList, remainList.length)
+  socket.on('connection', function () {
+    socket.on('isValid', function(data){
+      console.log("on data", data);
+      var count = parseInt(Cookie.get('remainCount')),
+          remainList = JSON.parse(Cookie.get('remainList'));
+      if(remainList.indexOf(parsetInt(data)) == -1)
+        remainList.push(parseInt(data));
+        Cookie.set('remainList', JSON.stringify(remainList));
+        Cookie.set('remainCount', remainList.length)
+      makeNotice(remainList, remainList.length)
+    })
   })
-
 
   function makeNotice(remainList, len) {
     var url = '';

@@ -73,6 +73,16 @@ exports.post = function(req, res) {
         doc     : topic,
         complete: render
       })
+
+      // 删除未评论 Cookie
+      var remainCount = parseInt(req.cookies['remainCount']),
+          remainList = JSON.parse(req.cookies['remainList']);
+      var index = remainList.indexOf(parseInt(req.params.id));
+      if(index >= 0) {
+        remainList.splice(index, 1)
+      }
+      res.cookies['remainCount'] = remainList.length;
+      res.cookies['remainList'] = JSON.parse(remainList);
     }
   }
 

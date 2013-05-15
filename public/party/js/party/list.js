@@ -7,7 +7,7 @@
  * @todo: 
  * @changelog: 
  */
-KISSY.add("party/list", function(S, Ajax, XTemplate, DragList) {
+KISSY.add("party/list", function(S, Ajax, XTemplate, DragList, Cookie) {
     var D = S.DOM, E = S.Event;
     var List = function(opt) {
         if (!(this instanceof List)) return new List(opt);
@@ -40,8 +40,19 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragList) {
                     self.el.html(new XTemplate(self.tpl).render(d));
 
                     self.bind();
+
+                    self.setReviewStatus();
                 }
             });
+        },
+
+        setReviewStatus: function(){
+          var str = Cookie.get("remainCount");
+          if(!str) return;
+          var remainList = JSON.parse(Cookie.get("remainCount"));
+          remainList.map(function(id){
+            D.get('#J_Feedback' + id).style.display = "block"
+          });
         },
         bind: function() {
 
@@ -69,15 +80,20 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragList) {
                     }
                 });
             });
-//
-//            E.on(document, 'click tap  tapHold', function(e){
-//                if(!D.parent(e.target, '.J_PartyOpts') && !D.parent(e.target, '.party-opts')){
-//                    D.css('.party-opts', 'visibility', 'hidden');
-//                }
-//                if(!D.parent(e.target, '.J_SessionOpts') && !D.parent(e.target, '.session-opts')){
-//                    D.css('.session-opts', 'visibility', 'hidden');
-//                }
-//            });
+
+            E.on(document, 'click tap tapHold', function(e){
+                if(!D.parent(e.target, '.J_PartyOpts') && !D.parent(e.target, '.party-opts')){
+                    D.css('.party-opts', 'visibility', 'hidden');
+                }
+                if(!D.parent(e.target, '.J_SessionOpts') && !D.parent(e.target, '.session-opts')){
+                    D.css('.session-opts', 'visibility', 'hidden');
+                }
+            });
+
+            E.delegate('body', 'tap', '.icon-push', function(ev){
+              var id = D.attr(ev.target, 'data-id');
+              socket.emit('setValid', id)
+            })
 
             var self = this;
             self.partyTapHoldEvt();
@@ -89,14 +105,14 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragList) {
          * party taphold效果
          */
         partyTapHoldEvt: function(){
-//
-//             E.on('.J_PartyOpts','dblclick tapHold', function(e){
-//
-//                var t = e.currentTarget,
-//                    partyOpts = D.get('.party-opts', t);
-//
-//                D.css(partyOpts, 'visibility', 'visible');
-//            });
+
+             E.on('.J_PartyOpts','dblclick tapHold', function(e){
+
+                var t = e.currentTarget,
+                    partyOpts = D.get('.party-opts', t);
+
+                D.css(partyOpts, 'visibility', 'visible');
+            });
         
         },
 
@@ -106,25 +122,25 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragList) {
         sessionTapHoldEvt: function(){
 
 
-
-          var dragList = new DragList(".party-item", {
-            enableScrollView  : true,
-            enableDragSwitch  : false,
-            enableTapHold     : true,
-          })
-
-
-//           E.delegate('.session-list','dblclick tapHold', '.J_SessionOpts', function(e){
-//                var t = e.currentTarget,
-//                    sessionOpts = D.get('.session-opts', t);
 //
-//                // first hide all session opts
-//                D.css('.session-opts', 'visibility', 'hidden');
-//
-//                // then show current session opts
-//                D.css(sessionOpts, 'visibility', 'visible');
-//            });
-//
+//          var dragList = new DragList(".party-item", {
+//            enableScrollView  : true,
+//            enableDragSwitch  : false,
+//            enableTapHold     : true,
+//          })
+
+
+           E.delegate('.session-list','dblclick tapHold', '.J_SessionOpts', function(e){
+                var t = e.currentTarget,
+                    sessionOpts = D.get('.session-opts', t);
+
+                // first hide all session opts
+                D.css('.session-opts', 'visibility', 'hidden');
+
+                // then show current session opts
+                D.css(sessionOpts, 'visibility', 'visible');
+            });
+
         },
 
         /**
@@ -190,5 +206,5 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragList) {
     return List;
 
 }, {
-    requires: ["ajax", "xtemplate", "widget/draglist"]
+    requires: ["ajax", "xtemplate", "widget/draglist", "cookie"]
 });
