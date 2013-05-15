@@ -13,7 +13,10 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragList) {
         if (!(this instanceof List)) return new List(opt);
 
         this.el = opt.el && S.one(opt.el);
-        this.tpl = S.isString(opt.tpl) && opt.tpl;
+        this.partyTpl = S.isString(opt.partyTpl) && opt.partyTpl;
+        this.sessionTpl = S.isString(opt.sessionTpl) && opt.sessionTpl;
+
+        this.parties = [];
 
         this._init();
     };
@@ -23,6 +26,8 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragList) {
             if (!this.el || !this.tpl) return;
 
             this.id = this.el.attr("data-id");
+
+            this.el.html("");
         },
         render: function() {
             var self = this;
@@ -38,11 +43,52 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragList) {
                         return;
                     }
 
-                    self.el.html(new XTemplate(self.tpl).render(d));
+                    self.parties = d.docs;
+
+                    self.el.append(new XTemplate(self.partyTpl).render(d));
+
+                    self.renderSession(0);
 
                     self.bind();
                 }
             });
+        },
+        renderSession: function(startPartyIndex) {
+            var parties = [],
+                count = 0;
+
+            while (this.parties[startPartyIndex] && count++ < 5) {
+                parties.push(this.parties[startPartyIndex++]);
+            }
+
+            var self = this;
+
+            S.each(parties, function(doc, index){
+
+                var elParty = S.one("#J_Party" + doc.id + "Session");
+
+                if (!elParty || S.trim(elParty.html())) return;
+
+                S.io({
+                    url: "/api/session/list",
+                    data: {
+                        ids: doc.sessions.join(",")
+                    },
+                    cache: false,
+                    dataType: "json",
+                    complete: function(d) {
+                        if (!d || !d.success) {
+                            //alert(d && d.message || "数据请求失败！");
+                            return;
+                        }
+
+                        doc.sessions = d.docs;
+
+                        elParty.append(new XTemplate(self.sessionTpl).render(doc));
+                    }
+                });
+            });
+
         },
         bind: function() {
 
@@ -70,15 +116,15 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragList) {
                     }
                 });
             });
-//
-//            E.on(document, 'click tap tapHold', function(e){
-//                if(!D.parent(e.target, '.J_PartyOpts') && !D.parent(e.target, '.party-opts')){
-//                    D.css('.party-opts', 'visibility', 'hidden');
-//                }
-//                if(!D.parent(e.target, '.J_SessionOpts') && !D.parent(e.target, '.session-opts')){
-//                    D.css('.session-opts', 'visibility', 'hidden');
-//                }
-//            });
+
+            E.on(document, 'click tap tapHold', function(e){
+                if(!D.parent(e.target, '.J_PartyOpts') && !D.parent(e.target, '.party-opts')){
+                    D.css('.party-opts', 'visibility', 'hidden');
+                }
+                if(!D.parent(e.target, '.J_SessionOpts') && !D.parent(e.target, '.session-opts')){
+                    D.css('.session-opts', 'visibility', 'hidden');
+                }
+            });
 
             var self = this;
             self.partyTapHoldEvt();
@@ -90,14 +136,14 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragList) {
          * party taphold效果
          */
         partyTapHoldEvt: function(){
-//
-//             E.on('.J_PartyOpts','dblclick tapHold', function(e){
-//
-//                var t = e.currentTarget,
-//                    partyOpts = D.get('.party-opts', t);
-//
-//                D.css(partyOpts, 'visibility', 'visible');
-//            });
+
+            E.on('.J_PartyOpts','dblclick tapHold', function(e){
+
+               var t = e.currentTarget,
+                   partyOpts = D.get('.party-opts', t);
+
+               D.css(partyOpts, 'visibility', 'visible');
+           });
         
         },
 

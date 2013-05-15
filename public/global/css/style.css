@@ -41,7 +41,9 @@ header h1{color:#fff;text-align:center;height:1.9230769230769231em;line-height:1
 .row .column:first-child label,.lastrow .column:first-child label{margin-right:20px}
 .row .column input,.lastrow .column input{line-height:24px;border:0;width:80%}
 .msg{text-align:center}
-.lastrow .column{padding-top:10px;padding-bottom:10px}
+.lastrow .column{padding-top:10px;padding-bottom:10px;}
+.lastrow .column input{width:auto}
+.lastrow .column form{display:inline}
 #J_Advise{margin-top:10px;border:0 none;height:200px;width:80%}
 .score{padding-left:2% !important;width:70.5% !important;}
 .score span{display:inline-block;margin-top:8px;margin-left:8px}
