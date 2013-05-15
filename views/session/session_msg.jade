@@ -11,8 +11,11 @@ block content
             #{num}条分享已经被删除
           else if type == 'update'
             #{num}条分享已经被更新
+          else if type == '404'
+            未找到相应的请求
       div.lastrow
-        div.column
-          &nbsp;
-        div.column
-          a.button(href="/session/create") 继续创建
+        if type !== '404'
+          div.column
+            &nbsp;
+          div.column
+            a.button(href="/session/create") 继续创建
