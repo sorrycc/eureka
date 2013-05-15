@@ -96,6 +96,7 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragList, Cookie) {
             var str = Cookie.get("remainCount");
             if(!str) return;
             var remainList = JSON.parse(Cookie.get("remainCount"));
+            if(!remainList || !remainList.length) return;
             remainList.map(function(id){
                 D.get('#J_Feedback' + id).style.display = "block"
             });
