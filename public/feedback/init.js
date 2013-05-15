@@ -8,9 +8,6 @@ KISSY.add(function(S, Node,Uri,Count,CountImage,saveCount) {
         var countImage = new CountImage('.J_Stars');
         var host = 'http://'+new Uri(window.location.href).getHostname();
         var socket = io.connect(host);
-        countImage.show(function(){
-            countImage.set('num',3);
-        })
         socket.on('feedbackCount', function (data) {
             var starNum = data.num;
             //触发统计
@@ -22,7 +19,9 @@ KISSY.add(function(S, Node,Uri,Count,CountImage,saveCount) {
             var people = count.get('time');
             //星数
             var starNum = self.get('average');
-            countImage.set('num',starNum);
+            countImage.show(function(){
+                countImage.set('num',starNum);
+            })
             saveCount(num,people);
         })
         //统计推送开始
