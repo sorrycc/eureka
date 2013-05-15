@@ -152,7 +152,7 @@ exports.update = function(req, res){
 
 exports.detail = function(req, res) {
   
-  var partyId = req.cookies.partyid,
+  var partyId = req.cookies.partyid || req.query.partyId,
       isRoot = isRootFunc(req.user.parties, partyId);
 
   if (partyId === undefined) {
