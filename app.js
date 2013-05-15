@@ -58,9 +58,6 @@ app.configure(function(){
         });
     }
 
-
-    app.use(app.router);
-
     app.use(stylus.middleware({
         src: __dirname + '/public'
         , compile: function(str, path) {
@@ -74,6 +71,8 @@ app.configure(function(){
 
     //app.use(express.directory(path.join(__dirname, 'public')));
     app.use(express.static(path.join(__dirname, 'public')));
+
+    app.use(app.router);
 });
 
 // NODE_ENV=development node app
@@ -157,10 +156,10 @@ app.post('/api/party/del/:id', function(req, res) {
 // 7n's
 app.get('/session/create', session.new);
 app.post('/session/create', session.create);
-app.get('/session/:id/', session.detail);
+app.get('/session/:id', session.detail);
 app.get('/session/:id/edit', session.edit);
 app.post('/session/:id/edit', session.update);
-app.del('/session/:id/', session.del);
+app.del('/session/:id', session.del);
 
 // 水儿
 // get sessions by party id
