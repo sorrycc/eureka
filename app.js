@@ -26,7 +26,7 @@ app.locals = {
 };
 
 app.configure(function(){
-    app.set('port', process.env.PORT || 3000);
+    app.set('port', process.env.PORT || 80);
     app.set('views', __dirname + '/views');
     app.set('view engine', 'jade');
     app.use(express.favicon());
@@ -58,9 +58,6 @@ app.configure(function(){
         });
     }
 
-
-    app.use(app.router);
-
     app.use(stylus.middleware({
         src: __dirname + '/public'
         , compile: function(str, path) {
@@ -74,6 +71,8 @@ app.configure(function(){
 
     //app.use(express.directory(path.join(__dirname, 'public')));
     app.use(express.static(path.join(__dirname, 'public')));
+
+    app.use(app.router);
 });
 
 // NODE_ENV=development node app
@@ -157,14 +156,14 @@ app.post('/api/party/del/:id', function(req, res) {
 // 7n's
 app.get('/session/create', session.new);
 app.post('/session/create', session.create);
-app.get('/session/:id/', session.detail);
+app.get('/session/:id', session.detail);
 app.get('/session/:id/edit', session.edit);
 app.post('/session/:id/edit', session.update);
-app.del('/session/:id/', session.del);
+app.del('/session/:id', session.del);
 
 // 水儿
 // get sessions by party id
-app.get('/api/session/list/:partyId', function(req, res) {
+app.get('/api/session/list', function(req, res) {
     session.list.get(req, res);
 });
 
@@ -176,7 +175,7 @@ app.post('/feedback/make/:id', feedback.post);
 app.get('/feedback/list', function(req, res) {
 });
 //剑平
-app.get('/feedback/result', feedback.result);
+app.get('/feedback/result/:partyId/:sessionId', feedback.result);
 app.post('/feedback/save_count', feedback.save_count);
 
 var server = http.createServer(app);
@@ -190,14 +189,24 @@ io.sockets.on('connection', function (socket) {
     //监听听众的打分数据
     socket.on('feedback', function (data) {
         //demo data
+        //TODO:
         var data = {sessionId:1,userId:33,starNum:3,feedbackContent:"PPT不够华丽"};
         //将数据推送给管理者界面显示统计结果
         socket.emit('feedbackCount', data);
     });
-
-    // 接收管理者可以反馈
     socket.on('setValid', function(data){
       // data 是 session id
       socket.broadcast.emit('isvalid', data);
+    });
+    //监听推送分享管理员推送
+    socket.on('push_feedback',function(data){
+        //demo data
+        //state:-1未推送，0正在推送，1推送完成
+        var data = {sessionId:1,state:1,people:5,count:10};
+        if(data.state === 1){
+            socket.emit('push_close',data);
+        }else if(data.state === 0){
+            socket.emit('push_open',data);
+        }
     })
 });

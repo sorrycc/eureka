@@ -13,10 +13,13 @@ var db = require("../db");
 
 // 渲染创建新分享页面
 exports.new = function(req, res){
+  var partyId = req.query.partyId || "";
+
   res.render('session/session_form', { 
     docTitle: '创建分享',
     hasAddIcon: false,
-    partyId: req.query.partyId,
+    partyId: partyId,
+    backUrl: "/party/" + partyId,
     success: '1',
     msg: '',
     type: 1,
@@ -87,10 +90,13 @@ exports.get = function(req, res){
 exports.del = function(req, res){
   model.del(req, res, render);
 
+  var partyId = req.body.partyId || "";
+
   function render(numAffected) {
     res.render('session/session_msg', {
       docTitle: '删除分享',
       num: numAffected,
+      backUrl: "/party/" + partyId,
       type: 'del',
       success: '1',
       msg: ''
@@ -115,27 +121,41 @@ exports.update = function(req, res){
 
 exports.detail = function(req, res) {
   model.get(req, res, render);
+
+  console.log("----");
+  console.log(req.user);
+  console.log("----");
   
   function render(docs){
-    var doc = docs[0];
+    var doc = docs[0],
+      partyId = req.query.partyId || "";
 
-    res.render('session/session_display', { 
+    if (doc !== undefined) {
+      res.render('session/session_display', { 
         docTitle: '分享详情',
+        backUrl: "/party/" + partyId,
+        isRoot: 'true',
         success: '1',
         msg: '',
         id: doc.id,
-        partyId: req.query.partyId || "",
+        partyId: partyId,
         title: doc.title,
         type: 'detail',
         description: doc.description,
         speakers: doc.speakers,
         from: doc.from,
         to: doc.to    
-      }); 
-  }
+      });   
+    } else {
+      res.render('session/session_msg', { 
+        docTitle: '404',
+        type: '404'
+      });  
+    }
+    
+ }   
+  
 };
-
-
 
 exports.list = {
   render: function(req, res){
@@ -146,49 +166,40 @@ exports.list = {
       }); 
   },
   get: function(req, res) {
-            var id,
-                query = {};
+    var ids,
+        query = {},
+        sessions = [],
+        isError;
 
-            if (id = req.params.id) {
-                query.id = id;
-                console.log("party id:"+id)
-            }
+    if (ids = req.query.ids) {
+      ids = ids.split(',');
+      console.log("session ids:" + ids);
+    }
 
-            db.get({
-                query: query,
-                collection: "party",
-                complete: function(err, docs) {
-                    if (err) {
-                        res.json({
-                            success: false,
-                            message: err.message
-                        });
-                        return;
-                    }
-                    // 模拟数据
-                    // if(docs[0].sessions === []){
-                      //console.log(docs);
-                      //console.log("=========");
-                        docs[0].sessions =[{
-                            id: "1",
-                            from: "13:00",
-                            to: "14:00",
-                            title: "分享一"
-                        },
-                        {
-                            id: "2",
-                            from: "14:00",
-                            to: "15:00",
-                            title: "分享二"
-                        }]
-                    // }
-
-                    res.json({
-                        success: true,
-                        party: docs
-                    });
-                }
+    
+      query.id = {
+        $in: ids
+      };
+      db.get({
+        collection: "session",
+        query: query,
+        complete: function(err, docs) {
+          if (err) {
+            res.json({
+              success: false,
+              message: err.message
             });
+            console.log("查询分享失败")
+            return;
+          }
+          else {
+            res.json({
+              success: true,
+              docs: docs
+            });
+          }
         }
-};
+      });
 
+  }
+};

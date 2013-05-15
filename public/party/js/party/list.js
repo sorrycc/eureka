@@ -29,6 +29,7 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragList, Cookie) {
 
             S.io({
                 url: "/api/party" + (self.id ? "/" + self.id : ""),
+                cache: false,
                 type: "get",
                 dataType: "json",
                 complete: function(d) {
@@ -80,6 +81,7 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragList, Cookie) {
                     }
                 });
             });
+<<<<<<< HEAD
 
             E.on(document, 'click tap tapHold', function(e){
                 if(!D.parent(e.target, '.J_PartyOpts') && !D.parent(e.target, '.party-opts')){
@@ -94,6 +96,17 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragList, Cookie) {
               var id = D.attr(ev.target, 'data-id');
               socket.emit('setValid', id)
             })
+=======
+//
+//            E.on(document, 'click tap tapHold', function(e){
+//                if(!D.parent(e.target, '.J_PartyOpts') && !D.parent(e.target, '.party-opts')){
+//                    D.css('.party-opts', 'visibility', 'hidden');
+//                }
+//                if(!D.parent(e.target, '.J_SessionOpts') && !D.parent(e.target, '.session-opts')){
+//                    D.css('.session-opts', 'visibility', 'hidden');
+//                }
+//            });
+>>>>>>> 08e4df920b0b0064a0680ae288a94e89e5148ebc
 
             var self = this;
             self.partyTapHoldEvt();
@@ -148,60 +161,27 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragList, Cookie) {
          * 通过动画transform实现Y轴上的旋转
          */
         viewOriginalCodeEvt: function(){
-            var self = this,
-                rotateEl;
-            E.on('.J_ViewOriginal', 'click tap', function(e){
-                rotateEl = D.parent(e.currentTarget, '.mainCard');
-                // hide session-list-wrap, and display code
-                rotateYDIV(0, rotateEl);
+            E.on('.view-qrcode','click', function (e) {
+                var $e = jQuery(this).parent();
+
+                // flip
+                $e.toggleClass("flip3d-flipped");
+
+                // lazy generate qrcode
+                if (!$e.data("generated")) {
+                    $e.data("generated", true);
+
+                    var $qrcode = $e.find(".qrcode");
+                    $qrcode.qrcode({
+                        //render	: "table",
+                        text	: $qrcode.data("url")
+                    });
+                }
             });
-            E.on('.code','click tap', function(e){
-                rotateEl = D.parent(e.currentTarget, '.mainCard');
-                rotateYDIV(180, rotateEl);
-            })
 
         }
 
     });
-
-     /**
-     * 实现元素的垂直翻转效果
-     */
-    function rotateYDIV(ny, el)
-    {
-        var rotYINT;
-
-        if(rotYINT)
-            clearInterval(rotYINT);
-
-        rotYINT = setInterval(function(){
-
-            ny = ny + 1
-            D.css(el, 'transform', 'rotateY(' + ny + 'deg)');
-            D.css(el, 'webkitTransform', 'rotateY(' + ny + 'deg)');
-            D.css(el, 'OTransform', 'rotateY(' + ny + 'deg)');
-            D.css(el, 'MozTransform', 'rotateY(' + ny + 'deg)');
-            // el.style.transform = 
-            // el.style.webkitTransform = "rotateY(" + ny + "deg)"
-            // el.style.OTransform = "rotateY(" + ny + "deg)"
-            // el.style.MozTransform = "rotateY(" + ny + "deg)"
-            if (ny == 180 || ny >= 360)
-            {
-                clearInterval(rotYINT)
-                if (ny >= 360){ny = 0}
-            }
-            // hide session-list-wrap, and display code
-            if(ny == 90){
-                D.hide(D.get('.party-item'), el);
-                D.show(D.get('.code'),el);
-            }
-            if(ny == 270){
-                D.show(D.get('.party-item',el));
-                D.hide(D.get('.code'),el);
-            }
-
-        },10);
-    }
 
     return List;
 

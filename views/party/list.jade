@@ -8,6 +8,7 @@ block content
         {{#each docs}}
         {{#with this}}
         div.mainCard
+<<<<<<< HEAD
             section.party-item
                 article.party-info.J_PartyOpts
                     h3.title {{title}}
@@ -37,9 +38,41 @@ block content
                         新增一个分享
                 div.code
                     img(src="http://img02.taobaocdn.com/tps/i2/T1SPeoXE0XXXbgvWvq-249-254.png")
+=======
+            div.flip3d
+                section.party-item.flip3d-front
+                    article.party-info.J_PartyOpts
+                        h3.title {{title}}
+                        div.party-time 时间:{{formatTime}}
+                        div.party-loc 地点:{{location}}
+                        div.party-opts
+                            a.opt.icon-edit(href="/party/edit/{{id}}")
+                            a.opt.icon-del(href="/api/party/del/{{id}}"")
+                    ul.session-list
+                        {{#each sessions}}
+                        li.J_SessionOpts.ks-draglist-item
+                            a.session-info(href="/session/{{id}}/?partyId=#{id}")
+                                span.time {{from}} - {{to}}
+                                span.title {{title}}
+                            div.session-opts
+                                a.opt.icon-add-session(href="/session/create?partyId=#{id}}")
+                                a.opt.icon-edit(href="/session/{{id}}/edit?partyId=#{id}")
+                                a.opt.icon-del(href="/session/del/{{id}}")
+                                a.opt.icon-push(href="/session/feedback/{{id}}")
+                        {{/each}}
+                    div.add-session-bar       
+                        a.text.large(href="/session/create?partyId={{../id}}")
+                            i.icon-add-session
+                            新增一个分享
+                ///.party-item
+                section.flip3d-back
+                    div.qrcode(data-url="/party/{{id}}")(title="/party/{{id}}")
+                a.icon-code.view-qrcode(href="javascript:;")
+>>>>>>> 08e4df920b0b0064a0680ae288a94e89e5148ebc
         {{/with}}
         {{/each}}
         
+    script(src="/party/js/jquery-qrcode.min.js")
     script
         KISSY.use("node, party/list, widget/draglist", function(S, Node, List, DragList){
             S.ready(function(){

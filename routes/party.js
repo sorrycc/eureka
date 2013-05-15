@@ -17,6 +17,7 @@ module.exports = {
             res.render("party/form", {
                 docTitle: "创建分享会",
                 id: "",
+                backUrl: "/party",
                 partyTitle: "",
                 time: "",
                 location: "",
@@ -92,6 +93,8 @@ module.exports = {
                 query.id = id;
             }
 
+            query.root = req.user._id;
+
             db.get({
                 query: query,
                 collection: "party",
@@ -105,8 +108,18 @@ module.exports = {
                     }
 
                     docs.forEach(function(doc, index){
-                        docs[index].formatTime = moment(doc.time).format("YYYY-MM-DD");
-                        //console.log(doc)
+                        docs[index] = {
+                            _id: doc._id
+                            , id: doc.id
+                            , root: doc.root
+                            , title: doc.title
+                            , time: doc.time
+                            , location: doc.location
+                            , admins: doc.admins
+                            , sessions: doc.sessions
+                            , listeners: doc.listeners
+                            , formatTime: moment(doc.time).format("YYYY-MM-DD")
+                        };
                     });
 
                     res.json({
@@ -121,7 +134,8 @@ module.exports = {
         render: function(req, res) {
             db.get({
                 query: {
-                    id: req.params.id
+                    id: req.params.id,
+                    root: req.user._id
                 },
                 collection: "party",
                 complete: function(err, docs) {
@@ -140,6 +154,7 @@ module.exports = {
                     res.render("party/form", {
                         docTitle: "编辑分享会",
                         id: doc.id,
+                        backUrl: "/party/" + req.params.id,
                         partyTitle: doc.title,
                         time: moment(doc.time).format("YYYY-MM-DD"),
                         location: doc.location,
@@ -163,7 +178,8 @@ module.exports = {
 
             db.post({
                 query: {
-                    id: id
+                    id: id,
+                    root: req.user._id
                 },
                 doc: req.body,
                 collection: "party",
@@ -197,7 +213,8 @@ module.exports = {
         db.del({
             collection: "party",
             query: {
-                id: id
+                id: id,
+                root: req.user._id
             },
             complete: function(err, numAffected) {
                 if (err) {
