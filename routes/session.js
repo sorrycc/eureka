@@ -119,8 +119,10 @@ exports.detail = function(req, res) {
   function render(docs){
     var doc = docs[0];
 
-    res.render('session/session_display', { 
+    if (doc !== undefined) {
+      res.render('session/session_display', { 
         docTitle: '分享详情',
+        isRoot: 'true',
         success: '1',
         msg: '',
         id: doc.id,
@@ -131,11 +133,17 @@ exports.detail = function(req, res) {
         speakers: doc.speakers,
         from: doc.from,
         to: doc.to    
-      }); 
-  }
+      });   
+    } else {
+      res.render('session/session_msg', { 
+        docTitle: '404',
+        type: '404'
+      });  
+    }
+    
+ }   
+  
 };
-
-
 
 exports.list = {
   render: function(req, res){
@@ -183,4 +191,3 @@ exports.list = {
 
   }
 };
-

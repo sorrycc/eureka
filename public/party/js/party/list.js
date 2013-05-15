@@ -29,6 +29,7 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragList) {
 
             S.io({
                 url: "/api/party" + (self.id ? "/" + self.id : ""),
+                cache: false,
                 type: "get",
                 dataType: "json",
                 complete: function(d) {
@@ -70,7 +71,7 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragList) {
                 });
             });
 //
-//            E.on(document, 'click tap  tapHold', function(e){
+//            E.on(document, 'click tap tapHold', function(e){
 //                if(!D.parent(e.target, '.J_PartyOpts') && !D.parent(e.target, '.party-opts')){
 //                    D.css('.party-opts', 'visibility', 'hidden');
 //                }

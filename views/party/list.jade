@@ -11,7 +11,7 @@ block content
             section.party-item
                 article.party-info.J_PartyOpts
                     h3.title {{title}}
-                    div.party-time 时间:{{time}}
+                    div.party-time 时间:{{formatTime}}
                     div.party-loc 地点:{{location}}
                     i.icon-code.J_ViewOriginal
                     div.party-opts
@@ -21,13 +21,12 @@ block content
                 ul.session-list
                     {{#each sessions}}
                     li.J_SessionOpts.ks-draglist-item
-                        a.session-info(href="/session/{{id}}")
+                        a.session-info(href="/session/{{id}}/?partyId=#{id}")
                             span.time {{from}} - {{to}}
                             span.title {{title}}
                         div.session-opts
                             a.opt.icon-add-session(href="/session/create?partyId=#{id}}")
                             a.opt.icon-edit(href="/session/{{id}}/edit?partyId=#{id}")
-                            //a.opt.icon-edit(href="/session/update/{{id}}")
                             a.opt.icon-del(href="/session/del/{{id}}")
                             a.opt.icon-push(href="/session/feedback/{{id}}")
                     {{/each}}
