@@ -164,7 +164,7 @@ app.del('/session/:id/', session.del);
 
 // 水儿
 // get sessions by party id
-app.get('/api/session/list/:partyId', function(req, res) {
+app.get('/api/session/list', function(req, res) {
     session.list.get(req, res);
 });
 
