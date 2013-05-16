@@ -29,7 +29,7 @@ KISSY.add(function(S, Node,Uri,Count,CountImage,saveCount) {
                     countImage.set('num',starNum);
                 })
                 saveCount(num,people);
-            },1000*120);
+            },10000);
         })
     }
 }, {requires : ['node','uri','./star-count','./count-image','./save-count']});
