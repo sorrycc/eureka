@@ -7,7 +7,7 @@
  * @todo: 
  * @changelog: 
  */
-KISSY.add("session/view", function(S) {
+KISSY.add("session/view", function(S, Node, Cookie) {
     var View = function(cfg) {
         if (!(this instanceof View)) return new View(cfg);
 
@@ -27,13 +27,20 @@ KISSY.add("session/view", function(S) {
             }
 
             this.btn.on("click", function(e){
-                location.href = "/session/"+this.sessionId+"/edit?partyId="+this.partyId;
+                location.href = "/session/"+this.sessionId+"/edit";
             }, this);
+
+            var remainList = Cookie.get("remainList");
+            if(!remainList) return;
+            remainList = JSON.parse(remainList);
+            if(remainList.indexOf(this.sessionId) >= 0) {
+              Node.all('#J_FeedbackBtn').removeAttr("disabled")
+            }
 
         }
     });
 
     return View;
 }, {
-    requires: ["node"]
+    requires: ["node", "cookie"]
 });

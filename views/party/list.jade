@@ -3,7 +3,7 @@ extends ../layout
 block head
     link(type="text/css", rel="stylesheet", href="/party/css/style.css")
 block content
-    div.panel.party-list#J_PartyList(data-id="#{id}")
+    div.panel.party-list#J_PartyList
     script#J_TemplateParty(type="javascript/template")
         {{#each docs}}
         {{#with this}}
@@ -12,43 +12,47 @@ block content
                 section.party-item.flip3d-front
                     article.party-info.J_PartyOpts
                         h3.title {{title}}
-                        div.party-time 时间:{{formatTime}}
-                        div.party-loc 地点:{{location}}
+                        div.party-time 时间: {{formatTime}}
+                        div.party-loc 地点: {{location}}
                         div.party-opts
                             a.opt.icon-edit(href="/party/edit/{{id}}")
-                            a.opt.icon-del(href="/api/party/del/{{id}}"")
-                    ul.session-list
-                        {{#each sessions}}
-                        span.icon-feedback(id="J_Feedback#{id}")
-                        li.J_SessionOpts.ks-draglist-item
-                            a.session-info(href="/session/{{id}}/?partyId=#{id}")
-                                span.time {{from}} - {{to}}
-                                span.title {{title}}
-                            div.session-opts
-                                a.opt.icon-add-session(href="/session/create?partyId=#{id}}")
-                                a.opt.icon-edit(href="/session/{{id}}/edit?partyId=#{id}")
-                                a.opt.icon-del(href="/session/del/{{id}}")
-                                a.opt.icon-push(href="javascript:void(0)",data-id="#{id}")
-                        {{/each}}
+                            a.opt.icon-del(href="/api/party/del/{{id}}")
+                    div.session-list-box(id="J_Party{{id}}Session")
                     div.add-session-bar       
                         a.text.large(href="/session/create?partyId={{../id}}")
                             i.icon-add-session
                             新增一个分享
-                ///.party-item
                 section.flip3d-back
                     div.qrcode(data-url="/party/{{id}}")(title="/party/{{id}}")
                 a.icon-code.view-qrcode(href="javascript:;")
         {{/with}}
         {{/each}}
+
+    script#J_TemplateSession(type="javascript/template")
+        ul.session-list
+            {{#each sessions}}
+            li.J_SessionOpts.ks-draglist-item
+                span.icon-feedback(id="J_Feedback{{id}}")
+                a.session-info(href="/session/{{id}}/?partyId={{../id}}")
+                    span.time {{from}} - {{to}}
+                    span.title {{title}}
+                div.session-opts
+                    a.opt.icon-add-session(href="/session/create?partyId={{../id}}")
+                    a.opt.icon-edit(href="/session/{{id}}/edit?partyId={{../id}}")
+                    a.opt.icon-del(href="/session/del/{{id}}")
+                    a.opt.icon-push(href="javascript:void(0)",data-id="{{id}}")
+            {{/each}}
         
     script(src="/party/js/jquery-qrcode.min.js")
+    script(src="/global/js/iscroll.js")
     script
-        KISSY.use("node, party/list, widget/draglist", function(S, Node, List, DragList){
+        KISSY.use("node, party/list, widget/dragswitch", function(S, Node, List, DragSwitch){
             S.ready(function(){
 
                 List({
                     el: "#J_PartyList",
-                    tpl: S.one("#J_TemplateParty").html()
+                    partyTpl: S.one("#J_TemplateParty").html(),
+                    sessionTpl: S.one("#J_TemplateSession").html()
                 }).render();
 
             });

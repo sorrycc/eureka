@@ -6,12 +6,16 @@ html, body
 
 body
   background-color: #58a8c1
+//
+//.dragswitch-dragging, .dragswitch-dragging *
+//  transition(none) !important
 
 header
   position: absolute
   width: 100%
   background-color: #303030
   height: (50/16)*1em
+  z-index: 9999
   
   a 
     &.back-icon-wrapper
@@ -43,9 +47,10 @@ header
     line-height: (50/26)*1em
 
 
-.panel {
-  height: 100%;
-}
+.panel
+  height: 100%
+  white-space: nowrap
+  transition(transform .3s ease-out 0s)
 
 
 ///* panel */
@@ -80,13 +85,14 @@ header
 
 .mainCard
   //background-color: #FFF
-  -webkit-box-shadow: -1px 3px 11px #555
-  box-shadow: -1px 3px 11px #555
   box-sizing(border-box)
   height: 100%
   overflow: auto
   -webkit-overflow-scrolling: touch
   padding: 4em 3em
+  display: inline-block
+  width: 100%
+  vertical-align: top
 
 .submitStatus
   padding: 30px
