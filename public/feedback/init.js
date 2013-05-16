@@ -9,7 +9,8 @@ KISSY.add(function(S, Node,Uri,Count,CountImage,saveCount) {
         var host = 'http://'+new Uri(window.location.href).getHostname()+'/stars';
         var socket = io.connect(host);
         socket.on('jianping', function (data) {
-            var starNum = data.num;
+
+            var starNum = data.score;
             //触发统计
             count.count(starNum);
         });
