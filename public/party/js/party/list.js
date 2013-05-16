@@ -29,7 +29,6 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragList) {
 
             S.io({
                 url: "/api/party" + (self.id ? "/" + self.id : ""),
-                cache: false,
                 type: "get",
                 dataType: "json",
                 complete: function(d) {
@@ -71,7 +70,7 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragList) {
                 });
             });
 //
-//            E.on(document, 'click tap tapHold', function(e){
+//            E.on(document, 'click tap  tapHold', function(e){
 //                if(!D.parent(e.target, '.J_PartyOpts') && !D.parent(e.target, '.party-opts')){
 //                    D.css('.party-opts', 'visibility', 'hidden');
 //                }
@@ -83,21 +82,29 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragList) {
             var self = this;
             self.partyTapHoldEvt();
             self.sessionTapHoldEvt();
-            self.viewOriginalCodeEvt();
+
+            E.on('.J_Rotate', 'click tap', function(e){
+                var t = e.currentTarget,
+                    p = D.parent(t, '.flip-container');
+
+                D.toggleClass(p, 'rotate');
+
+            });
+            // self.viewOriginalCodeEvt();
         },
 
          /**
          * party taphold效果
          */
         partyTapHoldEvt: function(){
-//
-//             E.on('.J_PartyOpts','dblclick tapHold', function(e){
-//
-//                var t = e.currentTarget,
-//                    partyOpts = D.get('.party-opts', t);
-//
-//                D.css(partyOpts, 'visibility', 'visible');
-//            });
+
+            E.on('.J_PartyOpts','dblclick tapHold', function(e){
+
+               var t = e.currentTarget,
+                   partyOpts = D.get('.party-opts', t);
+
+               D.css(partyOpts, 'visibility', 'visible');
+           });
         
         },
 
@@ -132,20 +139,20 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragList) {
          * 查看二维码原图
          * 通过动画transform实现Y轴上的旋转
          */
-        viewOriginalCodeEvt: function(){
-            var self = this,
-                rotateEl;
-            E.on('.J_ViewOriginal', 'click tap', function(e){
-                rotateEl = D.parent(e.currentTarget, '.mainCard');
-                // hide session-list-wrap, and display code
-                rotateYDIV(0, rotateEl);
-            });
-            E.on('.code','click tap', function(e){
-                rotateEl = D.parent(e.currentTarget, '.mainCard');
-                rotateYDIV(180, rotateEl);
-            })
+        // viewOriginalCodeEvt: function(){
+        //     var self = this,
+        //         rotateEl;
+        //     E.on('.J_ViewOriginal', 'click tap', function(e){
+        //         rotateEl = D.parent(e.currentTarget, '.mainCard');
+        //         // hide session-list-wrap, and display code
+        //         rotateYDIV(0, rotateEl);
+        //     });
+        //     E.on('.code','click tap', function(e){
+        //         rotateEl = D.parent(e.currentTarget, '.mainCard');
+        //         rotateYDIV(180, rotateEl);
+        //     })
 
-        }
+        // }
 
     });
 
