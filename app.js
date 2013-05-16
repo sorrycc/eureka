@@ -171,7 +171,10 @@ app.get('/api/session/list', function(req, res) {
 // feedback
 // 筱谷
 app.get('/feedback/make/:id', feedback.make);
-app.post('/feedback/make/:id', feedback.post);
+app.post('/feedback/make/:id', function(req, res){
+  sendToJianPin(req);
+  feedback.post(req,res);
+});
 app.get('/feedback/list', function(req, res) {
 });
 //剑平

@@ -82,8 +82,8 @@ exports.post = function(req, res) {
       if(index >= 0) {
         remainList.splice(index, 1)
       }
-      res.cookies['remainCount'] = remainList.length;
-      res.cookies['remainList'] = JSON.parse(remainList);
+      res.cookies('remainCount', remainList.length, {path: '/'});
+      res.cookies('remainList', JSON.parse(remainList), {path: '/'});
     }
   }
 
