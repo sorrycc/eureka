@@ -149,14 +149,7 @@ exports.del = function(req, res){
   }
 
   function render(numAffected) {
-    res.render('session/session_msg', {
-      docTitle: '删除分享',
-      num: numAffected,
-      backUrl: "/party/" + partyId,
-      type: 'del',
-      success: '1',
-      msg: ''
-    });
+    res.redirect("/party/" + partyId);
   } 
 };
 
@@ -165,13 +158,6 @@ exports.update = function(req, res){
 
   function render(numAffected) {
     res.redirect("/party/" + req.body.partyId || "");
-    // res.render('session/session_msg', {
-    //   docTitle: '更新分享',
-    //   num: numAffected,
-    //   type: 'update',
-    //   success: '1',
-    //   msg: ''
-    // });
   } 
 };
 
