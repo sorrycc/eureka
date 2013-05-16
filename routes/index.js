@@ -15,7 +15,7 @@ exports.index = function(req, res){
    */
 };
 
-exports.login = function(req, res){
+exports.user = function(req, res){
     res.json(req.user);
 };
 

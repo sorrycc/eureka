@@ -81,7 +81,7 @@ app.configure('development', function(){
 });
 
 app.get('/', routes.index);
-app.get('/login', routes.login);
+app.get('/user', routes.user);
 
 // 棪木
 //app.get('/login', function(req, res) {
