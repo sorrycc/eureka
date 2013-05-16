@@ -41,8 +41,8 @@ KISSY.use("node, cookie", function(S, Node, Cookie){
     else if(len == 1) {
       url = '/party/' + remainList[0];
     }
-    else if (partyId){
-      url = '/party' + partyId
+    else if (partyId && partyId != "null"){
+      url = '/party/' + partyId
     }
     else {
       url = '/party'
