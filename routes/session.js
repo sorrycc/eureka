@@ -26,14 +26,13 @@ var isRootFunc = function (plist, current) {
 // 渲染创建新分享页面
 exports.new = function(req, res){
   var partyId,
-    isRoot = isRootFunc(req.user.parties, partyId);
-
-
+    isRoot;
   
   if (req.cookies.partyid === undefined) {
     partyId = req.query.partyId;
     req.cookies.partyid = partyId;
   } else {
+    isRoot = isRootFunc(req.user.parties, partyId);
     partyId = req.cookies.partyid;
   }
 
@@ -71,7 +70,7 @@ exports.create = function(req, res){
 exports.edit = function(req, res){
   var partyId,
     sessionId = req.params.id,
-    isRoot = isRootFunc(req.user.parties, partyId);
+    isRoot;
 
   if (req.cookies.partyid === undefined) {
     partyId = req.query.partyId;
@@ -83,6 +82,7 @@ exports.edit = function(req, res){
   if (partyId === undefined) {
     res.redirect("/party");
   } else {
+    isRoot = isRootFunc(req.user.parties, partyId);
     model.get(req, res, render);  
   }
 
@@ -132,7 +132,7 @@ exports.get = function(req, res){
 exports.del = function(req, res){
   var partyId,
     sessionId = req.params.id,
-    isRoot = isRootFunc(req.user.parties, partyId);
+    isRoot;
 
   if (req.cookies.partyid === undefined) {
     partyId = req.query.partyId;
@@ -144,18 +144,12 @@ exports.del = function(req, res){
   if (partyId === undefined) {
     res.redirect("/party");
   } else {
+    isRoot = isRootFunc(req.user.parties, partyId);
     model.del(req, res, render);
   }
 
   function render(numAffected) {
-    res.render('session/session_msg', {
-      docTitle: '删除分享',
-      num: numAffected,
-      backUrl: "/party/" + partyId,
-      type: 'del',
-      success: '1',
-      msg: ''
-    });
+    res.redirect("/party/" + partyId);
   } 
 };
 
@@ -164,19 +158,12 @@ exports.update = function(req, res){
 
   function render(numAffected) {
     res.redirect("/party/" + req.body.partyId || "");
-    // res.render('session/session_msg', {
-    //   docTitle: '更新分享',
-    //   num: numAffected,
-    //   type: 'update',
-    //   success: '1',
-    //   msg: ''
-    // });
   } 
 };
 
 exports.detail = function(req, res) {
   var partyId,
-    isRoot = isRootFunc(req.user.parties, partyId);
+    isRoot;
 
   if (req.cookies.partyid === undefined) {
     partyId = req.query.partyId;
@@ -188,6 +175,7 @@ exports.detail = function(req, res) {
   if (partyId === undefined) {
     res.redirect("/party");
   } else {
+    isRoot = isRootFunc(req.user.parties, partyId);
     model.get(req, res, render);  
   }
   
