@@ -23,7 +23,7 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragSwitch, Cookie) {
 
     S.augment(List, {
         _init: function() {
-            if (!this.el || !this.tpl) return;
+            if (!this.el || !this.partyTpl || !this.sessionTpl) return;
 
             this.id = this.el.attr("data-id");
 
@@ -67,11 +67,14 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragSwitch, Cookie) {
 
             S.each(parties, function(doc, index){
 
+
                 var elParty = S.one("#J_Party" + doc.id + "Session");
 
                 if (!elParty || S.trim(elParty.html())) return;
 
                 elParty.parent('.flip3d').attr('id', "J_Party" + doc.id);
+
+                if (!doc.sessions.length) return;
 
                 S.io({
                     url: "/api/session/list",
