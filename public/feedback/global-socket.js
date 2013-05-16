@@ -4,10 +4,8 @@
  * Time: 下午8:34
  * Description:
  */
-window.socket = io.connect('http://localhost')
-  socket.on('isValid', function(data){
-    console.log("on data", data);
-  })
+window.socket = io.connect('http://localhost');
+//socket.join('room');
 
 KISSY.use("node, cookie", function(S, Node, Cookie){
   var S = KISSY,
@@ -20,6 +18,9 @@ KISSY.use("node, cookie", function(S, Node, Cookie){
       if(count) {
           count = parseInt(count);
           remainList = JSON.parse(Cookie.get('remainList'));
+          remainList.map(function(item,key){
+            if(!item) remainList.splice(key,1)
+          })
       }
       else {
         count = 0;
@@ -35,14 +36,15 @@ KISSY.use("node, cookie", function(S, Node, Cookie){
   function makeNotice(remainList, len) {
     var url = '';
     var partyId = Cookie.get('partyid');
-    if (location.href.indexOf('/party') >= 0){
+    if(len == 1) {
+      url = '/session/' + remainList[0];
+    }
+    else if (location.href.indexOf('/party') >= 0){
       location.reload()
+      return
     }
-    else if(len == 1) {
-      url = '/party/' + remainList[0];
-    }
-    else if (partyId){
-      url = '/party' + partyId
+    else if (partyId && partyId != "null"){
+      url = '/party/' + partyId
     }
     else {
       url = '/party'

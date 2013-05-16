@@ -35,7 +35,10 @@ mask()
       margin-top (50/16)*1em
       margin-left (70/16)*1em
       cursor pointer
-      
+
+.session-list-box
+  height: 100%
+
 ul.session-list
   li 
     border-bottom 1px solid #dbcccd
@@ -84,18 +87,21 @@ div.add-session-bar
   display none
   padding-top 60px
 
-.party-item {
-  height: 100%;
-  overflow: hidden;
-  background: #fff;
-  -webkit-user-select: none;
-}
+.party-item
+  //height: 100%
+  //overflow: hidden
+  background: #fff
+  -webkit-user-select: none
+
 
 
 // flip
 .flip3d
   position: relative
   height: 400px
+  background: #fff
+  //-webkit-box-shadow: -1px 3px 11px #555
+  box-shadow:(-1px 3px 11px #555)
 
   .flip3d-front, .flip3d-back
     transform: rotate3d(0, 1, 0, 0)

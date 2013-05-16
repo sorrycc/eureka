@@ -7,7 +7,7 @@
  * @todo: 
  * @changelog: 
  */
-KISSY.add("party/list", function(S, Ajax, XTemplate, DragList, Cookie) {
+KISSY.add("party/list", function(S, Ajax, XTemplate, DragSwitch, Cookie) {
     var D = S.DOM, E = S.Event;
     var List = function(opt) {
         if (!(this instanceof List)) return new List(opt);
@@ -71,6 +71,8 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragList, Cookie) {
 
                 if (!elParty || S.trim(elParty.html())) return;
 
+                elParty.parent('.flip3d').attr('id', "J_Party" + doc.id);
+
                 S.io({
                     url: "/api/session/list",
                     data: {
@@ -87,6 +89,7 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragList, Cookie) {
                         doc.sessions = d.docs;
 
                         elParty.append(new XTemplate(self.sessionTpl).render(doc));
+                        var scrollView = new iScroll("J_Party" + doc.id);
                     }
                 });
             });
@@ -142,21 +145,95 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragList, Cookie) {
               var id = D.attr(ev.target, 'data-id');
               socket.emit('setValid', id)
             })
-//
-//            E.on(document, 'click tap tapHold', function(e){
-//                if(!D.parent(e.target, '.J_PartyOpts') && !D.parent(e.target, '.party-opts')){
-//                    D.css('.party-opts', 'visibility', 'hidden');
-//                }
-//                if(!D.parent(e.target, '.J_SessionOpts') && !D.parent(e.target, '.session-opts')){
-//                    D.css('.session-opts', 'visibility', 'hidden');
-//                }
-//            });
 
             var self = this;
             self.partyTapHoldEvt();
             self.sessionTapHoldEvt();
             self.viewOriginalCodeEvt();
+            self.bindListSwitch();
         },
+
+
+
+        // 绑定列表间切换
+        bindListSwitch: function(){
+          var DS = new DragSwitch ("#J_PartyList", {
+            senDistance: 3,
+            binds: [
+              null,
+              {
+                moveEls       : ["#J_PartyList"],
+                maxDistance   : -D.viewportWidth(),
+                validDistance : -D.viewportWidth()/2,
+                passCallback  : function(ev){
+                  //$(ev.self.originalEl).addClass @dragSwitchConfig.rightClass
+                  //$(ev.self.originalEl)[0].style.webkitTransform = ""
+                },
+                failCallback  : null,
+                checkvalid    : function(ev){
+                  //return $(ev.self.originalEl).css("-webkit-transform") is "none"
+                  return true
+                }
+              },
+              null,
+              {
+                moveEls       : ["#J_PartyList"],
+                maxDistance   : 1,
+                validDistance : D.viewportWidth()/2,
+                passCallback  : function(ev){
+                           //$(ev.self.originalEl).addClass @dragSwitchConfig.leftClass
+                  $(ev.self.originalEl)[0].style.webkitTransform = ""
+                },
+                failCallback  : null,
+                checkvalid    : function(ev){
+                 //return $(ev.self.originalEl).css("-webkit-transform") is "none"
+                 return true
+                }
+              }
+            ]
+          });
+          var count = $('.mainCard').length,
+              currentIndex = 0,
+              nextIndex = null;
+
+          function next(){
+            if(currentIndex == count - 1) return
+            currentIndex++
+            $("#J_PartyList").css('-webkit-transform', "translateX(-" + currentIndex + "00%)")
+            if(currentIndex == count - 1) {
+              DS.config.binds[1].maxDistance = -1
+              DS.config.binds[3].maxDistance = D.viewportWidth()
+            }
+            else {
+              DS.config.binds[1].maxDistance = -D.viewportWidth()
+            }
+          }
+          function prev(){
+            if(currentIndex == 0) return
+            currentIndex--
+            $("#J_PartyList").css('transform', "translate(" + currentIndex + "00% 0)")
+            if(currentIndex == 0) {
+              DS.config.binds[3].maxDistance = 1
+              DS.config.binds[1].maxDistance = -D.viewportWidth()
+            }
+            else {
+              DS.config.binds[3].maxDistance = D.viewportWidth()
+            }
+          }
+
+          DS.on("dragRightEnd", function(ev){
+            if(DS.config.binds[3].passed) {
+              prev()
+            }
+          })
+
+          DS.on("dragLeftEnd", function(ev){
+            if(DS.config.binds[1].passed) {
+              next()
+            }
+          })
+        },
+
 
          /**
          * party taphold效果
@@ -187,7 +264,7 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragList, Cookie) {
 //          })
 
 
-           E.delegate('.session-list','dblclick tapHold', '.J_SessionOpts', function(e){
+           E.delegate('.session-list-box','dblclick tapHold', '.J_SessionOpts', function(e){
                 var t = e.currentTarget,
                     sessionOpts = D.get('.session-opts', t);
 
@@ -230,5 +307,5 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragList, Cookie) {
     return List;
 
 }, {
-    requires: ["ajax", "xtemplate", "widget/draglist", "cookie"]
+    requires: ["ajax", "xtemplate", "widget/dragswitch", "cookie"]
 });

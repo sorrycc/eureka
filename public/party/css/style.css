@@ -4,6 +4,7 @@
 .party-info .icon-code{position:absolute;right:1em;top:1em}
 .party-info div.party-opts{visibility:hidden;position:absolute;top:0;left:0;background-color:rgba(0,0,0,0.2);height:100%;width:100%;}
 .party-info div.party-opts .opt{float:left;margin-top:3.125em;margin-left:4.375em;cursor:pointer}
+.session-list-box{height:100%}
 ul.session-list li{border-bottom:1px solid #dbcccd;margin-bottom:0;position:relative;}
 ul.session-list li .session-info{font-size:.875em;line-height:1.2857142857142858em;display:block;padding:1em;padding-right:0;text-decoration:none;}
 ul.session-list li .session-info span.time{display:block;margin-bottom:5px;color:#58a8c1}
@@ -15,8 +16,8 @@ div.add-session-bar{padding:1em;}
 div.add-session-bar a.text{color:#6c93a0;font-size:1.125em;line-height:1.3333333333333333em;margin-left:5px;text-decoration:none}
 div.add-session-bar a.text i.icon-add-session{margin-right:5px}
 .code{display:none;padding-top:60px}
-.party-item{height:100%;overflow:hidden;background:#fff;-webkit-user-select:none}
-.flip3d{position:relative;height:400px;}
+.party-item{background:#fff;-webkit-user-select:none}
+.flip3d{position:relative;height:400px;background:#fff;-webkit-box-shadow:-1px 3px 11px #555;box-shadow:-1px 3px 11px #555;}
 .flip3d .flip3d-front,.flip3d .flip3d-back{-webkit-transform:rotate3d(0,1,0,0);-moz-transform:rotate3d(0,1,0,0);-o-transform:rotate3d(0,1,0,0);-ms-transform:rotate3d(0,1,0,0);transform:rotate3d(0,1,0,0);-webkit-transition:-webkit-transform .5s ease;-moz-transition:-moz-transform .5s ease;-o-transition:-o-transform .5s ease;-ms-transition:-ms-transform .5s ease;transition:transform .5s ease;-webkit-backface-visibility:hidden;-moz-backface-visibility:hidden;-ms-backface-visibility:hidden;backface-visibility:hidden}
 .flip3d .flip3d-back{position:absolute;top:0;right:0;bottom:0;left:0;-webkit-transform:rotate3d(0,1,0,180deg);-moz-transform:rotate3d(0,1,0,180deg);-o-transform:rotate3d(0,1,0,180deg);-ms-transform:rotate3d(0,1,0,180deg);transform:rotate3d(0,1,0,180deg)}
 .flip3d-flipped .flip3d-front{-webkit-transform:rotate3d(0,1,0,180deg);-moz-transform:rotate3d(0,1,0,180deg);-o-transform:rotate3d(0,1,0,180deg);-ms-transform:rotate3d(0,1,0,180deg);transform:rotate3d(0,1,0,180deg)}

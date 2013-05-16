@@ -32,6 +32,7 @@ block content
         ul.session-list
             {{#each sessions}}
             li.J_SessionOpts.ks-draglist-item
+                span.icon-feedback(id="J_Feedback{{id}}")
                 a.session-info(href="/session/{{id}}/?partyId={{../id}}")
                     span.time {{from}} - {{to}}
                     span.title {{title}}
@@ -39,12 +40,13 @@ block content
                     a.opt.icon-add-session(href="/session/create?partyId={{../id}}")
                     a.opt.icon-edit(href="/session/{{id}}/edit?partyId={{../id}}")
                     a.opt.icon-del(href="/session/del/{{id}}")
-                    a.opt.icon-push(href="/session/feedback/{{id}}")
+                    a.opt.icon-push(href="javascript:void(0)",data-id="{{id}}")
             {{/each}}
         
     script(src="/party/js/jquery-qrcode.min.js")
+    script(src="/global/js/iscroll.js")
     script
-        KISSY.use("node, party/list, widget/draglist", function(S, Node, List, DragList){
+        KISSY.use("node, party/list, widget/dragswitch", function(S, Node, List, DragSwitch){
             S.ready(function(){
 
                 List({
