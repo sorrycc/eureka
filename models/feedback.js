@@ -89,34 +89,17 @@ exports.getSession = function(sessionId, res, render) {
 }
 exports.sessions = function(req, res, render){
     var _query = {
-        id: req.partyId
+        party_id: req.partyId
     };
     db.get({
-        collection: PARTY_COLLECTION,
+        collection: SESSION_COLLECTION,
         query: _query,
         complete: function(err, docs) {
             if (err) {
                 res.send("error");
             }
             else {
-                var sessionIds = docs[0].sessions;
-
-                db.get({
-                    collection: PARTY_COLLECTION,
-                    query: _query,
-                    complete: function(err, docs) {
-                        if (err) {
-                            res.send("error");
-                        }
-                        else {
-                            var sessionIds = docs[0].sessions;
-
-                            render(docs[0].sessions);
-                        }
-                    }
-                });
-
-                render(docs[0].sessions);
+                render(docs);
             }
         }
     });

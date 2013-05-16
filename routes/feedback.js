@@ -114,11 +114,11 @@ exports.result = function(req, res){
             req.id = data.id;
             req.partyId = partyId;
             model.getcounts(req,res,function(sessions){
-/*                data.docTitle = '《' + data.title + '》的反馈结果';
+                data.docTitle = '《' + data.title + '》的反馈结果';
                 data.sessions = sessions;
                 data.partyId = req.params.partyId;
                 data.sessionId = req.params.sessionId;
-                res.render('feedback/result',data);*/
+                res.render('feedback/result',data);
             })
         })
     }
