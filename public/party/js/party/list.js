@@ -277,7 +277,7 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragSwitch, Cookie) {
 //          })
 
             function tapHandler(t){
-                window.location.href = "http://localhost:3000" + D.attr(t, 'data-url');
+                window.location.href = D.attr(t, 'data-url');
             }
 
             function tapHoldHandler(t){
