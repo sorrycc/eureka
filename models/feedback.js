@@ -70,9 +70,9 @@ exports.saveCount = function(req, res) {
  * @param res
  * @param render
  */
-exports.getSession = function(req, res, render) {
+exports.getSession = function(sessionId, res, render) {
     var _query = {
-      id: req.params.sessionId
+      id: sessionId
     };
     db.get({
         collection: SESSION_COLLECTION,
@@ -89,7 +89,7 @@ exports.getSession = function(req, res, render) {
 }
 exports.sessions = function(req, res, render){
     var _query = {
-        id: req.params.partyId
+        id: req.partyId
     };
     db.get({
         collection: PARTY_COLLECTION,
@@ -99,6 +99,23 @@ exports.sessions = function(req, res, render){
                 res.send("error");
             }
             else {
+                var sessionIds = docs[0].sessions;
+
+                db.get({
+                    collection: PARTY_COLLECTION,
+                    query: _query,
+                    complete: function(err, docs) {
+                        if (err) {
+                            res.send("error");
+                        }
+                        else {
+                            var sessionIds = docs[0].sessions;
+
+                            render(docs[0].sessions);
+                        }
+                    }
+                });
+
                 render(docs[0].sessions);
             }
         }
@@ -106,7 +123,7 @@ exports.sessions = function(req, res, render){
 }
 exports.getcounts = function(req, res, render){
     var _query = {
-        party_id: req.params.partyId
+        party_id: req.partyId
     };
     var self = this;
     db.get({
