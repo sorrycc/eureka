@@ -60,6 +60,11 @@ module.exports = {
         listeners: {
             "type": Array
         },
+        //允许反馈的时间，默认为2分钟
+        feedbackTimeout:{
+            "type":Number,
+            "default":2
+        },
         _deleted: {
             "type": Boolean,
             "default": false,
