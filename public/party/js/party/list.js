@@ -103,7 +103,7 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragList, Cookie) {
 
         bind: function() {
 
-            S.one(document).delegate("click", ".session-del", function(evt) {
+            S.one(document).delegate("click", ".party-del", function(evt) {
                 var el = S.all(evt.currentTarget),
                     url = el.attr("href");
 
@@ -123,7 +123,7 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragList, Cookie) {
                             return;
                         }
 
-                        el.parent().parent(".party-item").remove();
+                        el.parent().parent(".mainCard").remove();
                     }
                 });
             });

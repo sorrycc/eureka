@@ -16,8 +16,8 @@ block content
                         div.party-loc 地点: {{location}}
                         i.icon-code.J_ViewOriginal
                         div.party-opts
-                            a.opt.icon-edit(href="/party/edit/{{id}}")
-                            a.opt.icon-del(href="/api/party/del/{{id}}")
+                            a.opt.icon-edit.party-edit(href="/party/edit/{{id}}")
+                            a.opt.icon-del.party-del(href="/api/party/del/{{id}}")
                     div.session-list-box(id="J_Party{{id}}Session")
                     div.add-session-bar       
                         a.text.large(href="/session/create?partyId={{../id}}")
