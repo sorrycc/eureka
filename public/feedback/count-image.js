@@ -59,6 +59,7 @@ KISSY.add(function(S, Node, Base,XTemplate,LayerAnim) {
             var target = self.get('target');
             var spans = target.children('span');
             var config = [];
+            spans.css('opacity',1);
             spans.each(function($span,i){
                 // 动画配置参数
                 config[i] =
@@ -90,6 +91,7 @@ KISSY.add(function(S, Node, Base,XTemplate,LayerAnim) {
             target = target.children('.J_ScoreStars');
             var spans = target.children('span');
             var config = [];
+            spans.css('opacity',1);
             spans.each(function($span,i){
                 // 动画配置参数
                 config[i] =

@@ -9,7 +9,8 @@ KISSY.add(function(S, Node,Uri,Count,CountImage,saveCount) {
         var host = 'http://'+new Uri(window.location.href).getHostname()+'/stars';
         var socket = io.connect(host);
         socket.on('jianping', function (data) {
-            var starNum = data.num;
+            alert(data.score);
+            var starNum = data.score;
             //触发统计
             count.count(starNum);
         });
@@ -29,7 +30,7 @@ KISSY.add(function(S, Node,Uri,Count,CountImage,saveCount) {
                     countImage.set('num',starNum);
                 })
                 saveCount(num,people);
-            },1000*120);
+            },10000);
         })
     }
 }, {requires : ['node','uri','./star-count','./count-image','./save-count']});

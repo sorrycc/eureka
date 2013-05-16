@@ -258,16 +258,12 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragSwitch, Cookie) {
          */
         sessionTapHoldEvt: function(){
 
-
-//
-//          var dragList = new DragList(".party-item", {
-//            enableScrollView  : true,
-//            enableDragSwitch  : false,
-//            enableTapHold     : true,
-//          })
-
+          E.delegate('.session-list-box', 'touchstart touchend', '.J_SessionOpts', function(e){
+            e.preventDefault()
+          })
 
            E.delegate('.session-list-box','dblclick tapHold', '.J_SessionOpts', function(e){
+
                 var t = e.currentTarget,
                     sessionOpts = D.get('.session-opts', t);
 

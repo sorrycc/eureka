@@ -28,8 +28,8 @@ KISSY.use("node, cookie", function(S, Node, Cookie){
       }
       if(remainList.indexOf(parseInt(data)) == -1)
         remainList.push(parseInt(data));
-        Cookie.set('remainList', JSON.stringify(remainList));
-        Cookie.set('remainCount', remainList.length)
+        Cookie.set('remainList', JSON.stringify(remainList), 99999, "", "/");
+        Cookie.set('remainCount', remainList.length, 99999, "", "/")
       makeNotice(remainList, remainList.length)
     })
 
