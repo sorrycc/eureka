@@ -173,7 +173,7 @@ app.get('/api/session/list', function(req, res) {
 app.get('/feedback/make/:id', feedback.make);
 app.post('/feedback/make/:id', function(req, res){
   sendToJianPin(req);
-  feedback.post(req,res);
+  feedback.post(req, res);
 });
 app.get('/feedback/list', function(req, res) {
 });
@@ -220,10 +220,11 @@ io.sockets.on('connection', function (socket) {
 var starSocket;
 
 function sendToJianPin(req) {
-  starSocket.broadcast.emit("jianping", {
-    sessionId: req.params.id,
-    score: req.params.score
-  })
+  if(starSocket)
+    starSocket.emit("jianping", {
+      sessionId: req.params.id,
+      score: req.body.score
+    })
 }
 
 io.of('/stars').on("connection", function(star_socket){

@@ -45,9 +45,9 @@ exports.post = function(req, res) {
   function putData(err, docs) {
     topic = docs[0];
     var dataObj = {};
-    for(var key in req.params) {
-      if(req.params.hasOwnProperty(key) && key != 'id') {
-        dataObj[key] = req.params[key]
+    for(var key in req.body) {
+      if(req.body.hasOwnProperty(key) && key != 'id') {
+        dataObj[key] = req.body[key]
       }
     }
 
@@ -74,20 +74,21 @@ exports.post = function(req, res) {
         doc     : topic,
         complete: render
       })
-
-      // 删除未评论 Cookie
-      var remainCount = parseInt(req.cookies['remainCount']),
-          remainList = JSON.parse(req.cookies['remainList']);
-      var index = remainList.indexOf(parseInt(req.params.id));
-      if(index >= 0) {
-        remainList.splice(index, 1)
-      }
-      res.cookie('remainCount', remainList.length, {path: '/'});
-      res.cookie('remainList', JSON.parse(remainList), {path: '/'});
     }
   }
 
   function render(err, numAffected) {
+
+    // 删除未评论 Cookie
+    var remainCount = parseInt(req.cookies['remainCount']),
+      remainList = JSON.parse(req.cookies['remainList']);
+    var index = remainList.indexOf(parseInt(req.params.id));
+    if(index >= 0) {
+      remainList.splice(index, 1)
+    }
+    res.cookie('remainCount', remainList.length, {path: '/'});
+    res.cookie('remainList', JSON.stringify(remainList), {path: '/'});
+
     renderObj.docTitle = "提交成功"
     renderObj.type = "1"
     renderObj.responseString = "你的反馈已经成功提交啦！"
