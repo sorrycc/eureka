@@ -211,4 +211,18 @@ io.sockets.on('connection', function (socket) {
             socket.emit('push_open',data);
         }
     })
+
 });
+
+var starSocket;
+
+function sendToJianPin(req) {
+  starSocket.broadcast.emit("jianping", {
+    sessionId: req.params.id,
+    score: req.params.score
+  })
+}
+
+io.of('/stars').on("connection", function(star_socket){
+  starSocket = star_socket;
+})
