@@ -87,7 +87,9 @@ module.exports = {
         },
         get: function(req, res) {
             var id,
-                query = {}
+                query = {
+                    root: req.user._id
+                },
                 options = {};
 
             if (id = req.params.id) {
@@ -95,9 +97,7 @@ module.exports = {
             }
 
             if (!id && !req.user.parties.length) {
-                options: {
-                    limit: 1
-                }
+                options.limit = 1;
             }
 
             db.get({
@@ -125,6 +125,7 @@ module.exports = {
                             , sessions: doc.sessions
                             , listeners: doc.listeners
                             , formatTime: moment(doc.time).format("YYYY-MM-DD")
+                            , isadmin: !options.limit
                         };
                     });
 
@@ -198,6 +199,14 @@ module.exports = {
                         return;
                     }
 
+                    if (!numAffected) {
+                        res.json({
+                            success: false,
+                            message: "party not exist"
+                        });
+                        return;
+                    }
+
                     res.json({
                         success: true,
                         id: id
@@ -227,6 +236,14 @@ module.exports = {
                     res.json({
                         success: false,
                         message: err.message
+                    });
+                    return;
+                }
+
+                if (!numAffected) {
+                    res.json({
+                        success: false,
+                        message: "party not exist"
                     });
                     return;
                 }
