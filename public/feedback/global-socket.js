@@ -4,10 +4,8 @@
  * Time: 下午8:34
  * Description:
  */
-window.socket = io.connect('http://localhost')
-  socket.on('isValid', function(data){
-    console.log("on data", data);
-  })
+window.socket = io.connect('http://localhost');
+//socket.join('room');
 
 KISSY.use("node, cookie", function(S, Node, Cookie){
   var S = KISSY,
