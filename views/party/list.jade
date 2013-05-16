@@ -3,7 +3,7 @@ extends ../layout
 block head
     link(type="text/css", rel="stylesheet", href="/party/css/style.css")
 block content
-    div.panel.party-list#J_PartyList
+    div.panel.party-list#J_PartyList(data-id="#{id}")
     script#J_TemplateParty(type="javascript/template")
         {{#each docs}}
         {{#with this}}
@@ -14,15 +14,19 @@ block content
                         h3.title {{title}}
                         div.party-time 时间: {{formatTime}}
                         div.party-loc 地点: {{location}}
+                        {{#if ../isadmin}}
                         div.party-opts
-                            a.opt.icon-edit(href="/party/edit/{{id}}")
-                            a.opt.icon-del(href="/api/party/del/{{id}}")
+                            a.opt.icon-edit.party-edit(href="/party/edit/{{id}}")
+                            a.opt.icon-del.party-del(href="/api/party/del/{{id}}")
+                        {{/if}}
                     div.session-list-box(id="J_Party{{id}}Session")
+                    {{#if ../isadmin}}
                     div.add-session-bar       
                         a.text.large(href="/session/create?partyId={{../id}}")
                             i.icon-add-session
                             新增一个分享
-                section.flip-back.J_Rotate
+                    {{/if}}
+                section.flip-back.J_Rotate    
                     div.qrcode(data-url="/party/{{id}}")(title="/party/{{id}}")
                 a.icon-code.view-qrcode(href="javascript:;")
         {{/with}}

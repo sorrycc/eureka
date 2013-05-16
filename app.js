@@ -171,11 +171,14 @@ app.get('/api/session/list', function(req, res) {
 // feedback
 // 筱谷
 app.get('/feedback/make/:id', feedback.make);
-app.post('/feedback/make/:id', feedback.post);
+app.post('/feedback/make/:id', function(req, res){
+  sendToJianPin(req);
+  feedback.post(req,res);
+});
 app.get('/feedback/list', function(req, res) {
 });
 //剑平
-app.get('/feedback/result/:partyId/:sessionId', feedback.result);
+app.get('/feedback/result/:sessionId', feedback.result);
 app.post('/feedback/save_count', feedback.save_count);
 
 var server = http.createServer(app);
@@ -198,7 +201,7 @@ io.sockets.on('connection', function (socket) {
     socket.on('setValid', function(data){
       // data 是 session id
       //console.log("fasdf", data);
-      socket.emit('isValid', data);
+      socket.broadcast.emit('isValid', data);
     });
     //监听推送分享管理员推送
     socket.on('push_feedback',function(data){
@@ -211,4 +214,18 @@ io.sockets.on('connection', function (socket) {
             socket.emit('push_open',data);
         }
     })
+
 });
+
+var starSocket;
+
+function sendToJianPin(req) {
+  starSocket.broadcast.emit("jianping", {
+    sessionId: req.params.id,
+    score: req.params.score
+  })
+}
+
+io.of('/stars').on("connection", function(star_socket){
+  starSocket = star_socket;
+})

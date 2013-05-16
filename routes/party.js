@@ -87,17 +87,24 @@ module.exports = {
         },
         get: function(req, res) {
             var id,
-                query = {};
+                query = {},
+                options = {};
 
             if (id = req.params.id) {
                 query.id = id;
             }
 
-            query.root = req.user._id;
+            if (!id && !req.user.parties.length) {
+                options.limit = 1;
+            }
+            else if (!id) {
+                query.root = req.user._id;
+            }
 
             db.get({
                 query: query,
                 collection: "party",
+                options: options,
                 complete: function(err, docs) {
                     if (err) {
                         res.json({
@@ -119,6 +126,7 @@ module.exports = {
                             , sessions: doc.sessions
                             , listeners: doc.listeners
                             , formatTime: moment(doc.time).format("YYYY-MM-DD")
+                            , isadmin: !options.limit
                         };
                     });
 
@@ -192,6 +200,14 @@ module.exports = {
                         return;
                     }
 
+                    if (!numAffected) {
+                        res.json({
+                            success: false,
+                            message: "party not exist"
+                        });
+                        return;
+                    }
+
                     res.json({
                         success: true,
                         id: id
@@ -221,6 +237,14 @@ module.exports = {
                     res.json({
                         success: false,
                         message: err.message
+                    });
+                    return;
+                }
+
+                if (!numAffected) {
+                    res.json({
+                        success: false,
+                        message: "party not exist"
                     });
                     return;
                 }

@@ -128,7 +128,7 @@ module.exports = db = {
        var mod = mongoose.model(collection, schema[collection], collection);
 
        query._deleted = false;
-       options["sort"] = query["sort"] || {id: -1};
+       options["sort"] = options["sort"] || {id: -1};
 
        mod.find(query, null, options, function(err, docs) {
            complete(err, docs);
