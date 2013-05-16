@@ -26,14 +26,13 @@ var isRootFunc = function (plist, current) {
 // 渲染创建新分享页面
 exports.new = function(req, res){
   var partyId,
-    isRoot = isRootFunc(req.user.parties, partyId);
-
-
+    isRoot;
   
   if (req.cookies.partyid === undefined) {
     partyId = req.query.partyId;
     req.cookies.partyid = partyId;
   } else {
+    isRoot = isRootFunc(req.user.parties, partyId);
     partyId = req.cookies.partyid;
   }
 
@@ -71,7 +70,7 @@ exports.create = function(req, res){
 exports.edit = function(req, res){
   var partyId,
     sessionId = req.params.id,
-    isRoot = isRootFunc(req.user.parties, partyId);
+    isRoot;
 
   if (req.cookies.partyid === undefined) {
     partyId = req.query.partyId;
@@ -83,6 +82,7 @@ exports.edit = function(req, res){
   if (partyId === undefined) {
     res.redirect("/party");
   } else {
+    isRoot = isRootFunc(req.user.parties, partyId);
     model.get(req, res, render);  
   }
 
@@ -132,7 +132,7 @@ exports.get = function(req, res){
 exports.del = function(req, res){
   var partyId,
     sessionId = req.params.id,
-    isRoot = isRootFunc(req.user.parties, partyId);
+    isRoot;
 
   if (req.cookies.partyid === undefined) {
     partyId = req.query.partyId;
@@ -144,6 +144,7 @@ exports.del = function(req, res){
   if (partyId === undefined) {
     res.redirect("/party");
   } else {
+    isRoot = isRootFunc(req.user.parties, partyId);
     model.del(req, res, render);
   }
 
@@ -176,7 +177,7 @@ exports.update = function(req, res){
 
 exports.detail = function(req, res) {
   var partyId,
-    isRoot = isRootFunc(req.user.parties, partyId);
+    isRoot;
 
   if (req.cookies.partyid === undefined) {
     partyId = req.query.partyId;
@@ -188,6 +189,7 @@ exports.detail = function(req, res) {
   if (partyId === undefined) {
     res.redirect("/party");
   } else {
+    isRoot = isRootFunc(req.user.parties, partyId);
     model.get(req, res, render);  
   }
   
