@@ -87,9 +87,7 @@ module.exports = {
         },
         get: function(req, res) {
             var id,
-                query = {
-                    root: req.user._id
-                },
+                query = {},
                 options = {};
 
             if (id = req.params.id) {
@@ -98,6 +96,9 @@ module.exports = {
 
             if (!id && !req.user.parties.length) {
                 options.limit = 1;
+            }
+            else if (!id) {
+                query.root = req.user._id;
             }
 
             db.get({
