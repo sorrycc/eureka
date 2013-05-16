@@ -186,6 +186,7 @@ server.listen(app.get('port'), function(){
 });
 
 io.sockets.on('connection', function (socket) {
+//    socket.join('room');
     //监听听众的打分数据
     socket.on('feedback', function (data) {
         //demo data
