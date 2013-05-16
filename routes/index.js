@@ -5,11 +5,14 @@
 
 
 exports.index = function(req, res){
-  res.render('index', {
-      docTitle: 'Express',
-      title: "Express",
-      hasAddIcon: false
-  });
+    res.redirect("/party");
+  /*
+   *res.render('index', {
+   *    docTitle: 'Express',
+   *    title: "Express",
+   *    hasAddIcon: false
+   *});
+   */
 };
 
 exports.login = function(req, res){

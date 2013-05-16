@@ -40,6 +40,7 @@ header h1{color:#fff;text-align:center;height:1.9230769230769231em;line-height:1
 .row .column:first-child,.lastrow .column:first-child{text-align:right;display:block;float:left;background:none;width:25%;}
 .row .column:first-child label,.lastrow .column:first-child label{margin-right:20px}
 .row .column input,.lastrow .column input{line-height:24px;border:0;width:80%}
+.row .column input[type="date"],.lastrow .column input[type="date"],.row .column input[type="time"],.lastrow .column input[type="time"]{width:auto}
 .msg{text-align:center}
 .lastrow .column{padding-top:10px;padding-bottom:10px;}
 .lastrow .column input{width:auto}

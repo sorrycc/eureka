@@ -6,31 +6,30 @@ KISSY.add(function(S, Node,Uri,Count,CountImage,saveCount) {
     return function(){
         var count = new Count('.J_StarCount');
         var countImage = new CountImage('.J_Stars');
-        var host = 'http://'+new Uri(window.location.href).getHostname();
+        var host = 'http://'+new Uri(window.location.href).getHostname()+'/stars';
         var socket = io.connect(host);
-        countImage.show(function(){
-            countImage.set('num',3);
-        })
-        socket.on('feedbackCount', function (data) {
+        socket.on('jianping', function (data) {
             var starNum = data.num;
             //触发统计
             count.count(starNum);
         });
-        //统计推送结束
-        socket.on('push_close',function(data){
-            var num = count.get('value');
-            var people = count.get('time');
-            //星数
-            var starNum = self.get('average');
-            countImage.set('num',starNum);
-            saveCount(num,people);
-        })
         //统计推送开始
         socket.on('push_open',function(data){
             //星数
             count.set('value',data.count);
             //统计的次数
             count.set('time',data.people);
+
+            S.later(function(){
+                var num = count.get('value');
+                var people = count.get('time');
+                //星数
+                var starNum = self.get('average');
+                countImage.show(function(){
+                    countImage.set('num',starNum);
+                })
+                saveCount(num,people);
+            },1000*120);
         })
     }
 }, {requires : ['node','uri','./star-count','./count-image','./save-count']});
