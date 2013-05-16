@@ -25,8 +25,17 @@ var isRootFunc = function (plist, current) {
 
 // 渲染创建新分享页面
 exports.new = function(req, res){
-  var partyId = req.cookies.partyid,
-      isRoot = isRootFunc(req.user.parties, partyId);
+  var partyId,
+    isRoot = isRootFunc(req.user.parties, partyId);
+
+
+  
+  if (req.cookies.partyid === undefined) {
+    partyId = req.query.partyId;
+    req.cookies.partyid = partyId;
+  } else {
+    partyId = req.cookies.partyid;
+  }
 
   if (partyId === undefined) {
     res.redirect("/party");
@@ -60,9 +69,16 @@ exports.create = function(req, res){
 };
 
 exports.edit = function(req, res){
-  var partyId = req.cookies.partyid,
-      sessionId = req.params.id,
-      isRoot = isRootFunc(req.user.parties, partyId);
+  var partyId,
+    sessionId = req.params.id,
+    isRoot = isRootFunc(req.user.parties, partyId);
+
+  if (req.cookies.partyid === undefined) {
+    partyId = req.query.partyId;
+    req.cookies.partyid = partyId;
+  }  else {
+    partyId = req.cookies.partyid;
+  }
 
   if (partyId === undefined) {
     res.redirect("/party");
@@ -114,8 +130,16 @@ exports.get = function(req, res){
 };
 
 exports.del = function(req, res){
-  var partyId = req.cookies.partyid,
-      isRoot = isRootFunc(req.user.parties, partyId);
+  var partyId,
+    sessionId = req.params.id,
+    isRoot = isRootFunc(req.user.parties, partyId);
+
+  if (req.cookies.partyid === undefined) {
+    partyId = req.query.partyId;
+    req.cookies.partyid = partyId;
+  }  else {
+    partyId = req.cookies.partyid;
+  }
 
   if (partyId === undefined) {
     res.redirect("/party");
@@ -151,9 +175,15 @@ exports.update = function(req, res){
 };
 
 exports.detail = function(req, res) {
-  
-  var partyId = req.cookies.partyid || req.query.partyId,
-      isRoot = isRootFunc(req.user.parties, partyId);
+  var partyId,
+    isRoot = isRootFunc(req.user.parties, partyId);
+
+  if (req.cookies.partyid === undefined) {
+    partyId = req.query.partyId;
+    req.cookies.partyid = partyId;
+  }  else {
+    partyId = req.cookies.partyid;
+  }
 
   if (partyId === undefined) {
     res.redirect("/party");
