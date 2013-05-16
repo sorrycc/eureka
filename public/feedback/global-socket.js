@@ -4,7 +4,7 @@
  * Time: 下午8:34
  * Description:
  */
-window.socket = io.connect('http://localhost');
+window.socket = io.connect('http://' + location.host);
 //socket.join('room');
 
 KISSY.use("node, cookie", function(S, Node, Cookie){
