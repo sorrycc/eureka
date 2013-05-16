@@ -29,9 +29,9 @@ block content
         div.column
           &nbsp;
         div.column
-          if isRoot == "true"
+          if isRoot == true
             if type == "created"
-              form(method="post",action="/session/#{id}/")
+              form(method="post",action="/session/#{id}")
                 a.button(href="/session/#{id}/edit") 编辑分享
                 input(type="hidden", name="_method", value="delete")
                 input.button(type="submit", value="删除分享")
@@ -43,7 +43,7 @@ block content
                 input(type="hidden", name="_method", value="delete")
                 input.button(type="submit", value="删除分享")
           else
-            input#J_SessionFeedback.button(type="button", value="提交反馈", disabled="disabled")
+            input#J_SessionFeedback.button(type="button", value="提交反馈", disabled="disabled", id="J_FeedbackBtn")
   script
     KISSY.use("session/view", function(S, View){
         

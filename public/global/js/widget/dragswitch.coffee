@@ -1,4 +1,4 @@
-KISSY.add "widget/dragswitch", (S, Node, Event, UA, SSlog) ->
+KISSY.add "widget/dragswitch", (S, DOM, Node, Event, UA, SSlog) ->
 
   $ = KISSY.all
   defaultConfig =
@@ -22,6 +22,17 @@ KISSY.add "widget/dragswitch", (S, Node, Event, UA, SSlog) ->
 
     constructor: (@el, @config)->
       S.mix @, S.EventTarget
+
+      DOM.addStyleSheet """
+                      .dragswitch-dragging, .dragswitch-dragging * {
+                        -webkit-transition: none !important;
+                        -moz-transition: none !important;
+                        -o-transition: none !important;
+                        -ms-transition: none !important;
+                        transition: none !important;
+                      }
+                      """
+
       @init()
 
     init: ->
@@ -98,6 +109,7 @@ KISSY.add "widget/dragswitch", (S, Node, Event, UA, SSlog) ->
         @isVertical = 1 - @key % 2
         @effectBind = @config.binds[@key]
         return if !@effectBind
+        @effectBind.passed = false
         @moveEls = @effectBind.moveEls
         @actuMoveEls = @moveEls.slice()
         @actuMoveEls.push @originalEl if @effectBind.moveSelf
@@ -145,15 +157,16 @@ KISSY.add "widget/dragswitch", (S, Node, Event, UA, SSlog) ->
       @eventType = null
 
     touchEndHandler: (e)->
-      @fire @eventType + "End", S.mix(e, self: @)
       obj = @effectBind
       if Math.abs(@distance) >= Math.abs(obj.validDistance)
+        obj.passed = true
         if obj.passCallback
           obj.passCallback.call e.target, S.mix(e, self: @)
-        else
-          # 复原
-          @restoreMatrixState()
+      else
+        # 复原
+        @restoreMatrixState()
 #      @restoreMatrixState()
+      @fire @eventType + "End", S.mix(e, self: @)
 
     saveMatrixState: (els)->
       for el in els
@@ -202,6 +215,7 @@ KISSY.add "widget/dragswitch", (S, Node, Event, UA, SSlog) ->
 #        (new WebKitCSSMatrix(currentMatrix)).translate(distance * hori, distance * (1 - hori)).toString()
 
     parseMartix: (currentMatrix)->
+      currentMatrix = "matrix(1,0,0,1,0,0)" if !currentMatrix
       matrix = currentMatrix.match /[0-9\.\-]+/g
       matrix = [1,0,0,1,0,0] if !matrix
       matrix.forEach (item, key)-> matrix[key] = parseFloat(item)
@@ -219,4 +233,4 @@ KISSY.add "widget/dragswitch", (S, Node, Event, UA, SSlog) ->
 
 
 ,
-  requires: ["node", "event", "ua", "widget/sslog"]
+  requires: ["dom", "node", "event", "ua", "widget/sslog"]

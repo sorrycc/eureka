@@ -6,11 +6,12 @@
 .party-info div.party-opts .opt{float:left;margin-top:3.125em;margin-left:4.375em;cursor:pointer}
 .flip-container{-webkit-perspective:10000;-moz-perspective:10000;-ms-perspective:10000;perspective:10000;}
 .flip-container.rotate .flipper{-webkit-transform:rotateY(180deg);-moz-transform:rotateY(180deg);-o-transform:rotateY(180deg);-ms-transform:rotateY(180deg);transform:rotateY(180deg)}
-.flip-container .flipper{width:100%;-webkit-transition:.6s;-moz-transition:.6s;-o-transition:.6s;-ms-transition:.6s;transition:.6s;-webkit-transform-style:preserve-3d;-moz-transform-style:preserve-3d;-o-transform-style:preserve-3d;-ms-transform-style:preserve-3d;transform-style:preserve-3d;position:relative;}
-.flip-container .flipper .front,.flip-container .flipper .back{-webkit-backface-visibility:hidden;-moz-backface-visibility:hidden;-ms-backface-visibility:hidden;backface-visibility:hidden;position:absolute;top:0;left:0;width:100%}
-.flip-container .flipper .front{z-index:0}
-.flip-container .flipper .back{-webkit-transform:rotateY(180deg);-moz-transform:rotateY(180deg);-o-transform:rotateY(180deg);-ms-transform:rotateY(180deg);transform:rotateY(180deg);}
-.flip-container .flipper .back img{width:100%;height:100%}
+.flip-container .flipper{height:100%;width:100%;-webkit-transition:.6s;-moz-transition:.6s;-o-transition:.6s;-ms-transition:.6s;transition:.6s;-webkit-transform-style:preserve-3d;-moz-transform-style:preserve-3d;-o-transform-style:preserve-3d;-ms-transform-style:preserve-3d;transform-style:preserve-3d;position:relative;}
+.flip-container .flipper .flip-front,.flip-container .flipper .flip-back{-webkit-backface-visibility:hidden;-moz-backface-visibility:hidden;-ms-backface-visibility:hidden;backface-visibility:hidden;position:absolute;top:0;left:0;width:100%}
+.flip-container .flipper .flip-front{z-index:0}
+.flip-container .flipper .flip-back{-webkit-transform:rotateY(180deg);-moz-transform:rotateY(180deg);-o-transform:rotateY(180deg);-ms-transform:rotateY(180deg);transform:rotateY(180deg);}
+.flip-container .flipper .flip-back img{width:100%;height:100%}
+.session-list-box{height:100%}
 ul.session-list li{border-bottom:1px solid #dbcccd;margin-bottom:0;position:relative;}
 ul.session-list li .session-info{font-size:.875em;line-height:1.2857142857142858em;display:block;padding:1em;padding-right:0;text-decoration:none;}
 ul.session-list li .session-info span.time{display:block;margin-bottom:5px;color:#58a8c1}
@@ -21,4 +22,6 @@ ul.session-list .entry-list-edit-show .session-opts{visibility:visible !importan
 div.add-session-bar{padding:1em;}
 div.add-session-bar a.text{color:#6c93a0;font-size:1.125em;line-height:1.3333333333333333em;margin-left:5px;text-decoration:none}
 div.add-session-bar a.text i.icon-add-session{margin-right:5px}
-.party-item{overflow:hidden;background:#fff;-webkit-user-select:none}
+.party-item{background:#fff;-webkit-user-select:none}
+.view-qrcode{position:absolute;right:8px;top:8px}
+.qrcode{position:absolute;top:50%;left:50%;margin-top:-128px;margin-left:-128px;width:256px;height:256px}

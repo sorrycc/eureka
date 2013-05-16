@@ -229,6 +229,11 @@ module.exports = {
             "required": true,
             "validate": /\d+/
         },
+        party_id:{
+            "type": Number,
+            "required": true,
+            "validate": /\d+/
+        },
         // 统计更新时间
         timer: {
             "type": Date,
@@ -236,6 +241,11 @@ module.exports = {
         },
         // 分数
         count: {
+            "type": Number,
+            "default":0
+        },
+        //反馈的人数
+        people:{
             "type": Number,
             "default":0
         },

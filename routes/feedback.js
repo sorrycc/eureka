@@ -1,5 +1,6 @@
 
 var db = require("../db");
+var model = require("../models/feedback");
 
 function getTopic(id, callback) {
   db.get({
@@ -11,6 +12,7 @@ function getTopic(id, callback) {
   })
 }
 
+// 观众反馈页面
 exports.make = function(req, res){
   var renderObj = {}
   renderObj.docTitle = "反馈进行时";
@@ -34,6 +36,7 @@ exports.make = function(req, res){
   }
 }
 
+// 观众提交
 exports.post = function(req, res) {
   var renderObj = {};
   var topic = null;
@@ -71,6 +74,16 @@ exports.post = function(req, res) {
         doc     : topic,
         complete: render
       })
+
+      // 删除未评论 Cookie
+      var remainCount = parseInt(req.cookies['remainCount']),
+          remainList = JSON.parse(req.cookies['remainList']);
+      var index = remainList.indexOf(parseInt(req.params.id));
+      if(index >= 0) {
+        remainList.splice(index, 1)
+      }
+      res.cookies['remainCount'] = remainList.length;
+      res.cookies['remainList'] = JSON.parse(remainList);
     }
   }
 
@@ -85,8 +98,17 @@ exports.post = function(req, res) {
  * 管理者查看反馈结果页面
  */
 exports.result = function(req, res){
-    res.render('feedback/result',{
-        docTitle: '查看反馈结果'
+    //获取sessionId
+    model.getSession(req,res,function(result){
+        var data = result[0];
+        req.id = data.id;;
+        model.getcounts(req,res,function(sessions){
+            data.docTitle = '《' + data.title + '》的反馈结果';
+            data.sessions = sessions;
+            data.partyId = req.params.partyId;
+            data.sessionId = req.params.sessionId;
+            res.render('feedback/result',data);
+        })
     })
 }
 /**
