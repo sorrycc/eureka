@@ -116,6 +116,10 @@ module.exports = {
         feedbacks: {
             "type": Array
         },
+        party_id:{
+            "type":Number,
+            "default":1
+        },
         _deleted: {
             "type": Boolean,
             "default": false,

@@ -6,7 +6,7 @@ KISSY.add(function(S, Node,Uri,Count,CountImage,saveCount) {
     return function(){
         var count = new Count('.J_StarCount');
         var countImage = new CountImage('.J_Stars');
-        var host = 'http://'+new Uri(window.location.href).getHostname();
+        var host = 'http://'+new Uri(window.location.href).getHostname()+'/stars';
         var socket = io.connect(host);
         socket.on('feedbackCount', function (data) {
             var starNum = data.num;
