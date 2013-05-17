@@ -71,7 +71,7 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragSwitch, Cookie) {
 
                 if (!elParty || S.trim(elParty.html())) return;
 
-                elParty.parent('.flipper').attr('id', "J_Party" + doc.id);
+                elParty.parent('.party-item').attr('id', "J_Party" + doc.id);
 
                 if (!doc.sessions.length) return;
 
@@ -92,6 +92,8 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragSwitch, Cookie) {
 
                         elParty.append(new XTemplate(self.sessionTpl).render(doc));
                         var scrollView = new iScroll("J_Party" + doc.id);
+
+
                     }
                 });
             });
@@ -240,12 +242,29 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragSwitch, Cookie) {
         *  绑定二维码旋转效果
         */
         bindCodeRotate: function(){
-            E.on('.J_Rotate', 'tap', function(e){
+            
+
+            E.on('.J_Rotate','tap', function(e){
                 var t = e.currentTarget,
-                    p = D.parent(t, '.flip-container');
+                    p = D.parent(t,'.flip-container');
 
                 D.toggleClass(p, 'rotate');
 
+            });
+
+            E.on('.view-qrcode', 'tap', function (e) {
+                var $e = jQuery(this).parents('.flip3d')
+
+                // lazy generate qrcode
+                if (!$e.data("generated")) {
+                    $e.data("generated", true);
+
+                    var $qrcode = $e.find(".qrcode");
+                    $qrcode.qrcode({
+                        //render  : "table",
+                        text  : $qrcode.data("url")
+                    });
+                }
             });
         },
 

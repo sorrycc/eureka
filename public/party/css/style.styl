@@ -15,7 +15,6 @@ mask()
   border-top-left-radius 5px
   border-top-right-radius 5px
   padding 1em
-  position relative
 
   h3
     margin: 0 0  0.5em
@@ -39,28 +38,50 @@ mask()
 
 .flip-container
   perspective: 10000
-  &.rotate .flipper   
+  height: 100%
+  width: 100%
+
+  &.rotate .flip3d
     transform: rotateY(180deg)
-  .flipper
-    height: 100%
-    width: 100%
+
+  .flip3d
     transition: 0.6s;
     transform-style: preserve-3d;
     position: relative;
-    .flip-front, .flip-back
+    width: 100%
+    height: 100%
+
+    .flip3d-front, .flip3d-back
       backface-visibility: hidden;
       position: absolute;
       top: 0;
       left: 0;
-      width: 100%
-    .flip-front
-      z-index: 0;
-    .flip-back
+      width 100%
+      height 100%
+
+    .flip3d-front
+      z-index: 0
+        
+
+    .flip3d-back
       transform: rotateY(180deg);
-      img
-        width: 100%
-        height: 100%
+      background-color: white;
+
+      .qrcode-container
+        position: absolute
+        left: 50%
+        top: 50%
+        .qrcode
+          margin-left: -50%
+          margin-top: -50%
+
+// qrcode
+.view-qrcode
+  position: absolute
+  right: 8px
+  top: 8px
       
+
 
 .session-list-box
   height: 100%
@@ -119,17 +140,6 @@ div.add-session-bar
 
 
 
-// qrcode
-.view-qrcode
-  position: absolute
-  right: 8px
-  top: 8px
 
-.qrcode
-  position: absolute
-  top: 50%
-  left: 50%
-  margin-top: -128px
-  margin-left: -128px
-  width: 256px
-  height: 256px
+
+

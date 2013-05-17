@@ -90,6 +90,8 @@ module.exports = {
                 query = {},
                 options = {};
 
+            var host = req.get('host');
+
             if (id = req.params.id) {
                 query.id = id;
             }
@@ -127,6 +129,7 @@ module.exports = {
                             , listeners: doc.listeners
                             , formatTime: moment(doc.time).format("YYYY-MM-DD")
                             , isadmin: !options.limit
+                            , host: host
                         };
                     });
 
