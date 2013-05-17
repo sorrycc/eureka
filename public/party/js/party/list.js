@@ -298,7 +298,6 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragSwitch, Cookie) {
                 var t = e.currentTarget;
 
                 if(e.type == 'touchstart'){
-                    
                     tapTimer = setTimeout(function(){
                         isTapHold = true;
                         tapHoldHandler(t);
