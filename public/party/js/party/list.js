@@ -167,7 +167,7 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragSwitch, Cookie) {
               null,
               {
                 moveEls       : ["#J_PartyList"],
-                maxDistance   : -D.viewportWidth(),
+                maxDistance   : $('.mainCard').length > 1 ? -D.viewportWidth() : -1,
                 validDistance : -D.viewportWidth()/2,
                 passCallback  : function(ev){
                   //$(ev.self.originalEl).addClass @dragSwitchConfig.rightClass
