@@ -29,10 +29,10 @@ body{background-color:#58a8c1}
 header{position:absolute;width:100%;background-color:#303030;height:3.125em;z-index:9999;}
 header a.back-icon-wrapper{border-color:#fff #303030 #303030 #fff;border-width:1.5625em;border-style:solid;height:0;width:0;line-height:0;position:absolute;top:0;left:0;}
 header a.back-icon-wrapper .icon-back{position:absolute;top:-13px;left:-20px}
-header a.icon-add{position:absolute;top:.625em;right:1.25em}
+header a.icon-add{position:absolute;top:.375em;right:1.25em}
 header h1{color:#fff;text-align:center;height:1.9230769230769231em;line-height:1.9230769230769231em}
 .panel{height:100%;white-space:nowrap;-webkit-transition:-webkit-transform .3s ease-out 0;-moz-transition:-moz-transform .3s ease-out 0;-o-transition:-o-transform .3s ease-out 0;-ms-transition:-ms-transform .3s ease-out 0;transition:transform .3s ease-out 0}
-.mainCard{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;height:100%;overflow:auto;-webkit-overflow-scrolling:touch;padding:4em 3em;display:inline-block;width:100%;vertical-align:top}
+.mainCard{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;height:100%;overflow:auto;-webkit-overflow-scrolling:touch;padding:4.8em 1.3em 1.3em;display:inline-block;width:100%;vertical-align:top}
 .submitStatus{padding:30px;color:#333;text-align:center}
 .button{color:#fff;font-size:20px;background-color:#303030;padding:7px 20px;border:0 none;margin:0 20px 0 0;line-height:20px;cursor:pointer}
 .row,.lastrow{line-height:40px;border-bottom:1px solid #ccc;background:#d7f2fb;color:#333;}
