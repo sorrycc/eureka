@@ -7,8 +7,19 @@
  * @todo: 
  * @changelog: 
  */
-KISSY.add("party/list", function(S, Ajax, XTemplate, DragSwitch, Cookie) {
+KISSY.add("party/list", function(S, UA, Ajax, XTemplate, DragSwitch, Cookie) {
     var D = S.DOM, E = S.Event;
+
+
+    var prefix = (function(){
+      if(UA.webkit) return "-webkit-"
+      else if(UA.firefox) return "-moz-"
+      else if(UA.opera) return "-o-"
+      else if(UA.ie) return "-ms-"
+      else return ""
+    })()
+
+
     var List = function(opt) {
         if (!(this instanceof List)) return new List(opt);
 
@@ -170,7 +181,6 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragSwitch, Cookie) {
                 maxDistance   : $('.mainCard').length > 1 ? -D.viewportWidth() : -1,
                 validDistance : -D.viewportWidth()/2,
                 passCallback  : function(ev){
-                  //$(ev.self.originalEl).addClass @dragSwitchConfig.rightClass
                   //$(ev.self.originalEl)[0].style.webkitTransform = ""
                 },
                 failCallback  : null,
@@ -185,8 +195,7 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragSwitch, Cookie) {
                 maxDistance   : 1,
                 validDistance : D.viewportWidth()/2,
                 passCallback  : function(ev){
-                           //$(ev.self.originalEl).addClass @dragSwitchConfig.leftClass
-                  $(ev.self.originalEl)[0].style.webkitTransform = ""
+                  //$(ev.self.originalEl)[0].style.webkitTransform = ""
                 },
                 failCallback  : null,
                 checkvalid    : function(ev){
@@ -203,25 +212,27 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragSwitch, Cookie) {
           function next(){
             if(currentIndex == count - 1) return
             currentIndex++
-            $("#J_PartyList").css('-webkit-transform', "translateX(-" + currentIndex + "00%)")
+            $("#J_PartyList").css(prefix + 'transform', "translateX(-" + currentIndex + "00%)")
             if(currentIndex == count - 1) {
               DS.config.binds[1].maxDistance = -1
               DS.config.binds[3].maxDistance = D.viewportWidth()
             }
             else {
               DS.config.binds[1].maxDistance = -D.viewportWidth()
+              DS.config.binds[3].maxDistance = D.viewportWidth()
             }
           }
           function prev(){
             if(currentIndex == 0) return
             currentIndex--
-            $("#J_PartyList").css('transform', "translate(" + currentIndex + "00% 0)")
+            $("#J_PartyList").css(prefix + 'transform', "translateX(-" + currentIndex + "00%)")
             if(currentIndex == 0) {
               DS.config.binds[3].maxDistance = 1
               DS.config.binds[1].maxDistance = -D.viewportWidth()
             }
             else {
               DS.config.binds[3].maxDistance = D.viewportWidth()
+              DS.config.binds[1].maxDistance = -D.viewportWidth()
             }
           }
 
@@ -341,5 +352,5 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragSwitch, Cookie) {
     return List;
 
 }, {
-    requires: ["ajax", "xtemplate", "widget/dragswitch", "cookie"]
+    requires: ["ua", "ajax", "xtemplate", "widget/dragswitch", "cookie"]
 });
