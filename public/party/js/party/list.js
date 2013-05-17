@@ -71,7 +71,7 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragSwitch, Cookie) {
 
                 if (!elParty || S.trim(elParty.html())) return;
 
-                elParty.parent('.flipper').attr('id', "J_Party" + doc.id);
+                elParty.parent('.party-item').attr('id', "J_Party" + doc.id);
 
                 if (!doc.sessions.length) return;
 
@@ -92,6 +92,8 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragSwitch, Cookie) {
 
                         elParty.append(new XTemplate(self.sessionTpl).render(doc));
                         var scrollView = new iScroll("J_Party" + doc.id);
+
+
                     }
                 });
             });
@@ -246,6 +248,21 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragSwitch, Cookie) {
 
                 D.toggleClass(p, 'rotate');
 
+            });
+
+            E.on('.view-qrcode', 'tap', function (e) {
+                var $e = jQuery(this).parent();
+
+                // lazy generate qrcode
+                if (!$e.data("generated")) {
+                    $e.data("generated", true);
+
+                    var $qrcode = $e.find(".qrcode");
+                    $qrcode.qrcode({
+                        //render  : "table",
+                        text  : $qrcode.data("url")
+                    });
+                }
             });
         },
 

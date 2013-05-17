@@ -7,13 +7,14 @@ block content
     script#J_TemplateParty(type="javascript/template")
         {{#each docs}}
         {{#with this}}
-        div.mainCard.flip-container
-            div.flipper
-                section.party-item.flip-front
+        div.mainCard.flip-container(ontouchstart="this.classList.toggle('hover');")
+            div.flip3d
+                section.party-item.flip3d-front
                     article.party-info.J_PartyOpts
                         h3.title {{title}}
                         div.party-time 时间: {{formatTime}}
                         div.party-loc 地点: {{location}}
+                        a.icon-code.view-qrcode.J_Rotate(href="javascript:;")
                         {{#if ../isadmin}}
                         div.party-opts
                             a.opt.icon-edit.party-edit(href="/party/edit/{{id}}")
@@ -26,9 +27,10 @@ block content
                             i.icon-add-session
                             新增一个分享
                     {{/if}}
-                section.flip-back.J_Rotate    
-                    div.qrcode(data-url="/party/{{id}}")(title="/party/{{id}}")
-                a.icon-code.view-qrcode(href="javascript:;")
+                section.flip3d-back.J_Rotate  
+                    div.qrcode(data-url="http://{{host}}/party/{{id}}")(title="http://{{host}}/party/{{id}}")
+                    
+                
         {{/with}}
         {{/each}}
 
