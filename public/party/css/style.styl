@@ -65,7 +65,15 @@ mask()
 
     .flip3d-back
       transform: rotateY(180deg);
+      background-color: white;
 
+      .qrcode-container
+        position: absolute
+        left: 50%
+        top: 50%
+        .qrcode
+          margin-left: -50%
+          margin-top: -50%
 
 // qrcode
 .view-qrcode

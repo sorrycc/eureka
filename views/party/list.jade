@@ -8,7 +8,7 @@ block content
         {{#each docs}}
         {{#with this}}
         div.mainCard.flip-container
-            div.flip3d.flipper
+            div.flip3d
                 section.party-item.flip3d-front
                     article.party-info.J_PartyOpts
                         h3.title {{title}}
@@ -27,8 +27,9 @@ block content
                             i.icon-add-session
                             新增一个分享
                     {{/if}}
-                section.flip3d-back.J_Rotate  
-                    div.qrcode(data-url="http://{{host}}/party/{{id}}")(title="http://{{host}}/party/{{id}}")
+                section.flip3d-back.J_Rotate
+                    div.qrcode-container  
+                        div.qrcode(data-url="http://{{host}}/party/{{id}}")(title="http://{{host}}/party/{{id}}")
                     
         {{/with}}
         {{/each}}

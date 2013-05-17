@@ -253,7 +253,7 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragSwitch, Cookie) {
             });
 
             E.on('.view-qrcode', 'tap', function (e) {
-                var $e = jQuery(this).parent();
+                var $e = jQuery(this).parents('.flip3d')
 
                 // lazy generate qrcode
                 if (!$e.data("generated")) {
