@@ -240,12 +240,22 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragSwitch, Cookie) {
         *  绑定二维码旋转效果
         */
         bindCodeRotate: function(){
-            E.on('.J_Rotate', 'tap', function(e){
-                var t = e.currentTarget,
-                    p = D.parent(t, '.flip-container');
+            E.on('.view-qrcode', 'click', function (e) {
+                var $e = jQuery(this).parent();
 
-                D.toggleClass(p, 'rotate');
+                // flip
+                $e.toggleClass("flip3d-flipped");
 
+                // lazy generate qrcode
+                if (!$e.data("generated")) {
+                    $e.data("generated", true);
+
+                    var $qrcode = $e.find(".qrcode");
+                    $qrcode.qrcode({
+                        //render  : "table",
+                        text  : $qrcode.data("url")
+                    });
+                }
             });
         },
 

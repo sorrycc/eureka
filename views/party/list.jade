@@ -8,8 +8,8 @@ block content
         {{#each docs}}
         {{#with this}}
         div.mainCard.flip-container
-            div.flipper
-                section.party-item.flip-front
+            div.flip3d.flipper
+                section.party-item.flip3d-front
                     article.party-info.J_PartyOpts
                         h3.title {{title}}
                         div.party-time 时间: {{formatTime}}
@@ -26,9 +26,11 @@ block content
                             i.icon-add-session
                             新增一个分享
                     {{/if}}
-                section.flip-back.J_Rotate    
+                ///.flip3d-front
+                section.flip3d-back
                     div.qrcode(data-url="/party/{{id}}")(title="/party/{{id}}")
                 a.icon-code.view-qrcode(href="javascript:;")
+            ///.flip3d
         {{/with}}
         {{/each}}
 
