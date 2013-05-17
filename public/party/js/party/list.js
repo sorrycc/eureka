@@ -311,7 +311,10 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragSwitch, Cookie) {
             }
 
             var isTapHold = false;
-
+            var touchIsMove = false;
+           E.delegate('.session-list-box','touchmove', '.J_SessionOpts', function(){
+             touchIsMove = true;
+           });
 
            E.delegate('.session-list-box','touchstart touchend', '.J_SessionOpts', function(e){     
                 var t = e.currentTarget;
@@ -323,7 +326,7 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragSwitch, Cookie) {
                     },1000);
                 }else{
                     clearTimeout(tapTimer);
-                    if(!isTapHold){
+                    if(!isTapHold && !touchIsMove){
                         tapHandler(t);
                     }
                     isTapHold = false;
