@@ -242,9 +242,11 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragSwitch, Cookie) {
         *  绑定二维码旋转效果
         */
         bindCodeRotate: function(){
-            E.on('.J_Rotate', 'tap', function(e){
+            
+
+            E.on('.J_Rotate','tap', function(e){
                 var t = e.currentTarget,
-                    p = D.parent(t, '.flip-container');
+                    p = D.parent(t,'.flip-container');
 
                 D.toggleClass(p, 'rotate');
 

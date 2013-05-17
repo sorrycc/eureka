@@ -7,8 +7,8 @@ block content
     script#J_TemplateParty(type="javascript/template")
         {{#each docs}}
         {{#with this}}
-        div.mainCard.flip-container(ontouchstart="this.classList.toggle('hover');")
-            div.flip3d
+        div.mainCard.flip-container
+            div.flip3d.flipper
                 section.party-item.flip3d-front
                     article.party-info.J_PartyOpts
                         h3.title {{title}}
@@ -30,7 +30,6 @@ block content
                 section.flip3d-back.J_Rotate  
                     div.qrcode(data-url="http://{{host}}/party/{{id}}")(title="http://{{host}}/party/{{id}}")
                     
-                
         {{/with}}
         {{/each}}
 
