@@ -99,12 +99,17 @@ KISSY.add("party/list", function(S, UA, Ajax, XTemplate, DragSwitch, Cookie) {
                             return;
                         }
 
+                        // bugfix for xtemplate
+                        // @see: https://github.com/kissyteam/kissy/issues/356
+                        S.each(d.docs, function(session, index) {
+                            session.pid = doc.id;
+                        });
+
                         doc.sessions = d.docs;
 
                         elParty.append(new XTemplate(self.sessionTpl).render(doc));
+
                         var scrollView = new iScroll("J_Party" + doc.id);
-
-
                     }
                 });
             });

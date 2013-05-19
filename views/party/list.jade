@@ -6,7 +6,6 @@ block content
     div.panel.party-list#J_PartyList(data-id="#{id}")
     script#J_TemplateParty(type="javascript/template")
         {{#each docs}}
-        {{#with this}}
         div.mainCard.flip-container
             div.flip3d
                 section.party-item.flip3d-front
@@ -16,15 +15,15 @@ block content
                             div.party-time 时间: {{formatTime}}
                             div.party-loc 地点: {{location}}
                             a.icon-code.view-qrcode.J_Rotate(href="javascript:;")
-                            {{#if ../isadmin}}
+                            {{#if isadmin}}
                             div.party-opts
                                 a.opt.icon-edit.party-edit(href="/party/edit/{{id}}")
                                 a.opt.icon-del.party-del(href="/api/party/del/{{id}}")
                             {{/if}}
                         div.session-list-box(id="J_Party{{id}}Session")
-                        {{#if ../isadmin}}
+                        {{#if isadmin}}
                         div.add-session-bar       
-                            a.text.large(href="/session/create?partyId={{../id}}")
+                            a.text.large(href="/session/create?partyId={{id}}")
                                 i.icon-add-session
                                 新增一个分享
                         {{/if}}
@@ -32,20 +31,19 @@ block content
                     div.qrcode-container  
                         div.qrcode(data-url="http://{{host}}/party/{{id}}")(title="http://{{host}}/party/{{id}}")
                     
-        {{/with}}
         {{/each}}
 
     script#J_TemplateSession(type="javascript/template")
         ul.session-list
             {{#each sessions}}
-            li.J_SessionOpts.ks-draglist-item(data-url="/session/{{id}}/?partyId={{../id}}")
+            li.J_SessionOpts.ks-draglist-item(data-url="/session/{{id}}/?partyId={{pid}}")
                 span.icon-feedback(id="J_Feedback{{id}}")
                 span.session-info
                     span.time {{from}} - {{to}}
                     span.title {{title}}
                 div.session-opts
-                    a.opt.icon-add-session(href="/session/create?partyId={{../id}}")
-                    a.opt.icon-edit(href="/session/{{id}}/edit?partyId={{../id}}")
+                    a.opt.icon-add-session(href="/session/create?partyId={{pid}}")
+                    a.opt.icon-edit(href="/session/{{id}}/edit?partyId={{pid}}")
                     a.opt.icon-del(href="/session/del/{{id}}")
                     a.opt.icon-push(href="javascript:void(0)",data-id="{{id}}")
             {{/each}}
