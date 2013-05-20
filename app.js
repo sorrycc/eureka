@@ -160,6 +160,8 @@ app.get('/session/:id', session.detail);
 app.get('/session/:id/edit', session.edit);
 app.post('/session/:id/edit', session.update);
 app.del('/session/:id', session.del);
+//保存推送开始时间 by 剑平
+app.post('/session/start_feedback_time/:id', session.startFeedbackTime);
 
 // 水儿
 // get sessions by party id
@@ -180,6 +182,7 @@ app.get('/feedback/list', function(req, res) {
 //剑平
 app.get('/feedback/result/:sessionId', feedback.result);
 app.post('/feedback/save_count', feedback.save_count);
+app.post('/feedback/get_status/:sessionId', feedback.getStatus);
 
 var server = http.createServer(app);
 var io = require('socket.io').listen(server);
@@ -189,18 +192,8 @@ server.listen(app.get('port'), function(){
 });
 
 io.sockets.on('connection', function (socket) {
-//    socket.join('room');
-    //监听听众的打分数据
-    socket.on('feedback', function (data) {
-        //demo data
-        //TODO:
-        var data = {sessionId:1,userId:33,starNum:3,feedbackContent:"PPT不够华丽"};
-        //将数据推送给管理者界面显示统计结果
-        socket.emit('feedbackCount', data);
-    });
     socket.on('setValid', function(data){
       // data 是 session id
-      //console.log("fasdf", data);
       socket.broadcast.emit('isValid', data);
     });
     //监听推送分享管理员推送

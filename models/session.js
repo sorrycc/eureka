@@ -130,3 +130,32 @@ exports.post = function(req, res, render) {
 	    }
 	});
 }
+exports.updateStartFeedbackTime=function(req, res, render){
+    var _query = {
+        id : req.params.id
+    };
+    //当前时间戳
+    var time = Date.parse(new Date());
+    db.post({
+        query: _query,
+        collection: "session",
+        doc: {
+            start_feedback_time: time,
+            state: 1,
+            _deleted: false
+        },
+        options: {
+            multi: true
+        },
+        complete: function(err, numAffected) {
+            if (err) {
+                console.log(err.message);
+                res.send('{"status":0,"message":"'+err.message+'"}');
+                return;
+            } else {
+                res.send('{"status":1,"time":'+time+'}');
+                render(numAffected);
+            }
+        }
+    });
+}
