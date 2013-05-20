@@ -1,5 +1,8 @@
 extends ../layout
 
+block head
+    link(type="text/css", rel="stylesheet", href="/session/css/style.css")
+
 block content
   //div.bar
   //  h1 #{docTitle}
@@ -14,7 +17,7 @@ block content
         div.column
           label 分享者
         div.column
-          span #{speakers}
+          span.J_Speakers #{speakers}
       div.row
         div.column
           label 时间
