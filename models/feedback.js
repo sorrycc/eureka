@@ -201,6 +201,12 @@ exports.isExist = function(session_id,render){
         }
     });
 }
+/**
+ * 获取反馈推送起始时间
+ * @param req
+ * @param res
+ * @return {boolean}
+ */
 exports.getStartFeedbackTime = function(req,res){
     var sessionId = req.params.sessionId;
     if(!sessionId){
@@ -210,4 +216,19 @@ exports.getStartFeedbackTime = function(req,res){
     this.getSession(sessionId,res,function(session){
         res.send('{"status":'+session[0].state+',"start_feedback_time":"'+session[0].start_feedback_time+'"}');
     })
+}
+
+exports.getCount = function(sessionId,render){
+    if(!sessionId){
+        console.log('缺少session-id');
+        return false;
+    }
+    db.get({
+        query: {session_id:sessionId},
+        collection: COUNT_COLLECTION,
+        complete:function(err, docs){
+            console.log(docs);
+            render(docs);
+        }
+    });
 }

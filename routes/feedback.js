@@ -82,8 +82,11 @@ exports.post = function(req, res) {
   function render(err, numAffected) {
 
     // 删除未评论 Cookie
-    var remainCount = parseInt(req.cookies['remainCount']),
-      remainList = JSON.parse(req.cookies['remainList']);
+    var remainCount_str = req.cookies['remainCount'],
+        remainList_str  = req.cookies['remainList'];
+    var remainCount = remainCount_str ? parseInt(remainCount_str) : 0,
+        remainList = remainList_str ? JSON.parse(remainList_str) : [];
+
     var index = remainList.indexOf(parseInt(req.params.id));
     if(index >= 0) {
       remainList.splice(index, 1)
@@ -116,13 +119,22 @@ exports.result = function(req, res){
             var data = result[0];
             req.id = data.id;
             req.partyId = partyId;
-            model.getcounts(req,res,function(sessions){
-                data.docTitle = '《' + data.title + '》的反馈结果';
-                data.sessions = sessions;
-                data.partyId = req.params.partyId;
-                data.sessionId = req.params.sessionId;
-                res.render('feedback/result',data);
-            })
+
+            model.getCount(sessionId,function(result){
+                if(result.length){
+                    //得分
+                    data.count = result[0].count;
+                    //次数
+                    data.people = result[0].people;
+                }
+                model.getcounts(req,res,function(sessions){
+                    data.docTitle = '《' + data.title + '》的反馈结果';
+                    data.sessions = sessions;
+                    data.partyId = req.params.partyId;
+                    data.sessionId = req.params.sessionId;
+                    res.render('feedback/result',data);
+                })
+            });
         })
     }
 }

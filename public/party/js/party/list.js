@@ -108,8 +108,6 @@ KISSY.add("party/list", function (S, UA, Ajax, XTemplate, Uri, DragSwitch, Cooki
 
                         doc.sessions = d.docs;
 
-                        console.log(doc)
-
                         elParty.append(new XTemplate(self.sessionTpl).render(doc));
 
                         var scrollView = new iScroll("J_Party" + doc.id);
@@ -219,12 +217,14 @@ KISSY.add("party/list", function (S, UA, Ajax, XTemplate, Uri, DragSwitch, Cooki
             });
             var count = $('.mainCard').length,
                 currentIndex = 0,
-                nextIndex = null;
+                nextIndex = null,
+                cardWidth = $('.mainCard')[0].offsetWidth,
+                offsetWidth = D.viewportWidth() - cardWidth;
 
             function next() {
                 if (currentIndex == count - 1) return
                 currentIndex++
-                $("#J_PartyList").css(prefix + 'transform', "translateX(-" + currentIndex + "00%)")
+                $("#J_PartyList").css(prefix + 'transform', "translateX(-" + (currentIndex * cardWidth) + "px)")
                 if (currentIndex == count - 1) {
                     DS.config.binds[1].maxDistance = -1
                     DS.config.binds[3].maxDistance = D.viewportWidth()
@@ -238,7 +238,7 @@ KISSY.add("party/list", function (S, UA, Ajax, XTemplate, Uri, DragSwitch, Cooki
             function prev() {
                 if (currentIndex == 0) return
                 currentIndex--
-                $("#J_PartyList").css(prefix + 'transform', "translateX(-" + currentIndex + "00%)")
+                $("#J_PartyList").css(prefix + 'transform', "translateX(-" + (currentIndex * cardWidth) + "px)")
                 if (currentIndex == 0) {
                     DS.config.binds[3].maxDistance = 1
                     DS.config.binds[1].maxDistance = -D.viewportWidth()
@@ -311,13 +311,6 @@ KISSY.add("party/list", function (S, UA, Ajax, XTemplate, Uri, DragSwitch, Cooki
          * session taphold 效果
          */
         sessionTapHoldEvt: function () {
-
-//
-//          var dragList = new DragList(".party-item", {
-//            enableScrollView  : true,
-//            enableDragSwitch  : false,
-//            enableTapHold     : true,
-//          })
 
             function tapHandler(t) {
                 window.location.href = D.attr(t, 'data-url');

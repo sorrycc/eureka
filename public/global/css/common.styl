@@ -53,36 +53,6 @@ header
   transition(transform .3s ease-out 0s)
 
 
-///* panel */
-//
-///* iPad 及以下，以及所有小于（不等于）960宽度的平板电脑 */
-//@media only screen and (max-width: 959px)
-//  .panel
-//    height: 80%
-//
-//
-///* 仅iPad 竖版，以及所有小于（不等于）标准960宽度的平板电脑的竖版 */
-//@media only screen and (min-width: 768px) and (max-width: 959px)
-//  .panel
-//    height: 96%
-//
-//
-///* iPhone 及以下 */
-//@media only screen and (max-width: 767px)
-//  .panel
-//    height: 85%
-//
-///* 仅iPhone 横版，包括某些平板电脑的竖版 */
-//@media only screen and (min-width: 480px) and (max-width: 767px)
-//  .panel
-//    height: 85%
-//
-//
-///* 仅iphone4 竖版 */
-//@media only screen and (max-width: 479px)
-//  .panel
-//    height: 90%
-
 .mainCard
   box-sizing(border-box)
   height: 100%
@@ -90,13 +60,11 @@ header
   -webkit-overflow-scrolling: touch
   padding: 4.8em 1.3em 1.3em
   display: inline-block
-  width: 100%
+  width: 90% !important
   vertical-align: top
 
-.submitStatus
-  padding: 30px
-  color: #333
-  text-align: center
+.mainCard:first-child 
+  width: 90% !important
 
 
 //.main

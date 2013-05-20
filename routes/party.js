@@ -89,22 +89,22 @@ module.exports = {
             var id,
                 query = {},
                 options = {},
-                isadmin = false;
+                isadmin = true;
 
             var host = req.get('host');
 
             if (id = req.params.id) {
                 query.id = id;
 
-
                 isadmin = false;
                 req.user.parties.forEach(function(pid) {
-                    isadmin = isadmin || pid === id;
+                    isadmin = isadmin || pid === parseInt(id, 10);
                 });
             }
 
             if (!id && !req.user.parties.length) {
                 options.limit = 1;
+                isadmin = false;
             }
             else if (!id) {
                 query.root = req.user._id;
