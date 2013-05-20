@@ -17,7 +17,7 @@ KISSY.add("party/list", function (S, UA, Ajax, XTemplate, Uri, DragSwitch, Cooki
         else if (UA.opera) return "-o-"
         else if (UA.ie) return "-ms-"
         else return ""
-    })()
+    })();
 
 
     var List = function (opt) {
