@@ -126,7 +126,7 @@ KISSY.add("party/list", function(S, UA, Ajax, XTemplate, DragSwitch, Cookie) {
                 var el = S.all(evt.currentTarget),
                     url = el.attr("href");
 
-                evt.halt();
+                // evt.halt();
 
                 if (!url) return;
 
@@ -147,7 +147,7 @@ KISSY.add("party/list", function(S, UA, Ajax, XTemplate, DragSwitch, Cookie) {
                 });
             });
 
-            E.on(document, 'click tap tapHold', function(e){
+            E.on(document, 'tap', function(e){
                 if(!D.parent(e.target, '.J_PartyOpts') && !D.parent(e.target, '.party-opts')){
                     D.css('.party-opts', 'visibility', 'hidden');
                 }
@@ -159,7 +159,7 @@ KISSY.add("party/list", function(S, UA, Ajax, XTemplate, DragSwitch, Cookie) {
             E.delegate('body', 'tap', '.icon-push', function(ev){
               var id = D.attr(ev.target, 'data-id');
               socket.emit('setValid', id)
-            })
+            });
 
             var self = this;
             self.partyTapHoldEvt();
