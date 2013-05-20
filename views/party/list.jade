@@ -41,11 +41,13 @@ block content
                 span.session-info
                     span.time {{from}} - {{to}}
                     span.title {{title}}
+                {{#if isadmin}}
                 div.session-opts
                     a.opt.icon-add-session(href="/session/create?partyId={{pid}}")
                     a.opt.icon-edit(href="/session/{{id}}/edit?partyId={{pid}}")
                     a.opt.icon-del(href="/session/del/{{id}}")
                     a.opt.icon-push(href="javascript:void(0)",data-id="{{id}}")
+                {{/if}}
             {{/each}}
         
     script(src="/party/js/jquery-qrcode.min.js")

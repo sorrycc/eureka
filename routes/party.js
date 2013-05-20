@@ -88,12 +88,19 @@ module.exports = {
         get: function(req, res) {
             var id,
                 query = {},
-                options = {};
+                options = {},
+                isadmin = false;
 
             var host = req.get('host');
 
             if (id = req.params.id) {
                 query.id = id;
+
+
+                isadmin = false;
+                req.user.parties.forEach(function(pid) {
+                    isadmin = isadmin || pid === id;
+                });
             }
 
             if (!id && !req.user.parties.length) {
@@ -128,7 +135,7 @@ module.exports = {
                             , sessions: doc.sessions
                             , listeners: doc.listeners
                             , formatTime: moment(doc.time).format("YYYY-MM-DD")
-                            , isadmin: !options.limit
+                            , isadmin: isadmin
                             , host: host
                         };
                     });

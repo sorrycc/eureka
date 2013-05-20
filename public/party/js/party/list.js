@@ -103,9 +103,12 @@ KISSY.add("party/list", function (S, UA, Ajax, XTemplate, Uri, DragSwitch, Cooki
                         // @see: https://github.com/kissyteam/kissy/issues/356
                         S.each(d.docs, function (session, index) {
                             session.pid = doc.id;
+                            session.isadmin  = doc.isadmin;
                         });
 
                         doc.sessions = d.docs;
+
+                        console.log(doc)
 
                         elParty.append(new XTemplate(self.sessionTpl).render(doc));
 
