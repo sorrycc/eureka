@@ -37,7 +37,7 @@ KISSY.use("node, cookie", function(S, Node, Cookie){
     var url = '';
     var partyId = Cookie.get('partyid');
     if(len == 1) {
-      url = '/session/' + remainList[0];
+      url = '/feedback/make/' + remainList[0];
     }
     else if (location.href.indexOf('/party') >= 0){
       location.reload();

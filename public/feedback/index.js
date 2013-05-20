@@ -8,11 +8,11 @@ KISSY.use("event, node", function(S, Event, Node){
       all.removeClass('icon-star-solid');
       all.addClass("icon-star-hollow");
       var index = $(ev.target).index()
-      for(var i = 0; i <= index; i++) {
+      for(var i = 0; i < index; i++) {
         $(all[i]).addClass('icon-star-solid')
         $(all[i]).removeClass('icon-star-hollow')
       }
-      $('#J_Score').val(index + 1)
+      $('#J_Score').val(index)
     })
 
   })

@@ -152,10 +152,16 @@ module.exports = {
         score: {
             "type": Number
         },
+        // 建议
         advise: {
             "type": String
         },
+        //
         creator: {
+            "type": Schema.ObjectId
+        },
+        //
+        session: {
             "type": Schema.ObjectId
         },
         _deleted: {

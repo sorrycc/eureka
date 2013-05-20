@@ -52,8 +52,9 @@ exports.post = function(req, res) {
     }
 
     // 暂时用分享的id 代替作者 id
-    dataObj.creator = req.user.ObjectId
-
+    dataObj.creator = req.user._id;
+    dataObj.session = topic._id;
+    console.log("DDDDD", dataObj);
 
     db.put({
       doc       : dataObj,
