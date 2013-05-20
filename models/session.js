@@ -141,8 +141,7 @@ exports.updateStartFeedbackTime=function(req, res, render){
         collection: "session",
         doc: {
             start_feedback_time: time,
-            state: 1,
-            _deleted: false
+            state: 1
         },
         options: {
             multi: true

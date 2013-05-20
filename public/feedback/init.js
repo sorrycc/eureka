@@ -8,27 +8,38 @@ KISSY.add(function(S, Node,Uri,Count,CountImage,saveCount) {
         var countImage = new CountImage('.J_Stars');
         var host = 'http://'+new Uri(window.location.href).getHostname();
         var socket = io.connect(host+'/stars');
+        //监听用户的反馈提交
         socket.on('jianping', function (data) {
             var starNum = data.score;
             //触发统计
             count.count(starNum);
         });
-/*        S.later(function(){
-            var sessionId = Number($('#J_SessionId').val());
-            S.io.get('http://'+new Uri(window.location.href).getHostname()+'/feedback/get_status/'+sessionId,function(data){
-                if(data.status == 1){
-                    S.later(function(){
+
+        /**
+         * 定时判断是否已经可以开始统计
+         */
+        var timer = setInterval(function(){
+            S.io.get('http://'+new Uri(window.location.href).getHostname()+'/feedback/get_start_feedback_time/'+2,function(data){
+                var time = data.start_feedback_time;
+                if(data.status >=1 && time>0){
+                    var now = S.now();
+                    var t = now - time;
+                    //超过二分钟
+                    var isExceed = t >= 2*60*1000;
+                    if(isExceed){
                         var num = count.get('value');
                         var people = count.get('time');
                         //星数
-                        var starNum = self.get('average');
+                        var starNum = count.get('average');
                         countImage.show(function(){
                             countImage.set('num',starNum);
                         })
                         saveCount(num,people);
-                    },1000*120)
+                        //清理定时轮询
+                        clearInterval(timer);
+                    }
                 }
             },'json');
-        },200);*/
+        },500);
     }
 }, {requires : ['node','uri','./star-count','./count-image','./save-count']});
