@@ -155,7 +155,7 @@ KISSY.add("party/list", function (S, UA, Ajax, XTemplate, Uri, DragSwitch, Cooki
                 });
             });
 
-            E.on(document, 'click tap', function (e) {
+            E.on(document, 'tap', function (e) {
                 if (!D.parent(e.target, '.J_PartyOpts') && !D.parent(e.target, '.party-opts')) {
                     D.css('.party-opts', 'visibility', 'hidden');
                 }
@@ -164,7 +164,7 @@ KISSY.add("party/list", function (S, UA, Ajax, XTemplate, Uri, DragSwitch, Cooki
                 }
             });
 
-            E.delegate('body', 'click tap', '.icon-push', function (ev) {
+            E.delegate('body', 'tap', '.icon-push', function (ev) {
                 //session id
                 var id = D.attr(ev.target, 'data-id');
                 //记录推送时间
