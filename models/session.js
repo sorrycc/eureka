@@ -8,7 +8,7 @@ exports.put = function(req, res, render) {
         doc: {
 	        title: req.body.title,
 	        description: req.body.desc,
-	        speakers: req.body.speakers,
+	        speakers: req.body.speakers.replace(",", ","),
 	        from: req.body.from,
 	        to: req.body.to,
 	        state: 0, 
@@ -106,11 +106,11 @@ exports.post = function(req, res, render) {
 
 	db.post({
 	    query: _query,
-      collection: "session",
+        collection: "session",
 	    doc: {
         title: req.body.title,
         description: req.body.desc,
-        speakers: req.body.speakers,
+        speakers: req.body.speakers.replace(",", ","),
         from: req.body.from,
         to: req.body.to,
         state: 0, 
