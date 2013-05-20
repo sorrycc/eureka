@@ -8,11 +8,14 @@ KISSY.add(function(S, Node,Uri,Count,CountImage,saveCount) {
         var countImage = new CountImage('.J_Stars');
         var host = 'http://'+new Uri(window.location.href).getHostname();
         var socket = io.connect(host+'/stars');
+        //存在听众反馈
+        var isExistFeedback = false;
         //监听用户的反馈提交
         socket.on('jianping', function (data) {
             var starNum = data.score;
             //触发统计
             count.count(starNum);
+            isExistFeedback = true;
         });
 
         /**
@@ -21,7 +24,8 @@ KISSY.add(function(S, Node,Uri,Count,CountImage,saveCount) {
         var timer = setInterval(function(){
             S.io.get('http://'+new Uri(window.location.href).getHostname()+'/feedback/get_start_feedback_time/'+2,function(data){
                 var time = data.start_feedback_time;
-                if(data.status >=1 && time>0){
+                //反馈已经统计结束
+                if(data.status >1 && time>0){
                     var now = S.now();
                     var t = now - time;
                     //超过二分钟
@@ -34,7 +38,10 @@ KISSY.add(function(S, Node,Uri,Count,CountImage,saveCount) {
                         countImage.show(function(){
                             countImage.set('num',starNum);
                         })
-                        saveCount(num,people);
+                        //存在用户反馈，更新下统计数据
+                        if(isExistFeedback){
+                            saveCount(num,people);
+                        }
                         //清理定时轮询
                         clearInterval(timer);
                     }
