@@ -299,13 +299,6 @@ KISSY.add("party/list", function(S, UA, Ajax, XTemplate, DragSwitch, Cookie) {
          */
         sessionTapHoldEvt: function(){
 
-//
-//          var dragList = new DragList(".party-item", {
-//            enableScrollView  : true,
-//            enableDragSwitch  : false,
-//            enableTapHold     : true,
-//          })
-
             function tapHandler(t){
                 window.location.href = D.attr(t, 'data-url');
             }

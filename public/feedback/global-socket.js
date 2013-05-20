@@ -19,8 +19,8 @@ KISSY.use("node, cookie", function(S, Node, Cookie){
           count = parseInt(count);
           remainList = JSON.parse(Cookie.get('remainList'));
           remainList.map(function(item,key){
-            if(!item) remainList.splice(key,1)
-          })
+            if(!item) remainList.splice(key,1);
+          });
       }
       else {
         count = 0;
@@ -29,9 +29,9 @@ KISSY.use("node, cookie", function(S, Node, Cookie){
       if(remainList.indexOf(parseInt(data)) == -1)
         remainList.push(parseInt(data));
         Cookie.set('remainList', JSON.stringify(remainList), 99999, "", "/");
-        Cookie.set('remainCount', remainList.length, 99999, "", "/")
-      makeNotice(remainList, remainList.length)
-    })
+        Cookie.set('remainCount', remainList.length, 99999, "", "/");
+      makeNotice(remainList, remainList.length);
+    });
 
   function makeNotice(remainList, len) {
     var url = '';
@@ -40,17 +40,17 @@ KISSY.use("node, cookie", function(S, Node, Cookie){
       url = '/session/' + remainList[0];
     }
     else if (location.href.indexOf('/party') >= 0){
-      location.reload()
-      return
+      location.reload();
+      return;
     }
     else if (partyId && partyId != "null"){
-      url = '/party/' + partyId
+      url = '/party/' + partyId;
     }
     else {
-      url = '/party'
+      url = '/party';
     }
 
     $('#J_ReviewNotice').attr('href', url);
     $('#J_ReviewNotice')[0].style.display = "block";
   }
-})
+});

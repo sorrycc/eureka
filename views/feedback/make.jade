@@ -8,11 +8,12 @@ block content
     div.content
         div.mainCard
             if type == '1'
-                p.submitStatus #{responseString}
-                    br
-                    br
-                    br
-                    a.button(href="/session/list") 返回列表
+                div.status-container
+                    p.submit-status #{responseString}
+                        br
+                        br
+                        br
+                        a.button(href="/session/list") 返回列表
             else
                 form(method="post")
                     div.row
@@ -29,12 +30,12 @@ block content
                         div.column
                             label(for="score") 打分
                         div.column.score
+                            input#J_Score(type="hidden", name="score", value="#{score}")
                             - var ex_score = 5 - score
                             while score--
                                 span.icon-star-solid
                             while ex_score--
                                 span.icon-star-hollow
-                            input#J_Score(type="hidden", name="score", value="#{score}")
                     div.row
                         div.column
                             label(for="advise") 建议
