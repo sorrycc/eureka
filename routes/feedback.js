@@ -54,6 +54,7 @@ exports.post = function(req, res) {
     // 暂时用分享的id 代替作者 id
     dataObj.creator = req.user.ObjectId
 
+
     db.put({
       doc       : dataObj,
       collection: "feedback",
@@ -69,6 +70,7 @@ exports.post = function(req, res) {
       }
 
       topic.feedbacks.push(doc.id);
+      topic.status = 1;
       db.post({
         query   : {id: req.params.id},
         doc     : topic,

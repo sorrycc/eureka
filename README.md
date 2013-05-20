@@ -78,6 +78,6 @@ db.get({
 
 #### 用户信息获取
 
-所有页面强制登录，** req.user ** 保存已登录用户数据
+所有页面强制登录，** req.user ** 保存已登录用户数据（包括_id, name, nick, parties）
 
-参见 */login*
+参见 */user*

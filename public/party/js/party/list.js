@@ -7,8 +7,19 @@
  * @todo: 
  * @changelog: 
  */
-KISSY.add("party/list", function(S, Ajax, XTemplate, DragSwitch, Cookie) {
+KISSY.add("party/list", function(S, UA, Ajax, XTemplate, DragSwitch, Cookie) {
     var D = S.DOM, E = S.Event;
+
+
+    var prefix = (function(){
+      if(UA.webkit) return "-webkit-"
+      else if(UA.firefox) return "-moz-"
+      else if(UA.opera) return "-o-"
+      else if(UA.ie) return "-ms-"
+      else return ""
+    })()
+
+
     var List = function(opt) {
         if (!(this instanceof List)) return new List(opt);
 
@@ -34,7 +45,6 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragSwitch, Cookie) {
 
             S.io({
                 url: "/api/party" + (self.id ? "/" + self.id : ""),
-                cache: false,
                 type: "get",
                 dataType: "json",
                 complete: function(d) {
@@ -72,7 +82,7 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragSwitch, Cookie) {
 
                 if (!elParty || S.trim(elParty.html())) return;
 
-                elParty.parent('.flip3d').attr('id', "J_Party" + doc.id);
+                elParty.parent('.party-item').attr('id', "J_Party" + doc.id);
 
                 if (!doc.sessions.length) return;
 
@@ -89,9 +99,16 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragSwitch, Cookie) {
                             return;
                         }
 
+                        // bugfix for xtemplate
+                        // @see: https://github.com/kissyteam/kissy/issues/356
+                        S.each(d.docs, function(session, index) {
+                            session.pid = doc.id;
+                        });
+
                         doc.sessions = d.docs;
 
                         elParty.append(new XTemplate(self.sessionTpl).render(doc));
+
                         var scrollView = new iScroll("J_Party" + doc.id);
                     }
                 });
@@ -152,8 +169,8 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragSwitch, Cookie) {
             var self = this;
             self.partyTapHoldEvt();
             self.sessionTapHoldEvt();
-            self.viewOriginalCodeEvt();
             self.bindListSwitch();
+            self.bindCodeRotate();
         },
 
 
@@ -166,10 +183,9 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragSwitch, Cookie) {
               null,
               {
                 moveEls       : ["#J_PartyList"],
-                maxDistance   : -D.viewportWidth(),
+                maxDistance   : $('.mainCard').length > 1 ? -D.viewportWidth() : -1,
                 validDistance : -D.viewportWidth()/2,
                 passCallback  : function(ev){
-                  //$(ev.self.originalEl).addClass @dragSwitchConfig.rightClass
                   //$(ev.self.originalEl)[0].style.webkitTransform = ""
                 },
                 failCallback  : null,
@@ -184,8 +200,7 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragSwitch, Cookie) {
                 maxDistance   : 1,
                 validDistance : D.viewportWidth()/2,
                 passCallback  : function(ev){
-                           //$(ev.self.originalEl).addClass @dragSwitchConfig.leftClass
-                  $(ev.self.originalEl)[0].style.webkitTransform = ""
+                  //$(ev.self.originalEl)[0].style.webkitTransform = ""
                 },
                 failCallback  : null,
                 checkvalid    : function(ev){
@@ -202,25 +217,27 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragSwitch, Cookie) {
           function next(){
             if(currentIndex == count - 1) return
             currentIndex++
-            $("#J_PartyList").css('-webkit-transform', "translateX(-" + currentIndex + "00%)")
+            $("#J_PartyList").css(prefix + 'transform', "translateX(-" + currentIndex + "00%)")
             if(currentIndex == count - 1) {
               DS.config.binds[1].maxDistance = -1
               DS.config.binds[3].maxDistance = D.viewportWidth()
             }
             else {
               DS.config.binds[1].maxDistance = -D.viewportWidth()
+              DS.config.binds[3].maxDistance = D.viewportWidth()
             }
           }
           function prev(){
             if(currentIndex == 0) return
             currentIndex--
-            $("#J_PartyList").css('transform', "translate(" + currentIndex + "00% 0)")
+            $("#J_PartyList").css(prefix + 'transform', "translateX(-" + currentIndex + "00%)")
             if(currentIndex == 0) {
               DS.config.binds[3].maxDistance = 1
               DS.config.binds[1].maxDistance = -D.viewportWidth()
             }
             else {
               DS.config.binds[3].maxDistance = D.viewportWidth()
+              DS.config.binds[1].maxDistance = -D.viewportWidth()
             }
           }
 
@@ -237,13 +254,42 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragSwitch, Cookie) {
           })
         },
 
+        /**
+        *  绑定二维码旋转效果
+        */
+        bindCodeRotate: function(){
+            
+
+            E.on('.J_Rotate','tap', function(e){
+                var t = e.currentTarget,
+                    p = D.parent(t,'.flip-container');
+
+                D.toggleClass(p, 'rotate');
+
+            });
+
+            E.on('.view-qrcode', 'tap', function (e) {
+                var $e = jQuery(this).parents('.flip3d')
+
+                // lazy generate qrcode
+                if (!$e.data("generated")) {
+                    $e.data("generated", true);
+
+                    var $qrcode = $e.find(".qrcode");
+                    $qrcode.qrcode({
+                        //render  : "table",
+                        text  : $qrcode.data("url")
+                    });
+                }
+            });
+        },
+
 
          /**
          * party taphold效果
          */
         partyTapHoldEvt: function(){
-
-             E.on('.J_PartyOpts','dblclick tapHold', function(e){
+             E.on('.J_PartyOpts','tapHold', function(e){
 
                 var t = e.currentTarget,
                     partyOpts = D.get('.party-opts', t);
@@ -258,53 +304,58 @@ KISSY.add("party/list", function(S, Ajax, XTemplate, DragSwitch, Cookie) {
          */
         sessionTapHoldEvt: function(){
 
-          E.delegate('.session-list-box', 'touchstart touchend', '.J_SessionOpts', function(e){
-            e.preventDefault()
-          })
+//
+//          var dragList = new DragList(".party-item", {
+//            enableScrollView  : true,
+//            enableDragSwitch  : false,
+//            enableTapHold     : true,
+//          })
 
-           E.delegate('.session-list-box','dblclick tapHold', '.J_SessionOpts', function(e){
+            function tapHandler(t){
+                window.location.href = D.attr(t, 'data-url');
+            }
 
-                var t = e.currentTarget,
-                    sessionOpts = D.get('.session-opts', t);
+            function tapHoldHandler(t){
+
+                var sessionOpts = D.get('.session-opts', t);
 
                 // first hide all session opts
                 D.css('.session-opts', 'visibility', 'hidden');
 
                 // then show current session opts
                 D.css(sessionOpts, 'visibility', 'visible');
-            });
+            }
 
-        },
+            var isTapHold = false;
+            var touchIsMove = 0;
+           E.delegate('.session-list-box','touchmove', '.J_SessionOpts', function(){
+             touchIsMove++
+           });
 
-        /**
-         * 查看二维码原图
-         * 通过动画transform实现Y轴上的旋转
-         */
-        viewOriginalCodeEvt: function(){
-            E.on('.view-qrcode','click', function (e) {
-                var $e = jQuery(this).parent();
+           E.delegate('.session-list-box','touchstart touchend', '.J_SessionOpts', function(e){     
+                var t = e.currentTarget;
 
-                // flip
-                $e.toggleClass("flip3d-flipped");
-
-                // lazy generate qrcode
-                if (!$e.data("generated")) {
-                    $e.data("generated", true);
-
-                    var $qrcode = $e.find(".qrcode");
-                    $qrcode.qrcode({
-                        //render	: "table",
-                        text	: $qrcode.data("url")
-                    });
+                if(e.type == 'touchstart'){
+                    tapTimer = setTimeout(function(){
+                        isTapHold = true;
+                        tapHoldHandler(t);
+                    },1000);
+                }else{
+                    clearTimeout(tapTimer);
+                    if(!isTapHold && touchIsMove < 20){
+                        tapHandler(t);
+                    }
+                    isTapHold = false;
                 }
+ 
             });
-
         }
+
 
     });
 
     return List;
 
 }, {
-    requires: ["ajax", "xtemplate", "widget/dragswitch", "cookie"]
+    requires: ["ua", "ajax", "xtemplate", "widget/dragswitch", "cookie"]
 });
