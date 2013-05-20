@@ -257,4 +257,12 @@ exports.list = {
   }
 };
 
-
+/**
+ * 保存推送开始时间
+ * @author 剑平
+ * @param req
+ * @param res
+ */
+exports.startFeedbackTime = function(req, res){
+    model.updateStartFeedbackTime(req, res,function(){});
+}
