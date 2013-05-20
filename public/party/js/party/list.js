@@ -134,7 +134,7 @@ KISSY.add("party/list", function (S, UA, Ajax, XTemplate, Uri, DragSwitch, Cooki
                 var el = S.all(evt.currentTarget),
                     url = el.attr("href");
 
-                evt.halt();
+                // evt.halt();
 
                 if (!url) return;
 
@@ -155,7 +155,7 @@ KISSY.add("party/list", function (S, UA, Ajax, XTemplate, Uri, DragSwitch, Cooki
                 });
             });
 
-            E.on(document, 'click tap tapHold', function (e) {
+            E.on(document, 'click tap', function (e) {
                 if (!D.parent(e.target, '.J_PartyOpts') && !D.parent(e.target, '.party-opts')) {
                     D.css('.party-opts', 'visibility', 'hidden');
                 }
@@ -163,7 +163,8 @@ KISSY.add("party/list", function (S, UA, Ajax, XTemplate, Uri, DragSwitch, Cooki
                     D.css('.session-opts', 'visibility', 'hidden');
                 }
             });
-            E.delegate('body', 'tap', '.icon-push', function (ev) {
+
+            E.delegate('body', 'click tap', '.icon-push', function (ev) {
                 //session id
                 var id = D.attr(ev.target, 'data-id');
                 //记录推送时间
@@ -171,7 +172,7 @@ KISSY.add("party/list", function (S, UA, Ajax, XTemplate, Uri, DragSwitch, Cooki
                     S.log('推送时间为：' + data.time);
                 }, 'json');
                 socket.emit('setValid', id);
-            })
+            });
 
             var self = this;
             self.partyTapHoldEvt();
