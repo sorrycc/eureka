@@ -98,7 +98,6 @@
         if (!this.enabled) {
           return;
         }
-        e.preventDefault();
         ev = e.originalEvent;
         this.istouchStart = true;
         this.isSendStart = false;
@@ -159,6 +158,7 @@
           return;
         }
         e.stopPropagation();
+        e.preventDefault();
         if (!this.isSendStart) {
           this.isSendStart = true;
           this.fire(this.eventType + "Start", S.mix(e, {
