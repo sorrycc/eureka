@@ -6,7 +6,7 @@ a#J_ReviewNotice(href="javascript:void(0)")
 
 
 header
-    if (typeof(backUrl)!=="undefined")
+    if (typeof(backUrl)!=="undefined" && !!backUrl)
       a.back-icon-wrapper(href="#{backUrl}")
         i.icon-back
     h1 #{docTitle}  

@@ -1,4 +1,4 @@
-.party-info{background-color:#d7f2fb;border-top-left-radius:5px;border-top-right-radius:5px;padding:1em;position:relative;}
+.party-info{background-color:#d7f2fb;padding:1em;position:relative;}
 .party-info h3{margin:0 0 .5em}
 .party-info .party-time,.party-info .party-loc{margin:.5em 0 .5em}
 .party-info .icon-code{position:absolute;right:1em;top:1em}

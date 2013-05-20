@@ -11,17 +11,17 @@ block content
                     div.column
                         label(for="J_PartyName") 名称
                     div.column
-                        input#J_PartyName(name="title", placeholder="输入分享会名称", value="#{partyTitle}")
+                        input#J_PartyName(name="title", required, placeholder="输入分享会名称", value="#{partyTitle}")
                 div.row
                     div.column
                         label(for="J_PartyTime") 时间
                     div.column
-                        input#J_PartyName(name="time", type="date", value="#{time}")
+                        input#J_PartyName(name="time", required, type="date", value="#{time}")
                 div.row
                     div.column
                         label(for="J_PartyLoc") 地点
                     div.column
-                        input#J_PartyLoc(name="location", value="#{location}")
+                        input#J_PartyLoc(name="location", required, value="#{location}")
 
                 div.lastrow
                     div.column
