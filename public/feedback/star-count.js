@@ -69,7 +69,7 @@ KISSY.add(function(S, Node, Base) {
             value:0,
             getter:function(){
                 var self = this;
-                return Math.floor(self.get('value')/self.get('time'));
+                return Math.floor(Number(self.get('value'))/Number(self.get('time')));
             }
         }
     }});

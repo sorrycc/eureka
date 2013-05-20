@@ -37,7 +37,7 @@ KISSY.add(function(S, Node,Uri,Count,CountImage,saveCount,sessionList) {
          */
         var timer = setInterval(function(){
             S.io.get('http://'+new Uri(window.location.href).getHostname()+'/feedback/get_start_feedback_time/'+2,function(data){
-                var time = data.start_feedback_time;
+                var time = Number(data.start_feedback_time);
                 //反馈已经统计结束
                 if(data.status >1 && time>0){
                     var now = S.now();
@@ -49,9 +49,11 @@ KISSY.add(function(S, Node,Uri,Count,CountImage,saveCount,sessionList) {
                         var people = count.get('time');
                         //星数
                         var starNum = count.get('average');
-                        countImage.show(function(){
-                            countImage.set('num',starNum);
-                        })
+                        if(starNum>0){
+                            countImage.show(function(){
+                                countImage.set('num',starNum);
+                            })
+                        }
                         //存在用户反馈，更新下统计数据
                         if(isExistFeedback){
                             saveCount(num,people);
