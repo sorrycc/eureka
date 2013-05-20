@@ -139,16 +139,18 @@ exports.getcounts = function(req, res, render){
         party_id: req.partyId
     };
     var self = this;
-    db.get({
-        collection: COUNT_COLLECTION,
-        query: _query,
-        complete: function(err, counts) {
-            if (err) {
-                res.send("error");
-            }
-            else {
-                self.sessions(req, res,function(sessions){
+    self.sessions(req, res,function(sessions){
+        var newSessions = [];
+        db.get({
+            collection: COUNT_COLLECTION,
+            query: _query,
+            complete: function(err, counts) {
+                if (err) {
+                    res.send("error");
+                }
+                else {
                     for(var i = 0;i<sessions.length;i++){
+                        sessions[i].count = 0;
                         if(req.id != sessions[i].id){
                             for(var j = 0;j<counts.length;j++){
                                 if(sessions[i].id === counts[j].session_id){
@@ -156,11 +158,13 @@ exports.getcounts = function(req, res, render){
                                 }
                             }
                         }
+                        if(sessions[i].id !=req.id) newSessions.push(sessions[i]);
                     }
-                    render(sessions);
-                });
+                    render(newSessions);
+                }
             }
-        }
+        });
+
     });
 }
 /**
