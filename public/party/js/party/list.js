@@ -127,12 +127,11 @@ KISSY.add("party/list", function (S, UA, Ajax, XTemplate, Uri, DragSwitch, Cooki
         },
 
         bind: function () {
-
-            S.one(document).delegate("click", ".party-del", function (evt) {
+            E.delegate(document, "click", ".party-del", function (evt) {
                 var el = S.all(evt.currentTarget),
                     url = el.attr("href");
 
-                // evt.halt();
+                evt.halt();
 
                 if (!url) return;
 
@@ -153,7 +152,7 @@ KISSY.add("party/list", function (S, UA, Ajax, XTemplate, Uri, DragSwitch, Cooki
                 });
             });
 
-            E.on(document, 'tap', function (e) {
+            E.on(document, 'click tap', function (e) {
                 if (!D.parent(e.target, '.J_PartyOpts') && !D.parent(e.target, '.party-opts')) {
                     D.css('.party-opts', 'visibility', 'hidden');
                 }
@@ -161,6 +160,8 @@ KISSY.add("party/list", function (S, UA, Ajax, XTemplate, Uri, DragSwitch, Cooki
                     D.css('.session-opts', 'visibility', 'hidden');
                 }
             });
+
+            
 
             E.delegate('body', 'tap', '.icon-push', function (ev) {
                 //session id
@@ -183,7 +184,7 @@ KISSY.add("party/list", function (S, UA, Ajax, XTemplate, Uri, DragSwitch, Cooki
         // 绑定列表间切换
         bindListSwitch: function () {
             var DS = new DragSwitch("#J_PartyList", {
-                senDistance: 3,
+                senDistance: 10,
                 binds: [
                     null,
                     {

@@ -10,6 +10,7 @@ block content
             div.flip3d
                 section.party-item.flip3d-front
                     div.party
+
                         article.party-info.J_PartyOpts
                             h3.title {{title}}
                             div.party-time 时间: {{formatTime}}
@@ -27,6 +28,7 @@ block content
                                 i.icon-add-session
                                 新增一个分享
                         {{/if}}
+                        
                 section.flip3d-back.J_Rotate
                     div.qrcode-container  
                         div.qrcode(data-url="http://{{host}}/party/{{id}}")(title="http://{{host}}/party/{{id}}")
