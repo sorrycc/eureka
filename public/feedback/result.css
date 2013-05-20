@@ -7,7 +7,7 @@
 .count-img .star{font-size:5em;color:#ccc;display:inline-block;width:1em;opacity:0;filter:alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"}
 .count-img .star-score{font-size:5em;color:#ccc;display:inline-block;width:1em;color:#fff;opacity:0;filter:alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"}
 .session-list{position:fixed;bottom:0;left:0;width:100%;}
-.session-list li{width:16.666%;background:#d06503;text-align:center;float:left;}
+.session-list li{width:16.666%;background:#d06503;text-align:center;float:left;display:none;}
 .session-list li i{-webkit-transform:translate3d(0,0,0);-moz-transform:translate3d(0,0,0);-o-transform:translate3d(0,0,0);-ms-transform:translate3d(0,0,0);transform:translate3d(0,0,0);font-style:normal;font-variant:normal;font-size:1.5em}
 .session-list li a{height:6em;display:block;color:rgba(249,249,249,0.9);text-decoration:none;-webkit-transition:color .5s, background .5s, height .5s;-moz-transition:color .5s, background .5s, height .5s;-o-transition:color .5s, background .5s, height .5s;-ms-transition:color .5s, background .5s, height .5s;transition:color .5s,background .5s,height .5s;padding-top:1em;}
 .session-list li a .session-title{padding-top:1em}
