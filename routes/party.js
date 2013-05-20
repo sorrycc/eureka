@@ -89,7 +89,7 @@ module.exports = {
             var id,
                 query = {},
                 options = {},
-                isadmin = false;
+                isadmin = true;
 
             var host = req.get('host');
 
@@ -105,6 +105,7 @@ module.exports = {
 
             if (!id && !req.user.parties.length) {
                 options.limit = 1;
+                isadmin = false;
             }
             else if (!id) {
                 query.root = req.user._id;

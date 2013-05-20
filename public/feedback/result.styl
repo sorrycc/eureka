@@ -1,6 +1,7 @@
 .content
     margin-top 8em
     position relative
+    font-family "Microsoft YaHei"
 .session-info
     color #fff
     text-align center
@@ -34,18 +35,41 @@
         color #fff
         opacity 0
 .session-list
-    position absolute
-    right 20px
-    top 80px
-    background-color #fff
-
+    position fixed
+    bottom 0
+    left 0
+    width 100%
     li
-        line-height 58px
-        margin-bottom 0
-        border-bottom 1px solid #e5e5e5
-        .count-num
-            background-color #d7f2fb;
-            padding 20px
-            font-weight bolder
-        .text
-            padding 0 20px
+        width 16.666%
+        background rgb(208, 101, 3)
+        text-align center
+        float left
+        i
+            transform translate3d(0, 0, 0)
+            font-style normal
+            font-variant normal
+            font-size 1.5em
+        a
+            height 6em
+            display block
+            color rgba(249, 249, 249, .9)
+            text-decoration none
+            transition color .5s, background .5s, height .5s
+            padding-top 1em
+
+            .session-title
+                padding-top 1em
+    li:nth-child(6n+1)
+        background rgb(208, 101, 3)
+    li:nth-child(6n+2)
+        background rgb(233, 147, 26)
+    li:nth-child(6n+3)
+        background rgb(27, 54, 71)
+    li:nth-child(6n+4)
+        background rgb(200, 155, 194)
+    li:nth-child(6n+5)
+        background rgb(204, 196, 150)
+    li:nth-child(6n+6)
+        background rgb(21, 40, 54)
+    li:nth-child(6n+7)
+        background rgb(140, 166, 105)

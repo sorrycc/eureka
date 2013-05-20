@@ -116,13 +116,22 @@ exports.result = function(req, res){
             var data = result[0];
             req.id = data.id;
             req.partyId = partyId;
-            model.getcounts(req,res,function(sessions){
-                data.docTitle = '《' + data.title + '》的反馈结果';
-                data.sessions = sessions;
-                data.partyId = req.params.partyId;
-                data.sessionId = req.params.sessionId;
-                res.render('feedback/result',data);
-            })
+
+            model.getCount(sessionId,function(result){
+                if(result.length){
+                    //得分
+                    data.count = result[0].count;
+                    //次数
+                    data.people = result[0].people;
+                }
+                model.getcounts(req,res,function(sessions){
+                    data.docTitle = '《' + data.title + '》的反馈结果';
+                    data.sessions = sessions;
+                    data.partyId = req.params.partyId;
+                    data.sessionId = req.params.sessionId;
+                    res.render('feedback/result',data);
+                })
+            });
         })
     }
 }
@@ -134,6 +143,6 @@ exports.result = function(req, res){
 exports.save_count = function(req, res){
     model.saveCount(req, res);
 }
-exports.getStatus = function(req,res){
-    model.getStatus(req, res);
+exports.getStartFeedbackTime = function(req,res){
+    model.getStartFeedbackTime(req, res);
 }
