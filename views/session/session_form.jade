@@ -1,12 +1,15 @@
 extends ../layout
 
+block head
+    link(type="text/css", rel="stylesheet", href="/session/css/style.css")
+
 block content
   //div.bar
   //  h1 #{docTitle}
   div.content
     div.mainCard
       if success == '1'
-        form#J_SessionForm(method="post")
+        form#J_SessionForm(method="post", onSubmit="return false;")
           //if type == '1'
           input(type="hidden",name="partyId", value="#{partyId}")
           div.row
@@ -39,9 +42,9 @@ block content
               &nbsp;
             div.column
               if type == '1'
-                input.button(type="submit", value="创建")
+                input.button#J_SessionCommit(type="button", value="创建")
               else
-                input.button(type="submit", value="更新")
+                input.button#J_SessionCommit(type="button", value="更新")
               input(type="hidden", name="id", value="#{id}")
       else
         div.msg #{err}
