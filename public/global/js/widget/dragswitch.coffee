@@ -122,7 +122,7 @@ KISSY.add "widget/dragswitch", (S, DOM, Node, Event, UA, SSlog) ->
       return if !@eventType or !@enabled or !@effectBind
 #      console.log "just run in"
       e.stopPropagation()
-      e.preventDefault()
+      # e.preventDefault()
       if !@isSendStart
         @isSendStart = true
         @fire @eventType + "Start", S.mix(e, self: @)
