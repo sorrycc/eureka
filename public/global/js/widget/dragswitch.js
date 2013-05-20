@@ -158,7 +158,6 @@
           return;
         }
         e.stopPropagation();
-        e.preventDefault();
         if (!this.isSendStart) {
           this.isSendStart = true;
           this.fire(this.eventType + "Start", S.mix(e, {
