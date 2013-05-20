@@ -30,7 +30,7 @@ exports.new = function(req, res){
   
   if (req.cookies.partyid === undefined) {
     partyId = req.query.partyId;
-    req.cookies.partyid = partyId;
+    res.cookie("partyid", partyId);
   } else {
     isRoot = isRootFunc(req.user.parties, partyId);
     partyId = req.cookies.partyid;
@@ -74,7 +74,7 @@ exports.edit = function(req, res){
 
   if (req.cookies.partyid === undefined) {
     partyId = req.query.partyId;
-    req.cookies.partyid = partyId;
+    res.cookie("partyid", partyId);
   }  else {
     partyId = req.cookies.partyid;
   }
@@ -136,7 +136,7 @@ exports.del = function(req, res){
 
   if (req.cookies.partyid === undefined) {
     partyId = req.query.partyId;
-    req.cookies.partyid = partyId;
+    res.cookie("partyid", partyId);
   }  else {
     partyId = req.cookies.partyid;
   }
@@ -167,7 +167,7 @@ exports.detail = function(req, res) {
 
   if (req.cookies.partyid === undefined) {
     partyId = req.query.partyId;
-    req.cookies.partyid = partyId;
+    res.cookie("partyid", partyId);
   }  else {
     partyId = req.cookies.partyid;
   }
