@@ -108,8 +108,6 @@ KISSY.add("party/list", function(S, UA, Ajax, XTemplate, DragSwitch, Cookie) {
 
                         doc.sessions = d.docs;
 
-                        console.log(doc)
-
                         elParty.append(new XTemplate(self.sessionTpl).render(doc));
 
                         var scrollView = new iScroll("J_Party" + doc.id);
