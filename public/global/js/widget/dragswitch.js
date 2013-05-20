@@ -98,7 +98,6 @@
         if (!this.enabled) {
           return;
         }
-        e.preventDefault();
         ev = e.originalEvent;
         this.istouchStart = true;
         this.isSendStart = false;
