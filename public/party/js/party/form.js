@@ -69,7 +69,7 @@ KISSY.add("party/form", function(S) {
                     }
 
                     if (self.id) {
-                        alert("编辑成功！");
+                        //alert("编辑成功！");
                         window.top.location.href = "/party/" + self.id;
                     }
                     else {
