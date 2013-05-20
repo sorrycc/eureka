@@ -202,9 +202,12 @@ exports.isExist = function(session_id,render){
     });
 }
 exports.getStartFeedbackTime = function(req,res){
-    var sessionId = req.params.id;
-    this.getSession(sessionId,function(session){
-        var state = session.state;
-        res.send('{"status":'+state+',"start_feedback_time":"'+session.start_feedback_time+'"}');
+    var sessionId = req.params.sessionId;
+    if(!sessionId){
+        res.send('{"status":-2}');
+        return false;
+    }
+    this.getSession(sessionId,res,function(session){
+        res.send('{"status":'+session[0].state+',"start_feedback_time":"'+session[0].start_feedback_time+'"}');
     })
 }

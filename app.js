@@ -182,7 +182,7 @@ app.get('/feedback/list', function(req, res) {
 //剑平
 app.get('/feedback/result/:sessionId', feedback.result);
 app.post('/feedback/save_count', feedback.save_count);
-app.post('/feedback/get_start_feedback_time/:sessionId', feedback.getStartFeedbackTime);
+app.get('/feedback/get_start_feedback_time/:sessionId', feedback.getStartFeedbackTime);
 
 var server = http.createServer(app);
 var io = require('socket.io').listen(server);

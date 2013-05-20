@@ -15,27 +15,31 @@ KISSY.add(function(S, Node,Uri,Count,CountImage,saveCount) {
             count.count(starNum);
         });
 
-        var socketStatus = io.connect(host);
-        //管理员推送反馈许可
-        socketStatus.on('isValid',function(sessionId){
-            S.io.get('http://'+new Uri(window.location.href).getHostname()+'/feedback/get_start_feedback_time/'+sessionId,function(data){
+        /**
+         * 定时判断是否已经可以开始统计
+         */
+        var timer = setInterval(function(){
+            S.io.get('http://'+new Uri(window.location.href).getHostname()+'/feedback/get_start_feedback_time/'+2,function(data){
                 var time = data.start_feedback_time;
                 if(data.status >=1 && time>0){
                     var now = S.now();
                     var t = now - time;
+                    //超过二分钟
                     var isExceed = t >= 2*60*1000;
                     if(isExceed){
                         var num = count.get('value');
                         var people = count.get('time');
                         //星数
-                        var starNum = self.get('average');
+                        var starNum = count.get('average');
                         countImage.show(function(){
                             countImage.set('num',starNum);
                         })
                         saveCount(num,people);
+                        //清理定时轮询
+                        clearInterval(timer);
                     }
                 }
             },'json');
-        })
+        },500);
     }
 }, {requires : ['node','uri','./star-count','./count-image','./save-count']});
