@@ -28,6 +28,12 @@ exports.saveCount = function(req, res) {
     }
     var self = this;
 
+    /**
+     * 保存或更新数据完成后执行的方法
+     * @param err
+     * @param res
+     * @private
+     */
     function _complete(err,res){
         if (err) {
             res.send('{"status":0,"message":"'+err+'"}');
@@ -35,6 +41,30 @@ exports.saveCount = function(req, res) {
         else {
             res.send('{"status":1}');
         }
+        _closeFeedback(sessionId);
+    }
+
+    /**
+     * 关闭统计
+     * @private
+     */
+    function _closeFeedback(sessionId){
+        db.post({
+            query: {id:sessionId},
+            collection: SESSION_COLLECTION,
+            doc: {
+                state: 2
+            },
+            options: {
+                multi: true
+            },
+            complete: function(err) {
+                if (err) {
+                    console.log(err.message);
+                    return;
+                }
+            }
+        });
     }
 
     self.isExist(sessionId,function(result){
@@ -171,11 +201,10 @@ exports.isExist = function(session_id,render){
         }
     });
 }
-exports.getStatus = function(req,res){
+exports.getStartFeedbackTime = function(req,res){
     var sessionId = req.params.id;
     this.getSession(sessionId,function(session){
         var state = session.state;
-        console.log(state);
-        res.send('{"status":'+state+'}');
+        res.send('{"status":'+state+',"start_feedback_time":"'+session.start_feedback_time+'"}');
     })
 }

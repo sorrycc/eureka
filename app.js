@@ -182,7 +182,7 @@ app.get('/feedback/list', function(req, res) {
 //剑平
 app.get('/feedback/result/:sessionId', feedback.result);
 app.post('/feedback/save_count', feedback.save_count);
-app.post('/feedback/get_status/:sessionId', feedback.getStatus);
+app.post('/feedback/get_start_feedback_time/:sessionId', feedback.getStartFeedbackTime);
 
 var server = http.createServer(app);
 var io = require('socket.io').listen(server);
@@ -192,22 +192,11 @@ server.listen(app.get('port'), function(){
 });
 
 io.sockets.on('connection', function (socket) {
+    //管理员推送反馈许可
     socket.on('setValid', function(data){
       // data 是 session id
       socket.broadcast.emit('isValid', data);
     });
-    //监听推送分享管理员推送
-    socket.on('push_feedback',function(data){
-        //demo data
-        //state:-1未推送，0正在推送，1推送完成
-        var data = {sessionId:1,state:1,people:5,count:10};
-        if(data.state === 1){
-            socket.emit('push_close',data);
-        }else if(data.state === 0){
-            socket.emit('push_open',data);
-        }
-    })
-
 });
 
 var starSocket;
