@@ -180,6 +180,7 @@ app.get('/feedback/list', function(req, res) {
 //剑平
 app.get('/feedback/result/:sessionId', feedback.result);
 app.post('/feedback/save_count', feedback.save_count);
+app.post('/feedback/get_status/:sessionId', feedback.getStatus);
 
 var server = http.createServer(app);
 var io = require('socket.io').listen(server);

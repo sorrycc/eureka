@@ -171,3 +171,11 @@ exports.isExist = function(session_id,render){
         }
     });
 }
+exports.getStatus = function(req,res){
+    var sessionId = req.params.id;
+    this.getSession(sessionId,function(session){
+        var state = session.state;
+        console.log(state);
+        res.send('{"status":'+state+'}');
+    })
+}

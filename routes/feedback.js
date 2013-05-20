@@ -132,3 +132,6 @@ exports.result = function(req, res){
 exports.save_count = function(req, res){
     model.saveCount(req, res);
 }
+exports.getStatus = function(req,res){
+    model.getStatus(req, res);
+}
