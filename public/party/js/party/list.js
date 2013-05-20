@@ -197,7 +197,7 @@ KISSY.add("party/list", function (S, UA, Ajax, XTemplate, Uri, DragSwitch, Cooki
                         failCallback: null,
                         checkvalid: function (ev) {
                             //return $(ev.self.originalEl).css("-webkit-transform") is "none"
-                            return true
+                            return true;
                         }
                     },
                     null,
@@ -211,7 +211,7 @@ KISSY.add("party/list", function (S, UA, Ajax, XTemplate, Uri, DragSwitch, Cooki
                         failCallback: null,
                         checkvalid: function (ev) {
                             //return $(ev.self.originalEl).css("-webkit-transform") is "none"
-                            return true
+                            return true;
                         }
                     }
                 ]
@@ -219,48 +219,47 @@ KISSY.add("party/list", function (S, UA, Ajax, XTemplate, Uri, DragSwitch, Cooki
             var count = $('.mainCard').length,
                 currentIndex = 0,
                 nextIndex = null,
-                cardWidth = $('.mainCard')[0].offsetWidth,
-                offsetWidth = D.viewportWidth() - cardWidth;
+                cardWidth = $('.mainCard')[0].offsetWidth;
 
             function next() {
-                if (currentIndex == count - 1) return
-                currentIndex++
-                $("#J_PartyList").css(prefix + 'transform', "translateX(-" + (currentIndex * cardWidth) + "px)")
+                if (currentIndex == count - 1) return;
+                currentIndex++;
+                $("#J_PartyList").css(prefix + 'transform', "translateX(-" + (currentIndex * cardWidth) + "px)");
                 if (currentIndex == count - 1) {
-                    DS.config.binds[1].maxDistance = -1
-                    DS.config.binds[3].maxDistance = D.viewportWidth()
+                    DS.config.binds[1].maxDistance = -1;
+                    DS.config.binds[3].maxDistance = D.viewportWidth();
                 }
                 else {
-                    DS.config.binds[1].maxDistance = -D.viewportWidth()
-                    DS.config.binds[3].maxDistance = D.viewportWidth()
+                    DS.config.binds[1].maxDistance = -D.viewportWidth();
+                    DS.config.binds[3].maxDistance = D.viewportWidth();
                 }
             }
 
             function prev() {
-                if (currentIndex == 0) return
-                currentIndex--
-                $("#J_PartyList").css(prefix + 'transform', "translateX(-" + (currentIndex * cardWidth) + "px)")
+                if (currentIndex == 0) return;
+                currentIndex--;
+                $("#J_PartyList").css(prefix + 'transform', "translateX(-" + (currentIndex * cardWidth) + "px)");
                 if (currentIndex == 0) {
-                    DS.config.binds[3].maxDistance = 1
-                    DS.config.binds[1].maxDistance = -D.viewportWidth()
+                    DS.config.binds[3].maxDistance = 1;
+                    DS.config.binds[1].maxDistance = -D.viewportWidth();
                 }
                 else {
-                    DS.config.binds[3].maxDistance = D.viewportWidth()
-                    DS.config.binds[1].maxDistance = -D.viewportWidth()
+                    DS.config.binds[3].maxDistance = D.viewportWidth();
+                    DS.config.binds[1].maxDistance = -D.viewportWidth();
                 }
             }
 
             DS.on("dragRightEnd", function (ev) {
                 if (DS.config.binds[3].passed) {
-                    prev()
+                    prev();
                 }
-            })
+            });
 
             DS.on("dragLeftEnd", function (ev) {
                 if (DS.config.binds[1].passed) {
-                    next()
+                    next();
                 }
-            })
+            });
         },
 
         /**
@@ -278,7 +277,7 @@ KISSY.add("party/list", function (S, UA, Ajax, XTemplate, Uri, DragSwitch, Cooki
             });
 
             E.on('.view-qrcode', 'tap', function (e) {
-                var $e = jQuery(this).parents('.flip3d')
+                var $e = jQuery(this).parents('.flip3d');
 
                 // lazy generate qrcode
                 if (!$e.data("generated")) {

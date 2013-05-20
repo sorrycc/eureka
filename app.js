@@ -73,6 +73,12 @@ app.configure(function(){
     app.use(express.static(path.join(__dirname, 'public')));
 
     app.use(app.router);
+
+    app.use(function(req, res, next){
+        res.render("404", {
+            docTitle: "404"
+        });
+    });
 });
 
 // NODE_ENV=development node app
