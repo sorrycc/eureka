@@ -1,14 +1,8 @@
+
+
 var db = require("../db");
 
 exports.put = function(req, res, render) {
-    //获取cookies中的partyid
-    var cookies = {};
-    req.headers.cookie && req.headers.cookie.split(';').forEach(function( cookie ) {
-        var parts = cookie.split('=');
-        cookies[ parts[ 0 ].trim() ] = ( parts[ 1 ] || '' ).trim();
-    });
-    var partyId = cookies['partyid'] || 0;
-
 	db.put({
         collection: "session",
         doc: {
@@ -17,8 +11,7 @@ exports.put = function(req, res, render) {
 	        speakers: req.body.speakers,
 	        from: req.body.from,
 	        to: req.body.to,
-	        state: 0,
-            party_id:partyId,
+	        state: 0, 
 	        feedbacks: [],
 	        _deleted: false
         },
@@ -136,4 +129,32 @@ exports.post = function(req, res, render) {
 	        }
 	    }
 	});
+}
+exports.updateStartFeedbackTime=function(req, res, render){
+    var _query = {
+        id : req.params.id
+    };
+    //当前时间戳
+    var time = Date.parse(new Date());
+    db.post({
+        query: _query,
+        collection: "session",
+        doc: {
+            start_feedback_time: time,
+            state: 1
+        },
+        options: {
+            multi: true
+        },
+        complete: function(err, numAffected) {
+            if (err) {
+                console.log(err.message);
+                res.send('{"status":0,"message":"'+err.message+'"}');
+                return;
+            } else {
+                res.send('{"status":1,"time":'+time+'}');
+                render(numAffected);
+            }
+        }
+    });
 }

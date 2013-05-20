@@ -134,3 +134,6 @@ exports.result = function(req, res){
 exports.save_count = function(req, res){
     model.saveCount(req, res);
 }
+exports.getStartFeedbackTime = function(req,res){
+    model.getStartFeedbackTime(req, res);
+}
