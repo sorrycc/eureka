@@ -82,8 +82,11 @@ exports.post = function(req, res) {
   function render(err, numAffected) {
 
     // 删除未评论 Cookie
-    var remainCount = parseInt(req.cookies['remainCount']),
-      remainList = JSON.parse(req.cookies['remainList']);
+    var remainCount_str = req.cookies['remainCount'],
+        remainList_str  = req.cookies['remainList'];
+    var remainCount = remainCount_str ? parseInt(remainCount_str) : 0,
+        remainList = remainList_str ? JSON.parse(remainList_str) : [];
+
     var index = remainList.indexOf(parseInt(req.params.id));
     if(index >= 0) {
       remainList.splice(index, 1)

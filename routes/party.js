@@ -96,10 +96,9 @@ module.exports = {
             if (id = req.params.id) {
                 query.id = id;
 
-
                 isadmin = false;
                 req.user.parties.forEach(function(pid) {
-                    isadmin = isadmin || pid === id;
+                    isadmin = isadmin || pid === parseInt(id, 10);
                 });
             }
 
