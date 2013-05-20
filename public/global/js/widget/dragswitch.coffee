@@ -65,7 +65,7 @@ KISSY.add "widget/dragswitch", (S, DOM, Node, Event, UA, SSlog) ->
       @enabled = if @config.checkvalid then @config.checkvalid() else true # 外部检查
       return if !@enabled
 #      e.halt() if @isSendStart
-      e.preventDefault()
+      # e.preventDefault()
       ev = e.originalEvent
       @istouchStart = true
       @isSendStart = false
@@ -122,6 +122,7 @@ KISSY.add "widget/dragswitch", (S, DOM, Node, Event, UA, SSlog) ->
       return if !@eventType or !@enabled or !@effectBind
 #      console.log "just run in"
       e.stopPropagation()
+      e.preventDefault()
       if !@isSendStart
         @isSendStart = true
         @fire @eventType + "Start", S.mix(e, self: @)
