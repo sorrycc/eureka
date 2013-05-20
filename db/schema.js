@@ -113,6 +113,13 @@ module.exports = {
             "default": -1,
             "enmu": [-1, 0, 1]
         },
+        /**
+         * 开始推送的时间
+         */
+        start_feedback_time:{
+            "type": Number,
+            "default": -1
+        },
         feedbacks: {
             "type": Array
         },
