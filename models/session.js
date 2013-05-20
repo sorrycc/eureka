@@ -11,6 +11,7 @@ exports.put = function(req, res, render) {
 	        speakers: req.body.speakers.replace(",", ","),
 	        from: req.body.from,
 	        to: req.body.to,
+            party_id:req.body.partyId,
 	        state: 0, 
 	        feedbacks: [],
 	        _deleted: false

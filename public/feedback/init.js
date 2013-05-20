@@ -3,9 +3,23 @@
  * @author 剑平（明河）<minghe36@126.com>
  **/
 KISSY.add(function(S, Node,Uri,Count,CountImage,saveCount) {
+    var $ = Node.all;
     return function(){
-        var count = new Count('.J_StarCount');
+        var $count = $('.J_StarCount');
+        var count = new Count('.J_StarCount',{
+            value:Number($count.text()),
+            time:Number($count.attr('data-time'))
+        });
+
         var countImage = new CountImage('.J_Stars');
+
+        if(count.get('value') > 0 && count.get('time') > 0){
+            var starNum = count.get('average');
+            countImage.show(function(){
+                countImage.set('num',starNum);
+            })
+        }
+
         var host = 'http://'+new Uri(window.location.href).getHostname();
         var socket = io.connect(host+'/stars');
         //存在听众反馈

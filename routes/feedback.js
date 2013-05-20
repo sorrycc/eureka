@@ -109,7 +109,7 @@ exports.result = function(req, res){
         var parts = cookie.split('=');
         cookies[ parts[ 0 ].trim() ] = ( parts[ 1 ] || '' ).trim();
     });
-    var partyId = cookies['partyid'];
+    var partyId = Number(cookies['partyid']);
     if(!partyId){
 
     }else{
@@ -119,6 +119,8 @@ exports.result = function(req, res){
             var data = result[0];
             req.id = data.id;
             req.partyId = partyId;
+            data.count = 0;
+            data.people = 0;
 
             model.getCount(sessionId,function(result){
                 if(result.length){
