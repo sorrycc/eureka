@@ -33,6 +33,11 @@ KISSY.add("session/view", function(S, Node, Cookie) {
                   location.href = "/session/"+this.sessionId+"/edit";
               }, this);
 
+            S.one("#J_SessionResult").on("click", function(e) {
+                
+                location.href = "/feedback/result/"+this.sessionId;
+            }, this);
+
             var _speakers = S.one(".J_Speakers"),
                 _html = _speakers.html(),
                 _speakerArray = _html.split(",");
