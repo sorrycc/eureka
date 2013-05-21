@@ -154,10 +154,10 @@ KISSY.add("party/list", function (S, UA, Ajax, XTemplate, Uri, DragSwitch, Cooki
 
             E.on(document, 'click tap', function (e) {
                 if (!D.parent(e.target, '.J_PartyOpts') && !D.parent(e.target, '.party-opts')) {
-                    D.css('.party-opts', 'visibility', 'hidden');
+                    D.removeClass('.party-info', 'hover')
                 }
                 if (!D.parent(e.target, '.J_SessionOpts') && !D.parent(e.target, '.session-opts')) {
-                    D.css('.session-opts', 'visibility', 'hidden');
+                    D.removeClass('.session-info', 'hover');
                 }
             });
 
@@ -301,9 +301,9 @@ KISSY.add("party/list", function (S, UA, Ajax, XTemplate, Uri, DragSwitch, Cooki
             E.on('.J_PartyOpts', 'tapHold', function (e) {
 
                 var t = e.currentTarget,
-                    partyOpts = D.next(t,'.party-opts');
+                    partyInfo = D.parent(t, '.party-info');
 
-                D.css(partyOpts, 'visibility', 'visible');
+                D.addClass(partyInfo, 'hover')
             });
 
         },
@@ -319,13 +319,13 @@ KISSY.add("party/list", function (S, UA, Ajax, XTemplate, Uri, DragSwitch, Cooki
 
             function tapHoldHandler(t) {
 
-                var sessionOpts = D.next(t ,'.session-opts');
+                var sessionInfo = D.parent(t ,'.session-info');
 
                 // first hide all session opts
-                D.css('.session-opts', 'visibility', 'hidden');
+                D.removeClass('.session-info', 'hover');
 
                 // then show current session opts
-                D.css(sessionOpts, 'visibility', 'visible');
+                D.addClass(sessionInfo, 'hover');
             }
 
             var isTapHold = false;

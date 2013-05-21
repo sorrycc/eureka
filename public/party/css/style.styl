@@ -1,14 +1,5 @@
 @import "../../global/css/font.styl"
 
-// party info , add by shuier
-mask()
-  visibility hidden
-  position absolute
-  top 0
-  left 0
-  background-color: rgba(0,0,0,0.2)
-  height: 100%
-  width: 100%
 
 .party-info
   background-color #d7f2fb
@@ -27,12 +18,24 @@ mask()
     top: 1em
 
   div.party-opts
-    mask()
+    position absolute
+    top 0
+    left -9999px
+    height: 100%
+    width: 100%
+
     .opt
       float left
       margin-top (50/16)*1em
       margin-left (70/16)*1em
       cursor pointer
+
+  &.hover
+    div.party-opts   
+      left: 0
+      background-color: rgba(0,0,0,0.2)
+      transition: background-color 1s ease 
+      
 
 
 .flip-container
@@ -105,12 +108,22 @@ ul.session-list
         display block
         margin-bottom 0
     div.session-opts
-      mask()
+      position absolute
+      top 0
+      left -9999px
+      height: 100%
+      width: 100%
       .opt 
         float left
         margin-top (25 /16)*1em
         margin-left (35/16)*1em
         cursor pointer
+    &.hover
+      div.session-opts
+        left: 0
+        background-color: rgba(0,0,0,0.2)
+        transition: background-color 1s ease 
+
 
   .entry-list-edit-show {
 
