@@ -18,7 +18,11 @@ block content
             each session, i in sessions
                 li
                     a(href="./#{session.id}")
-                        i #{session.count}
+                        i
+                            if session.state === 0
+                                span.no-start-feedback 未开始反馈
+                            else
+                                =session.count
                         div.session-title #{session.title}
 
     script(type='text/javascript')
