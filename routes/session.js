@@ -175,7 +175,10 @@ exports.detail = function(req, res) {
   if (partyId === undefined) {
     res.redirect("/party");
   } else {
+    console.log(req.user.parties);
+    console.log("pid:" + partyId);
     isRoot = isRootFunc(req.user.parties, partyId);
+    console.log("isRoot:" + partyId);
     model.get(req, res, render);  
   }
   
