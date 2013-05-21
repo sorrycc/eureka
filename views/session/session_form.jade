@@ -9,7 +9,7 @@ block content
   div.content
     div.mainCard
       if success == '1'
-        form#J_SessionForm(method="post", onSubmit="return false;")
+        form#J_SessionForm.shadow(method="post", onSubmit="return false;")
           //if type == '1'
           input(type="hidden",name="partyId", value="#{partyId}")
           div.row
