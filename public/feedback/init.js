@@ -10,7 +10,6 @@ KISSY.add(function(S, Node,Uri,Count,CountImage,saveCount,sessionList) {
             value:Number($count.text()),
             time:Number($count.attr('data-time'))
         });
-
         var countImage = new CountImage('.J_Stars');
 
         if(count.get('value') > 0 && count.get('time') > 0){

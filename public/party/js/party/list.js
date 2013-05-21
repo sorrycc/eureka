@@ -216,8 +216,9 @@ KISSY.add("party/list", function (S, UA, Ajax, XTemplate, Uri, DragSwitch, Cooki
                     }
                 ]
             });
-            var count = $('.mainCard').length,
-                currentIndex = 0,
+            var count = $('.mainCard').length;
+            if(!count) return;
+            var currentIndex = 0,
                 nextIndex = null,
                 cardWidth = $('.mainCard')[0].offsetWidth,
                 offsetWidth = D.viewportWidth() - cardWidth;
@@ -330,27 +331,42 @@ KISSY.add("party/list", function (S, UA, Ajax, XTemplate, Uri, DragSwitch, Cooki
 
             var isTapHold = false;
             var touchIsMove = 0;
+            var tapTimer;
             E.delegate('.session-list-box', 'touchmove', '.J_SessionOpts', function () {
-                touchIsMove++
+                touchIsMove++;
             });
 
-            E.delegate('.session-list-box', 'touchstart touchend', '.J_SessionOpts', function (e) {
+
+            E.delegate('.session-list-box', 'touchstart mousedown', '.J_SessionOpts', function (e) {
                 var t = e.currentTarget;
-
-                if (e.type == 'touchstart') {
-                    tapTimer = setTimeout(function () {
-                        isTapHold = true;
-                        tapHoldHandler(t);
-                    }, 1000);
-                } else {
-                    clearTimeout(tapTimer);
-                    if (!isTapHold && touchIsMove < 20) {
-                        tapHandler(t);
-                    }
-                    isTapHold = false;
-                }
+                touchIsMove = 0;
+                // E.delegate('.session-list-box', "click", ".J_SessionOpts", function(e){
+                //     e.halt();
+                // });
+                tapTimer = setTimeout(function () {
+                    isTapHold = true;
+                    tapHoldHandler(t);
+                }, 1000);
 
             });
+
+            E.delegate('.session-list-box', 'touchend mouseup', '.J_SessionOpts', function (e) {
+                var t = e.currentTarget;
+                clearTimeout(tapTimer);
+                if (!isTapHold && touchIsMove < 20) {
+                    tapHandler(t);
+                }
+                isTapHold = false;
+            })
+
+
+            // E.delegate('.session-list-box', "click", ".J_SessionOpts", function(e){
+            //     if(touchIsMove) 
+            //         e.halt();
+            //     else
+            //         var t = e.currentTarget;
+            //         tapHandler(t);
+            // });
         }
 
 
