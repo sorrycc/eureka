@@ -12,7 +12,8 @@ KISSY.use("node, cookie", function(S, Node, Cookie){
       $ = S.all;
 
     socket.on('isValid', function(data){
-      console.log("on data", data);
+      // console.log("on data", data);
+      if(window.doNotShowFeedback) return;
       var count = Cookie.get('remainCount');
       var remainList;
       if(count) {
