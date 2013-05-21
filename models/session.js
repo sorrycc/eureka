@@ -60,12 +60,18 @@ exports.put = function(req, res, render) {
             }
         }
     });
-}
+};
 
 exports.get = function(req, res, render) {
     var _query = {
       id: req.params.id
     };
+
+    function checkFeedbacked(docs, data){
+        docs[0].feedbacked = data;
+        // console.log("feedback data:", data);
+        render(docs);
+    }
 
     db.get({
         collection: "session",
@@ -75,11 +81,22 @@ exports.get = function(req, res, render) {
                 res.send("error");
             }
             else {
-                render(docs);
+                db.get({
+                    collection: "feedback",
+                    query: {
+                        creator: req.user._id,
+                        seesion: docs._id
+                    },
+                    complete: function(data){
+                        checkFeedbacked(docs, data);
+                    }
+                });
+
+                //render(docs);
             }
         }
     });
-}
+};
 
 exports.del = function(req, res, render) {
 	var _query = {
@@ -87,7 +104,7 @@ exports.del = function(req, res, render) {
   };
 
 	db.del({
-	    query: _query,
+        query: _query,
 	    collection: "session",
 	    complete: function(err, numAffected) {
 	        if (err) {

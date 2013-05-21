@@ -13,19 +13,20 @@ block content
                         br
                         br
                         br
-                        a.button(href="/session/list") 返回列表
+                        a.button(href="/party") 返回列表
             else
                 form(method="post")
                     div.row
                         div.column
                             label(for="title") 主题
                         div.column
-                            input#J_Title(type="text", name="title", value="#{title}")
+                            p#J_Title(type="text", name="title", value="#{title}") #{title}
+                                
                     div.row
                         div.column
                             label(for="speakers") 分享者
                         div.column
-                            input#J_Speakers(type="text", name="speakers", value="#{speakers}")
+                            p#J_Speakers(type="text", name="speakers", value="#{speakers}") #{speakers}
                     div.row
                         div.column
                             label(for="score") 打分

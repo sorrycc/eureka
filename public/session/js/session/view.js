@@ -46,20 +46,11 @@ KISSY.add("session/view", function(S, Node, Cookie) {
                 }
             });
 
-
-
-
-
-            var remainList = Cookie.get("remainList");
-            if(!remainList) return;
-            remainList = JSON.parse(remainList);
-            _this = this
-            if(remainList.indexOf(this.sessionId) >= 0) {
-              Node.all('#J_FeedbackBtn').removeAttr("disabled")
-              Node.all('#J_FeedbackBtn').on("click", function(){
-                location.href = "/feedback/make/" + _this.sessionId
-              })
-            }
+            var _this = this;
+            Node.all('#J_FeedbackBtn').on("click", function(ev){
+              if(Node.all(ev.target).hasAttr("disabled")) return;
+              location.href = "/feedback/make/" + _this.sessionId
+            })
 
         }
     });
