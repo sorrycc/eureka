@@ -40,7 +40,6 @@ form{-webkit-box-shadow:2px 2px 10px #666;box-shadow:2px 2px 10px #666}
 .row .column,.lastrow .column{display:inline-block;padding-left:2.5%;min-height:40px;height:100%;width:70%;background:#fff;}
 .row .column:first-child,.lastrow .column:first-child{text-align:right;display:block;float:left;background:none;width:25%;}
 .row .column:first-child label,.lastrow .column:first-child label{margin-right:20px}
-.row .column input,.lastrow .column input,.row .column p,.lastrow .column p{line-height:40px;border:0 none;width:80%;font-size:1em}
 .row .column input[type="date"],.lastrow .column input[type="date"],.row .column input[type="time"],.lastrow .column input[type="time"]{width:auto;font-size:1em}
 .msg{text-align:center}
 .lastrow .column{padding-top:10px;padding-bottom:10px;}
