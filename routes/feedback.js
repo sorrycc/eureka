@@ -39,7 +39,7 @@ exports.make = function(req, res){
   }
 
   function real_render(err, docs) {
-    if(err || !(feedback = docs[0])) {
+    if(err || (feedback = docs[0])) {
       renderObj.type = "1";
       renderObj.id = req.params.id;
       renderObj.responseString = "不能重复反馈哦！";
