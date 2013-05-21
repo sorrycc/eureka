@@ -2,19 +2,33 @@
  * @fileoverview 保存统计数据
  * @author 剑平（明河）<minghe36@126.com>
  **/
-KISSY.add(function(S, Node, io,Uri,Cookie) {
+KISSY.add(function(S, Node,LayerAnim) {
     var EMPTY = '';
     var $ = Node.all;
-    return function saveCount(count,people){
-        if(!S.isNumber(count) || !S.isNumber(people)) return false;
-        if(count <= 0 || people <= 0) return false;
-        var sessionId = Number($('#J_SessionId').val());
-        var partyId = Number(Cookie.get('partyid'));
-        var url = 'http://'+new Uri(window.location.href).getHostname()+'/feedback/save_count';
-        io.post(url,{count:count,people:people,sessionId:sessionId,partyId:partyId},function(data){
-            if(!data.status){
-                S.log(data.msg);
-            }
-        },'json');
+    return function(){
+        var $list = $('.J_SessionList');
+        var $lis = $list.children('li');
+        if(!$lis.length) return false;
+        var config = [];
+        $lis.show();
+        $lis.each(function($li,i){
+            // 动画配置参数
+            config[i] =
+            {
+                node: $li[0],
+                from:
+                {
+                    opacity: 0,
+                    width:0
+                },
+                delay: i * 0.2,
+                easing: "Back.easeOut",
+                duration: 0.5
+            };
+
+        })
+        // 创建并播放动画
+        var anim = new LayerAnim(config);
+        anim.run();
     }
-}, {requires : ['node','ajax','uri','cookie']});
+}, {requires : ['node','gallery/layer-anim/1.0/']});

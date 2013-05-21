@@ -32,14 +32,16 @@ block content
                 section.flip3d-back.J_Rotate
                     div.qrcode-container  
                         div.qrcode(data-url="http://{{host}}/party/{{id}}")(title="http://{{host}}/party/{{id}}")
+
+
                     
         {{/each}}
 
     script#J_TemplateSession(type="javascript/template")
         ul.session-list
             {{#each sessions}}
-            li.ks-draglist-item
-                div.session-info.J_SessionOpts(data-url="/session/{{id}}/?partyId={{pid}}")
+            li.ks-draglist-item.session-info
+                div.J_SessionOpts(data-url="/session/{{id}}/?partyId={{pid}}")
                     span.icon-feedback(id="J_Feedback{{id}}")
                     span.session-info
                         span.time {{from}} - {{to}}
