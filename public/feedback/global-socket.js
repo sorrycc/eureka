@@ -37,6 +37,8 @@ KISSY.use("node, cookie", function(S, Node, Cookie){
   function makeNotice(remainList, len) {
     var url = '';
     var partyId = Cookie.get('partyid');
+    //如果是反馈结果页面，不显示消息
+    if(isFeedbackResultPage()) return false;
     if(len == 1) {
       url = '/feedback/make/' + remainList[0];
     }
@@ -53,5 +55,13 @@ KISSY.use("node, cookie", function(S, Node, Cookie){
 
     $('#J_ReviewNotice').attr('href', url);
     $('#J_ReviewNotice')[0].style.display = "block";
+  }
+
+    /**
+     * 是否是反馈结果页面
+     * @return Boolean
+     */
+  function isFeedbackResultPage(){
+     return $('#J_IsResult').length;
   }
 });
