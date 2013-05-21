@@ -212,14 +212,14 @@ exports.isExist = function(session_id,render){
  * @return {boolean}
  */
 exports.getStartFeedbackTime = function(req,res){
-    var sessionId = req.params.sessionId;
-    if(!sessionId){
-        res.send('{"status":-2}');
-        return false;
-    }
-    this.getSession(sessionId,res,function(session){
-        res.send('{"status":'+session[0].state+',"start_feedback_time":"'+session[0].start_feedback_time+'"}');
-    })
+    // var sessionId = req.params.sessionId;
+    // if(!sessionId){
+    //     res.send('{"status":-2}');
+    //     return false;
+    // }
+    // this.getSession(sessionId,res,function(session){
+    //     res.send('{"status":'+session[0].state+',"start_feedback_time":"'+session[0].start_feedback_time+'"}');
+    // })
 }
 
 exports.getCount = function(sessionId,render){
