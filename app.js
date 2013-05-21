@@ -39,7 +39,7 @@ app.configure(function(){
     if (app.get("port") === 80) {
         // auth
         app.use(nobuc(/.*/, {
-            hostname: "login-test.alibaba-inc.com",
+            hostname: app.get("env") === "development" ? "login-test.alibaba-inc.com" : "login.alibaba-inc.com",
             appname: "eureka"
         }));
 
@@ -146,19 +146,6 @@ app.post('/api/party/del/:id', function(req, res) {
     party.del(req, res);
 });
 
-// session
-// 七念
-// someone's
-// app.get('/session/create', session.new);
-// app.post('/session/create', session.create);
-// //app.get('/session/get', session.get);
-// app.get('/session/edit/:id', session.edit);
-// app.get('/session/update/:id', session.update);
-// app.post('/session/del/:id', session.del);
-// app.get('/session/detail/:id', function(req, res) {
-//     session.detail.render(req, res);
-// });
-
 // 7n's
 app.get('/session/create', session.new);
 app.post('/session/create', session.create);
@@ -189,6 +176,9 @@ app.get('/feedback/list', function(req, res) {
 app.get('/feedback/result/:sessionId', feedback.result);
 app.post('/feedback/save_count', feedback.save_count);
 app.get('/feedback/get_start_feedback_time/:sessionId', feedback.getStartFeedbackTime);
+app.get('/error/404',function(req, res){
+    res.render('404',{docTitle:'页面出错啦~'});
+})
 
 var server = http.createServer(app);
 var io = require('socket.io').listen(server);

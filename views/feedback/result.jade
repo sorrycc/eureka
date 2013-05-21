@@ -6,6 +6,7 @@ block head
 block content
     input(type="hidden",value="#{sessionId}")#J_SessionId
     input(type="hidden",value="#{partyId}")#J_PartyId
+    input(type="hidden",value="1")#J_IsResult
     div.content
         div.session-info
             div.count
@@ -18,7 +19,11 @@ block content
             each session, i in sessions
                 li
                     a(href="./#{session.id}")
-                        i #{session.count}
+                        i
+                            if session.state === 0
+                                span.no-start-feedback 未开始反馈
+                            else
+                                =session.count
                         div.session-title #{session.title}
 
     script(type='text/javascript')

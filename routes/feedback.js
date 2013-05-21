@@ -14,25 +14,47 @@ function getTopic(id, callback) {
 
 // 观众反馈页面
 exports.make = function(req, res){
-  var renderObj = {}
+  var renderObj = {};
+  var topic = {};
   renderObj.docTitle = "反馈进行时";
   getTopic(req.params.id, render);
 
   function render(err, docs){
     if(err || !(topic = docs[0])) {
       renderObj.type = "1";
-      renderObj.responseString = "无此主题，或暂时还不能反馈哦"
+      renderObj.id = req.params.id;
+      renderObj.responseString = "无此主题，或暂时还不能反馈哦";
+      res.render('feedback/make', renderObj);
+    }
+    else {
+      db.get({
+        query: {
+          session: topic._id,
+          creator: req.user._id
+        },
+        collection: "feedback",
+        complete: real_render
+      });
+    }
+  }
+
+  function real_render(err, docs) {
+    if(err || (feedback = docs[0])) {
+      renderObj.type = "1";
+      renderObj.id = req.params.id;
+      renderObj.responseString = "不能重复反馈哦！";
     }
     else {
       renderObj.type            = "0";
-      renderObj.responseString  = ""
-      renderObj.title           = topic.title
-      renderObj.speakers        = topic.speakers
-      renderObj.score           = 3
-      renderObj.advise          = ""
-      renderObj.id              = req.params.id
+      renderObj.responseString  = "";
+      renderObj.title           = topic.title;
+      renderObj.speakers        = topic.speakers;
+      renderObj.score           = 3;
+      renderObj.advise          = "";
+      renderObj.id              = req.params.id;
+      renderObj.backUrl         = "/party/" + topic.id;
     }
-    res.render('feedback/make', renderObj)
+    res.render('feedback/make', renderObj); 
   }
 }
 
@@ -47,11 +69,10 @@ exports.post = function(req, res) {
     var dataObj = {};
     for(var key in req.body) {
       if(req.body.hasOwnProperty(key) && key != 'id') {
-        dataObj[key] = req.body[key]
+        dataObj[key] = req.body[key];
       }
     }
 
-    // 暂时用分享的id 代替作者 id
     dataObj.creator = req.user._id;
     dataObj.session = topic._id;
     console.log("DDDDD", dataObj);
@@ -60,7 +81,7 @@ exports.post = function(req, res) {
       doc       : dataObj,
       collection: "feedback",
       complete  : addFeedbackToTopic
-    })
+    });
 
     function addFeedbackToTopic(err, doc){
       console.log(doc);
@@ -72,6 +93,7 @@ exports.post = function(req, res) {
 
       topic.feedbacks.push(doc.id);
       topic.status = 1;
+      topic.backUrl = "/party/" + topic.id;
       db.post({
         query   : {id: req.params.id},
         doc     : topic,
