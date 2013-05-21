@@ -154,10 +154,23 @@ exports.del = function(req, res){
 };
 
 exports.update = function(req, res){
-  model.post(req, res, render);
+  var partyId;
+
+  if (req.cookies.partyid === undefined) {
+    partyId = req.query.partyId;
+    res.cookie("partyid", partyId);
+  }  else {
+    partyId = req.cookies.partyid;
+  }
+
+  if (partyId === undefined) {
+    res.redirect("/party");
+  } else {
+    model.post(req, res, render);
+  }
 
   function render(numAffected) {
-    res.redirect("/party/" + req.body.partyId || "");
+    res.redirect("/party/" + partyId);
   } 
 };
 
