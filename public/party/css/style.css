@@ -25,5 +25,5 @@ ul.session-list li.hover div.session-opts{left:0;background-color:rgba(0,0,0,0.2
 ul.session-list .entry-list-edit-show .session-opts{visibility:visible !important}
 div.add-session-bar{padding:1em;}
 div.add-session-bar a.text{color:#6c93a0;font-size:1.125em;line-height:1.3333333333333333em;margin-left:5px;text-decoration:none}
-div.add-session-bar a.text i.icon-add-session{margin-right:5px}
+div.add-session-bar a.text i.icon-add-session{margin-right:5px;margin-top:2px}
 .party-item{background:#fff;-webkit-user-select:none}
