@@ -1,6 +1,7 @@
 .content{margin-top:10em;position:relative;font-family:"Microsoft YaHei"}
 .session-info{color:#fff;text-align:center;margin-top:1em;}
 .session-info .count em{font-size:5em}
+.anim-num{font-size:5em;color:#fff;margin-top:.5em;font-family:"Microsoft YaHei"}
 .stars-wrapper{margin-top:3em;height:5em;position:relative}
 .count-img{position:absolute;top:0;left:50%;}
 .count-img .score-stars-wrapper{position:absolute;top:0;left:0}

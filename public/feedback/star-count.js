@@ -34,6 +34,23 @@ KISSY.add(function(S, Node, Base) {
             //次数+1
             self.set('time',time +1);
             self.set('value',value + starNum);
+            self._removeNum();
+        },
+        /**
+         * 删除当前的数字
+         * @private
+         */
+        _removeNum:function(){
+            var self = this;
+            var value = self.get('value');
+            var $span = $('<em class="anim-num" style="position:absolute;">'+value+'</em>');
+            var $target = self.get('target');
+            var pos = $target.offset();
+            var random = Math.floor(Math.random() * 80);
+            if(random % 2) random = -random;
+            $span.css(pos).appendTo('body').animate({left:pos.left + random,top:pos.top + random,opacity:0},0.5,"easeOut",function(){
+                $span.remove();
+            });
         }
     }, {ATTRS : /** @lends StarCount*/{
         target:{
