@@ -12,11 +12,11 @@ KISSY.add("party/list", function (S, UA, Ajax, XTemplate, Uri, DragSwitch, Cooki
     //host
     var host = 'http://' + new Uri(window.location.href).getHostname();
     var prefix = (function () {
-        if (UA.webkit) return "-webkit-"
-        else if (UA.firefox) return "-moz-"
-        else if (UA.opera) return "-o-"
-        else if (UA.ie) return "-ms-"
-        else return ""
+        if (UA.webkit) return "-webkit-";
+        else if (UA.firefox) return "-moz-";
+        else if (UA.opera) return "-o-";
+        else if (UA.ie) return "-ms-";
+        else return "";
     })();
 
 
@@ -122,7 +122,7 @@ KISSY.add("party/list", function (S, UA, Ajax, XTemplate, Uri, DragSwitch, Cooki
             var remainList = JSON.parse(Cookie.get("remainCount"));
             if (!remainList || !remainList.length) return;
             remainList.map(function (id) {
-                D.get('#J_Feedback' + id).style.display = "block"
+                D.get('#J_Feedback' + id).style.display = "block";
             });
         },
 
@@ -197,7 +197,7 @@ KISSY.add("party/list", function (S, UA, Ajax, XTemplate, Uri, DragSwitch, Cooki
                         failCallback: null,
                         checkvalid: function (ev) {
                             //return $(ev.self.originalEl).css("-webkit-transform") is "none"
-                            return true
+                            return true;
                         }
                     },
                     null,
@@ -211,7 +211,7 @@ KISSY.add("party/list", function (S, UA, Ajax, XTemplate, Uri, DragSwitch, Cooki
                         failCallback: null,
                         checkvalid: function (ev) {
                             //return $(ev.self.originalEl).css("-webkit-transform") is "none"
-                            return true
+                            return true;
                         }
                     }
                 ]
@@ -222,46 +222,51 @@ KISSY.add("party/list", function (S, UA, Ajax, XTemplate, Uri, DragSwitch, Cooki
                 nextIndex = null,
                 cardWidth = $('.mainCard')[0].offsetWidth,
                 offsetWidth = D.viewportWidth() - cardWidth;
+            $($('.mainCard')[0]).addClass("current-card");
 
             function next() {
-                if (currentIndex == count - 1) return
-                currentIndex++
-                $("#J_PartyList").css(prefix + 'transform', "translateX(-" + (currentIndex * cardWidth) + "px)")
+                if (currentIndex == count - 1) return;
+                currentIndex++;
+                $('.mainCard').removeClass("current-card");
+                $($('.mainCard')[currentIndex]).addClass("current-card");
+                $("#J_PartyList").css(prefix + 'transform', "translateX(-" + (currentIndex * cardWidth) + "px)");
                 if (currentIndex == count - 1) {
-                    DS.config.binds[1].maxDistance = -1
-                    DS.config.binds[3].maxDistance = D.viewportWidth()
+                    DS.config.binds[1].maxDistance = -1;
+                    DS.config.binds[3].maxDistance = D.viewportWidth();
                 }
                 else {
-                    DS.config.binds[1].maxDistance = -D.viewportWidth()
-                    DS.config.binds[3].maxDistance = D.viewportWidth()
+                    DS.config.binds[1].maxDistance = -D.viewportWidth();
+                    DS.config.binds[3].maxDistance = D.viewportWidth();
                 }
             }
 
             function prev() {
-                if (currentIndex == 0) return
-                currentIndex--
-                $("#J_PartyList").css(prefix + 'transform', "translateX(-" + (currentIndex * cardWidth) + "px)")
+                if (currentIndex == 0) return;
+                currentIndex--;
+                $('.mainCard').removeClass("current-card");
+                $($('.mainCard')[currentIndex]).addClass("current-card");
+                $("#J_PartyList").css(prefix + 'transform', "translateX(-" + (currentIndex * cardWidth) + "px)");
                 if (currentIndex == 0) {
-                    DS.config.binds[3].maxDistance = 1
-                    DS.config.binds[1].maxDistance = -D.viewportWidth()
+                    DS.config.binds[3].maxDistance = 1;
+                    DS.config.binds[1].maxDistance = -D.viewportWidth();
                 }
                 else {
-                    DS.config.binds[3].maxDistance = D.viewportWidth()
-                    DS.config.binds[1].maxDistance = -D.viewportWidth()
+                    DS.config.binds[3].maxDistance = D.viewportWidth();
+                    DS.config.binds[1].maxDistance = -D.viewportWidth();
                 }
             }
 
             DS.on("dragRightEnd", function (ev) {
                 if (DS.config.binds[3].passed) {
-                    prev()
+                    prev();
                 }
-            })
+            });
 
             DS.on("dragLeftEnd", function (ev) {
                 if (DS.config.binds[1].passed) {
-                    next()
+                    next();
                 }
-            })
+            });
         },
 
         /**
@@ -279,7 +284,7 @@ KISSY.add("party/list", function (S, UA, Ajax, XTemplate, Uri, DragSwitch, Cooki
             });
 
             E.on('.view-qrcode', 'tap', function (e) {
-                var $e = jQuery(this).parents('.flip3d')
+                var $e = jQuery(this).parents('.flip3d');
 
                 // lazy generate qrcode
                 if (!$e.data("generated")) {
@@ -357,7 +362,7 @@ KISSY.add("party/list", function (S, UA, Ajax, XTemplate, Uri, DragSwitch, Cooki
                     tapHandler(t);
                 }
                 isTapHold = false;
-            })
+            });
 
 
             // E.delegate('.session-list-box', "click", ".J_SessionOpts", function(e){
