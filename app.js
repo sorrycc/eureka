@@ -37,10 +37,9 @@ app.configure(function(){
 
 
     if (app.get("port") === 80) {
-        console.log(app.get("env"));
         // auth
         app.use(nobuc(/.*/, {
-            hostname: app.get("env") === "development" ? "login-test.alibaba-inc.com" : "login.alibaba-inc.ocm",
+            hostname: app.get("env") === "development" ? "login-test.alibaba-inc.com" : "login.alibaba-inc.com",
             appname: "eureka"
         }));
 
