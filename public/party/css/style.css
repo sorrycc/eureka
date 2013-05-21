@@ -1,7 +1,7 @@
 .party-info{background-color:#d7f2fb;padding:1em;position:relative;}
 .party-info h3{margin:0 0 .5em}
-.party-info .party-time,.party-info .party-loc{margin:.5em 0 .5em}
-.party-info .icon-code{position:absolute;right:1em;top:1em}
+.party-info .party-time,.party-info .party-loc{margin:.2em 0 .2em}
+.party-info .icon-code{position:absolute;right:1em;top:1.4em}
 .party-info div.party-opts{position:absolute;top:0;left:-9999px;height:100%;width:100%;}
 .party-info div.party-opts .opt{float:left;margin-top:3.125em;margin-left:4.375em;cursor:pointer}
 .party-info.hover div.party-opts{left:0;background-color:rgba(0,0,0,0.2);-webkit-transition:background-color 1s ease;-moz-transition:background-color 1s ease;-o-transition:background-color 1s ease;-ms-transition:background-color 1s ease;transition:background-color 1s ease}
@@ -16,7 +16,7 @@
 .view-qrcode{position:absolute;right:8px;top:8px}
 .session-list-box{height:100%}
 ul.session-list li{border-bottom:1px solid #dbcccd;margin-bottom:0;position:relative;}
-ul.session-list li .session-info{font-size:.875em;line-height:1.2857142857142858em;display:block;padding:1em;padding-right:0;text-decoration:none;}
+ul.session-list li .session-info{font-size:1em;line-height:1.125em;display:block;padding:1em;padding-right:0;text-decoration:none;}
 ul.session-list li .session-info span.time{display:block;margin-bottom:5px;color:#58a8c1}
 ul.session-list li .session-info span.title{display:block;margin-bottom:0}
 ul.session-list li div.session-opts{position:absolute;top:0;left:-9999px;height:100%;width:100%;}
