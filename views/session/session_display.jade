@@ -46,6 +46,7 @@ block content
                 form(method="post",action="/session/#{id}/")
                   input(type="hidden", name="_method", value="delete")
                   input.button(type="submit", value="删除分享")
+                input#J_SessionResult.button(type="button", value="查看反馈")
             else
               if feedbacked
                 input#J_SessionFeedback.button(type="button", value="提交反馈", disabled="disabled", id="J_FeedbackBtn")
