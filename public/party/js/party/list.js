@@ -127,6 +127,8 @@ KISSY.add("party/list", function (S, UA, Ajax, XTemplate, Uri, DragSwitch, Cooki
         },
 
         bind: function () {
+            var self = this;
+
             E.delegate(document, "click", ".party-del", function (evt) {
                 var el = S.all(evt.currentTarget),
                     url = el.attr("href");
@@ -144,6 +146,11 @@ KISSY.add("party/list", function (S, UA, Ajax, XTemplate, Uri, DragSwitch, Cooki
                     complete: function (d) {
                         if (!d || !d.success) {
                             alert("抱歉，删除失败！");
+                            return;
+                        }
+
+                        if (self.id) {
+                            window.location.assign("/party");
                             return;
                         }
 

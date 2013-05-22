@@ -159,12 +159,12 @@ module.exports = {
                 collection: "party",
                 complete: function(err, docs) {
                     if (err) {
-                        res.send(err.message);
+                        res.redirect("/404");
                         return;
                     }
 
                     if (!docs.length) {
-                        res.send("can not find this party.");
+                        res.redirect("/404");
                         return;
                     }
 
