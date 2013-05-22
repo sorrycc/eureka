@@ -68,8 +68,10 @@ exports.get = function(req, res, render) {
     };
 
     function checkFeedbacked(docs, data){
-        docs[0].feedbacked = data;
-        // console.log("feedback data:", data);
+        if(docs[0].state == 1) 
+            docs[0].feedbacked = data;
+        else
+            docs[0].feedbacked = false;
         render(docs);
     }
 
