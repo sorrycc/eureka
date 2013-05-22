@@ -5,6 +5,7 @@
 KISSY.add(function(S, Node,Uri,ajax,Count,CountImage,sessionList) {
     var $ = Node.all;
     return function(){
+        var sessionId = Number($('#J_SessionId').val());
         var $count = $('.J_StarCount');
         var count = new Count('.J_StarCount',{
             value:Number($count.text()),
@@ -24,10 +25,12 @@ KISSY.add(function(S, Node,Uri,ajax,Count,CountImage,sessionList) {
         var isExistFeedback = false;
         //监听用户的反馈提交
         socket.on('jianping', function (data) {
-            var starNum = data.score;
-            //触发统计
-            count.count(starNum);
-            isExistFeedback = true;
+            if(sessionId == Number(data.sessionId)){
+                var starNum = data.score;
+                //触发统计
+                count.count(starNum);
+                isExistFeedback = true;
+            }
         });
 
         function showStars(){

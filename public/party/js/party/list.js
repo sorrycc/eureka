@@ -173,10 +173,6 @@ KISSY.add("party/list", function (S, UA, Ajax, XTemplate, Uri, DragSwitch, Cooki
             E.delegate('body', 'tap', '.icon-push', function (ev) {
                 //session id
                 var id = D.attr(ev.target, 'data-id');
-                //记录推送时间
-                S.io.post(host + '/session/start_feedback_time/' + id, function (data) {
-                    S.log('推送时间为：' + data.time);
-                }, 'json');
                 socket.emit('setValid', id);
             });
 
