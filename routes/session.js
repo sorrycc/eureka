@@ -240,13 +240,10 @@ exports.list = {
 
     if (ids = req.query.ids) {
       ids = ids.split(',');
-      console.log("session ids:" + ids);
     }
 
     function checkFeedback(sessions, feedbacks){
-      console.log(sessions, feedbacks)
       sessions.forEach(function(session, key){
-        console.log(session.id)
         var feedbacked = feedbacks.some(function(feedback){
           // console.log(feedback.id, req.user._id, session._id);
           // console.log(feedback.session.equals(session._id));
@@ -257,7 +254,6 @@ exports.list = {
            session.onfeedback = true;
         }
       });
-      console.log(sessions);
       res.json({
         success: true,
         docs: sessions
@@ -277,7 +273,6 @@ exports.list = {
             success: false,
             message: err.message
           });
-          console.log("查询分享失败");
           return;
         }
         else {

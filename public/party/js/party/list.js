@@ -173,9 +173,7 @@ KISSY.add("party/list", function (S, UA, Ajax, XTemplate, Uri, DragSwitch, Cooki
             E.delegate('body', 'tap', '.icon-push', function (ev) {
                 //session id
                 var id = D.attr(ev.target, 'data-id');
-                S.io.post(host + '/feedback/status',{sessionId:Number(id),status:1}, function (data) {
-                    socket.emit('setValid', id);
-                }, 'json');
+                socket.emit('setValid', id);
             });
 
             var self = this;
