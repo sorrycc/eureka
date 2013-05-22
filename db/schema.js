@@ -127,6 +127,10 @@ module.exports = {
             "type":Number,
             "default":1
         },
+        onfeedback: {
+            "type":Boolean,
+            "default":false
+        },
         _deleted: {
             "type": Boolean,
             "default": false,
