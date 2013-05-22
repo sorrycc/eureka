@@ -236,3 +236,18 @@ exports.closeFeedback = function(sessionId,render){
         }
     });
 }
+exports.updateStatus = function(sessionId,status,render){
+    db.post({
+        query: {id:sessionId},
+        collection: SESSION_COLLECTION,
+        doc: {
+            state: status
+        },
+        options: {
+            multi: true
+        },
+        complete: function(err) {
+            if(render)render(err);
+        }
+    });
+}

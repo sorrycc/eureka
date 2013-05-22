@@ -210,6 +210,17 @@ exports.close = function(req, res){
         }
     })
 }
+exports.status = function(req,res){
+    var sessionId = Number(req.body.sessionId);
+    var status = Number(req.body.status);
+    model.updateStatus(sessionId,status,function(err){
+        if(err){
+            res.send('{"status":0}');
+        }else{
+            res.send('{"status":1}');
+        }
+    })
+}
 exports.getStartFeedbackTime = function(req,res){
     model.getStartFeedbackTime(req, res);
 }
