@@ -94,13 +94,13 @@
           <h1>手势部分</h1>
           <p>遇到的问题</p>
           <ol>
-            <li>多个手势 Touch 事件冲突</li>
+            <li>多个手势事件间冲突</li>
             <li>KISSY TapHold 事件很坑爹</li>
-            <li>基于 transform:matrix 的拖拽手势框架 DragSwitch</li>
+            <li>基于 transform2d:matrix 的拖拽手势框架 DragSwitch</li>
           </ol>
         </section>
         <section>
-          <h2>1. 多个手势 Touch 事件冲突</h2>
+          <h2>1. 多个手势事件间冲突</h2>
           <p>如果两个手势都是向右拖拽，那怎么判断该触发哪个？</p>
           <p>解决方法：每个手势使用敏感度设置（touchMove 的距离），应该优先触发的手势设置高敏感度，触发时阻止 touch 事件继续传递，防止下一个手势触发</p>
         </section>
