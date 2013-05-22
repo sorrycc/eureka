@@ -153,6 +153,7 @@ app.get('/session/:id', session.detail);
 app.get('/session/:id/edit', session.edit);
 app.post('/session/:id/edit', session.update);
 app.del('/session/:id', session.del);
+app.get('/session/del/:id', session.del);
 //保存推送开始时间 by 剑平
 app.post('/session/start_feedback_time/:id', session.startFeedbackTime);
 
