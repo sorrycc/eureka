@@ -5,6 +5,8 @@ html
 
     // 页面初始缩放比例正确，横竖版切换时自动根据当前窗口宽度重置页面缩放，但无法手动缩放页面
     meta(name="viewport",content="width=device-width,initial-scale=1,maximum-scale=1")
+    meta(name="apple-mobile-web-app-capable", content="yes")
+    meta(name="apple-mobile-web-app-status-bar-style", content="black")
 
     link(rel='stylesheet', href='/global/css/style.css')
     
@@ -17,6 +19,23 @@ html
 
     // normal js
     script(src="http://a.tbcdn.cn/s/kissy/1.3.0/seed.js")
+    script
+        if (!window.navigator.standalone) {
+            KISSY.ready(function(){
+                if(document.documentElement.scrollHeight <= document.documentElement.clientHeight) {  
+                    document.getElementsByTagName('body')[0].style.height = document.documentElement.clientWidth / screen.width * screen.height - document.getElementsByTagName("header")[0].clientHeight + 'px';
+                }  
+                setTimeout(function() {window.scrollTo(0, 1)}, 0);
+            });
+        }
+        else {
+            KISSY.use("node, event", function(S){
+                S.one(document).delegate("click", "a", function(e){
+                    e.halt();
+                    location.href = S.all(e.currentTarget).attr("href");
+                });
+            });
+        }
     script(src="/global/js/config.js")
     script(src="/js/socket.io/socket.io.min.js")
     
