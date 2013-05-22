@@ -117,13 +117,13 @@ KISSY.add("party/list", function (S, UA, Ajax, XTemplate, Uri, DragSwitch, Cooki
         },
 
         setReviewStatus: function () {
-            var str = Cookie.get("remainCount");
-            if (!str) return;
-            var remainList = JSON.parse(Cookie.get("remainCount"));
-            if (!remainList || !remainList.length) return;
-            remainList.map(function (id) {
-                D.get('#J_Feedback' + id).style.display = "block";
-            });
+            // var str = Cookie.get("remainCount");
+            // if (!str) return;
+            // var remainList = JSON.parse(Cookie.get("remainCount"));
+            // if (!remainList || !remainList.length) return;
+            // remainList.map(function (id) {
+            //     D.get('#J_Feedback' + id).style.display = "block";
+            // });
         },
 
         bind: function () {

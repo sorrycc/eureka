@@ -243,30 +243,60 @@ exports.list = {
       console.log("session ids:" + ids);
     }
 
-    
-      query.id = {
-        $in: ids
-      };
-      db.get({
-        collection: "session",
-        query: query,
-        complete: function(err, docs) {
-          if (err) {
-            res.json({
-              success: false,
-              message: err.message
-            });
-            console.log("查询分享失败")
-            return;
-          }
-          else {
-            res.json({
-              success: true,
-              docs: docs
-            });
-          }
+    function checkFeedback(sessions, feedbacks){
+      console.log("in here");
+      sessions.forEach(function(session){
+        var feedbacked = feedbacks.some(function(feedback){
+          return feedback.session == session._id && feedback.creator == req.user._id;
+        });
+
+        if(session.state == 1 && !feedbacked) {
+          session.onfeedback = true;
         }
       });
+
+      res.json({
+        success: true,
+        docs: sessions
+      });
+    }
+    
+    query.id = {
+      $in: ids
+    };
+
+    db.get({
+      collection: "session",
+      query: query,
+      complete: function(err, docs) {
+        if (err) {
+          res.json({
+            success: false,
+            message: err.message
+          });
+          console.log("查询分享失败");
+          return;
+        }
+        else {
+          var list = [];
+          docs.forEach(function(doc){
+            list.push(doc._id);
+          });
+
+          db.get({
+            collection: "feedback",
+            query: {
+              session: {$in:list}
+            },
+            complete: function(err, feedbacks){
+              if(feedbacks)
+                checkFeedback(docs, feedbacks);
+            }
+          });
+
+        }
+      }
+    });
 
   }
 };
