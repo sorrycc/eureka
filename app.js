@@ -14,7 +14,7 @@ var express = require('express')
 
 var party = require('./routes/party');
 var feedback = require('./routes/feedback');
-var db = require("db");
+var db = require("./db");
 
 
 var stylus = require('stylus')
