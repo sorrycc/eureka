@@ -9,7 +9,7 @@
 }@media only screen and (max-width: 479px){.party-list .mainCard{width:88%;padding:4.8em 1.5% 1.3em 1.5%}
 .party-list .current-card{padding-top:4.2em}
 .party-list .fst-card{margin-left:4.5%}
-.party-list .only-one-card.fst-card{padding:4.5em 5% 1.3em 5%;width:90%}
+.party-list .only-one-card.fst-card{margin-left:0;padding:4.8em 1.1em 1.3em;width:100%}
 }.party-info{background-color:#d7f2fb;padding:1em;position:relative;}
 .party-info h3{margin:0 0 .5em}
 .party-info .party-time,.party-info .party-loc{margin:.2em 0 .2em}

@@ -365,7 +365,7 @@ KISSY.add("party/list", function (S, UA, Ajax, XTemplate, Uri, DragSwitch, Cooki
             E.delegate('.session-list-box', 'touchend mouseup', '.J_SessionOpts', function (e) {
                 var t = e.currentTarget;
                 clearTimeout(tapTimer);
-                if (!isTapHold && touchIsMove < 20) {
+                if (!isTapHold && touchIsMove < 3) {
                     tapHandler(t);
                 }
                 isTapHold = false;
