@@ -194,22 +194,14 @@ server.listen(app.get('port'), function(){
 io.sockets.on('connection', function (socket) {
     //管理员推送反馈许可
     socket.on('setValid', function(data){
-      // data 是 session id
-      db.get({
-        collection: 'session',
-        query: {id: data},
-        complete: function(err, docs){
-            if(docs && docs.length){
-                docs[0].state = 1;
-                console.log("set state", 1);
-                db.post({
-                    collection: 'session',
-                    query: {id: data},
-                    doc: docs[0]
-                });
+        db.post({
+            collection: 'session',
+            query: {id: Number(data)},
+            doc: {state:1},
+            complete:function(err,docs){
+                console.log(err);
             }
-        }
-      });
+        });
       socket.broadcast.emit('isValid', data);
     });
 });
