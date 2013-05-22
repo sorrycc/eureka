@@ -20,10 +20,8 @@
     <!-- For syntax highlighting -->
     <link rel="stylesheet" href="lib/css/zenburn.css">
 
-    <!-- If the query includes 'print-pdf', use the PDF print sheet -->
-    <script>
-      document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
-    </script>
+    <!-- -->
+    <link rel="stylesheet" href="/css/eureka.css">
 
     <!--[if lt IE 9]>
     <script src="lib/js/html5shiv.js"></script>
@@ -41,16 +39,47 @@
         <section>
           <h1>Eureka</h1>
           <p>
-            <small>Created by Taobao UED FEM - Eureka小组</small>
+            <small class="gray">Created by Taobao UED FEM - <b class=green>Eureka</b>小组</small>
           </p>
         </section>
 
+
         <section>
-          <h1>Why</h1>
+          
+          <section>
+            <h2>Eureka前传<h2>
+          </section>
+          <section>
+            <h3>Eureka 小组</h3>
+            <img src="./img/eureka.JPG" alt="eureka team"/>
+          </section>
+          <section>
+            <p><b class="green">11267</b> lines of code</p>
+            <p><b class="green">412</b> commits</p>
+            <img src="./img/amazing_journey.png"/>
+          </section>
+          <section>
+            <p>相约星期三</p>
+            <img src="./img/wednesday.png" />
+          </section>
+          <section>
+            <h3>Eureka 小组</h3>
+            <img src="./img/team.png" />
+          </section>
+        </section>
+        <section>
+          <img src="./img/eureka_md.png" />
         </section>
 
         <section>
-          <h1>What</h1>
+          <h3><b class="green">Eureka</b>, a tiny, but real application</h3>
+        </section>
+
+        <section>
+          <h3>产品背景</h3>
+          <p>签到信息和反馈信息对于分享会有重要的价值</p>
+          <p>传统的签到和反馈方式需要大量的人工参与来完成数据的融合汇总</p>
+          
         </section>
         <!-- End 7n -->
 
@@ -126,7 +155,7 @@
         overview: true,
         center: true,
 
-        theme: "beige", // available themes are in /css/theme
+        theme: "default", // available themes are in /css/theme
         transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
 
         // Optional libraries used to extend on reveal.js

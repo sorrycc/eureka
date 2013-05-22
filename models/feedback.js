@@ -3,15 +3,13 @@ var db = require("../db");
 var COUNT_COLLECTION = "feedback_count";
 //分享集合
 var SESSION_COLLECTION = "session";
-//分享会集合
-var PARTY_COLLECTION = "party";
 /**
  * 保存反馈星数统计
  * @param req
  * @param res
  * @return {boolean}
  */
-exports.saveCount = function(req, res) {
+exports.saveCount = function(req, res,render) {
     //分享id
     var sessionId = req.body.sessionId;
     var partyId =  req.body.partyId;
@@ -35,36 +33,16 @@ exports.saveCount = function(req, res) {
      * @private
      */
     function _complete(err,res){
-        if (err) {
-            res.send('{"status":0,"message":"'+err+'"}');
-        }
-        else {
-            res.send('{"status":1}');
-        }
-        _closeFeedback(sessionId);
-    }
-
-    /**
-     * 关闭统计
-     * @private
-     */
-    function _closeFeedback(sessionId){
-        db.post({
-            query: {id:sessionId},
-            collection: SESSION_COLLECTION,
-            doc: {
-                state: 2
-            },
-            options: {
-                multi: true
-            },
-            complete: function(err) {
-                if (err) {
-                    console.log(err.message);
-                    return;
-                }
+        if(render){
+            render();
+        }else{
+            if (err) {
+                res.send('{"status":0,"message":"'+err+'"}');
             }
-        });
+            else {
+                res.send('{"status":1}');
+            }
+        }
     }
 
     self.isExist(sessionId,function(result){
@@ -78,6 +56,7 @@ exports.saveCount = function(req, res) {
                 }
             });
         }else{
+            console.log('partyId',partyId);
             db.put({
                 collection: COUNT_COLLECTION,
                 doc: {
@@ -94,6 +73,7 @@ exports.saveCount = function(req, res) {
 
     });
 }
+
 /**
  * 获取分享
  * @param req
@@ -212,14 +192,16 @@ exports.isExist = function(session_id,render){
  * @return {boolean}
  */
 exports.getStartFeedbackTime = function(req,res){
-    // var sessionId = req.params.sessionId;
-    // if(!sessionId){
-    //     res.send('{"status":-2}');
-    //     return false;
-    // }
-    // this.getSession(sessionId,res,function(session){
-    //     res.send('{"status":'+session[0].state+',"start_feedback_time":"'+session[0].start_feedback_time+'"}');
-    // })
+    var sessionId = req.params.sessionId;
+    if(!sessionId){
+         res.send('{"status":-2}');
+         return false;
+    }
+    this.getSession(sessionId,res,function(session){
+         var status = Number(session[0].state) || 1;
+         var time = Number(session[0].start_feedback_time) || -1;
+         res.send('{"status":'+status+',"start_feedback_time":'+time+'}');
+    })
 }
 
 exports.getCount = function(sessionId,render){
@@ -231,8 +213,26 @@ exports.getCount = function(sessionId,render){
         query: {session_id:sessionId},
         collection: COUNT_COLLECTION,
         complete:function(err, docs){
-            console.log(docs);
             render(docs);
+        }
+    });
+}
+/**
+ * 关闭反馈
+ * @param sessionId
+ */
+exports.closeFeedback = function(sessionId,render){
+    db.post({
+        query: {id:sessionId},
+        collection: SESSION_COLLECTION,
+        doc: {
+            state: 2
+        },
+        options: {
+            multi: true
+        },
+        complete: function(err) {
+            if(render)render(err);
         }
     });
 }

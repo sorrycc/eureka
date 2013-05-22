@@ -2,7 +2,7 @@
  * @fileoverview 初始化统计反馈逻辑（管理者界面）
  * @author 剑平（明河）<minghe36@126.com>
  **/
-KISSY.add(function(S, Node,Uri,Count,CountImage,saveCount,sessionList) {
+KISSY.add(function(S, Node,Uri,ajax,Count,CountImage,sessionList) {
     var $ = Node.all;
     return function(){
         var $count = $('.J_StarCount');
@@ -29,40 +29,46 @@ KISSY.add(function(S, Node,Uri,Count,CountImage,saveCount,sessionList) {
             //触发统计
             count.count(starNum);
             isExistFeedback = true;
-
-            var num = count.get('value');
-            var people = count.get('time');
-            saveCount(num,people);
         });
+
+        function showStars(){
+            var num = count.get('value');
+            //星数
+            var starNum = count.get('average');
+            countImage.show(function(){
+                countImage.set('num',starNum);
+            })
+            ajax.post('http://'+new Uri(window.location.href).getHostname()+'/feedback/close',{sessionId:Number($('#J_SessionId').val())},function(data){
+
+            },'json')
+        }
 
         /**
          * 定时判断是否已经可以开始统计
          */
-        var timer = setInterval(function(){
-            S.io.get('http://'+new Uri(window.location.href).getHostname()+'/feedback/get_start_feedback_time/'+2,function(data){
+        /*var timer = S.later(function(){
+            ajax.get('http://'+new Uri(window.location.href).getHostname()+'/feedback/get_start_feedback_time/'+2,function(data){
                 var time = Number(data.start_feedback_time);
                 //反馈已经统计结束
-                if(data.status >1 && time>0){
+                if(Number(data.status) >1 && time>0){
                     var now = S.now();
                     var t = now - time;
                     //超过二分钟
                     var isExceed = t >= 2*60*1000;
                     if(isExceed){
-                        var num = count.get('value');
-                        //星数
-                        var starNum = count.get('average');
-                        if(starNum>0){
-                            countImage.show(function(){
-                                countImage.set('num',starNum);
-                            })
-                        }
+                        showStars();
                         //清理定时轮询
                         clearInterval(timer);
                     }
                 }
             },'json');
-        },500);
+        },500);*/
 
         sessionList();
+
+        $('.J_CloseFeedback').on('click',function(){
+            showStars();
+        })
+
     }
-}, {requires : ['node','uri','./star-count','./count-image','./save-count','./session-list']});
+}, {requires : ['node','uri','ajax','./star-count','./count-image','./session-list']});

@@ -183,6 +183,8 @@ KISSY.add("party/list", function (S, UA, Ajax, XTemplate, Uri, DragSwitch, Cooki
 
         // 绑定列表间切换
         bindListSwitch: function () {
+            var self = this;
+
             var DS = new DragSwitch("#J_PartyList", {
                 senDistance: 3,
                 binds: [
@@ -239,6 +241,8 @@ KISSY.add("party/list", function (S, UA, Ajax, XTemplate, Uri, DragSwitch, Cooki
                     DS.config.binds[1].maxDistance = -D.viewportWidth();
                     DS.config.binds[3].maxDistance = D.viewportWidth();
                 }
+
+                self.renderSession(currentIndex);
             }
 
             function prev() {
@@ -255,6 +259,8 @@ KISSY.add("party/list", function (S, UA, Ajax, XTemplate, Uri, DragSwitch, Cooki
                     DS.config.binds[3].maxDistance = D.viewportWidth();
                     DS.config.binds[1].maxDistance = -D.viewportWidth();
                 }
+
+                self.renderSession(currentIndex);
             }
 
             DS.on("dragRightEnd", function (ev) {
