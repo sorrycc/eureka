@@ -153,41 +153,36 @@ exports.post = function(req, res) {
  * 管理者查看反馈结果页面
  */
 exports.result = function(req, res){
-    var cookies = {};
-    req.headers.cookie && req.headers.cookie.split(';').forEach(function( cookie ) {
-        var parts = cookie.split('=');
-        cookies[ parts[ 0 ].trim() ] = ( parts[ 1 ] || '' ).trim();
-    });
-    var partyId = Number(cookies['partyid']);
-    if(!partyId){
-
-    }else{
-        var sessionId = req.params.sessionId;
-        //获取sessionId
-        model.getSession(sessionId,res,function(result){
-            var data = result[0];
-            req.id = data.id;
-            req.partyId = partyId;
-            data.count = 0;
-            data.people = 0;
-
-            model.getCount(sessionId,function(result){
-                if(result.length){
-                    //得分
-                    data.count = result[0].count;
-                    //次数
-                    data.people = result[0].people;
-                }
-                model.getcounts(req,res,function(sessions){
-                    data.docTitle = '《' + data.title + '》的反馈结果';
-                    data.sessions = sessions;
-                    data.partyId = req.params.partyId;
-                    data.sessionId = req.params.sessionId;
-                    res.render('feedback/result',data);
-                })
-            });
-        })
+    var sessionId = req.params.sessionId;
+    if(!sessionId){
+        res.render('404');
+        return false;
     }
+    //获取sessionId
+    model.getSession(sessionId,res,function(result){
+        var data = result[0];
+        req.id = data.id;
+        req.partyId = data.party_id;
+        console.log(req.partyId);
+        data.count = 0;
+        data.people = 0;
+
+        model.getCount(sessionId,function(result){
+            if(result.length){
+                //得分
+                data.count = result[0].count;
+                //次数
+                data.people = result[0].people;
+            }
+            model.getcounts(req,res,function(sessions){
+                data.docTitle = '《' + data.title + '》的反馈结果';
+                data.sessions = sessions;
+                data.partyId = req.params.partyId;
+                data.sessionId = req.params.sessionId;
+                res.render('feedback/result',data);
+            })
+        });
+    })
 }
 /**
  * 保存反馈结果
