@@ -244,17 +244,20 @@ exports.list = {
     }
 
     function checkFeedback(sessions, feedbacks){
-      // console.log("in here");
-      sessions.forEach(function(session){
+      console.log(sessions, feedbacks)
+      sessions.forEach(function(session, key){
+        console.log(session.id)
         var feedbacked = feedbacks.some(function(feedback){
-          return feedback.session == session._id && feedback.creator == req.user._id;
+          // console.log(feedback.id, req.user._id, session._id);
+          // console.log(feedback.session.equals(session._id));
+          return feedback.session.equals(session._id) && feedback.creator.equals(req.user._id);
         });
 
         if(session.state == 1 && !feedbacked) {
-          session.onfeedback = true;
+           session.onfeedback = true;
         }
       });
-
+      console.log(sessions);
       res.json({
         success: true,
         docs: sessions
