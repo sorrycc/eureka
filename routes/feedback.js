@@ -62,10 +62,15 @@ exports.make = function(req, res){
 exports.post = function(req, res) {
   var renderObj = {};
   var topic = null;
-  getTopic(req.params.id, putData);
+  var sessionId =req.params.id;
+  //星数
+  var score = 0;
+  var partyId;
+  getTopic(sessionId, putData);
 
   function putData(err, docs) {
     topic = docs[0];
+    partyId = topic.party_id;
     var dataObj = {};
     for(var key in req.body) {
       if(req.body.hasOwnProperty(key) && key != 'id') {
@@ -75,6 +80,7 @@ exports.post = function(req, res) {
 
     dataObj.creator = req.user._id;
     dataObj.session = topic._id;
+    score =  Number(dataObj.score);
     console.log("DDDDD", dataObj);
 
     db.put({
@@ -84,8 +90,6 @@ exports.post = function(req, res) {
     });
 
     function addFeedbackToTopic(err, doc){
-      console.log(doc);
-
       if(!doc) {
         console.log(err);
         return;
@@ -97,9 +101,31 @@ exports.post = function(req, res) {
       db.post({
         query   : {id: req.params.id},
         doc     : topic,
-        complete: render
+        complete: saveStars
       })
     }
+  }
+
+    /**
+     * 保存星数
+      */
+  function saveStars(){
+        model.getCount(sessionId,function(feedBackCount){
+            var count;
+            var people;
+            if(feedBackCount.length){
+                count = Number(feedBackCount[0].count);
+                people = Number(feedBackCount[0].people);
+                count += score;
+                people +=1;
+            }else{
+                count = score;
+                people = 1;
+            }
+            model.saveCount({body:{sessionId:sessionId,partyId:partyId,count:count,people:people}},{},function(){
+                render();
+            })
+        })
   }
 
   function render(err, numAffected) {
