@@ -72,6 +72,14 @@ exports.post = function(req, res) {
 
   function putData(err, docs) {
     topic = docs[0];
+    if(Number(topic.state) == 2){
+        renderObj.docTitle = "提交失败";
+        renderObj.type = "1";
+        renderObj.pid = req.cookies.partyid;
+        renderObj.responseString = "反馈已经关闭！"
+        res.render('feedback/make', renderObj)
+        return false;
+    }
     partyId = topic.party_id;
     var dataObj = {};
     for(var key in req.body) {
