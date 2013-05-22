@@ -1,13 +1,13 @@
-.party-list .mainCard{width:94%;padding:5em .75% 2em .75%;-webkit-transition:padding-top .8s linear;-moz-transition:padding-top .8s linear;-o-transition:padding-top .8s linear;-ms-transition:padding-top .8s linear;transition:padding-top .8s linear}
-.party-list .current-card{padding-top:4.5em;-webkit-transition:padding-top .8s linear;-moz-transition:padding-top .8s linear;-o-transition:padding-top .8s linear;-ms-transition:padding-top .8s linear;transition:padding-top .8s linear}
+.party-list .mainCard{width:94%;padding:5em .75% 2em .75%;-webkit-transition:padding-top .5s linear;-moz-transition:padding-top .5s linear;-o-transition:padding-top .5s linear;-ms-transition:padding-top .5s linear;transition:padding-top .5s linear}
+.party-list .current-card{padding-top:4.5em;-webkit-transition:padding-top .5s linear;-moz-transition:padding-top .5s linear;-o-transition:padding-top .5s linear;-ms-transition:padding-top .5s linear;transition:padding-top .5s linear}
 .party-list .fst-card{margin-left:2.25%}
 .party-list .only-one-card.fst-card{margin-left:0;padding:4.8em 1.3em 1.3em;width:100%}
 @media only screen and (max-width: 959px){.party-list .mainCard{width:94%;padding:5em .75% 2em .75%;-webkit-transition:padding-top .8s linear;-moz-transition:padding-top .8s linear;-o-transition:padding-top .8s linear;-ms-transition:padding-top .8s linear;transition:padding-top .8s linear}
 .party-list .current-card{padding-top:4.5em;-webkit-transition:padding-top .8s linear;-moz-transition:padding-top .8s linear;-o-transition:padding-top .8s linear;-ms-transition:padding-top .8s linear;transition:padding-top .8s linear}
 .party-list .fst-card{margin-left:2.25%}
 .party-list .only-one-card.fst-card{margin-left:0;padding:4.8em 1.3em 1.3em;width:100%}
-}@media only screen and (min-width: 768px) and (max-width: 959px){.party-list .mainCard{width:94%;padding:5em .75% 2em .75%;-webkit-transition:padding-top .8s linear;-moz-transition:padding-top .8s linear;-o-transition:padding-top .8s linear;-ms-transition:padding-top .8s linear;transition:padding-top .8s linear}
-.party-list .current-card{padding-top:4.5em;-webkit-transition:padding-top .8s linear;-moz-transition:padding-top .8s linear;-o-transition:padding-top .8s linear;-ms-transition:padding-top .8s linear;transition:padding-top .8s linear}
+}@media only screen and (min-width: 768px) and (max-width: 959px){.party-list .mainCard{width:94%;padding:5em .75% 2em .75%;-webkit-transition:padding-top .7s linear;-moz-transition:padding-top .7s linear;-o-transition:padding-top .7s linear;-ms-transition:padding-top .7s linear;transition:padding-top .7s linear}
+.party-list .current-card{padding-top:4.5em;-webkit-transition:padding-top .7s linear;-moz-transition:padding-top .7s linear;-o-transition:padding-top .7s linear;-ms-transition:padding-top .7s linear;transition:padding-top .7s linear}
 .party-list .fst-card{margin-left:2.25%}
 .party-list .only-one-card.fst-card{margin-left:0;padding:4.8em 1.3em 1.3em;width:100%}
 }@media only screen and (max-width: 767px){.party-list .mainCard{width:88%;padding:4.8em 1.5% 1.3em 1.5%;-webkit-transition:padding-top .8s linear;-moz-transition:padding-top .8s linear;-o-transition:padding-top .8s linear;-ms-transition:padding-top .8s linear;transition:padding-top .8s linear}

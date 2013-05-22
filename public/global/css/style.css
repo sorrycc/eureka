@@ -19,8 +19,8 @@ a img{border:none}
 body{font-size:1em;line-height:1.5em;font-family:Microsoft Yahei,Simsun}
 h1{font-size:1.625em;line-height:1.3846153846153846em}
 h3{font-size:1.5em;line-height:.8333333333333334em}
-body{font-size:1.06em}
-@media only screen and (max-width: 959px){body{font-size:1.06em}
+body{font-size:1.08em}
+@media only screen and (max-width: 959px){body{font-size:1.08em}
 }@media only screen and (min-width: 768px) and (max-width: 959px){body{font-size:1.04em}
 }@media only screen and (max-width: 767px){body{font-size:1.02em}
 }@media only screen and (min-width: 480px) and (max-width: 767px){body{font-size:1.02em}
