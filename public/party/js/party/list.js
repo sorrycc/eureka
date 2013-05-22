@@ -281,7 +281,7 @@ KISSY.add("party/list", function (S, UA, Ajax, XTemplate, Uri, DragSwitch, Cooki
         bindCodeRotate: function () {
 
 
-            E.on('.J_Rotate', 'tap', function (e) {
+            E.on('.J_Rotate', 'tap click', function (e) {
                 var t = e.currentTarget,
                     p = D.parent(t, '.flip-container');
 
@@ -289,7 +289,7 @@ KISSY.add("party/list", function (S, UA, Ajax, XTemplate, Uri, DragSwitch, Cooki
 
             });
 
-            E.on('.view-qrcode', 'tap', function (e) {
+            E.on('.view-qrcode', 'tap click', function (e) {
                 var $e = jQuery(this).parents('.flip3d');
 
                 // lazy generate qrcode
