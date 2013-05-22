@@ -54,7 +54,7 @@ exports.make = function(req, res){
       renderObj.score           = 3;
       renderObj.advise          = "";
       renderObj.id              = req.params.id;
-      renderObj.backUrl         = "/party/" + topic.id;
+      renderObj.backUrl         = "/party/" + req.cookies.partyid;
     }
     res.render('feedback/make', renderObj); 
   }
@@ -105,7 +105,7 @@ exports.post = function(req, res) {
 
       topic.feedbacks.push(doc.id);
       topic.status = 1;
-      topic.backUrl = "/party/" + topic.id;
+      topic.backUrl = "/party/" + req.cookies.partyid;
       db.post({
         query   : {id: req.params.id},
         doc     : topic,
