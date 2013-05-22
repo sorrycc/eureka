@@ -28,15 +28,19 @@ KISSY.add("session/view", function(S, Node, Cookie) {
                 return;
             }
 
-            if(this.btn)
+            if(this.btn) {
               this.btn.on("click", function(e){
                   location.href = "/session/"+this.sessionId+"/edit";
-              }, this);
+              }, this);  
+            }
 
-            S.one("#J_SessionResult").on("click", function(e) {
-                
-                location.href = "/feedback/result/"+this.sessionId;
-            }, this);
+            var resultBtn = S.one("#J_SessionResult");
+
+            if (resultBtn) {
+                resultBtn.on("click", function(e) {
+                    location.href = "/feedback/result/"+this.sessionId;
+                }, this);
+            }
 
             var _speakers = S.one(".J_Speakers"),
                 _html = _speakers.html(),
