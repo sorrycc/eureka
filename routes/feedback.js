@@ -23,6 +23,7 @@ exports.make = function(req, res){
     if(err || !(topic = docs[0])) {
       renderObj.type = "1";
       renderObj.id = req.params.id;
+      renderObj.pid = req.cookies.partyid;
       renderObj.responseString = "无此主题，或暂时还不能反馈哦";
       res.render('feedback/make', renderObj);
     }
@@ -42,6 +43,7 @@ exports.make = function(req, res){
     if(err || (feedback = docs[0])) {
       renderObj.type = "1";
       renderObj.id = req.params.id;
+      renderObj.pid = req.cookies.partyid;
       renderObj.responseString = "不能重复反馈哦！";
     }
     else {
@@ -52,7 +54,7 @@ exports.make = function(req, res){
       renderObj.score           = 3;
       renderObj.advise          = "";
       renderObj.id              = req.params.id;
-      renderObj.backUrl         = "/party/" + topic.id;
+      renderObj.backUrl         = "/party/" + req.cookies.partyid;
     }
     res.render('feedback/make', renderObj); 
   }
@@ -70,6 +72,14 @@ exports.post = function(req, res) {
 
   function putData(err, docs) {
     topic = docs[0];
+    if(Number(topic.state) == 2){
+        renderObj.docTitle = "提交失败";
+        renderObj.type = "1";
+        renderObj.pid = req.cookies.partyid;
+        renderObj.responseString = "反馈已经关闭！"
+        res.render('feedback/make', renderObj)
+        return false;
+    }
     partyId = topic.party_id;
     var dataObj = {};
     for(var key in req.body) {
@@ -81,7 +91,6 @@ exports.post = function(req, res) {
     dataObj.creator = req.user._id;
     dataObj.session = topic._id;
     score =  Number(dataObj.score);
-    console.log("DDDDD", dataObj);
 
     db.put({
       doc       : dataObj,
@@ -91,13 +100,12 @@ exports.post = function(req, res) {
 
     function addFeedbackToTopic(err, doc){
       if(!doc) {
-        console.log(err);
         return;
       }
 
       topic.feedbacks.push(doc.id);
       topic.status = 1;
-      topic.backUrl = "/party/" + topic.id;
+      topic.backUrl = "/party/" + req.cookies.partyid;
       db.post({
         query   : {id: req.params.id},
         doc     : topic,
@@ -145,6 +153,7 @@ exports.post = function(req, res) {
 
     renderObj.docTitle = "提交成功"
     renderObj.type = "1"
+    renderObj.pid = req.cookies.partyid;
     renderObj.responseString = "你的反馈已经成功提交啦！"
     res.render('feedback/make', renderObj)
   }
@@ -153,41 +162,35 @@ exports.post = function(req, res) {
  * 管理者查看反馈结果页面
  */
 exports.result = function(req, res){
-    var cookies = {};
-    req.headers.cookie && req.headers.cookie.split(';').forEach(function( cookie ) {
-        var parts = cookie.split('=');
-        cookies[ parts[ 0 ].trim() ] = ( parts[ 1 ] || '' ).trim();
-    });
-    var partyId = Number(cookies['partyid']);
-    if(!partyId){
-
-    }else{
-        var sessionId = req.params.sessionId;
-        //获取sessionId
-        model.getSession(sessionId,res,function(result){
-            var data = result[0];
-            req.id = data.id;
-            req.partyId = partyId;
-            data.count = 0;
-            data.people = 0;
-
-            model.getCount(sessionId,function(result){
-                if(result.length){
-                    //得分
-                    data.count = result[0].count;
-                    //次数
-                    data.people = result[0].people;
-                }
-                model.getcounts(req,res,function(sessions){
-                    data.docTitle = '《' + data.title + '》的反馈结果';
-                    data.sessions = sessions;
-                    data.partyId = req.params.partyId;
-                    data.sessionId = req.params.sessionId;
-                    res.render('feedback/result',data);
-                })
-            });
-        })
+    var sessionId = req.params.sessionId;
+    if(!sessionId){
+        res.render('404');
+        return false;
     }
+    //获取sessionId
+    model.getSession(sessionId,res,function(result){
+        var data = result[0];
+        req.id = data.id;
+        req.partyId = data.party_id;
+        data.count = 0;
+        data.people = 0;
+
+        model.getCount(sessionId,function(result){
+            if(result.length){
+                //得分
+                data.count = result[0].count;
+                //次数
+                data.people = result[0].people;
+            }
+            model.getcounts(req,res,function(sessions){
+                data.docTitle = '《' + data.title + '》的反馈结果';
+                data.sessions = sessions;
+                data.partyId = req.params.partyId;
+                data.sessionId = req.params.sessionId;
+                res.render('feedback/result',data);
+            })
+        });
+    })
 }
 /**
  * 保存反馈结果
