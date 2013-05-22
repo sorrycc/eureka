@@ -5,40 +5,89 @@
   .mainCard
     width: 94% 
     padding: 5em 0.75% 2em 0.75%
+    transition: padding-top 0.8s linear
   .current-card
     padding-top: 4.5em
+    transition: padding-top 0.8s linear 
   .fst-card 
     margin-left: 2.25%
-  .only-one-card.fst-card
-    padding: 5em 2% 2em 2% 
-    width: 96%;
+  .only-one-card.fst-card 
+    margin-left: 0
+    padding: 4.8em 1.3em 1.3em
+    width: 100%
 
-/* iPad 及以下，以及所有小于（不等于）960宽度的平板电脑 */
+/* iPad 及以下，以及所有小于（不等于）960宽度的平板电脑*/
 @media only screen and (max-width: 959px) 
   .party-list
     .mainCard
-      width: 95% 
+      width: 94% 
+      padding: 5em 0.75% 2em 0.75%
+      transition: padding-top 0.8s linear
+    .current-card
+      padding-top: 4.5em
+      transition: padding-top 0.8s linear 
+    .fst-card 
+      margin-left: 2.25%
+    .only-one-card.fst-card 
+      margin-left: 0
+      padding: 4.8em 1.3em 1.3em
+      width: 100%
 
  
 /* 仅iPad 竖版，以及所有小于（不等于）标准960宽度的平板电脑的竖版 */
 @media only screen and (min-width: 768px) and (max-width: 959px) 
   .party-list
     .mainCard
-      width: 95% 
+      width: 94% 
+      padding: 5em 0.75% 2em 0.75%
+      transition: padding-top 0.8s linear
+    .current-card
+      padding-top: 4.5em
+      transition: padding-top 0.8s linear 
+    .fst-card 
+      margin-left: 2.25%
+    .only-one-card.fst-card 
+      margin-left: 0
+      padding: 4.8em 1.3em 1.3em
+      width: 100%
 
  
 /* iPhone 及以下 */
 @media only screen and (max-width: 767px) 
   .party-list
     .mainCard
-      width: 95% 
+      width: 88% 
+      padding: 4.8em 1.5% 1.3em 1.5%
+      transition: padding-top 0.8s linear 
+    .current-card
+      padding-top: 4.2em
+      transition: padding-top 0.8s linear
+    .fst-card 
+      margin-left: 4.5%
+    .only-one-card.fst-card
+      margin-left: 0
+      padding: 4.8em 1.3em 1.3em
+      width: 100%;
+  
 
  
 /* 仅iPhone 横版，包括某些平板电脑的竖版 */
 @media only screen and (min-width: 480px) and (max-width: 767px) 
   .party-list
     .mainCard
-      width: 95% 
+      width: 88% 
+      padding: 4.8em 1.5% 1.3em 1.5%
+      transition: padding-top 0.8s linear 
+    .current-card
+      padding-top: 4.2em
+      transition: padding-top 0.8s linear
+    .fst-card 
+      margin-left: 4.5%
+    .only-one-card.fst-card
+      margin-left: 0
+      padding: 4.8em 1.3em 1.3em
+      width: 100%;
+  
 
  
 /* 仅iphone4 竖版 */
@@ -47,15 +96,16 @@
     .mainCard
       width: 88% 
       padding: 4.8em 1.5% 1.3em 1.5%
-      
+      transition: padding-top 0.8s linear 
     .current-card
       padding-top: 4.2em
+      transition: padding-top 0.8s linear
     .fst-card 
       margin-left: 4.5%
     .only-one-card.fst-card
       margin-left: 0
-      padding: 4.8em 1.1em 1.3em
-      width: 100%;
+      padding: 4.8em 1.3em 1.3em
+      width: 100%
   
   
 
