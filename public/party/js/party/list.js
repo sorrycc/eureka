@@ -170,8 +170,9 @@ KISSY.add("party/list", function (S, UA, Ajax, XTemplate, Uri, DragSwitch, Cooki
 
             
 
-            E.delegate('body', 'tap', '.icon-push', function (ev) {
+            E.delegate('body', 'tap click', '.icon-push', function (ev) {
                 //session id
+                ev.preventDefault();
                 var id = D.attr(ev.target, 'data-id');
                 socket.emit('setValid', id);
             });
