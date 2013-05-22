@@ -31,6 +31,15 @@ KISSY.add(function(S, Node,Uri,ajax,Count,CountImage,sessionList) {
             isExistFeedback = true;
         });
 
+        function showStars(){
+            var num = count.get('value');
+            //星数
+            var starNum = count.get('average');
+            countImage.show(function(){
+                countImage.set('num',starNum);
+            })
+        }
+
         /**
          * 定时判断是否已经可以开始统计
          */
@@ -44,14 +53,7 @@ KISSY.add(function(S, Node,Uri,ajax,Count,CountImage,sessionList) {
                     //超过二分钟
                     var isExceed = t >= 2*60*1000;
                     if(isExceed){
-                        var num = count.get('value');
-                        //星数
-                        var starNum = count.get('average');
-                        if(starNum>0){
-                            countImage.show(function(){
-                                countImage.set('num',starNum);
-                            })
-                        }
+                        showStars();
                         //清理定时轮询
                         clearInterval(timer);
                     }
@@ -60,5 +62,11 @@ KISSY.add(function(S, Node,Uri,ajax,Count,CountImage,sessionList) {
         },500);
 
         sessionList();
+
+        $('body').on('keyup',function(ev){
+            if(ev.keyCode == 13 || ev.keyCode == 108){
+                showStars();
+            }
+        })
     }
 }, {requires : ['node','uri','ajax','./star-count','./count-image','./session-list']});
