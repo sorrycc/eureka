@@ -8,48 +8,50 @@ block content
   //  h1 #{docTitle}
   div.content
     div.mainCard
-      div.row
-        div.column
-          label 标题
-        div.column
-          span #{title}
-      div.row
-        div.column
-          label 分享者
-        div.column
-          span.J_Speakers #{speakers}
-      div.row
-        div.column
-          label 时间
-        div.column
-          span #{from} ~ #{to}
-      div.row
-        div.column
-          label 简介
-        div.column
-          span #{description}
-      div.lastrow
-        div.column
-          &nbsp;
-        div.column
-          if isRoot == true
-            if type == "created"
-              form(method="post",action="/session/#{id}")
-                a.button(href="/session/#{id}/edit") 编辑分享
-                input(type="hidden", name="_method", value="delete")
-                input.button(type="submit", value="删除分享")
+      div.shadow
+        div.row
+          div.column
+            label 标题
+          div.column
+            span #{title}
+        div.row
+          div.column
+            label 分享者
+          div.column
+            span.J_Speakers #{speakers}
+        div.row
+          div.column
+            label 时间
+          div.column
+            span #{from} ~ #{to}
+        div.row
+          div.column
+            label 简介
+          div.column
+            span #{description}
+        div.lastrow
+          div.column
+            &nbsp;
+          div.column
+            if isRoot == true
+              if type == "created"
+                form(method="post",action="/session/#{id}")
+                  a.button(href="/session/#{id}/edit") 编辑分享
+                  input(type="hidden", name="_method", value="delete")
+                  input.button(type="submit", value="删除分享")
 
-                a.button(href="/session/create") 继续创建
-            else if type == "detail"
-              input#J_SessionEdit.button(type="button", value="编辑分享")
-              form(method="post",action="/session/#{id}/")
-                input(type="hidden", name="_method", value="delete")
-                input.button(type="submit", value="删除分享")
-          else
-            if feedbacked
-              input#J_SessionFeedback.button(type="button", value="提交反馈", disabled="disabled", id="J_FeedbackBtn")
+                  a.button(href="/session/create") 继续创建
+              else if type == "detail"
+                input#J_SessionEdit.button(type="button", value="编辑分享")
+                form(method="post",action="/session/#{id}/")
+                  input(type="hidden", name="_method", value="delete")
+                  input.button(type="submit", value="删除分享")
+                input#J_SessionResult.button(type="button", value="查看反馈")
             else
-              input#J_SessionFeedback.button(type="button", value="提交反馈", id="J_FeedbackBtn")
+              if feedbacked
+                input#J_SessionFeedback.button(type="button", value="提交反馈", disabled="disabled", id="J_FeedbackBtn")
+              else
+                input#J_SessionFeedback.button(type="button", value="提交反馈", id="J_FeedbackBtn")
   script
     KISSY.use("session/view", function(S, View){
         
