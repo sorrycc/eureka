@@ -1,14 +1,63 @@
 @import "../../global/css/font.styl"
 
+/* 正常PC液晶屏样式 */
 .party-list
   .mainCard
-      padding: 4.8em 0.5em 1.3em 0.7em
-      width: 90% 
-  .only-one-card
-      padding: 4.5em 1em 1.3em 1em
-      width: 100%;
+    width: 94% 
+    padding: 5em 0.75% 2em 0.75%
   .current-card
+    padding-top: 4.5em
+  .fst-card 
+    margin-left: 2.25%
+  .only-one-card.fst-card
+    padding: 5em 2% 2em 2% 
+    width: 96%;
+
+/* iPad 及以下，以及所有小于（不等于）960宽度的平板电脑 */
+@media only screen and (max-width: 959px) 
+  .party-list
+    .mainCard
+      width: 95% 
+
+ 
+/* 仅iPad 竖版，以及所有小于（不等于）标准960宽度的平板电脑的竖版 */
+@media only screen and (min-width: 768px) and (max-width: 959px) 
+  .party-list
+    .mainCard
+      width: 95% 
+
+ 
+/* iPhone 及以下 */
+@media only screen and (max-width: 767px) 
+  .party-list
+    .mainCard
+      width: 95% 
+
+ 
+/* 仅iPhone 横版，包括某些平板电脑的竖版 */
+@media only screen and (min-width: 480px) and (max-width: 767px) 
+  .party-list
+    .mainCard
+      width: 95% 
+
+ 
+/* 仅iphone4 竖版 */
+@media only screen and (max-width: 479px) 
+  .party-list
+    .mainCard
+      width: 88% 
+      padding: 4.8em 1.5% 1.3em 1.5%
+      
+    .current-card
       padding-top: 4.2em
+    .fst-card 
+      margin-left: 4.5%
+    .only-one-card.fst-card
+      margin-left: 0
+      padding: 4.8em 1.1em 1.3em
+      width: 100%;
+  
+  
 
 
 .party-info
