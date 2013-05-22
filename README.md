@@ -81,3 +81,19 @@ db.get({
 所有页面强制登录，** req.user ** 保存已登录用户数据（包括_id, name, nick, parties）
 
 参见 */user*
+
+## 部署
+
+eureka默认使用80端口部署，当使用80端口启动应用会使用buc做权限认证；
+
+如果使用非80端口部署，当前登录用户使用mock数据。
+
+### 部署环境
+
+默认部署为development环境，development环境调用buc的测试环境接口；如需部署生产环境请带上 **NODE_ENV=product** 参数：
+
+```
+sudo NODE_ENV=product node app.js
+// forever
+sudo NODE_ENV=product forever start app.js
+```
