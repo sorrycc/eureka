@@ -42,31 +42,7 @@ exports.saveCount = function(req, res,render) {
             else {
                 res.send('{"status":1}');
             }
-            _closeFeedback(sessionId);
         }
-    }
-
-    /**
-     * 关闭统计
-     * @private
-     */
-    function _closeFeedback(sessionId){
-        db.post({
-            query: {id:sessionId},
-            collection: SESSION_COLLECTION,
-            doc: {
-                state: 2
-            },
-            options: {
-                multi: true
-            },
-            complete: function(err) {
-                if (err) {
-                    console.log(err.message);
-                    return;
-                }
-            }
-        });
     }
 
     self.isExist(sessionId,function(result){
@@ -238,6 +214,25 @@ exports.getCount = function(sessionId,render){
         collection: COUNT_COLLECTION,
         complete:function(err, docs){
             render(docs);
+        }
+    });
+}
+/**
+ * 关闭反馈
+ * @param sessionId
+ */
+exports.closeFeedback = function(sessionId,render){
+    db.post({
+        query: {id:sessionId},
+        collection: SESSION_COLLECTION,
+        doc: {
+            state: 2
+        },
+        options: {
+            multi: true
+        },
+        complete: function(err) {
+            if(render)render(err);
         }
     });
 }

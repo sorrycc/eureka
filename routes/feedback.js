@@ -197,6 +197,16 @@ exports.result = function(req, res){
 exports.save_count = function(req, res){
     model.saveCount(req, res);
 }
+exports.close = function(req, res){
+    var sessionId = req.body.sessionId;
+    model.closeFeedback(sessionId,function(err){
+        if(err){
+            res.send('{"status":0}');
+        }else{
+            res.send('{"status":1}');
+        }
+    })
+}
 exports.getStartFeedbackTime = function(req,res){
     model.getStartFeedbackTime(req, res);
 }

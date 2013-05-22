@@ -38,12 +38,15 @@ KISSY.add(function(S, Node,Uri,ajax,Count,CountImage,sessionList) {
             countImage.show(function(){
                 countImage.set('num',starNum);
             })
+            ajax.post('http://'+new Uri(window.location.href).getHostname()+'/feedback/close',{sessionId:Number($('#J_SessionId').val())},function(data){
+
+            },'json')
         }
 
         /**
          * 定时判断是否已经可以开始统计
          */
-        var timer = S.later(function(){
+        /*var timer = S.later(function(){
             ajax.get('http://'+new Uri(window.location.href).getHostname()+'/feedback/get_start_feedback_time/'+2,function(data){
                 var time = Number(data.start_feedback_time);
                 //反馈已经统计结束
@@ -59,14 +62,13 @@ KISSY.add(function(S, Node,Uri,ajax,Count,CountImage,sessionList) {
                     }
                 }
             },'json');
-        },500);
+        },500);*/
 
         sessionList();
 
-        $('body').on('keyup',function(ev){
-            if(ev.keyCode == 13 || ev.keyCode == 108){
-                showStars();
-            }
+        $('.J_CloseFeedback').on('click',function(){
+            showStars();
         })
+
     }
 }, {requires : ['node','uri','ajax','./star-count','./count-image','./session-list']});
