@@ -201,6 +201,7 @@ io.sockets.on('connection', function (socket) {
         complete: function(err, docs){
             if(docs && docs.length){
                 docs[0].state = 1;
+                console.log("set state", 1);
                 db.post({
                     collection: 'session',
                     query: {id: data},
