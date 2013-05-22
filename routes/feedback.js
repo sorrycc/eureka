@@ -23,6 +23,7 @@ exports.make = function(req, res){
     if(err || !(topic = docs[0])) {
       renderObj.type = "1";
       renderObj.id = req.params.id;
+      renderObj.pid = req.cookies.partyid;
       renderObj.responseString = "无此主题，或暂时还不能反馈哦";
       res.render('feedback/make', renderObj);
     }
@@ -42,6 +43,7 @@ exports.make = function(req, res){
     if(err || (feedback = docs[0])) {
       renderObj.type = "1";
       renderObj.id = req.params.id;
+      renderObj.pid = req.cookies.partyid;
       renderObj.responseString = "不能重复反馈哦！";
     }
     else {
@@ -81,7 +83,6 @@ exports.post = function(req, res) {
     dataObj.creator = req.user._id;
     dataObj.session = topic._id;
     score =  Number(dataObj.score);
-    console.log("DDDDD", dataObj);
 
     db.put({
       doc       : dataObj,
@@ -91,7 +92,6 @@ exports.post = function(req, res) {
 
     function addFeedbackToTopic(err, doc){
       if(!doc) {
-        console.log(err);
         return;
       }
 
@@ -145,6 +145,7 @@ exports.post = function(req, res) {
 
     renderObj.docTitle = "提交成功"
     renderObj.type = "1"
+    renderObj.pid = req.cookies.partyid;
     renderObj.responseString = "你的反馈已经成功提交啦！"
     res.render('feedback/make', renderObj)
   }
