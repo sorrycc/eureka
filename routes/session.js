@@ -248,15 +248,13 @@ exports.list = {
       sessions.forEach(function(session, key){
         console.log(session.id)
         var feedbacked = feedbacks.some(function(feedback){
-          console.log(feedback.id);
-          return feedback.session == session._id && feedback.creator == req.user._id;
+          // console.log(feedback.id, req.user._id, session._id);
+          // console.log(feedback.session.toString());
+          return feedback.session.toString() == session._id.toString() && feedback.creator.toString() == req.user._id.toString();
         });
 
         if(session.state == 1 && !feedbacked) {
            session.onfeedback = true;
-          // session.set('onfeedback', true);
-          //session.state = 2;
-           console.log("onfeedback", true);
         }
       });
       console.log(sessions);
