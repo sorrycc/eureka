@@ -163,7 +163,6 @@ exports.result = function(req, res){
         var data = result[0];
         req.id = data.id;
         req.partyId = data.party_id;
-        console.log(req.partyId);
         data.count = 0;
         data.people = 0;
 
