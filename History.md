@@ -2,6 +2,109 @@
 n.n.n / 2013-05-22 
 ==================
 
+  * ppt update
+  * Merge pull request #56 from dev2geek/master
+  * reveal.js
+  * Merge pull request #55 from dev2geek/master
+  * Merge remote-tracking branch 'upstream/master'
+  * update
+  * edit
+  * Merge branch 'master' of github.com:wondger/eureka
+  * optimize maincard margin
+  * Merge pull request #53 from dev2geek/master
+  * view feedback
+  * feedback form shadow
+  * add shadow class
+  * Merge branch 'master' of github.com:wondger/eureka
+  * adjust font-size
+  * Merge remote-tracking branch 'origin/master'
+  * fix bug
+  * Merge pull request #52 from dev2geek/master
+  * Merge remote-tracking branch 'upstream/master'
+  * session detail
+  * Merge branch 'master' of github.com:wondger/eureka
+  * update
+  * solve add session icon problem
+  * optimize add session icon style
+  * Merge branch 'master' of github.com:wondger/eureka
+  * party mask add  transition effect
+  * Merge remote-tracking branch 'origin/master'
+  * fix bug
+  * Merge branch 'master' of github.com:wondger/eureka
+  * Merge branch 'master' of github.com:wondger/eureka
+  * result dont show notice
+  * nobuc invoke update
+  * Merge remote-tracking branch 'origin/master'
+  * 4040
+  * nobuc middlewaver update for NODE_ENV
+  * update
+  * update
+  * Merge pull request #46 from dev2geek/master
+  * issue #45
+  * update
+  * update
+  * update
+  * Merge remote-tracking branch 'origin/master'
+  * jade
+  * Merge branch 'master' of github.com:wondger/eureka
+  * party-info remove radius border
+  * Merge branch 'master' of github.com:wondger/eureka
+  * handle event invalid
+  * Merge branch 'master' of github.com:wondger/eureka
+  * fixed issue #33
+  * fixed closed issue #33
+  * Merge branch 'master' of github.com:wondger/eureka
+  * fixed issue #32
+  * Merge remote-tracking branch 'origin/master'
+  * jade
+  * Merge branch 'master' of github.com:wondger/eureka
+  * Merge pull request #43 from dev2geek/master
+  * issue 35
+  * Merge remote-tracking branch 'upstream/master'
+  * minor
+  * Merge branch 'master' of github.com:wondger/eureka
+  * fixed #40
+  * backUrl update
+  * Merge branch 'master' of github.com:wondger/eureka
+  * Merge remote-tracking branch 'origin/master'
+  * Merge branch 'master' of github.com:wondger/eureka
+  * update
+  * update
+  * Merge remote-tracking branch 'origin/master'
+  * Merge branch 'master' of github.com:wondger/eureka
+  * update
+  * anim
+  * Merge pull request #31 from dev2geek/master
+  * Merge remote-tracking branch 'upstream/master'
+  * multi speakers
+  * Merge remote-tracking branch 'origin/master'
+  * add css
+  * Merge branch 'master' of github.com:wondger/eureka
+  * 404 page
+  * update
+  * Merge branch 'master' of github.com:wondger/eureka
+  * update
+  * Merge branch 'master' of github.com:wondger/eureka
+  * box shadow and party info opts area
+  * Merge pull request #29 from dev2geek/master
+  * Merge remote-tracking branch 'upstream/master'
+  * validation animation
+  * Merge branch 'master' of github.com:wondger/eureka
+  * update
+  * add box shadow
+  * Merge pull request #28 from dev2geek/master
+  * Merge branch 'master' of github.com:wondger/eureka
+  * Merge remote-tracking branch 'upstream/master'
+  * session creation validation
+  * add css
+  * Merge remote-tracking branch 'origin/master'
+  * add close push
+  * update
+  * Merge branch 'master' of github.com:wondger/eureka
+
+n.n.n / 2013-05-22 
+==================
+
   * Merge pull request #56 from dev2geek/master
   * reveal.js
   * Merge pull request #55 from dev2geek/master
