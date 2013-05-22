@@ -11,7 +11,6 @@ KISSY.add(function(S, Node,Uri,ajax,Count,CountImage,sessionList) {
             time:Number($count.attr('data-time'))
         });
         var countImage = new CountImage('.J_Stars');
-
         if(count.get('value') > 0 && count.get('time') > 0){
             var starNum = count.get('average');
             countImage.show(function(){
@@ -67,6 +66,7 @@ KISSY.add(function(S, Node,Uri,ajax,Count,CountImage,sessionList) {
         sessionList();
 
         $('.J_CloseFeedback').on('click',function(){
+            if(Number($('#J_Status').val()) === 2) return false;
             showStars();
         })
 
