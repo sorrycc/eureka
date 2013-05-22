@@ -26,25 +26,35 @@ KISSY.add("session/form", function(S) {
 
         validate: function() {
             var formData = S.unparam(S.IO.serialize("#J_SessionForm")),
-                invalidArray = [];
+                invalidArray = [],
+                reg = /^\d\d:\d\d$/g,
+                fromVal = S.trim(formData.from),
+                toVal = S.trim(formData.to),
+                titleVal = S.trim(formData.title),
+                descVal = S.trim(formData.desc),
+                speakersVal = S.trim(formData.speakers);
 
-            if (formData.from === "") {
+
+            var _formVal = reg.test(fromVal);
+            reg.lastIndex = 0;
+            if (fromVal === "" || !_formVal) {
                 invalidArray.push("#J_SessionFrom");
             }
 
-            if (formData.to === "") {
+            var _toVal = reg.test(toVal);
+            if (toVal === "" || !_toVal) {
                 invalidArray.push("#J_SessionTo");   
             }
 
-            if (formData.title === "") {
+            if (titleVal === "" || (titleVal.length > 20)) {
                 invalidArray.push("#J_SessionTitle");   
             }
             
-            if (formData.desc === "") {
+            if (descVal === "" || (descVal.length > 2000)) {
                 invalidArray.push("#J_SessionDesc");   
             }
 
-            if (formData.speakers === "") {
+            if (speakersVal === "" || (speakersVal.length > 100)) {
                 invalidArray.push("#J_SessionSpeakers");   
             }
 
