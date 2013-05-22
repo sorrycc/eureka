@@ -249,8 +249,8 @@ exports.list = {
         console.log(session.id)
         var feedbacked = feedbacks.some(function(feedback){
           // console.log(feedback.id, req.user._id, session._id);
-          // console.log(feedback.session.toString());
-          return feedback.session.toString() == session._id.toString() && feedback.creator.toString() == req.user._id.toString();
+          // console.log(feedback.session.equals(session._id));
+          return feedback.session.equals(session._id) && feedback.creator.equals(req.user._id);
         });
 
         if(session.state == 1 && !feedbacked) {
