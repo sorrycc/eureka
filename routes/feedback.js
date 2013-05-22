@@ -107,10 +107,11 @@ exports.post = function(req, res) {
       topic.status = 1;
       topic.backUrl = "/party/" + req.cookies.partyid;
       db.post({
+        collection: 'session',
         query   : {id: req.params.id},
         doc     : topic,
         complete: saveStars
-      })
+      });
     }
   }
 

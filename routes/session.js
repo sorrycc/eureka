@@ -244,7 +244,7 @@ exports.list = {
     }
 
     function checkFeedback(sessions, feedbacks){
-      console.log("in here");
+      // console.log("in here");
       sessions.forEach(function(session){
         var feedbacked = feedbacks.some(function(feedback){
           return feedback.session == session._id && feedback.creator == req.user._id;

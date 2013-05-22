@@ -14,6 +14,7 @@ var express = require('express')
 
 var party = require('./routes/party');
 var feedback = require('./routes/feedback');
+var db = require("db");
 
 
 var stylus = require('stylus')
@@ -181,7 +182,7 @@ app.post('/feedback/status', feedback.status);
 app.get('/feedback/get_start_feedback_time/:sessionId', feedback.getStartFeedbackTime);
 app.get('/error/404',function(req, res){
     res.render('404',{docTitle:'页面出错啦~'});
-})
+});
 
 var server = http.createServer(app);
 var io = require('socket.io').listen(server);
@@ -194,6 +195,20 @@ io.sockets.on('connection', function (socket) {
     //管理员推送反馈许可
     socket.on('setValid', function(data){
       // data 是 session id
+      db.get({
+        collection: 'session',
+        query: {id: data},
+        complete: function(err, docs){
+            if(docs && docs.length){
+                docs[0].state = 1;
+                db.post({
+                    collection: 'session',
+                    query: {id: data},
+                    doc: docs[0]
+                });
+            }
+        }
+      });
       socket.broadcast.emit('isValid', data);
     });
 });
