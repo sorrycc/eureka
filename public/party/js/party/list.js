@@ -289,7 +289,7 @@ KISSY.add("party/list", function (S, UA, Ajax, XTemplate, Uri, DragSwitch, Cooki
         bindCodeRotate: function () {
 
 
-            E.on('.J_Rotate', 'tap click', function (e) {
+            E.on('.J_Rotate', 'tap', function (e) {
                 var t = e.currentTarget,
                     p = D.parent(t, '.flip-container');
 
@@ -297,7 +297,7 @@ KISSY.add("party/list", function (S, UA, Ajax, XTemplate, Uri, DragSwitch, Cooki
 
             });
 
-            E.on('.view-qrcode', 'tap click', function (e) {
+            E.on('.view-qrcode', 'tap', function (e) {
                 var $e = jQuery(this).parents('.flip3d');
 
                 // lazy generate qrcode
@@ -372,7 +372,7 @@ KISSY.add("party/list", function (S, UA, Ajax, XTemplate, Uri, DragSwitch, Cooki
             E.delegate('.session-list-box', 'touchend mouseup', '.J_SessionOpts', function (e) {
                 var t = e.currentTarget;
                 clearTimeout(tapTimer);
-                if (!isTapHold && touchIsMove < 20) {
+                if (!isTapHold && touchIsMove < 3) {
                     tapHandler(t);
                 }
                 isTapHold = false;
