@@ -1,7 +1,16 @@
-.party-list .mainCard{padding:4.8em .5em 1.3em .7em;width:90%}
-.party-list .only-one-card{padding:4.5em 1em 1.3em 1em;width:100%}
+.party-list .mainCard{width:94%;padding:5em .75% 2em .75%}
+.party-list .current-card{padding-top:4.5em}
+.party-list .fst-card{margin-left:2.25%}
+.party-list .only-one-card.fst-card{padding:5em 2% 2em 2%;width:96%}
+@media only screen and (max-width: 959px){.party-list .mainCard{width:95%}
+}@media only screen and (min-width: 768px) and (max-width: 959px){.party-list .mainCard{width:95%}
+}@media only screen and (max-width: 767px){.party-list .mainCard{width:95%}
+}@media only screen and (min-width: 480px) and (max-width: 767px){.party-list .mainCard{width:95%}
+}@media only screen and (max-width: 479px){.party-list .mainCard{width:88%;padding:4.8em 1.5% 1.3em 1.5%}
 .party-list .current-card{padding-top:4.2em}
-.party-info{background-color:#d7f2fb;padding:1em;position:relative;}
+.party-list .fst-card{margin-left:4.5%}
+.party-list .only-one-card.fst-card{padding:4.5em 5% 1.3em 5%;width:90%}
+}.party-info{background-color:#d7f2fb;padding:1em;position:relative;}
 .party-info h3{margin:0 0 .5em}
 .party-info .party-time,.party-info .party-loc{margin:.2em 0 .2em}
 .party-info .icon-code{position:absolute;right:1em;top:1.4em}

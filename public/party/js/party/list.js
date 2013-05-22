@@ -225,6 +225,7 @@ KISSY.add("party/list", function (S, UA, Ajax, XTemplate, Uri, DragSwitch, Cooki
                 cardWidth = $('.mainCard')[0].offsetWidth,
                 offsetWidth = D.viewportWidth() - cardWidth;
             $($('.mainCard')[0]).addClass("current-card");
+            $($('.mainCard')[0]).addClass("fst-card");
 
             function next() {
                 if (currentIndex == count - 1) return;

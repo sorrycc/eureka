@@ -176,6 +176,7 @@ app.get('/feedback/list', function(req, res) {
 //剑平
 app.get('/feedback/result/:sessionId', feedback.result);
 app.post('/feedback/save_count', feedback.save_count);
+app.post('/feedback/close', feedback.close);
 app.get('/feedback/get_start_feedback_time/:sessionId', feedback.getStartFeedbackTime);
 app.get('/error/404',function(req, res){
     res.render('404',{docTitle:'页面出错啦~'});
