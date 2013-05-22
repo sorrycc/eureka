@@ -2,7 +2,7 @@
  * @fileoverview 初始化统计反馈逻辑（管理者界面）
  * @author 剑平（明河）<minghe36@126.com>
  **/
-KISSY.add(function(S, Node,Uri,Count,CountImage,sessionList) {
+KISSY.add(function(S, Node,Uri,ajax,Count,CountImage,sessionList) {
     var $ = Node.all;
     return function(){
         var $count = $('.J_StarCount');
@@ -34,11 +34,11 @@ KISSY.add(function(S, Node,Uri,Count,CountImage,sessionList) {
         /**
          * 定时判断是否已经可以开始统计
          */
-        var timer = setInterval(function(){
-            S.io.get('http://'+new Uri(window.location.href).getHostname()+'/feedback/get_start_feedback_time/'+2,function(data){
+        var timer = S.later(function(){
+            ajax.get('http://'+new Uri(window.location.href).getHostname()+'/feedback/get_start_feedback_time/'+2,function(data){
                 var time = Number(data.start_feedback_time);
                 //反馈已经统计结束
-                if(data.status >1 && time>0){
+                if(Number(data.status) >1 && time>0){
                     var now = S.now();
                     var t = now - time;
                     //超过二分钟
@@ -61,4 +61,4 @@ KISSY.add(function(S, Node,Uri,Count,CountImage,sessionList) {
 
         sessionList();
     }
-}, {requires : ['node','uri','./star-count','./count-image','./session-list']});
+}, {requires : ['node','uri','ajax','./star-count','./count-image','./session-list']});

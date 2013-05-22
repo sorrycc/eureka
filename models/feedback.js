@@ -222,7 +222,9 @@ exports.getStartFeedbackTime = function(req,res){
          return false;
     }
     this.getSession(sessionId,res,function(session){
-         res.send('{"status":'+session[0].state||1+',"start_feedback_time":"'+session[0].start_feedback_time || 0+'"}');
+         var status = Number(session[0].state) || 1;
+         var time = Number(session[0].start_feedback_time) || -1;
+         res.send('{"status":'+status+',"start_feedback_time":'+time+'}');
     })
 }
 
