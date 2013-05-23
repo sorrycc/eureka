@@ -83,7 +83,7 @@ exports.get = function(req, res, render) {
             start_feedback_time: d.start_feedback_time,
             state: d.state,
             id: d.id,
-            feedbacked: d.state == 1 ? !!data : false
+            feedbacked: d.state === 1 ? !!data : false
         };
         render(docs);
     }

@@ -209,7 +209,7 @@ exports.detail = function(req, res) {
         type: 'detail',
         description: doc.description,
         speakers: doc.speakers,
-        feedbacked: doc.stat !== 1 || doc.feedbacked,
+        feedbacked: doc.state !== 1 || doc.feedbacked,
         from: doc.from,
         to: doc.to    
       });   
