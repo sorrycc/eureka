@@ -22,7 +22,6 @@ KISSY.add(function(S, Node,LayerAnim) {
                     width:0
                 },
                 delay: i * 0.2,
-                easing: "Back.easeOut",
                 duration: 0.5
             };
 
