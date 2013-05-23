@@ -240,7 +240,14 @@ exports.list = {
 
     if (ids = req.query.ids) {
       ids = ids.split(',');
-      console.log("session ids:" + ids);
+    }
+
+    if (!ids || !ids.length) {
+        res.json({
+            success: false,
+            message: "no ids"
+        });
+        return;
     }
 
     function checkFeedback(sessions, feedbacks){
@@ -257,7 +264,6 @@ exports.list = {
            session.onfeedback = true;
         }
       });
-      console.log(sessions);
       res.json({
         success: true,
         docs: sessions
@@ -271,13 +277,17 @@ exports.list = {
     db.get({
       collection: "session",
       query: query,
+      options: {
+          sort: {
+              id: 1
+          }
+      },
       complete: function(err, docs) {
         if (err) {
           res.json({
             success: false,
             message: err.message
           });
-          console.log("查询分享失败");
           return;
         }
         else {
