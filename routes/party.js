@@ -48,7 +48,7 @@ module.exports = {
                     doc: {
                         root: req.user._id,
                         title: req.body.title,
-                        time: Date(req.body.time),
+                        time: new Date(req.body.time),
                         location: req.body.location,
                     },
                     complete: function(err, doc) {

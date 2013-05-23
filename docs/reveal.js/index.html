@@ -110,53 +110,85 @@
 
         <!-- Start 棪木 筱谷 剑平 水儿 幽零 -->
 
+        <section>
+            <h2>技术实现</h2>
+            <ul>
+                <li>技术框架</li>
+                <li>技术亮点</li>
+            </ul>
+        </section>
         
+        <section>
+            <!-- 棪木 Start -->
+            <section>
+              <h2>技术框架</h2>
+              <ul>
+                  <li>NodeJS + MongoDB</li>
+                  <li>expressjs, jade, mogoose, socket.io, kissy, stylus</li>
+                  <li>nobuc, user, db</li>
+              </ul>
+            </section>
+            <section>
+                <img src="http://img01.taobaocdn.com/tps/i1/T1IgaPXrpaXXcqfZbM-720-540.png" alt="" />
+            </section>
+            <section>
+                <img src="https://a248.e.akamai.net/camo.github.com/879cd6770367a724bc02a65387b09148ce445d81/687474703a2f2f696d6730322e74616f62616f63646e2e636f6d2f7470732f69322f5431695a4e30584252585858614b7a394c472d3738392d3439372e706e67" alt="" />
+            </section>
+            <!-- 棪木 End-->
+        </section>
         
-        <!-- 筱谷 Start -->
-        <section>
-          <h1>手势部分</h1>
-          <p>遇到的问题</p>
-          <ol>
-            <li>多个手势事件间冲突</li>
-            <li>KISSY TapHold 事件很坑爹</li>
-            <li>基于 transform2d:matrix 的拖拽手势框架 DragSwitch</li>
-          </ol>
-        </section>
-        <section>
-          <h2>1. 多个手势事件间冲突</h2>
-          <p>如果两个手势都是向右拖拽，那怎么判断该触发哪个？</p>
-          <p>解决方法：每个手势使用敏感度设置（touchMove 的距离），应该优先触发的手势设置高敏感度，触发时阻止 touch 事件继续传递，防止下一个手势触发</p>
-        </section>
-        <section>
-          <h2>2. KISSY TapHold 事件很坑爹</h2>
-          <p>KISSY 的 TapHold 事件必须 touchMove 一下才能触发，如果 PC 上用鼠标模拟这个事件则必须也移动一下鼠标，很诡异。</p>
-          <p>但 KISSY 为什么可以这么做咧？</p>
-          <p>因为大多数移动设备，当你一直按住屏幕，以为只有 touchStart 的时候，其实也有 touchMove 事件被触发；理论上手指头越胖的人，touchMove 事件越容易被触发。</p>
-        </section>
-        <section>
-          <h2>3. 基于 transform2d:matrix 的拖拽手势框架 DragSwitch</h2>
-          <p>eureka 分享会卡片切换效果的实现使用了此框架</p>
-          <p>第一个版本功能十分简单，只支持上下左右四个方向自定义拖拽手势</p>
-          <p>兼容所有支持 transform2d 的浏览器</p>
-          <p>可在此基础上扩展更多拖拽手势，如 scrollView（但因为数学和物理没学好，惯性滚动的算法一直没搞出来）</p>
-          <p>代码混乱，无注释无文档状态，后面会整理提交到 kissy gallery</p>
-        </section>      
-        <!-- 筱谷 End -->
-
         <!-- 棪木 Start -->
         <section>
-          <h2>技术框架</h2>
+          <h2>技术亮点</h2>
           <ul>
-              <li>NodeJS + MongoDB</li>
-              <li>expressjs, jade, mogoose, socket.io, kissy, stylus</li>
-              <li>nobuc, user, db</li>
+              <li>后台用户系统nobuc</li>
+              <li>手势</li>
           </ul>
         </section>
+        <!-- 棪木 Start -->
 
         <section>
-            <img src="http://img01.taobaocdn.com/tps/i1/T1IgaPXrpaXXcqfZbM-720-540.png" alt="" />
+            <h2>nobuc</h2>
+            <p><a href="http://docs.alibaba-inc.com/display/RC/BUC" target="_blank">BUC</a>的一个expressjs中间件</p>
+            <p>简单，高效，稳定</p>
+            <img src="http://img01.taobaocdn.com/tps/i1/T15l1LXphhXXc8IS2B-787-162.png" alt="" />
+            <a href="http://gitlab.taobao.ali.com/yanmu.wj/nobuc">http://gitlab.taobao.ali.com/yanmu.wj/nobuc</a>
         </section>
         <!-- 棪木 End-->
+
+        <section>
+            <!-- 筱谷 Start -->
+            <section>
+                <h3>手势部分</h3>
+                <p>遇到的问题</p>
+                <ol>
+                    <li>多个手势事件间冲突</li>
+                    <li>KISSY TapHold 事件很坑爹</li>
+                    <li>基于 transform2d:matrix 的拖拽手势框架 DragSwitch</li>
+                </ol>
+                </section>
+            <section>
+                <h3>1. 多个手势事件间冲突</h3>
+                <p>如果两个手势都是向右拖拽，那怎么判断该触发哪个？</p>
+                <p>解决方法：每个手势使用敏感度设置（touchMove 的距离），应该优先触发的手势设置高敏感度，触发时阻止 touch 事件继续传递，防止下一个手势触发</p>
+            </section>
+            <section>
+                <h3>2. KISSY TapHold 事件很坑爹</h3>
+                <p>KISSY 的 TapHold 事件必须 touchMove 一下才能触发，如果 PC 上用鼠标模拟这个事件则必须也移动一下鼠标，很诡异。</p>
+                <p>但 KISSY 为什么可以这么做咧？</p>
+                <p>因为大多数移动设备，当你一直按住屏幕，以为只有 touchStart 的时候，其实也有 touchMove 事件被触发；理论上手指头越胖的人，touchMove 事件越容易被触发。</p>
+            </section>
+            <section>
+            <h3>3. 基于 transform2d:matrix 的拖拽手势框架 DragSwitch</h3>
+                <p>eureka 分享会卡片切换效果的实现使用了此框架</p>
+                <p>第一个版本功能十分简单，只支持上下左右四个方向自定义拖拽手势</p>
+                <p>兼容所有支持 transform2d 的浏览器</p>
+                <p>可在此基础上扩展更多拖拽手势，如 scrollView（但因为数学和物理没学好，惯性滚动的算法一直没搞出来）</p>
+                <p>代码混乱，无注释无文档状态，后面会整理提交到 kissy gallery</p>
+            </section>      
+            <!-- 筱谷 End -->
+
+        </section>
 
         <!-- End 棪木 筱谷 剑平 水儿 幽零 -->
 
