@@ -68,10 +68,23 @@ exports.get = function(req, res, render) {
     };
 
     function checkFeedbacked(docs, data){
-        if(docs[0].state == 1) 
-            docs[0].feedbacked = data;
-        else
-            docs[0].feedbacked = false;
+        var d = docs[0];
+        docs[0] = {
+            title: d.title,
+            description: d.description,
+            speakers: d.speakers,
+            from: d.from,
+            to: d.to,
+            _id: d._id,
+            _deleted: d._deleted,
+            onfeedback: d.onfeedback,
+            party_id: d.party_id,
+            feedbacks: d.feedbacks,
+            start_feedback_time: d.start_feedback_time,
+            state: d.state,
+            id: d.id,
+            feedbacked: d.state == 1 ? !!data : false
+        };
         render(docs);
     }
 
