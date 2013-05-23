@@ -6,6 +6,7 @@ KISSY.add(function(S, Node,Uri,ajax,Count,CountImage,sessionList) {
     var $ = Node.all;
     return function(){
         var sessionId = Number($('#J_SessionId').val());
+        var partyId = Number($('#J_PartyId').val());
         var $count = $('.J_StarCount');
         var count = new Count('.J_StarCount',{
             value:Number($count.text()),
@@ -34,14 +35,19 @@ KISSY.add(function(S, Node,Uri,ajax,Count,CountImage,sessionList) {
         });
 
         function showStars(){
-            var num = count.get('value');
-            //星数
-            var starNum = count.get('average');
-            countImage.show(function(){
-                countImage.set('num',starNum);
-            })
-            ajax.post('http://'+new Uri(window.location.href).getHostname()+'/feedback/close',{sessionId:Number($('#J_SessionId').val())},function(data){
-
+            var href= 'http://'+new Uri(window.location.href).getHostname();
+            ajax.get(href+'/user',function(data){
+                var parties = data.parties;
+                if(parties && parties.length > 0 && S.inArray(partyId,parties)){
+                    ajax.post(href+'/feedback/close',{sessionId:Number($('#J_SessionId').val())},function(data){
+                        var num = count.get('value');
+                        //星数
+                        var starNum = count.get('average');
+                        countImage.show(function(){
+                            countImage.set('num',starNum);
+                        })
+                    },'json')
+                }
             },'json')
         }
 

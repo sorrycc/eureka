@@ -8,7 +8,7 @@
  * @changelog: 
  */
 KISSY.add("party/list", function (S, UA, Ajax, XTemplate, Uri, DragSwitch, Cookie) {
-    var D = S.DOM, E = S.Event;
+    var D = S.DOM, E = S.Event, $ = S.all;
     //host
     var host = 'http://' + new Uri(window.location.href).getHostname();
     var prefix = (function () {
