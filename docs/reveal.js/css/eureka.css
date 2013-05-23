@@ -17,4 +17,5 @@
 .reveal h5,
 .reveal h6 {
   font-family: "League Gothic", Impact, sans-serif, "微软雅黑";
+  text-transform: none;
 }
